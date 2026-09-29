@@ -1,0 +1,62 @@
+# Prática 01 — Validando seu laboratório 🧪
+
+**Objetivo:** garantir que sua VM Ubuntu está pronta para o bootcamp e dar seus primeiros passos no terminal.
+
+**Pré-requisito:** ter seguido os guias de [`setup/`](../../setup/). Se você travou em algum passo, este é o momento de pedir ajuda — os monitores estão de plantão!
+
+## Passo 1 — Ligue a VM e faça login
+
+Abra o VirtualBox, selecione a VM `bootcamp-devops` e clique em **Iniciar**. Faça login com seu usuário e senha.
+
+Resultado esperado:
+
+```text
+aluno@bootcamp:~$
+```
+
+## Passo 2 — Execute o roteiro de testes
+
+Siga o **[roteiro de testes](../../setup/roteiro-de-testes.md)** completo (6 testes: login, versão do Ubuntu, internet, DNS/HTTPS, `apt` e disco).
+
+## Passo 3 — Deixe sua marca 🖋️
+
+Agora um gostinho do que vem por aí. Digite:
+
+```bash
+echo "Meu primeiro comando no bootcamp DevOps!"
+```
+
+O terminal repete a frase de volta. Você acabou de usar o `echo` — o comando que "fala" no terminal.
+
+Que tal saber quem você é para o sistema?
+
+```bash
+whoami
+```
+
+E há quanto tempo a máquina está ligada?
+
+```bash
+uptime
+```
+
+## Passo 4 — Compartilhe a vitória 🎉
+
+Digite o comando abaixo, tire um print do resultado e poste no chat/comunidade:
+
+```bash
+echo "Ambiente pronto! $(whoami) reportando da VM $(hostname) 🚀"
+```
+
+## Deu errado? 😥
+
+| Problema | Caminho |
+|----------|---------|
+| VM não liga / erro de virtualização | Seção *Problemas comuns* do [guia do VirtualBox](../../setup/instalacao-virtualbox.md) |
+| Login não funciona | Confira usuário/senha; se esqueceu a senha, veja o [guia da VM](../../setup/instalacao-ubuntu-vm.md) |
+| Algum teste do roteiro falhou | Anote a mensagem de erro e chame um monitor no canal `#setup-ambiente` |
+| Nada resolveu | Sinalize para a equipe — a partir da Aula 02 existe uma imagem backup para casos extremos |
+
+## Missão da semana 📌
+
+Antes da Aula 02: se ainda não respondeu, preencha o formulário de confirmação do ambiente. E brinque com o terminal sem medo — **dentro da VM você não quebra nada do seu computador**. Se a VM "quebrar de vez", é só criar outra. Esse é o superpoder das máquinas virtuais!
