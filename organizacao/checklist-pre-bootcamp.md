@@ -4,7 +4,7 @@ Documento de organização da equipe: tudo que precisa estar pronto **antes da A
 
 ## T-2 semanas
 
-- [ ] Datas das 10 aulas confirmadas e atualizadas no [README](../README.md).
+- [x] Datas das 10 aulas confirmadas e atualizadas no [README](../README.md): 3, 4, 5, 6, 10, 11, 12, 13, 17 e 18 de novembro de 2026.
 - [ ] Repositório público revisado (guias de setup testados em Windows, Linux e macOS).
 - [ ] Canais de comunidade criados (Discord ou Slack), com canal por tema: `#setup-ambiente`, `#duvidas-gerais`, `#aula-do-dia`.
 - [ ] Monitores voluntários da Matera confirmados e com acesso aos canais.
