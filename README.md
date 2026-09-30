@@ -10,20 +10,20 @@ Levar você **do zero ao primeiro deploy automatizado**: ao final das 10 aulas, 
 
 ## 📅 Grade das aulas
 
-> As datas serão divulgadas em breve. Todas as aulas acontecem ao vivo, das **19:30 às 21:45**.
+> As aulas acontecem em **novembro de 2026**, de 3 a 18/11, sempre ao vivo das **19:30 às 21:45**.
 
 | Aula | Data | Tema | Parte 1 (conceitos) | Parte 2 (prática) |
 |------|------|------|---------------------|-------------------|
-| [01](aulas/aula-01-devops-overview/) | A definir | DevOps: Overview + Comunidades | O que é DevOps, cultura, ciclo de vida | Boas-vindas + apoio à configuração do ambiente |
-| [02](aulas/aula-02-linux-basico/) | A definir | Linux 1: História + Comandos básicos | Por que o Linux domina o DevOps | Primeiros comandos no terminal |
-| [03](aulas/aula-03-linux-intermediario/) | A definir | Linux 2: Comandos intermediários | Permissões, processos, pacotes e redes | `grep`, pipes, `apt`, `curl` e companhia |
-| [04](aulas/aula-04-linux-shell-script/) | A definir | Linux 3: Shell Script | Automatizando tarefas com scripts | Seu primeiro script de health check |
-| [05](aulas/aula-05-devops-pipelines/) | A definir | DevOps: Esteiras e Pipelines | O que é CI/CD e por que ele existe | Dinâmica: montando uma pipeline "manual" |
-| [06](aulas/aula-06-git/) | A definir | Git | Controle de versão e fonte única da verdade | `init`, `commit`, `branch` e `merge` |
-| [07](aulas/aula-07-docker/) | A definir | Docker 1: Overview + Comandos | Containers vs. VMs | `docker run` e seu primeiro `Dockerfile` |
-| [08](aulas/aula-08-docker-compose/) | A definir | Docker 2: Docker Compose | Orquestrando múltiplos containers | Subindo app + serviço com `docker compose` |
-| [09](aulas/aula-09-github/) | A definir | GitHub | Remotos, colaboração e portfólio | Publicando seu projeto + primeiro Pull Request |
-| [10](aulas/aula-10-github-actions/) | A definir | GitHub Actions + Encerramento | CI na prática, DevSecOps e próximos passos | Sua primeira pipeline no GitHub + surpresa final 🎁 |
+| [01](aulas/aula-01-devops-overview/) | 03/11 (ter) | DevOps: Overview + Comunidades | O que é DevOps, cultura, ciclo de vida | Boas-vindas + apoio à configuração do ambiente |
+| [02](aulas/aula-02-linux-basico/) | 04/11 (qua) | Linux 1: História + Comandos básicos | Por que o Linux domina o DevOps | Primeiros comandos no terminal |
+| [03](aulas/aula-03-linux-intermediario/) | 05/11 (qui) | Linux 2: Comandos intermediários | Permissões, processos, pacotes e redes | `grep`, pipes, `apt`, `curl` e companhia |
+| [04](aulas/aula-04-linux-shell-script/) | 06/11 (sex) | Linux 3: Shell Script | Automatizando tarefas com scripts | Seu primeiro script de health check |
+| [05](aulas/aula-05-devops-pipelines/) | 10/11 (ter) | DevOps: Esteiras e Pipelines | O que é CI/CD e por que ele existe | Dinâmica: montando uma pipeline "manual" |
+| [06](aulas/aula-06-git/) | 11/11 (qua) | Git | Controle de versão e fonte única da verdade | `init`, `commit`, `branch` e `merge` |
+| [07](aulas/aula-07-docker/) | 12/11 (qui) | Docker 1: Overview + Comandos | Containers vs. VMs | `docker run` e seu primeiro `Dockerfile` |
+| [08](aulas/aula-08-docker-compose/) | 13/11 (sex) | Docker 2: Docker Compose | Orquestrando múltiplos containers | Subindo app + serviço com `docker compose` |
+| [09](aulas/aula-09-github/) | 17/11 (ter) | GitHub | Remotos, colaboração e portfólio | Publicando seu projeto + primeiro Pull Request |
+| [10](aulas/aula-10-github-actions/) | 18/11 (qua) | GitHub Actions + Encerramento | CI na prática, DevSecOps e próximos passos | Sua primeira pipeline no GitHub + surpresa final 🎁 |
 
 ## 🕒 Formato das aulas
 
