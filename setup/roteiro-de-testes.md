@@ -27,7 +27,7 @@ Resultado esperado: uma linha `Description: Ubuntu 24.04.x LTS` (ou a versão LT
 ## Teste 3 — Acesso à internet
 
 ```bash
-ping -c 4 ubuntu.com
+ping -c 4 google.com
 ```
 
 Resultado esperado: 4 linhas de resposta e, no final, `4 received, 0% packet loss`.
@@ -37,7 +37,7 @@ Resultado esperado: 4 linhas de resposta e, no final, `4 received, 0% packet los
 ## Teste 4 — Resolução de nomes (DNS) e HTTPS
 
 ```bash
-curl -I https://www.matera.com
+curl -I https://www.google.com
 ```
 
 Resultado esperado: a primeira linha contém `HTTP/2 200` (ou `HTTP/1.1 200 OK`).

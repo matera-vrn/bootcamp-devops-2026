@@ -42,38 +42,53 @@ Compare o resultado com a linha correspondente do `SHA256SUMS`. Guia oficial de 
 5. **Disco:** 
    - Disk Size: **20 GB** (padrão, alocado dinamicamente).
 6. Conclua e clique em **Finalizar** (*Finish*).
+7. Selecione a opção:
+   - `*Try or Install Ubuntu` e aguarde finalizar a instalação.
 
-## 3. Instale o Ubuntu
+## 3. Primeiro login
 
-A instalação é guiada por um assistente em modo texto (use as setas, `Tab` e `Enter` para navegar). Guia oficial passo a passo:
-
-👉 **https://ubuntu.com/tutorials/install-ubuntu-server**
-
-Sugestões para o bootcamp:
-
-| Tela | O que escolher |
-|------|----------------|
-| GNU Grub | Selecione a opção `*Try or Install Ubuntu` |
-| Idioma | English (evita problemas de codificação) ou Português |
-| Teclado | Portuguese (Brazil) — teste as teclas `ç` e acentos |
-| Tipo de instalação | Ubuntu Server (padrão) |
-| Rede / Proxy / Espelho | Deixe o padrão |
-| Disco | Use o disco inteiro (padrão) — é o disco *virtual*, seus arquivos estão seguros |
-| Seu perfil | Nome: seu nome · Servidor: `bootcamp` · Usuário: escolha um simples (ex.: `aluno`) · **Senha: anote! Você vai usá-la em todas as aulas** |
-| SSH | Marque **Install OpenSSH server** |
-| Snaps adicionais | Não selecione nenhum |
-
-Ao final, escolha **Reboot Now**. Se a tela pedir para remover a mídia de instalação, apenas pressione `Enter`.
-
-## 4. Primeiro login
-
-Depois de reiniciar, aparecerá `bootcamp login:`. Digite seu usuário e senha (a senha não aparece enquanto você digita — é normal!).
+Depois de reiniciar, aparecerá `bootcamp login:`. Digite seu usuário e senha (a senha não aparece enquanto você digita e é normal!).
 
 Se você viu algo como:
 
 ```text
-aluno@bootcamp:~$
+aluno@bootcamp-devops:~$
 ```
+
+## 4. Acessar a VM via SSH pelo Terminal
+
+A forma padrão de trabalhar com servidores ou VMs sem modo gráfico é conectar-se a eles pelo terminal da sua própria máquina usando SSH. Dessa forma, você usa o terminal nativo do seu sistema para copiar e colar livremente.
+
+1. Instalar o serviço SSH na VM, no terminal da VM, rode:
+```text
+sudo apt update
+[sudo] password for aluno: *************
+sudo apt install openssh-server -y
+```
+
+**Configurar o Redirecionamento de Portas no VirtualBox**
+
+2. No menu do VirtualBox, vá em Configurações da VM > Rede.
+3. Com a placa configurada como **NAT**, clique no menu **Expert** > **Rede** (Network) > **Redirecionamento de Portas** (Port Forwarding).
+4. Adicione uma regra com os valores:
+- Nome: SSH
+- Protocolo: TCP
+- Porta do Hospedeiro (Host Port): 2222
+- Porta do Convidado (Guest Port): 22
+- Clique em OK para salvar.
+
+5. Conectar pelo terminal da sua própria máquina.
+- Abra o Terminal (Linux/Mac) ou o PowerShell/CMD (Windows) na sua máquina real e digite:
+```text
+$ ssh aluno@localhost -p 2222
+The authenticity of host '[localhost]:2222 ([127.0.0.1]:2222)' can't be established.
+ED25519 key fingerprint is SHA256:aBcdeFghIjKLmNoPqRSTuvXwZabcDeFghijKLMNoPqRsT.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '[localhost]:2222' (ED25519) to the list of known hosts.
+aluno@localhost's password:
+```
+>🐧 A partir de agora, você estará controlando a VM diretamente da sua janela de terminal principal, podendo copiar e colar normalmente com Ctrl + Shift + V ou clicando com o botão direito.
 
 **Parabéns, sua VM está pronta!** 🎉
 
