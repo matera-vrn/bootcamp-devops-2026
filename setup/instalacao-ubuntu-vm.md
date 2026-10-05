@@ -11,7 +11,7 @@ Baixe **somente do espelho oficial de downloads do Ubuntu**:
 👉 **https://releases.ubuntu.com/**
 
 1. Entre na pasta da versão **LTS mais recente** (ex.: `24.04`).
-2. Baixe o arquivo **`ubuntu-24.04.x-live-server-amd64.iso`** (~2,5 GB).
+2. Baixe o arquivo **`ubuntu-24.04.x-live-server-amd64.iso`** (ex.: `ubuntu-24.04.5-live-server-amd64.iso`) (~3,2 GB).
 
 > A página oficial de download do Ubuntu Server (https://ubuntu.com/download/server) leva para o mesmo arquivo.
 
@@ -28,14 +28,20 @@ Compare o resultado com a linha correspondente do `SHA256SUMS`. Guia oficial de 
 
 1. Abra o VirtualBox e clique em **Nova** (*New*).
 2. Preencha:
-   - **Nome:** `bootcamp-devops`
-   - **ISO Image:** selecione o arquivo `.iso` baixado
+   - **Nome:** (*VM Name*) `bootcamp-devops`
+   - **Diretório:** (*VM Folder*) `/home/seu.usuario/VirtualBox VMs`
+   - **ISO Image:** selecione o arquivo `.iso` baixado (ex.: `ubuntu-24.04.5-live-server-amd64.iso`)
    - Se aparecer a opção **Skip Unattended Installation**, **marque-a** (vamos instalar manualmente para aprender!)
-3. **Hardware:**
+3. **Usuário e Senha:**
+   - User Name: **aluno**
+   - Password: ************ (*Digite sua senha*)
+   - Confirm Password: ************ (*Digite sua senha*)
+4. **Hardware - Specify virtual hardware:**
    - Memória: **2048 MB** (ou 4096 MB se seu computador tiver 16 GB de RAM)
    - Processadores: **2 CPUs**
-4. **Disco:** 20 GB (padrão, alocado dinamicamente).
-5. Conclua e clique em **Iniciar** (*Start*).
+5. **Disco:** 
+   - Disk Size: **20 GB** (padrão, alocado dinamicamente).
+6. Conclua e clique em **Finalizar** (*Finish*).
 
 ## 3. Instale o Ubuntu
 
@@ -47,6 +53,7 @@ Sugestões para o bootcamp:
 
 | Tela | O que escolher |
 |------|----------------|
+| GNU Grub | Selecione a opção `*Try or Install Ubuntu` |
 | Idioma | English (evita problemas de codificação) ou Português |
 | Teclado | Portuguese (Brazil) — teste as teclas `ç` e acentos |
 | Tipo de instalação | Ubuntu Server (padrão) |
