@@ -92,7 +92,26 @@ aluno@localhost's password:
 
 **Parabéns, sua VM está pronta!** 🎉
 
-Próximo passo: **[roteiro de testes](roteiro-de-testes.md)** para validar o ambiente.
+## 5. Valide a conexão com a internet
+
+Antes de seguir adiante, confirme que a VM enxerga a internet — sem isso, nenhuma prática do bootcamp funciona (instalação de pacotes, Docker, GitHub...). Ainda logado(a) na VM, digite:
+
+```bash
+ping -c 4 ubuntu.com
+```
+
+Resultado esperado: 4 respostas e, no final, `4 received, 0% packet loss`.
+
+```text
+64 bytes from ubuntu.com ...: icmp_seq=1 ttl=... time=...ms
+...
+4 packets transmitted, 4 received, 0% packet loss
+```
+
+- ✅ **Recebeu respostas?** Internet OK — siga para o roteiro de testes.
+- ❌ **`Name or service not known` ou 100% packet loss?** A VM está sem rede. Desligue a VM, abra **Configurações → Rede** no VirtualBox e confirme que o adaptador está **habilitado** e em modo **NAT**. Ligue a VM e teste de novo. Se persistir, veja se o computador (host) está com internet e chame os monitores no canal `#setup-ambiente`.
+
+Próximo passo: **[roteiro de testes](roteiro-de-testes.md)** para validar o ambiente completo.
 
 ## Problemas comuns
 
