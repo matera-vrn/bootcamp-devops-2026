@@ -48,7 +48,7 @@ No Ubuntu, programas vêm de **repositórios oficiais** via `apt`:
 
 ```bash
 sudo apt update        # atualiza o catálogo
-sudo apt install htop  # instala um pacote
+sudo apt install btop  # instala um pacote
 ```
 
 > 🔐 **Segurança desde o dia zero:** instalar de repositórios oficiais (em vez de baixar binários de sites aleatórios) é a primeira prática de DevSecOps que você aprende — origem confiável e versões auditadas.
