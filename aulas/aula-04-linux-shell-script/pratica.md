@@ -8,10 +8,10 @@
 
 ```bash
 cd ~/meu-projeto-devops/scripts
-nano healthcheck.sh
+vi healthcheck.sh
 ```
 
-> O `nano` é um editor simples de terminal: digite normalmente, salve com `Ctrl+O` + `Enter` e saia com `Ctrl+X`.
+> O `vi` é um editor simples de terminal: digite normalmente, salve com `Esc :wq` + `Enter`.
 
 ## Passo 2 — Digite o script
 

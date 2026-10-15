@@ -12,7 +12,7 @@ Nossa "aplicação" é simples de propósito: uma página `index.html`. A esteir
 
 ```bash
 cd ~/meu-projeto-devops/scripts
-nano build.sh
+vi build.sh
 ```
 
 Conteúdo:
@@ -38,7 +38,7 @@ echo "🔨 [BUILD] OK — app/index.html gerado."
 ## Passo 2 — Stage de teste
 
 ```bash
-nano test.sh
+vi test.sh
 ```
 
 Conteúdo:
@@ -68,7 +68,7 @@ echo "🧪 [TEST] OK — 2 de 2 testes passaram."
 ## Passo 3 — Stage de deploy
 
 ```bash
-nano deploy.sh
+vi deploy.sh
 ```
 
 Conteúdo:
@@ -86,7 +86,7 @@ echo "🚀 [DEPLOY] OK — publicado em ~/producao/index.html"
 ## Passo 4 — A esteira que liga tudo
 
 ```bash
-nano pipeline.sh
+vi pipeline.sh
 ```
 
 Conteúdo:

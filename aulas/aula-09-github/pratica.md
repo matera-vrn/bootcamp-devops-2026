@@ -60,7 +60,7 @@ Vamos fazer uma melhoria pelo fluxo profissional completo:
 
 ```bash
 git checkout -b docs-readme
-nano README.md
+vi README.md
 ```
 
 Escreva um README caprichado (markdown!), por exemplo:

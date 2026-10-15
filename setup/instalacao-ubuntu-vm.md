@@ -27,19 +27,19 @@ Compare o resultado com a linha correspondente do `SHA256SUMS`. Guia oficial de 
 ## 2. Crie a VM no VirtualBox
 
 1. Abra o VirtualBox e clique em **Nova** (*New*).
-2. Preencha:
+2. **Preencha - Virtual machine name and operating systems**
    - **Nome:** (*VM Name*) `bootcamp-devops`
    - **Diretório:** (*VM Folder*) `/home/seu.usuario/VirtualBox VMs`
    - **ISO Image:** selecione o arquivo `.iso` baixado (ex.: `ubuntu-24.04.5-live-server-amd64.iso`)
    - Se aparecer a opção **Skip Unattended Installation**, **marque-a** (vamos instalar manualmente para aprender!)
-3. **Usuário e Senha:**
+3. **Usuário e Senha - Set up unattended guest OS installation**
    - User Name: **aluno**
    - Password: ************ (*Digite sua senha*)
    - Confirm Password: ************ (*Digite sua senha*)
 4. **Hardware - Specify virtual hardware:**
    - Memória: **2048 MB** (ou 4096 MB se seu computador tiver 16 GB de RAM)
    - Processadores: **2 CPUs**
-5. **Disco:** 
+5. **Disco - Specify virtual Hard** 
    - Disk Size: **20 GB** (padrão, alocado dinamicamente).
 6. Conclua e clique em **Finalizar** (*Finish*).
 7. Selecione a opção:

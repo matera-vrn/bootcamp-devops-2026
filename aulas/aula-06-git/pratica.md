@@ -75,7 +75,7 @@ git checkout -b melhoria-healthcheck
 Edite o script e adicione a contagem de processos no final (antes da última linha `echo`):
 
 ```bash
-nano scripts/healthcheck.sh
+vi scripts/healthcheck.sh
 ```
 
 ```bash

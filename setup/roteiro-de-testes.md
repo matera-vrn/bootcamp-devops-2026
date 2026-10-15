@@ -60,7 +60,7 @@ Digite sua senha quando pedir. Resultado esperado: várias linhas terminando **s
 df -h /
 ```
 
-Resultado esperado: a coluna `Avail` mostra **pelo menos 10G** disponíveis.
+Resultado esperado: a coluna `Avail` mostra **pelo menos 20G** disponíveis.
 
 - [ ] Espaço suficiente
 

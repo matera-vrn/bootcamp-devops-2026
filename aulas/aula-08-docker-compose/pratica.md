@@ -18,7 +18,7 @@ Resultado esperado: `Docker Compose version v2.x`.
 
 ```bash
 cd ~/meu-projeto-devops
-nano compose.yaml
+vi compose.yaml
 ```
 
 Conteúdo (atenção à indentação — 2 espaços, nunca Tab!):

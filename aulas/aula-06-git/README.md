@@ -51,6 +51,8 @@ No DevOps, o repositório Git não guarda só código da aplicação:
 | `git add arquivo` | Coloca a mudança na "caixa" (staging) |
 | `git commit -m "mensagem"` | Sela a caixa no histórico, com autor e data |
 | `git log` | Mostra a linha do tempo |
+| `git checkout` | Utilizado para alternar entre ramificações (branches) |
+| `git merge` | Traz o conteúdo da branch informada para a branch atual |
 
 > 🧠 **Boas mensagens de commit** dizem o *o quê* e o *porquê*: `"adiciona teste de disco ao healthcheck"` ✔ · `"ajustes"` ✖
 
