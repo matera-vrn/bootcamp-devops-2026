@@ -2,11 +2,11 @@
 
 Execute este checklist **depois de instalar a VM** e traga o resultado para a Aula 01. Cada teste valida algo que usaremos durante o bootcamp.
 
-Faça login na VM e digite os comandos abaixo, um por vez. Não se preocupe em entender cada comando agora — é exatamente isso que vamos aprender nas aulas de Linux! 😉
+Não se preocupe em entender cada comando agora — é exatamente isso que vamos aprender nas aulas de Linux! 😉 Digite um comando por vez e dê Enter.
 
 ## Teste 1 — A VM liga e o login funciona
 
-Você consegue fazer login e ver o *prompt*?
+Na janela do VirtualBox, faça login com o usuário `aluno` e sua senha (lembre: **a senha não aparece enquanto você digita**). Você vê o *prompt* abaixo?
 
 ```text
 aluno@bootcamp:~$
@@ -14,17 +14,31 @@ aluno@bootcamp:~$
 
 - [ ] Sim, estou logado(a)!
 
-## Teste 2 — O sistema é o Ubuntu esperado
+## Teste 2 — O teclado está certo
+
+Os caracteres especiais do terminal precisam sair corretos. Digite exatamente (lembre: `~` é tecla morta no ABNT2 — aperte `~` e depois **Espaço**; `|` é Shift + `\`):
+
+```bash
+echo "teclado: ~ | / > ç"
+```
+
+Resultado esperado: a linha `teclado: ~ | / > ç` repetida na tela, com todos os símbolos iguais.
+
+- [ ] Todos os símbolos saíram certos
+
+> Saiu trocado? O layout do teclado ficou errado na instalação. Corrija com `sudo dpkg-reconfigure keyboard-configuration` (escolha *Generic 105-key*, *Portuguese (Brazil)*) e reinicie com `sudo reboot`.
+
+## Teste 3 — O sistema é o Ubuntu esperado
 
 ```bash
 lsb_release -a
 ```
 
-Resultado esperado: uma linha `Description: Ubuntu 24.04.x LTS` (ou a versão LTS que você instalou).
+Resultado esperado: uma linha `Description: Ubuntu 24.04.x LTS`.
 
 - [ ] Versão confirmada
 
-## Teste 3 — Acesso à internet
+## Teste 4 — Acesso à internet
 
 ```bash
 ping -c 4 google.com
@@ -34,7 +48,7 @@ Resultado esperado: 4 linhas de resposta e, no final, `4 received, 0% packet los
 
 - [ ] Internet funcionando
 
-## Teste 4 — Resolução de nomes (DNS) e HTTPS
+## Teste 5 — Resolução de nomes (DNS) e HTTPS
 
 ```bash
 curl -I https://www.google.com
@@ -44,25 +58,39 @@ Resultado esperado: a primeira linha contém `HTTP/2 200` (ou `HTTP/1.1 200 OK`)
 
 - [ ] DNS e HTTPS funcionando
 
-## Teste 5 — Instalação de pacotes
+## Teste 6 — Instalação de pacotes
 
 ```bash
 sudo apt update
 ```
 
-Digite sua senha quando pedir. Resultado esperado: várias linhas terminando **sem mensagens de erro** (avisos em amarelo são OK).
+Digite sua senha quando pedir (de novo: ela não aparece). Resultado esperado: várias linhas terminando **sem mensagens de erro** (avisos em amarelo são OK).
 
 - [ ] `apt` funcionando
 
-## Teste 6 — Espaço em disco
+## Teste 7 — Espaço em disco
 
 ```bash
 df -h /
 ```
 
-Resultado esperado: a coluna `Avail` mostra **pelo menos 10G** disponíveis.
+Resultado esperado: a coluna `Avail` mostra **pelo menos 15G** disponíveis.
 
 - [ ] Espaço suficiente
+
+> Menos que isso? Veja a última linha de *Problemas comuns* do [guia da VM](instalacao-ubuntu-vm.md).
+
+## Teste 8 — Conexão por SSH a partir do seu computador
+
+Este é o jeito como você vai usar a VM em todas as aulas. Abra o terminal **do seu computador** (Terminal/PowerShell no Windows, Terminal no macOS/Linux) e digite:
+
+```bash
+ssh aluno@localhost -p 2222
+```
+
+Resultado esperado: depois de `yes` (só na primeira vez) e da senha, o mesmo prompt `aluno@bootcamp:~$` aparece **na janela do seu terminal**. Teste colar algo (Ctrl+V no Windows, Cmd+V no Mac, Ctrl+Shift+V no Linux) e depois saia com `exit`.
+
+- [ ] SSH funcionando e consigo colar
 
 ---
 

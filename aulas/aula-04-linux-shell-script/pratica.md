@@ -2,7 +2,7 @@
 
 **Objetivo:** escrever um script que verifica a "saúde" da VM — internet, disco e memória — e responde com ✅ ou ❌. Esse script fica no projeto e será reaproveitado nas próximas aulas!
 
-**Onde:** dentro da VM Ubuntu.
+**Onde:** no terminal conectado à VM via SSH (como no [setup](../../setup/instalacao-ubuntu-vm.md)). A janela do VirtualBox também serve, mas sem copiar e colar.
 
 ## Passo 1 — Crie o arquivo
 

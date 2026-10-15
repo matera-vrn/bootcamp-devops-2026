@@ -2,7 +2,7 @@
 
 **Objetivo:** construir uma esteira com 3 stages — **build**, **teste** e **deploy** — onde cada stage é um script e a esteira **para no primeiro erro**. É exatamente assim que uma pipeline de verdade funciona; a diferença é que na Aula 10 quem vai apertar o botão é o GitHub.
 
-**Onde:** dentro da VM Ubuntu, no `~/meu-projeto-devops`.
+**Onde:** no terminal conectado à VM via SSH, dentro de `~/meu-projeto-devops`.
 
 ## O cenário
 
