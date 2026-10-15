@@ -1,6 +1,6 @@
 # Prática 04 — Seu primeiro script: o health check 🩺
 
-**Objetivo:** escrever um script que verifica a "saúde" da VM — internet, disco e memória — e responde com ✅ ou ❌. Esse script fica no projeto e será reaproveitado nas próximas aulas!
+**Objetivo:** escrever um script que verifica a "saúde" da VM — internet, disco e memória — e responde com `[OK]` ou `[FALHA]`. Esse script fica no projeto e será reaproveitado nas próximas aulas!
 
 **Onde:** dentro da VM Ubuntu.
 
@@ -15,33 +15,33 @@ nano healthcheck.sh
 
 ## Passo 2 — Digite o script
 
-Copie para dentro do `healthcheck.sh` (digite mesmo — errar e corrigir faz parte!):
+Copie para dentro do `healthcheck.sh` (digite — errar e corrigir faz parte! — ou cole, se estiver via SSH). Repare: só caracteres do teclado, **sem emoji nem acento**, para o script funcionar em qualquer terminal:
 
 ```bash
 #!/bin/bash
-# healthcheck.sh — verifica a saude basica da maquina
+# healthcheck.sh - verifica a saude basica da maquina
 set -e
 
-echo "=== Health Check — $(hostname) — $(date '+%d/%m/%Y %H:%M') ==="
+echo "=== Health Check - $(hostname) - $(date '+%d/%m/%Y %H:%M') ==="
 
 # 1) Internet
 if ping -c 1 ubuntu.com > /dev/null 2>&1; then
-    echo "✅ Internet: OK"
+    echo "[OK] Internet"
 else
-    echo "❌ Internet: FALHOU"
+    echo "[FALHA] Internet"
 fi
 
 # 2) Espaco em disco (alerta se uso > 80%)
 USO_DISCO=$(df / --output=pcent | tail -1 | tr -d ' %')
 if [ "$USO_DISCO" -lt 80 ]; then
-    echo "✅ Disco: ${USO_DISCO}% usado"
+    echo "[OK] Disco: ${USO_DISCO}% usado"
 else
-    echo "❌ Disco: ${USO_DISCO}% usado (acima de 80%!)"
+    echo "[FALHA] Disco: ${USO_DISCO}% usado (acima de 80%!)"
 fi
 
 # 3) Memoria livre
 MEM_LIVRE=$(free -m | grep Mem | awk '{print $7}')
-echo "✅ Memoria disponivel: ${MEM_LIVRE} MB"
+echo "[OK] Memoria disponivel: ${MEM_LIVRE} MB"
 
 echo "=== Fim do health check ==="
 ```
@@ -64,10 +64,10 @@ Resultado esperado: `-rwxrwxr-x` — o `x` da Aula 03 em ação!
 Resultado esperado:
 
 ```text
-=== Health Check — bootcamp — 10/11/2026 20:45 ===
-✅ Internet: OK
-✅ Disco: 32% usado
-✅ Memoria disponivel: 1450 MB
+=== Health Check - bootcamp - 06/11/2026 20:45 ===
+[OK] Internet
+[OK] Disco: 32% usado
+[OK] Memoria disponivel: 1450 MB
 === Fim do health check ===
 ```
 
@@ -97,3 +97,4 @@ Execute 2–3 vezes e veja o log crescer — cada execução com seu horário.
 | `command not found` ao rodar | Use `./healthcheck.sh` (com `./` na frente) |
 | `syntax error near unexpected token` | Algum `if`/`then`/`fi` incompleto — compare com o modelo linha a linha |
 | Números estranhos no disco/memória | Confira se copiou os comandos `df`/`free` exatamente como no modelo |
+| `integer expression expected` | A linha `USO_DISCO=` não produziu um número — compare-a com o modelo, caractere por caractere (`df / --output=pcent`, `tail -1`, `tr -d ' %'`) |

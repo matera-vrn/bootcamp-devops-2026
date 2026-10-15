@@ -45,7 +45,7 @@ uptime
 Digite o comando abaixo, tire um print do resultado e poste no chat/comunidade:
 
 ```bash
-echo "Ambiente pronto! $(whoami) reportando da VM $(hostname) 🚀"
+echo "Ambiente pronto! $(whoami) reportando da VM $(hostname)"
 ```
 
 ## Deu errado? 😥

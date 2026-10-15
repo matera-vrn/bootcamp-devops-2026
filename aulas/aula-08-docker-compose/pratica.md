@@ -12,7 +12,7 @@ sudo apt install -y docker-compose-v2
 docker compose version
 ```
 
-Resultado esperado: `Docker Compose version v2.x`.
+Resultado esperado: `Docker Compose version 2.x...`.
 
 ## Passo 2 — Declare o sistema
 
@@ -51,15 +51,17 @@ Resultado esperado: dois serviços com status `Up`/`running`. Teste a página:
 curl http://localhost:8080
 ```
 
+E no navegador do seu computador: **http://localhost:8080**.
+
 ## Passo 4 — Espie os bastidores
 
 Logs de cada serviço:
 
 ```bash
-docker compose logs visitas | head -15
+docker compose logs visitas | grep Ready
 ```
 
-Resultado esperado: o log de inicialização do Redis (`Ready to accept connections`).
+Resultado esperado: a linha `Ready to accept connections tcp` do log do Redis. (Quer ver o log inteiro? `docker compose logs visitas` — o aviso `WARNING Memory overcommit must be enabled!` é inofensivo aqui.)
 
 ## Passo 5 — A mágica da rede interna
 
@@ -78,7 +80,7 @@ docker compose exec visitas redis-cli INCR visitas_do_site
 docker compose exec visitas redis-cli GET visitas_do_site
 ```
 
-Rode o `INCR` mais vezes e veja o contador subir — dados vivendo em um serviço, consultados de fora dele.
+Resultado esperado: `(integer) 1` e, no `GET`, `"1"`. Rode o `INCR` mais vezes e veja o contador subir — dados vivendo em um serviço, consultados de fora dele.
 
 ## Passo 6 — Derrube tudo (e suba de novo, só para sentir o poder)
 
@@ -89,6 +91,14 @@ docker compose up -d
 ```
 
 Um comando derruba o sistema; outro o recria. **Esse é o superpoder do declarativo**: o arquivo é a verdade, o ambiente é descartável.
+
+E o contador? Confira:
+
+```bash
+docker compose exec visitas redis-cli GET visitas_do_site
+```
+
+Resultado esperado: `(nil)` — o contador **sumiu**. Não é bug: o container do Redis foi destruído e recriado do zero, e os dados viviam dentro dele. Ambiente descartável, dados descartados. Para dados sobreviverem, usa-se um **volume** — um tema para você explorar depois do bootcamp.
 
 ## Passo 7 — Versione a infraestrutura
 
@@ -110,5 +120,17 @@ Adicione um terceiro serviço ao `compose.yaml` usando a imagem `traefik/whoami`
 |----------|----------------|
 | `yaml: line X: ...` | Indentação errada — use 2 espaços, remova Tabs |
 | `port is already allocated` | Sobrou um container da Aula 07 na 8080: `docker ps` + `docker stop <nome>` |
-| `permission denied ... docker.sock` | Sessão sem o grupo docker — rode `newgrp docker` |
+| `permission denied ... docker.sock` | Sessão sem o grupo docker — saia (`exit`) e conecte de novo por SSH |
+| `no configuration file provided: not found` | Rode os comandos de dentro de `~/meu-projeto-devops`, onde está o `compose.yaml` |
+| `'compose' is not a docker command` | O plugin não foi instalado — refaça o Passo 1 |
 | `pull access denied` | Erro de digitação no nome da imagem (`redis:alpine`) |
+
+## Missão até a próxima aula 📌
+
+Na Aula 09 o seu projeto vai para o GitHub — e criar a conta no meio da aula consome tempo precioso (confirmação de e-mail, verificações). Faça antes:
+
+1. Crie sua conta em **https://github.com/signup** — escolha um nome de usuário profissional: ele aparecerá no seu portfólio.
+2. Confirme o e-mail.
+3. Recomendado: ative a verificação em duas etapas em *Settings → Password and authentication*.
+
+Já tem conta? Missão cumprida. 😉

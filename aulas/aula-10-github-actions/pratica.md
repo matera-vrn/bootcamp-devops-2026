@@ -51,9 +51,9 @@ git push
 
 No navegador: seu repositório → aba **Actions**. Você verá o workflow `CI` rodando (bolinha amarela). Clique nele → clique no job `build-e-teste` → expanda os steps **Build** e **Teste**.
 
-Resultado esperado: ✅ verde, com os mesmos `🔨 [BUILD] OK` e `🧪 [TEST] OK` que você via na VM — só que executados numa máquina do GitHub, disparados pelo seu push. **Essa é a Integração Contínua.**
+Resultado esperado: ✅ verde, com os mesmos `[BUILD] OK` e `[TEST] OK` que você via na VM — só que executados numa máquina do GitHub, disparados pelo seu push. **Essa é a Integração Contínua.**
 
-## Passo 4 — O selo de qualidade no README
+## Passo 4 — O selo de qualidade no README (se der tempo; senão, missão de casa)
 
 Na página do workflow: botão `···` → **Create status badge** → copie o markdown. Na VM:
 
@@ -83,7 +83,7 @@ git commit -m "altera titulo da pagina"
 git push -u origin quebra-proposital
 ```
 
-No navegador, abra o **Pull Request** dessa branch. Aguarde alguns segundos e observe: o check **CI / build-e-teste** fica ❌ **vermelho, dentro do PR**. O GitHub avisa que o merge não é seguro — **antes** de o erro chegar à main. Clique em **Details** e encontre a linha exata do `🧪 [TEST] FALHOU`.
+No navegador, abra o **Pull Request** dessa branch. Aguarde alguns segundos e observe: o check **CI / build-e-teste** fica ❌ **vermelho, dentro do PR**. O GitHub avisa que o merge não é seguro — **antes** de o erro chegar à main (o botão de merge continua ativo: aqui é você quem decide não clicar; em projetos reais, uma regra de proteção da branch bloqueia o botão). Clique em **Details** e encontre a linha exata do `[TEST] FALHOU`.
 
 ## Passo 6 — Conserte e veja o PR ficar verde
 
@@ -110,3 +110,4 @@ Tire prints do repositório com o badge verde e da aba Actions, e prepare seu po
 | `Permission denied` no step Build | Os scripts perderam o `+x`? Rode `git update-index --chmod=+x scripts/*.sh`, commit e push |
 | Erro de YAML no workflow | Indentação — compare com o modelo; 2 espaços, sem Tab |
 | Pipeline verde mas badge não aparece | O markdown do badge aponta para a branch certa? Regenere pelo botão *Create status badge* |
+| `refusing to allow a Personal Access Token to create or update workflow` no push | O token não tem a permissão **Workflows**. Edite-o em *Settings → Developer settings → Fine-grained tokens* (ou gere outro com *Contents* + *Workflows: Read and write*) e repita o `git push`. Se o Git guardou o token antigo, apague a linha dele em `~/.git-credentials` com o `nano` para ele pedir o novo |

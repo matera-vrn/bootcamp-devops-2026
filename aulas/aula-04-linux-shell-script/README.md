@@ -49,9 +49,9 @@ Regras: sem espaço em volta do `=`; use `$VARIAVEL` para ler; `$(comando)` capt
 
 ```bash
 if ping -c 1 matera.com > /dev/null 2>&1; then
-    echo "✅ Internet OK"
+    echo "[OK] Internet"
 else
-    echo "❌ Sem internet"
+    echo "[FALHA] Sem internet"
 fi
 ```
 
@@ -92,4 +92,4 @@ echo "Olá, $1!"               # $1 = primeiro parâmetro
 
 ## O que levamos para a próxima aula 🔗
 
-> **Gancho para a Aula 05:** "Seu script executa 5 verificações em 2 segundos. Agora imagine encadear scripts de build, teste e deploy, executados por um robô a cada mudança de código. Isso tem nome: **pipeline**. É o assunto de amanhã — o coração do DevOps."
+> **Gancho para a Aula 05:** "Seu script executa 3 verificações em 2 segundos. Agora imagine encadear scripts de build, teste e deploy, executados por um robô a cada mudança de código. Isso tem nome: **pipeline**. É o assunto da próxima aula — o coração do DevOps."

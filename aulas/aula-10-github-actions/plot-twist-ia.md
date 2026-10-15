@@ -1,6 +1,6 @@
 # 🎁 A surpresa final: o plot twist da IA
 
-> **Roteiro para os apresentadores** — conduzir ao vivo no encerramento da Aula 10, depois da prática.
+> **Roteiro para os apresentadores** — conduzir ao vivo no **bloco final da Aula 10 (21:20–21:45)**, no lugar do Q&A de sempre. A prática (45 min) precisa terminar no horário: se atrasar, o badge (Passo 4 da prática) vira missão de casa.
 
 ## A ideia
 
