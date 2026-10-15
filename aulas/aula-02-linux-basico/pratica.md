@@ -48,7 +48,7 @@ ls /usr/bin | head -10
 ls /var/log
 ```
 
-O `head -10` mostra só as 10 primeiras linhas — `/usr/bin` tem centenas de programas. E `/var/log` é o primeiro lugar para olhar quando algo quebra.
+O `|` (a "barra em pé", `Shift + \`) liga a saída de um comando ao próximo — você vai dominar isso na próxima aula; por ora, só repare que o `head -10` mostra as 10 primeiras linhas — `/usr/bin` tem centenas de programas. E `/var/log` é o primeiro lugar para olhar quando algo quebra.
 
 Para fechar, experimente o `..` (subir um nível):
 
