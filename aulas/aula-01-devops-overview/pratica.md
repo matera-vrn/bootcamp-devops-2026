@@ -48,6 +48,8 @@ Digite o comando abaixo, tire um print do resultado e poste no chat/comunidade:
 echo "Ambiente pronto! $(whoami) reportando da VM $(hostname)"
 ```
 
+(`hostname` mostra o nome da máquina e `whoami`, o seu usuário — o terminal montou a frase para você.)
+
 ## Deu errado? 😥
 
 | Problema | Caminho |

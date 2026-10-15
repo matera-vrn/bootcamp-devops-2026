@@ -1,6 +1,8 @@
 # Aula 04 — Linux 3: Shell Script
 
 > **Objetivo:** transformar comandos em **automação**. Escrever, entender e executar os primeiros shell scripts — a porta de entrada para tudo que vem depois (pipelines!).
+>
+> 📖 Apareceu uma palavra nova? Consulte o [glossário](../../glossario.md).
 
 ## 🔁 Revisão da Aula 03 (5 min)
 
@@ -57,12 +59,14 @@ fi
 
 O `if` testa se o comando deu certo (código de saída 0 = sucesso). Todo comando devolve um código — é assim que pipelines sabem se um passo falhou!
 
+O trecho `> /dev/null 2>&1` joga fora toda a saída do `ping` (o `/dev/null` é o "buraco negro" do Linux): não queremos ver o resultado, só saber se deu certo.
+
 ### 5. Loops: repetição sem sofrimento
 
 ```bash
 for SERVICO in ssh cron systemd-resolved; do
     echo "Verificando $SERVICO..."
-    systemctl is-active "$SERVICO"
+    systemctl is-active "$SERVICO"   # systemctl: gerencia os servicos do sistema
 done
 ```
 

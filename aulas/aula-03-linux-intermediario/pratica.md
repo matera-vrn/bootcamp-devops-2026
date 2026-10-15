@@ -104,3 +104,9 @@ Usando pipes, conte quantos arquivos de configuração `.conf` existem em `/etc`
 | `Permission denied` no `apt` | Faltou o `sudo` |
 | `ping: Name or service not known` | VM sem internet — confira o adaptador NAT e rode o [roteiro de testes](../../setup/roteiro-de-testes.md) |
 | `curl: command not found` | Instale com `sudo apt install -y curl` |
+
+## Missão até a próxima aula 📌
+
+1. Abra o `btop` amanhã e descubra qual processo mais consome memória na sua VM. Depois feche-o com `q`.
+2. Investigue com `grep`: quantas linhas do arquivo `/etc/passwd` contêm a palavra `nologin`? (Dica: `grep -c`.)
+3. Rode `ls -l /etc | head -20` e tente ler as permissões de três arquivos em voz alta: "dono pode ler e escrever, grupo pode ler...".

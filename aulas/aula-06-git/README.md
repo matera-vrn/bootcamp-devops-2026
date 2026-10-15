@@ -1,6 +1,8 @@
 # Aula 06 — Git: onde o código vive
 
 > **Objetivo:** entender o que é controle de versão, por que o Git é a **fonte única da verdade** do DevOps e dominar o fluxo básico: `init`, `add`, `commit`, `branch`, `merge`.
+>
+> 📖 Apareceu uma palavra nova? Consulte o [glossário](../../glossario.md).
 
 ## 🔁 Revisão da Aula 05 (5 min)
 

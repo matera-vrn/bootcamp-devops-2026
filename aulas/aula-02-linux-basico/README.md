@@ -1,6 +1,8 @@
 # Aula 02 — Linux 1: História + Comandos básicos
 
 > **Objetivo:** perder o medo da tela preta. Entender por que o Linux domina o mundo DevOps e sair navegando pelo terminal com confiança.
+>
+> 📖 Apareceu uma palavra nova? Consulte o [glossário](../../glossario.md).
 
 ## 🔁 Revisão da Aula 01 (5 min)
 
@@ -15,7 +17,7 @@
 
 ### 1. Um pouco de história
 
-- **1991:** Linus Torvalds, um estudante finlandês, publica um kernel "de hobby" na internet e convida o mundo a colaborar.
+- **1991:** Linus Torvalds, um estudante finlandês, publica um **kernel** (o núcleo de um sistema operacional) "de hobby" na internet e convida o mundo a colaborar.
 - O Linux cresce como **software livre e de código aberto**: qualquer pessoa pode ler, modificar e distribuir.
 - Hoje: roda na **imensa maioria dos servidores do mundo**, em todos os supercomputadores do TOP500, em todo Android, nos carros, roteadores... e em toda a nuvem.
 
@@ -32,6 +34,8 @@ O **kernel** é o núcleo; as **distribuições** (distros) empacotam kernel + f
 - Automação nasce no **terminal**: scripts, pipelines e ferramentas de infra assumem um shell Linux.
 
 ### 4. Anatomia do terminal
+
+A linha que fica esperando seus comandos chama-se **prompt**. O programa que lê e executa o que você digita é o **shell** — no Ubuntu, o **bash**. Veja um comando completo:
 
 ```text
 aluno@bootcamp:~$ ls -l /home
@@ -78,6 +82,28 @@ Caminho **absoluto** começa da raiz (`/home/aluno/projetos`); caminho **relativ
 | `man` | Abre o manual de qualquer comando | *manual* |
 
 > 🧠 **Regra de ouro:** na dúvida, `man comando`. O terminal vem com a documentação embutida.
+
+### 7. Kit de sobrevivência do terminal
+
+Oito teclas que resolvem 90% dos sustos de quem está começando:
+
+| Tecla | Faz |
+|-------|-----|
+| `Tab` | **Autocompleta** nomes de arquivos, pastas e comandos. Digite `cd meu-` + `Tab` e veja a mágica (2x `Tab` mostra as opções) |
+| `↑` `↓` | Navega pelos comandos que você já digitou — ninguém redigita comando |
+| `Ctrl + C` | **Cancela** o comando atual. O terminal "travou"? É isto |
+| `Ctrl + L` (ou `clear`) | Limpa a tela |
+| `q` | Sai de telas de leitura (`man`, `less`, o histórico do Git) |
+| `Ctrl + R` | Busca no histórico: comece a digitar e ele encontra |
+| `Ctrl + D` (ou `exit`) | Encerra a sessão |
+| `comando --help` | Ajuda resumida, quando o `man` for longo demais |
+
+Dois sustos clássicos:
+
+- **Apareceu um `>` sozinho e nada acontece.** Você abriu aspas e não fechou — o shell está esperando o resto. `Ctrl + C` e digite de novo.
+- **O `~` não aparece (ou sai `~~`).** No teclado ABNT2, `~` é tecla morta: aperte `~` e depois **Espaço**. E `|` é `Shift + \` (a tecla ao lado do `Z`). Veja o box de teclado no [setup](../../setup/instalacao-ubuntu-vm.md).
+
+> 📝 Tudo isso está na [cola do terminal](../../recursos/cheat-sheet-terminal.md) — imprima e deixe ao lado.
 
 ---
 

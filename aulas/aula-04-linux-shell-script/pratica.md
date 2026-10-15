@@ -11,7 +11,17 @@ cd ~/meu-projeto-devops/scripts
 nano healthcheck.sh
 ```
 
-> O `nano` é um editor simples de terminal: digite normalmente, salve com `Ctrl+O` + `Enter` e saia com `Ctrl+X`.
+> ✏️ **nano em 1 minuto** — o `nano` é um editor de texto que roda no terminal. O mouse **não** funciona: mova-se com as setas.
+>
+> | Tecla | Faz |
+> |-------|-----|
+> | `Ctrl + O`, depois `Enter` | **Salva** (ele mostra o nome do arquivo; confirme com Enter) |
+> | `Ctrl + X` | **Sai** (se houver mudança não salva, pergunta `Save modified buffer?` — responda `Y` e Enter) |
+> | `Ctrl + K` / `Ctrl + U` | Recorta a linha / cola de volta |
+> | `Ctrl + W` | Procura um texto |
+> | `Alt + U` | Desfaz |
+>
+> Na barra de baixo, `^` significa `Ctrl`. Se estiver via SSH, você pode colar o conteúdo com `Ctrl + V` (Windows), `Cmd + V` (Mac) ou `Ctrl + Shift + V` (Linux).
 
 ## Passo 2 — Digite o script
 
@@ -98,3 +108,9 @@ Execute 2–3 vezes e veja o log crescer — cada execução com seu horário.
 | `syntax error near unexpected token` | Algum `if`/`then`/`fi` incompleto — compare com o modelo linha a linha |
 | Números estranhos no disco/memória | Confira se copiou os comandos `df`/`free` exatamente como no modelo |
 | `integer expression expected` | A linha `USO_DISCO=` não produziu um número — compare-a com o modelo, caractere por caractere (`df / --output=pcent`, `tail -1`, `tr -d ' %'`) |
+
+## Missão até a próxima aula 📌
+
+1. Toda vez que ligar a VM esta semana, rode `~/meu-projeto-devops/scripts/healthcheck.sh >> ~/meu-projeto-devops/healthcheck.log` e veja o log crescer com `tail -5 ~/meu-projeto-devops/healthcheck.log`.
+2. Faça o desafio bônus 2 (site como parâmetro `$1`): é a diferença entre um script que só serve para você e um que serve para qualquer um.
+3. Automatize uma chatice sua: um script de 3 linhas que cria a pasta do dia (`mkdir ~/rascunho-$(date +%d-%m)`) já conta.

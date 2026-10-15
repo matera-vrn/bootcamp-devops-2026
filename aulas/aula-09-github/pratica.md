@@ -118,3 +118,8 @@ Capriche no seu **perfil** do GitHub: foto, bio ("Estudante de DevOps — Bootca
 | Colei o token e nada apareceu | Normal: senhas não aparecem. Dê Enter |
 | `error: failed to push some refs` | O repositório remoto foi criado com README — rode `git pull origin main --allow-unrelated-histories` (salve a mensagem com `Ctrl+X`) e repita o push |
 | `Repository not found` | URL com typo no usuário ou nome do repositório — confira com `git remote -v` |
+
+## Missão até a próxima aula 📌
+
+1. Faça o desafio bônus (perfil + repositório fixado): é a sua vitrine a partir de agora.
+2. Abra um **segundo Pull Request** sozinho(a): corrija ou melhore qualquer coisa no `README.md` pelo fluxo completo — branch → commit → push → PR → merge → `git pull`. Na próxima aula, a pipeline vai rodar dentro desse mesmo fluxo.

@@ -1,6 +1,8 @@
 # Aula 10 — GitHub Actions + Encerramento 🏁
 
 > **Objetivo:** fechar o ciclo: a pipeline manual da Aula 05 vira uma pipeline **de verdade**, executada automaticamente pelo GitHub a cada push. E encerrar o bootcamp olhando para frente: DevSecOps, Kubernetes, carreira — e uma surpresa. 🎁
+>
+> 📖 Apareceu uma palavra nova? Consulte o [glossário](../../glossario.md).
 
 ## 🔁 Revisão da Aula 09 (5 min)
 
@@ -72,6 +74,7 @@ E quando a pipeline precisa de uma senha (um registro de imagens — *registry* 
 - **Kubernetes (K8s):** o compose "adulto" — orquestra containers em **muitas máquinas**, com auto-recuperação e escala automática. É o padrão da indústria (e o dia a dia na Matera).
 - **DevSecOps:** segurança desde o dia zero — scanners de vulnerabilidade e de segredos **como stages da pipeline**.
 - **Infraestrutura como Código (Terraform), observabilidade (métricas, logs, traces), nuvem (AWS/Azure/GCP)** — cada um dá um bootcamp inteiro.
+- **Continue no Linux todos os dias:** o guia [continuando com Linux](../../recursos/continuando-com-linux.md) mostra como manter o terminal na sua rotina — na VM, com WSL2 no Windows ou no Terminal do Mac — com um desafio de 30 dias. E a [cola de comandos](../../recursos/cheat-sheet-terminal.md) para ter sempre à mão.
 
 ### 6. Carreira e comunidade
 

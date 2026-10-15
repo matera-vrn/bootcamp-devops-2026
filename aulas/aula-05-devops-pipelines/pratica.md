@@ -157,3 +157,8 @@ Adicione um 4º stage à pipeline: o `healthcheck.sh` da Aula 04 rodando **depoi
 | `No such file or directory` | Rode a pipeline de dentro da pasta `scripts` (`cd ~/meu-projeto-devops/scripts`) |
 | Pipeline não para no erro | Confira o `set -e` no topo do `pipeline.sh` e os `exit 1` no `test.sh` |
 | `EOF` dá erro de sintaxe | O `EOF` final precisa estar sozinho na linha, sem espaços antes |
+
+## Missão até a próxima aula 📌
+
+1. Rode a pipeline mais duas vezes esta semana e provoque uma falha **diferente** da aula: apague o `app/index.html` antes de rodar só o `./test.sh` e veja qual dos dois testes pega o problema.
+2. Faça o desafio bônus (health check como 4º stage) — na próxima aula você vai versionar tudo isso, e é bom que esteja do seu jeito.

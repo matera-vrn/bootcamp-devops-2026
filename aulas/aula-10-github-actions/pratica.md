@@ -111,3 +111,7 @@ Tire prints do repositório com o badge verde e da aba Actions, e prepare seu po
 | Erro de YAML no workflow | Indentação — compare com o modelo; 2 espaços, sem Tab |
 | Pipeline verde mas badge não aparece | O markdown do badge aponta para a branch certa? Regenere pelo botão *Create status badge* |
 | `refusing to allow a Personal Access Token to create or update workflow` no push | O token não tem a permissão **Workflows**. Edite-o em *Settings → Developer settings → Fine-grained tokens* (ou gere outro com *Contents* + *Workflows: Read and write*) e repita o `git push`. Se o Git guardou o token antigo, apague a linha dele em `~/.git-credentials` com o `nano` para ele pedir o novo |
+
+## Missão para depois do bootcamp 📌
+
+O loop não termina — recomeça. Leia o guia [continuando com Linux](../../recursos/continuando-com-linux.md), escolha o seu caminho (manter a VM, WSL2 no Windows ou o Terminal do Mac) e aceite o **desafio dos 30 dias**: 10 minutos de terminal por dia. Daqui a um mês, conte na comunidade o que você automatizou.
