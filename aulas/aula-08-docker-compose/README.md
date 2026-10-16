@@ -1,6 +1,8 @@
 # Aula 08 — Docker 2: Docker Compose
 
 > **Objetivo:** sair de "um container" para "um sistema": orquestrar múltiplos containers com um único arquivo declarativo, o `compose.yaml`.
+>
+> 📖 Apareceu uma palavra nova? Consulte o [glossário](../../glossario.md).
 
 ## 🔁 Revisão da Aula 07 (5 min)
 
@@ -45,10 +47,10 @@ services:            # a lista de containers do sistema
       - "8080:80"    # VM:container — igual ao -p!
 
   visitas:
-    image: redis:alpine   # ou use uma imagem pronta do Hub
+    image: redis:alpine   # ou use uma imagem pronta do Hub (Redis: banco de dados em memoria)
 ```
 
-- **YAML**: formato de texto sensível a **indentação** (2 espaços, nunca Tab!).
+- **YAML**: formato de texto sensível a **indentação** — os espaços no início de cada linha, que dizem "isto está dentro daquilo" (2 espaços por nível, nunca Tab!).
 - Cada serviço = um container. O Compose cria automaticamente uma **rede interna** onde os serviços se enxergam **pelo nome** (`site` acessa `visitas` pelo hostname `visitas` — DNS da Aula 03 em ação!).
 
 ### 4. Comandos do dia a dia

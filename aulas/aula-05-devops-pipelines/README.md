@@ -1,6 +1,8 @@
 # Aula 05 — DevOps: Esteiras e Pipelines
 
 > **Objetivo:** entender de verdade o que é CI/CD e o conceito de esteira (pipeline) — e sentir na pele, montando uma pipeline "manual" com os scripts que vocês já sabem escrever.
+>
+> 📖 Apareceu uma palavra nova? Consulte o [glossário](../../glossario.md).
 
 ## 🔁 Revisão da Aula 04 (5 min)
 

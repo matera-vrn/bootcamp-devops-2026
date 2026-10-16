@@ -1,6 +1,8 @@
 # Aula 04 — Linux 3: Shell Script
 
 > **Objetivo:** transformar comandos em **automação**. Escrever, entender e executar os primeiros shell scripts — a porta de entrada para tudo que vem depois (pipelines!).
+>
+> 📖 Apareceu uma palavra nova? Consulte o [glossário](../../glossario.md).
 
 ## 🔁 Revisão da Aula 03 (5 min)
 
@@ -49,20 +51,22 @@ Regras: sem espaço em volta do `=`; use `$VARIAVEL` para ler; `$(comando)` capt
 
 ```bash
 if ping -c 1 matera.com > /dev/null 2>&1; then
-    echo "✅ Internet OK"
+    echo "[OK] Internet"
 else
-    echo "❌ Sem internet"
+    echo "[FALHA] Sem internet"
 fi
 ```
 
 O `if` testa se o comando deu certo (código de saída 0 = sucesso). Todo comando devolve um código — é assim que pipelines sabem se um passo falhou!
+
+O trecho `> /dev/null 2>&1` joga fora toda a saída do `ping` (o `/dev/null` é o "buraco negro" do Linux): não queremos ver o resultado, só saber se deu certo.
 
 ### 5. Loops: repetição sem sofrimento
 
 ```bash
 for SERVICO in ssh cron systemd-resolved; do
     echo "Verificando $SERVICO..."
-    systemctl is-active "$SERVICO"
+    systemctl is-active "$SERVICO"   # systemctl: gerencia os servicos do sistema
 done
 ```
 
@@ -86,10 +90,10 @@ echo "Olá, $1!"               # $1 = primeiro parâmetro
 
 ## Parte 2 — Mão na massa
 
-👉 Siga o **[pratica.md](pratica.md)**: você vai escrever um **health check** — o script que verifica a saúde da sua VM — e ele ficará no projeto até o fim do bootcamp.
+👉 Siga o **[pratica.md](pratica.md)**: primeiro o relatório da Aula 03 vira script (cinco linhas e pronto), depois você escreve um **health check** — o script que verifica a saúde da sua VM — que ficará no projeto até o fim do bootcamp.
 
 ---
 
 ## O que levamos para a próxima aula 🔗
 
-> **Gancho para a Aula 05:** "Seu script executa 5 verificações em 2 segundos. Agora imagine encadear scripts de build, teste e deploy, executados por um robô a cada mudança de código. Isso tem nome: **pipeline**. É o assunto de amanhã — o coração do DevOps."
+> **Gancho para a Aula 05:** "Seu script verifica a máquina em 2 segundos. Agora imagine encadear scripts de build, teste e deploy, executados por um robô a cada mudança de código. Isso tem nome: **pipeline**. É o assunto da próxima aula — o coração do DevOps."

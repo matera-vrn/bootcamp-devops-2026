@@ -2,14 +2,17 @@
 
 **Objetivo:** transformar o `meu-projeto-devops` em um repositório Git, fazer os primeiros commits, criar uma branch, e fazer um merge.
 
-**Onde:** dentro da VM Ubuntu.
+**Onde:** no terminal conectado à VM via SSH (como no [setup](../../setup/instalacao-ubuntu-vm.md)). A janela do VirtualBox também serve, mas sem copiar e colar.
 
-## Passo 1 — Instale e apresente-se ao Git
+## Passo 1 — Apresente-se ao Git
+
+O Git já vem instalado no Ubuntu Server. Confirme:
 
 ```bash
-sudo apt update && sudo apt install -y git
 git --version
 ```
+
+Resultado esperado: `git version 2.43.x` (se aparecer `command not found`, instale com `sudo apt install -y git`).
 
 O Git assina cada commit com seu nome. Configure uma vez só:
 
@@ -18,6 +21,8 @@ git config --global user.name "Seu Nome"
 git config --global user.email "seu-email@exemplo.com"
 git config --global init.defaultBranch main
 ```
+
+> 💡 O e-mail fica gravado em cada commit e será **público** quando o projeto for para o GitHub (Aula 09). Se preferir não expor o seu, o GitHub oferece um endereço *noreply* em *Settings → Emails* — dá para trocar depois com o mesmo comando.
 
 ## Passo 2 — Nasce um repositório
 
@@ -38,6 +43,24 @@ git status
 Resultado esperado: arquivos em vermelho como *untracked* — o Git os vê, mas ainda não os protege.
 
 ## Passo 4 — Primeiro commit! 🎉
+
+Antes, duas arrumações que todo profissional faz: o arquivo vazio `scripts/teste.sh` (Aula 03) não precisa entrar no histórico, e arquivos **gerados** — logs, relatórios, a página que o build cria — não se versionam; versiona-se o *código que os gera*. O `.gitignore` é a lista do que o Git deve ignorar:
+
+```bash
+rm scripts/teste.sh
+nano .gitignore
+```
+
+Conteúdo:
+
+```text
+# arquivos gerados - nao versionar
+*.log
+relatorio.txt
+app/index.html
+```
+
+Rode `git status` de novo: o `healthcheck.log`, o `relatorio.txt` e o `app/index.html` sumiram da lista. Agora sim:
 
 ```bash
 git add .
@@ -72,21 +95,21 @@ Resultado esperado: duas linhas no log — sua linha do tempo cresceu.
 git checkout -b melhoria-healthcheck
 ```
 
-Edite o script e adicione a contagem de processos no final (antes da última linha `echo`):
+Edite o script e adicione, no final (antes da última linha `echo`), há quanto tempo a máquina está ligada:
 
 ```bash
 vi scripts/healthcheck.sh
 ```
 
 ```bash
-echo "✅ Processos ativos: $(ps aux | wc -l)"
+echo "[OK] Tempo ligado: $(uptime -p)"
 ```
 
 Commit na branch:
 
 ```bash
 git add scripts/healthcheck.sh
-git commit -m "adiciona contagem de processos ao healthcheck"
+git commit -m "adiciona tempo ligado ao healthcheck"
 ```
 
 ## Passo 7 — Compare os universos paralelos
@@ -118,3 +141,10 @@ Crie uma branch `experimento`, faça um commit **quebrando** o healthcheck de pr
 | `not a git repository` | Você não está dentro de `~/meu-projeto-devops` |
 | `nothing to commit` | Faltou o `git add` antes do commit, ou nada mudou |
 | Abriu um editor estranho no merge/commit | É o editor de mensagem; salve e saia (`Ctrl+X` no nano; `Esc :wq` no vim) |
+| `git log` abriu uma tela que não sai | É o visualizador de páginas: navegue com as setas e saia com `q` |
+
+## Missão até a próxima aula 📌
+
+1. Faça pelo menos **dois commits reais** até a próxima aula: melhore um comentário num script, acrescente uma linha ao `README.txt`, ajuste o health check. Mensagens que dizem *o que* e *por quê*.
+2. Antes de cada commit, rode `git status` e `git diff` — e só depois `git add`. Esse ritual é o que separa quem usa Git de quem sofre com Git.
+3. Veja sua história crescer: `git log --oneline`.

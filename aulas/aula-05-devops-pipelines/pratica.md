@@ -2,40 +2,35 @@
 
 **Objetivo:** construir uma esteira com 3 stages — **build**, **teste** e **deploy** — onde cada stage é um script e a esteira **para no primeiro erro**. É exatamente assim que uma pipeline de verdade funciona; a diferença é que na Aula 10 quem vai apertar o botão é o GitHub.
 
-**Onde:** dentro da VM Ubuntu, no `~/meu-projeto-devops`.
+**Onde:** no terminal conectado à VM via SSH, dentro de `~/meu-projeto-devops/scripts`.
 
 ## O cenário
 
 Nossa "aplicação" é simples de propósito: uma página `index.html`. A esteira vai **montá-la** (build), **verificá-la** (teste) e **publicá-la** (deploy) em uma pasta que simula o servidor de produção.
 
-## Passo 1 — Stage de build
+> ⌨️ São quatro scripts curtos (28 linhas no total), só com caracteres do teclado. Digite com calma ou, via SSH, cole bloco a bloco. Travou? No fim da página há como baixar as versões prontas.
+
+## Passo 1 — Stage de build (6 linhas)
 
 ```bash
 cd ~/meu-projeto-devops/scripts
 vi build.sh
 ```
 
-Conteúdo:
+Conteúdo (a linha do `echo "<h1>...` é uma só, comprida — não aperte Enter no meio dela):
 
 ```bash
 #!/bin/bash
 set -e
-echo "🔨 [BUILD] Montando a aplicacao..."
-
+echo "[BUILD] Montando a aplicacao..."
 mkdir -p ~/meu-projeto-devops/app
-cat > ~/meu-projeto-devops/app/index.html <<EOF
-<html>
-  <body>
-    <h1>Bootcamp DevOps Matera 2026</h1>
-    <p>Build feito em: $(date '+%d/%m/%Y %H:%M:%S')</p>
-  </body>
-</html>
-EOF
-
-echo "🔨 [BUILD] OK — app/index.html gerado."
+echo "<h1>Bootcamp DevOps Matera 2026</h1><p>Build em $(date '+%d/%m/%Y %H:%M:%S')</p>" > ~/meu-projeto-devops/app/index.html
+echo "[BUILD] OK - app/index.html gerado."
 ```
 
-## Passo 2 — Stage de teste
+O "build" aqui é gerar a página com a data e hora — numa aplicação real, seria compilar o código.
+
+## Passo 2 — Stage de teste (9 linhas)
 
 ```bash
 vi test.sh
@@ -46,26 +41,18 @@ Conteúdo:
 ```bash
 #!/bin/bash
 set -e
-echo "🧪 [TEST] Verificando a aplicacao..."
-
-ARQUIVO=~/meu-projeto-devops/app/index.html
-
-# Teste 1: o arquivo existe?
-if [ ! -f "$ARQUIVO" ]; then
-    echo "🧪 [TEST] FALHOU: index.html nao existe!"
+echo "[TEST] Verificando a aplicacao..."
+if grep -q "Bootcamp DevOps" ~/meu-projeto-devops/app/index.html; then
+    echo "[TEST] OK - conteudo esperado encontrado."
+else
+    echo "[TEST] FALHOU - conteudo esperado nao encontrado!"
     exit 1
 fi
-
-# Teste 2: o conteudo esperado esta la?
-if ! grep -q "Bootcamp DevOps" "$ARQUIVO"; then
-    echo "🧪 [TEST] FALHOU: conteudo esperado nao encontrado!"
-    exit 1
-fi
-
-echo "🧪 [TEST] OK — 2 de 2 testes passaram."
 ```
 
-## Passo 3 — Stage de deploy
+O `exit 1` é o coração da esteira: um código de saída diferente de zero significa **"falhei"** — e quem chamou o script fica sabendo.
+
+## Passo 3 — Stage de deploy (6 linhas)
 
 ```bash
 vi deploy.sh
@@ -76,14 +63,13 @@ Conteúdo:
 ```bash
 #!/bin/bash
 set -e
-echo "🚀 [DEPLOY] Publicando em 'producao'..."
-
+echo "[DEPLOY] Publicando em 'producao'..."
 mkdir -p ~/producao
 cp ~/meu-projeto-devops/app/index.html ~/producao/
-echo "🚀 [DEPLOY] OK — publicado em ~/producao/index.html"
+echo "[DEPLOY] OK - publicado em ~/producao/index.html"
 ```
 
-## Passo 4 — A esteira que liga tudo
+## Passo 4 — A esteira que liga tudo (7 linhas)
 
 ```bash
 vi pipeline.sh
@@ -94,14 +80,23 @@ Conteúdo:
 ```bash
 #!/bin/bash
 set -e
-echo "===== 🏭 PIPELINE INICIADA — $(date '+%H:%M:%S') ====="
-
+echo "===== PIPELINE INICIADA - $(date '+%H:%M:%S') ====="
 ./build.sh
 ./test.sh
 ./deploy.sh
-
-echo "===== ✅ PIPELINE VERDE — aplicacao em producao! ====="
+echo "===== PIPELINE VERDE - aplicacao em producao! ====="
 ```
+
+Graças ao `set -e`, se qualquer stage devolver erro, a esteira **para ali** — os stages seguintes não rodam.
+
+### Comandos novos nesta prática
+
+| Trecho | O que faz |
+|--------|-----------|
+| `mkdir -p pasta` | Cria a pasta se não existir (e não reclama se já existir) |
+| `grep -q "texto" arquivo` | Procura o texto **em silêncio** (*quiet*): não imprime nada, só responde "achei" (sucesso) ou "não achei" (erro) — perfeito para um `if` |
+| `exit 1` | Encerra o script avisando que falhou (`0` = sucesso; qualquer outro número = falha) |
+| `./build.sh` dentro de outro script | Um script pode chamar outros — é assim que a esteira encadeia os stages |
 
 ## Passo 5 — Execute a esteira!
 
@@ -110,7 +105,20 @@ chmod +x build.sh test.sh deploy.sh pipeline.sh
 ./pipeline.sh
 ```
 
-Resultado esperado: os três stages em sequência e a mensagem `✅ PIPELINE VERDE`. Confira a "produção":
+Resultado esperado:
+
+```text
+===== PIPELINE INICIADA - 20:50:12 =====
+[BUILD] Montando a aplicacao...
+[BUILD] OK - app/index.html gerado.
+[TEST] Verificando a aplicacao...
+[TEST] OK - conteudo esperado encontrado.
+[DEPLOY] Publicando em 'producao'...
+[DEPLOY] OK - publicado em ~/producao/index.html
+===== PIPELINE VERDE - aplicacao em producao! =====
+```
+
+Confira a "produção":
 
 ```bash
 cat ~/producao/index.html
@@ -118,27 +126,47 @@ cat ~/producao/index.html
 
 ## Passo 6 — Quebre a pipeline (de propósito!) 💥
 
-Cultura blameless na prática: vamos provocar uma falha e ver a esteira nos proteger. Edite o `build.sh` e troque a frase `Bootcamp DevOps Matera 2026` por `Ola mundo`. Rode de novo:
+Cultura blameless na prática: vamos provocar uma falha e ver a esteira nos proteger. Edite o `build.sh` (`nano build.sh`) e troque `Bootcamp DevOps Matera 2026` por `Ola mundo`. Rode de novo:
 
 ```bash
 ./pipeline.sh
 ```
 
-Resultado esperado: o **[TEST] FALHOU** e — aqui está a mágica — o **deploy nunca executou**. A versão quebrada **não chegou em produção**. Isso é qualidade antes de ir para o ar!
+Resultado esperado: `[TEST] FALHOU` e — aqui está a mágica — **o deploy nunca executou**. A versão quebrada **não chegou em produção**. Isso é qualidade antes de ir para o ar!
 
 > 🔎 Confirme: `cat ~/producao/index.html` ainda mostra a versão boa anterior.
 
 Agora desfaça a mudança no `build.sh` e deixe a pipeline verde de novo. 💚
 
+## Travou na digitação? Baixe a versão pronta
+
+Os quatro scripts estão neste repositório. Via SSH, baixe-os para a pasta certa — e **leia antes de executar** (`cat build.sh`):
+
+```bash
+cd ~/meu-projeto-devops/scripts
+curl -O https://raw.githubusercontent.com/matera-vrn/bootcamp-devops-2026/main/aulas/aula-05-devops-pipelines/scripts/build.sh
+curl -O https://raw.githubusercontent.com/matera-vrn/bootcamp-devops-2026/main/aulas/aula-05-devops-pipelines/scripts/test.sh
+curl -O https://raw.githubusercontent.com/matera-vrn/bootcamp-devops-2026/main/aulas/aula-05-devops-pipelines/scripts/deploy.sh
+curl -O https://raw.githubusercontent.com/matera-vrn/bootcamp-devops-2026/main/aulas/aula-05-devops-pipelines/scripts/pipeline.sh
+chmod +x build.sh test.sh deploy.sh pipeline.sh
+```
+
 ## Desafio bônus 🏆
 
-Adicione um 4º stage à pipeline: o `healthcheck.sh` da Aula 04 rodando **depois** do deploy (na vida real isso se chama *smoke test* — checar se produção continua saudável após a mudança).
+1. **Smoke test:** adicione um 4º stage à pipeline — o `healthcheck.sh` da Aula 04 rodando **depois** do deploy (na vida real, checar se produção continua saudável após a mudança se chama *smoke test*).
+2. **Teste mais claro:** hoje, se o `index.html` não existir, o `grep` reclama em inglês e o teste falha. Adicione antes dele um teste só para isso, com uma mensagem sua: `if [ ! -f ~/meu-projeto-devops/app/index.html ]; then echo "[TEST] FALHOU - index.html nao existe!"; exit 1; fi` (`-f` = "o arquivo existe?"; `!` = "não").
 
 ## Deu errado? 😥
 
 | Problema | Causa provável |
 |----------|----------------|
 | `Permission denied` | Faltou `chmod +x` em algum dos 4 scripts |
-| `No such file or directory` | Rode a pipeline de dentro da pasta `scripts` (`cd ~/meu-projeto-devops/scripts`) |
-| Pipeline não para no erro | Confira o `set -e` no topo do `pipeline.sh` e os `exit 1` no `test.sh` |
-| `EOF` dá erro de sintaxe | O `EOF` final precisa estar sozinho na linha, sem espaços antes |
+| `No such file or directory` ao rodar `./pipeline.sh` | Rode a pipeline de dentro da pasta `scripts` (`cd ~/meu-projeto-devops/scripts`) |
+| `grep: ... No such file or directory` | O `test.sh` rodou antes do `build.sh` — rode `./build.sh` primeiro (a pipeline faz isso na ordem certa) |
+| Pipeline não para no erro | Confira o `set -e` no topo do `pipeline.sh` e o `exit 1` no `test.sh` |
+| A página saiu sem a data | A linha do `echo "<h1>...` ficou quebrada em duas no nano — ela é uma linha só |
+
+## Missão até a próxima aula 📌
+
+1. Rode a pipeline mais duas vezes esta semana e provoque uma falha **diferente** da aula: apague a página (`rm ~/meu-projeto-devops/app/index.html`) e rode só o `./test.sh`. Ele reprova mesmo sem o arquivo? Depois faça o desafio bônus 2 para a mensagem de erro ficar sua.
+2. Faça o desafio bônus 1 (health check como 4º stage) — na próxima aula você vai versionar tudo isso, e é bom que esteja do seu jeito.

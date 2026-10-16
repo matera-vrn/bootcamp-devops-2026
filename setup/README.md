@@ -9,8 +9,12 @@ Para que **todo mundo tenha exatamente o mesmo ambiente** — não importa se se
 Siga os guias **nesta ordem**, antes da primeira aula:
 
 1. **[Instalar o VirtualBox](instalacao-virtualbox.md)** no seu computador (Windows, Linux ou macOS).
-2. **[Criar a máquina virtual Ubuntu](instalacao-ubuntu-vm.md)** dentro do VirtualBox.
+2. **[Criar a máquina virtual Ubuntu](instalacao-ubuntu-vm.md)** dentro do VirtualBox — inclui a instalação do Ubuntu tela a tela e a conexão por **SSH**, o jeito como você vai usar a VM nas aulas.
 3. **[Executar o roteiro de testes](roteiro-de-testes.md)** para confirmar que está tudo funcionando.
+
+⏱️ **Reserve cerca de 2 horas** para tudo (o download da imagem do Ubuntu tem ~4 GB) e faça **pelo menos uma semana antes** da Aula 01, para dar tempo de pedir ajuda se algo travar.
+
+**O que esperar:** o Ubuntu Server é instalado por um assistente em **modo texto**, em inglês, navegado só pelo teclado (setas, Tab, Espaço e Enter). Parece assustador, mas são 17 telas em que, na maioria, basta confirmar — o guia mostra o que escolher em cada uma. Depois disso, você vai usar a VM pelo terminal do seu próprio computador, com copiar e colar funcionando.
 
 ## Requisitos mínimos do computador
 
@@ -21,7 +25,9 @@ Siga os guias **nesta ordem**, antes da primeira aula:
 | Processador | Com suporte a virtualização (VT-x/AMD-V) habilitado na BIOS/UEFI |
 | Internet | Necessária durante as aulas para baixar pacotes |
 
-> ⚠️ **Virtualização desabilitada?** Se o VirtualBox reclamar que a virtualização não está disponível, será preciso habilitar **VT-x** (Intel) ou **AMD-V** (AMD) na BIOS/UEFI do computador. Procure por "Virtualization Technology" nas configurações. Em caso de dúvida, chame a gente nos canais da comunidade!
+> ⚠️ **Virtualização desabilitada?** Se o VirtualBox reclamar que a virtualização não está disponível, será preciso habilitar **VT-x** (Intel) ou **AMD-V** (AMD) na BIOS/UEFI do computador. O passo a passo (inclusive como conferir pelo Gerenciador de Tarefas no Windows) está em *Problemas comuns* do [guia do VirtualBox](instalacao-virtualbox.md). Em caso de dúvida, chame a gente nos canais da comunidade!
+
+> 🍎 **Mac com chip Apple M (M1, M2, M3, M4)?** Funciona, mas atenção: baixe o VirtualBox para **Apple Silicon** e a imagem do Ubuntu **arm64** — os guias indicam qual.
 
 ## E se eu não conseguir?
 
