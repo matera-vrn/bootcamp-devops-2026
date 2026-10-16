@@ -2,7 +2,7 @@
 
 **Objetivo:** transformar o `meu-projeto-devops` em um repositório Git, fazer os primeiros commits, criar uma branch, e fazer um merge.
 
-**Onde:** dentro da VM Ubuntu.
+**Onde:** no terminal conectado à VM via SSH (como no [setup](../../setup/instalacao-ubuntu-vm.md)). A janela do VirtualBox também serve, mas sem copiar e colar.
 
 ## Passo 1 — Apresente-se ao Git
 

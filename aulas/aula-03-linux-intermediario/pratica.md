@@ -2,7 +2,7 @@
 
 **Objetivo:** usar comandos intermediários para investigar o sistema, controlar permissões e falar com a internet — tudo dentro do `meu-projeto-devops`.
 
-**Onde:** dentro da VM Ubuntu.
+**Onde:** no terminal conectado à VM via SSH (como no [setup](../../setup/instalacao-ubuntu-vm.md)). A janela do VirtualBox também serve, mas sem copiar e colar.
 
 ## Passo 1 — Instale sua primeira ferramenta
 

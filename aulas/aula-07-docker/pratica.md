@@ -2,7 +2,7 @@
 
 **Objetivo:** instalar o Docker na VM, rodar o primeiro container, e containerizar a página do seu projeto com um `Dockerfile`.
 
-**Onde:** dentro da VM Ubuntu.
+**Onde:** no terminal conectado à VM via SSH (como no [setup](../../setup/instalacao-ubuntu-vm.md)). A janela do VirtualBox também serve, mas sem copiar e colar.
 
 ## Passo 1 — Instale o Docker
 
