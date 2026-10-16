@@ -141,7 +141,6 @@ Crie uma branch `experimento`, faça um commit **quebrando** o healthcheck de pr
 | `not a git repository` | Você não está dentro de `~/meu-projeto-devops` |
 | `nothing to commit` | Faltou o `git add` antes do commit, ou nada mudou |
 | Abriu um editor estranho no merge/commit | É o editor de mensagem; salve e saia (`Ctrl+X` no nano; `Esc :wq` no vim) |
-
 | `git log` abriu uma tela que não sai | É o visualizador de páginas: navegue com as setas e saia com `q` |
 
 ## Missão até a próxima aula 📌

@@ -91,7 +91,6 @@ Sem olhar as respostas acima, crie dentro de `meu-projeto-devops` uma pasta `doc
 | `No such file or directory` | Você não está na pasta que imagina — rode `pwd` e `ls` para se localizar |
 | `Permission denied` | Você tentou mexer fora da sua pasta pessoal — por enquanto, fique dentro de `~` (permissões são o tema da próxima aula!) |
 | `command not found` | Erro de digitação no comando — o terminal é implacável com typos |
-
 | O terminal "travou" e o prompt não volta | `Ctrl + C` cancela o que estiver rodando |
 | Apareceu um `>` sozinho e nada acontece | Você abriu aspas e não fechou — `Ctrl + C` e digite de novo |
 | Abriu uma tela que não sai (`man`, `less`) | Aperte `q` |
