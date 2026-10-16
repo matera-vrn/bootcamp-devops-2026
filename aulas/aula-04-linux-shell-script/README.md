@@ -90,10 +90,10 @@ echo "Olá, $1!"               # $1 = primeiro parâmetro
 
 ## Parte 2 — Mão na massa
 
-👉 Siga o **[pratica.md](pratica.md)**: você vai escrever um **health check** — o script que verifica a saúde da sua VM — e ele ficará no projeto até o fim do bootcamp.
+👉 Siga o **[pratica.md](pratica.md)**: primeiro o relatório da Aula 03 vira script (cinco linhas e pronto), depois você escreve um **health check** — o script que verifica a saúde da sua VM — que ficará no projeto até o fim do bootcamp.
 
 ---
 
 ## O que levamos para a próxima aula 🔗
 
-> **Gancho para a Aula 05:** "Seu script executa 3 verificações em 2 segundos. Agora imagine encadear scripts de build, teste e deploy, executados por um robô a cada mudança de código. Isso tem nome: **pipeline**. É o assunto da próxima aula — o coração do DevOps."
+> **Gancho para a Aula 05:** "Seu script verifica a máquina em 2 segundos. Agora imagine encadear scripts de build, teste e deploy, executados por um robô a cada mudança de código. Isso tem nome: **pipeline**. É o assunto da próxima aula — o coração do DevOps."
