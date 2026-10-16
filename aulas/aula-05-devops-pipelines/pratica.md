@@ -14,7 +14,7 @@ Nossa "aplicação" é simples de propósito: uma página `index.html`. A esteir
 
 ```bash
 cd ~/meu-projeto-devops/scripts
-nano build.sh
+vi build.sh
 ```
 
 Conteúdo (a linha do `echo "<h1>...` é uma só, comprida — não aperte Enter no meio dela):
@@ -33,7 +33,7 @@ O "build" aqui é gerar a página com a data e hora — numa aplicação real, s
 ## Passo 2 — Stage de teste (9 linhas)
 
 ```bash
-nano test.sh
+vi test.sh
 ```
 
 Conteúdo:
@@ -55,7 +55,7 @@ O `exit 1` é o coração da esteira: um código de saída diferente de zero sig
 ## Passo 3 — Stage de deploy (6 linhas)
 
 ```bash
-nano deploy.sh
+vi deploy.sh
 ```
 
 Conteúdo:
@@ -72,7 +72,7 @@ echo "[DEPLOY] OK - publicado em ~/producao/index.html"
 ## Passo 4 — A esteira que liga tudo (7 linhas)
 
 ```bash
-nano pipeline.sh
+vi pipeline.sh
 ```
 
 Conteúdo:

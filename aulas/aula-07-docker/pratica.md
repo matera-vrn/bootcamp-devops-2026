@@ -77,7 +77,7 @@ Vamos containerizar a página que a sua pipeline da Aula 05 gera:
 ```bash
 cd ~/meu-projeto-devops
 ./scripts/build.sh        # garante que app/index.html existe
-nano Dockerfile
+vi Dockerfile
 ```
 
 Conteúdo (repare: o nome é `Dockerfile`, com D maiúsculo e sem extensão):

@@ -43,65 +43,30 @@ Se o código for igual ao da linha correspondente do `SHA256SUMS`, o download es
 
 ## 2. Crie a VM no VirtualBox
 
-Abra o VirtualBox e clique em **Nova** (*New*). Dependendo da versão, as opções aparecem em páginas sucessivas ou todas numa única janela — os campos são os mesmos:
+1. Abra o VirtualBox e clique em **Nova** (*New*).
+2. **Preencha - Virtual machine name and operating systems**
+   - **Nome:** (*VM Name*) `bootcamp-devops`
+   - **Diretório:** (*VM Folder*) `/home/seu.usuario/VirtualBox VMs`
+   - **ISO Image:** selecione o arquivo `.iso` baixado (ex.: `ubuntu-24.04.5-live-server-amd64.iso`)
+   - Se aparecer a opção **Skip Unattended Installation**, **marque-a** (vamos instalar manualmente para aprender!)
+3. **Usuário e Senha - Set up unattended guest OS installation**
+   - User Name: **aluno**
+   - Password: ************ (*Digite sua senha*)
+   - Confirm Password: ************ (*Digite sua senha*)
+4. **Hardware - Specify virtual hardware:**
+   - Memória: **2048 MB** (ou 4096 MB se seu computador tiver 16 GB de RAM)
+   - Processadores: **2 CPUs**
+5. **Disco - Specify virtual Hard** 
+   - Disk Size: **20 GB** (padrão, alocado dinamicamente).
+6. Conclua e clique em **Finalizar** (*Finish*).
+7. Selecione a opção:
+   - `*Try or Install Ubuntu` e aguarde finalizar a instalação.
 
-1. **Nome e sistema operacional**
-   - **Nome** (*Name*): `bootcamp-devops`
-   - **Pasta** (*Folder*): deixe o padrão sugerido
-   - **Imagem ISO** (*ISO Image*): selecione o arquivo `.iso` que você baixou
-   - ✅ **Marque "Pular instalação desassistida"** (*Skip Unattended Installation*). Vamos instalar manualmente — é rápido e você já começa a aprender.
-2. **Instalação desassistida / Usuário e senha**: fica desabilitada por causa do item anterior. Usuário e senha serão definidos pelo instalador do Ubuntu, no passo 3.
-3. **Hardware**
-   - **Memória base**: `2048` MB (ou `4096` MB se seu computador tiver 16 GB de RAM ou mais)
-   - **Processadores**: `2`
-4. **Disco rígido virtual**
-   - **Tamanho**: `40` GB. Não se assuste: é "alocado dinamicamente" — só ocupa no seu computador o que a VM realmente usar (uns 10–15 GB ao final do bootcamp).
-5. Clique em **Finalizar** (*Finish*).
+## 3. Primeiro login
 
-## 3. Instale o Ubuntu — tela a tela
+Depois de reiniciar, aparecerá `bootcamp login:`. Digite seu usuário e senha (a senha não aparece enquanto você digita e é normal!).
 
-Selecione a VM `bootcamp-devops` e clique em **Iniciar** (*Start*). Vai abrir uma janela com o instalador do Ubuntu em **modo texto**.
-
-> ⌨️ **Como navegar no instalador:** o mouse não funciona aqui. Use as **setas** para mover, **Tab** para pular entre campos, **Espaço** para marcar/desmarcar caixas e **Enter** para confirmar. Para avançar, selecione **[ Done ]** no fim da tela e dê Enter.
->
-> 🖱️ Ao clicar dentro da janela da VM, ela "captura" seu mouse e teclado. Para devolvê-los ao seu computador, aperte a **tecla Host**: `Ctrl` **da direita** (Windows/Linux) ou `⌘` **da esquerda** (Mac). Ela aparece no canto inferior direito da janela.
-
-Siga as telas nesta ordem (os nomes estão em inglês, como aparecem na tela):
-
-| # | Tela | O que escolher |
-|---|------|----------------|
-| 1 | Menu inicial (*GRUB*) | **Try or Install Ubuntu Server** → Enter (ou só aguarde) |
-| 2 | *Welcome!* (idioma) | **English**. As mensagens de erro do material e as respostas que você vai achar na internet estão em inglês — e o teclado continua em português, tranquilo |
-| 3 | *Installer update available* (pode não aparecer) | **Continue without updating** |
-| 4 | *Keyboard configuration* | Veja o box de teclado logo abaixo. Para notebooks e teclados brasileiros: *Layout* **Portuguese (Brazil)**, *Variant* **Portuguese (Brazil)** → Done |
-| 5 | *Choose the type of installation* | **Ubuntu Server** (já selecionado). Não marque *Search for third-party drivers* → Done |
-| 6 | *Network configuration* | Deixe como está (vai aparecer `DHCPv4 10.0.2.15/24`) → Done |
-| 7 | *Proxy configuration* | Deixe em branco → Done |
-| 8 | *Ubuntu archive mirror configuration* | Deixe o padrão; aguarde a mensagem *This mirror location passed tests* → Done |
-| 9 | *Guided storage configuration* | **Use an entire disk** (já selecionado). **Desmarque a caixa *Set up this disk as an LVM group*** (desça até ela com a seta e aperte Espaço) → Done |
-| 10 | *Storage configuration* (resumo) | Done |
-| 11 | *Confirm destructive action* | **Continue**. Pode confirmar sem medo: o "disco" aqui é o arquivo virtual de 40 GB que você criou no passo 2 — seu Windows/Mac e seus arquivos não são tocados |
-| 12 | *Profile configuration* | *Your name*: seu nome · *Your servers name*: **`bootcamp`** · *Pick a username*: **`aluno`** · *Choose a password*: uma senha simples que você **vai lembrar** (anote! ela será pedida em todas as aulas) → Done |
-| 13 | *Upgrade to Ubuntu Pro* | **Skip for now** → Continue |
-| 14 | *SSH configuration* | ✅ **Marque *Install OpenSSH server*** (Espaço). *Import SSH key*: **No** → Done |
-| 15 | *Featured server snaps* | Não marque nada → Done |
-| 16 | *Installing system* | Aguarde (5–15 min). Quando aparecer **Install complete!**, selecione **Reboot Now** → Enter |
-| 17 | *Please remove the installation medium, then press ENTER* | Só aperte **Enter** (o VirtualBox já ejeta a ISO sozinho) |
-
-> ⌨️ **Teclado ABNT2 (o padrão brasileiro) e os caracteres do terminal.** Se o layout escolhido na tela 4 estiver errado, teclas como `/`, `ç` e `~` saem trocadas. Com o layout certo, ainda há duas pegadinhas:
-> - `~` e `^` são **teclas mortas**: aperte a tecla e depois **Espaço** para o símbolo aparecer (se apertar duas vezes, sai `~~`). Isso vale também no PowerShell do Windows.
-> - `|` (a "barra em pé", que vamos usar muito) é **Shift + `\`**, a tecla entre o Shift esquerdo e o `Z`.
-> - `/` fica ao lado do Shift direito (a mesma tecla do `?`) e também no `/` do teclado numérico.
->
-> Teclados de Mac ou no padrão americano: escolha **English (US)** na tela 4.
-
-## 4. Primeiro login
-
-Depois de reiniciar, a tela mostra várias mensagens e, no meio delas, `bootcamp login:`. **Aperte Enter** se o cursor ficar escondido atrás das mensagens.
-
-Digite `aluno`, dê Enter, digite a senha e dê Enter — **a senha não aparece enquanto você digita, nem asteriscos. É normal!**
-
-Se você está vendo isto, o Ubuntu está instalado:
+Se você viu algo como:
 
 ```text
 aluno@bootcamp:~$

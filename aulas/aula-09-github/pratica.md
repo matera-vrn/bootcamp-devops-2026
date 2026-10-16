@@ -59,8 +59,7 @@ Vamos fazer uma melhoria pelo fluxo profissional completo. O GitHub mostra autom
 
 ```bash
 git checkout -b docs-readme
-git mv README.txt README.md
-nano README.md
+vi README.md
 ```
 
 Apague o que estava lá e escreva um README caprichado em **markdown** — a linguagem de formatação do GitHub, em que `#` vira título e `-` vira lista. Por exemplo:

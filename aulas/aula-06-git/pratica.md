@@ -98,7 +98,7 @@ git checkout -b melhoria-healthcheck
 Edite o script e adicione, no final (antes da última linha `echo`), há quanto tempo a máquina está ligada:
 
 ```bash
-nano scripts/healthcheck.sh
+vi scripts/healthcheck.sh
 ```
 
 ```bash

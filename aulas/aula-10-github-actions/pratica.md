@@ -11,7 +11,7 @@ O caminho é sagrado: `.github/workflows/` (com ponto, no plural!):
 ```bash
 cd ~/meu-projeto-devops
 mkdir -p .github/workflows
-nano .github/workflows/ci.yml
+vi .github/workflows/ci.yml
 ```
 
 Conteúdo (indentação com 2 espaços!):
@@ -58,7 +58,7 @@ Resultado esperado: ✅ verde, com os mesmos `[BUILD] OK` e `[TEST] OK` que voc�
 Na página do workflow: botão `···` → **Create status badge** → copie o markdown. Na VM:
 
 ```bash
-nano README.md    # cole o badge na primeira linha
+vi README.md    # cole o badge na primeira linha
 git add README.md
 git commit -m "adiciona badge de status da CI"
 git push
@@ -72,7 +72,7 @@ O gran finale: vamos tentar integrar um código quebrado — pelo fluxo da Aula 
 
 ```bash
 git checkout -b quebra-proposital
-nano scripts/build.sh
+vi scripts/build.sh
 ```
 
 Troque `Bootcamp DevOps Matera 2026` por `Ola mundo` (o teste vai reprovar, lembra?).
@@ -88,7 +88,7 @@ No navegador, abra o **Pull Request** dessa branch. Aguarde alguns segundos e ob
 ## Passo 6 — Conserte e veja o PR ficar verde
 
 ```bash
-nano scripts/build.sh     # desfaça a mudança
+vi scripts/build.sh     # desfaça a mudança
 git add scripts/build.sh
 git commit -m "corrige titulo da pagina"
 git push
