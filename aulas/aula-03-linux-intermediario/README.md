@@ -5,6 +5,7 @@
 ## 🔁 Revisão da Aula 02 (5 min)
 
 - O Linux domina os servidores do mundo — e o terminal é a língua nativa dele.
+- A árvore de diretórios: tudo parte da raiz `/`, cada pasta tem sua função (`/home`, `/etc`, `/var/log`, `/usr/bin`, `/tmp`), caminhos absolutos e relativos, `~` e `..`.
 - Vocês navegaram (`pwd`, `cd`, `ls`), criaram (`mkdir`, `touch`, `echo >`), leram (`cat`) e organizaram (`cp`, `mv`, `rm`) arquivos.
 - Nasceu o `meu-projeto-devops` — ele cresce a cada aula.
 - **Gancho:** vocês já sabem andar pela casa. Hoje recebem as **chaves do prédio**: permissões, processos, instalação de programas e rede.
