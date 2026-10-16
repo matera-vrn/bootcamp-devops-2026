@@ -56,14 +56,16 @@ Traduzindo o vocabulário:
 ```text
 git push → GitHub Actions acorda → checkout → build → testes
    → ✅ verde: badge verde no repo, PR liberado para merge
-   → ❌ vermelho: e-mail na hora, merge bloqueado, produção protegida
+   → ❌ vermelho: e-mail na hora, PR sinalizado como inseguro, produção protegida
 ```
+
+> 🔒 Por padrão, o GitHub **avisa** que os checks falharam, mas ainda deixa o botão de merge ativo. Para **bloquear** de verdade: *Settings → Rules → Rulesets → New branch ruleset* → *Require status checks to pass*. Em times reais isso é regra, não opção.
 
 Cada peça dessa frase você aprendeu numa aula: Linux (02–04), pipeline (05), Git (06), containers (07–08), GitHub (09). **Hoje tudo se conecta.**
 
 ### 4. Segredos na pipeline (DevSecOps na prática)
 
-E quando a pipeline precisa de uma senha (registry, nuvem)? **Nunca no YAML!** O GitHub tem um cofre: *Settings → Secrets and variables → Actions*. No workflow, usa-se `${{ secrets.MINHA_SENHA }}` — o valor nunca aparece nos logs.
+E quando a pipeline precisa de uma senha (um registro de imagens — *registry* —, a nuvem)? **Nunca no YAML!** O GitHub tem um cofre: *Settings → Secrets and variables → Actions*. No workflow, usa-se `${{ secrets.MINHA_SENHA }}` — o valor nunca aparece nos logs.
 
 ### 5. Próximos passos da jornada
 
@@ -83,7 +85,7 @@ E quando a pipeline precisa de uma senha (registry, nuvem)? **Nunca no YAML!** O
 
 👉 Siga o **[pratica.md](pratica.md)**: criar o workflow, ver a primeira pipeline verde, quebrar e consertar (blameless até o fim!).
 
-E no encerramento... **[a surpresa final](plot-twist-ia.md)**. 🤖🎁
+E no bloco final (21:20), no lugar do Q&A de sempre... **[a surpresa final](plot-twist-ia.md)**. 🤖🎁
 
 ---
 

@@ -5,7 +5,7 @@
 ## 🔁 Revisão da Aula 01 (5 min)
 
 - DevOps é **cultura**: Dev + Ops como um time só, com automação e cultura blameless.
-- O ciclo de vida DevOps é um loop: planejar → codificar → buildar → testar → liberar → operar → monitorar.
+- O ciclo de vida DevOps é um loop: planejar → codificar → buildar → testar → liberar → implantar → operar → monitorar.
 - Todos validaram o ambiente: a VM Ubuntu é nosso laboratório.
 - **Gancho:** toda essa automação roda em cima de um sistema operacional. Hoje conhecemos o rei deles: o **Linux**. 🐧
 

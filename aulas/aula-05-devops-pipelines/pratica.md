@@ -8,6 +8,8 @@
 
 Nossa "aplicação" é simples de propósito: uma página `index.html`. A esteira vai **montá-la** (build), **verificá-la** (teste) e **publicá-la** (deploy) em uma pasta que simula o servidor de produção.
 
+> ⌨️ Os quatro scripts usam só caracteres do teclado (sem emoji nem acento). Digite com calma ou, se estiver via SSH, cole bloco a bloco.
+
 ## Passo 1 — Stage de build
 
 ```bash
@@ -20,7 +22,7 @@ Conteúdo:
 ```bash
 #!/bin/bash
 set -e
-echo "🔨 [BUILD] Montando a aplicacao..."
+echo "[BUILD] Montando a aplicacao..."
 
 mkdir -p ~/meu-projeto-devops/app
 cat > ~/meu-projeto-devops/app/index.html <<EOF
@@ -32,7 +34,7 @@ cat > ~/meu-projeto-devops/app/index.html <<EOF
 </html>
 EOF
 
-echo "🔨 [BUILD] OK — app/index.html gerado."
+echo "[BUILD] OK - app/index.html gerado."
 ```
 
 ## Passo 2 — Stage de teste
@@ -46,23 +48,23 @@ Conteúdo:
 ```bash
 #!/bin/bash
 set -e
-echo "🧪 [TEST] Verificando a aplicacao..."
+echo "[TEST] Verificando a aplicacao..."
 
 ARQUIVO=~/meu-projeto-devops/app/index.html
 
 # Teste 1: o arquivo existe?
 if [ ! -f "$ARQUIVO" ]; then
-    echo "🧪 [TEST] FALHOU: index.html nao existe!"
+    echo "[TEST] FALHOU: index.html nao existe!"
     exit 1
 fi
 
 # Teste 2: o conteudo esperado esta la?
 if ! grep -q "Bootcamp DevOps" "$ARQUIVO"; then
-    echo "🧪 [TEST] FALHOU: conteudo esperado nao encontrado!"
+    echo "[TEST] FALHOU: conteudo esperado nao encontrado!"
     exit 1
 fi
 
-echo "🧪 [TEST] OK — 2 de 2 testes passaram."
+echo "[TEST] OK - 2 de 2 testes passaram."
 ```
 
 ## Passo 3 — Stage de deploy
@@ -76,11 +78,11 @@ Conteúdo:
 ```bash
 #!/bin/bash
 set -e
-echo "🚀 [DEPLOY] Publicando em 'producao'..."
+echo "[DEPLOY] Publicando em 'producao'..."
 
 mkdir -p ~/producao
 cp ~/meu-projeto-devops/app/index.html ~/producao/
-echo "🚀 [DEPLOY] OK — publicado em ~/producao/index.html"
+echo "[DEPLOY] OK - publicado em ~/producao/index.html"
 ```
 
 ## Passo 4 — A esteira que liga tudo
@@ -94,13 +96,13 @@ Conteúdo:
 ```bash
 #!/bin/bash
 set -e
-echo "===== 🏭 PIPELINE INICIADA — $(date '+%H:%M:%S') ====="
+echo "===== PIPELINE INICIADA - $(date '+%H:%M:%S') ====="
 
 ./build.sh
 ./test.sh
 ./deploy.sh
 
-echo "===== ✅ PIPELINE VERDE — aplicacao em producao! ====="
+echo "===== PIPELINE VERDE - aplicacao em producao! ====="
 ```
 
 ## Passo 5 — Execute a esteira!
@@ -110,7 +112,20 @@ chmod +x build.sh test.sh deploy.sh pipeline.sh
 ./pipeline.sh
 ```
 
-Resultado esperado: os três stages em sequência e a mensagem `✅ PIPELINE VERDE`. Confira a "produção":
+Resultado esperado: os três stages em sequência e a mensagem final de pipeline verde:
+
+```text
+===== PIPELINE INICIADA - 20:50:12 =====
+[BUILD] Montando a aplicacao...
+[BUILD] OK - app/index.html gerado.
+[TEST] Verificando a aplicacao...
+[TEST] OK - 2 de 2 testes passaram.
+[DEPLOY] Publicando em 'producao'...
+[DEPLOY] OK - publicado em ~/producao/index.html
+===== PIPELINE VERDE - aplicacao em producao! =====
+```
+
+Confira a "produção":
 
 ```bash
 cat ~/producao/index.html
