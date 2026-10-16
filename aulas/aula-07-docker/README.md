@@ -1,6 +1,8 @@
 # Aula 07 — Docker 1: Overview + Comandos
 
 > **Objetivo:** resolver o clássico *"na minha máquina funciona"*. Entender o que são containers, a diferença real entre container e máquina virtual, e rodar os primeiros containers com Docker.
+>
+> 📖 Apareceu uma palavra nova? Consulte o [glossário](../../glossario.md).
 
 ## 🔁 Revisão da Aula 06 (5 min)
 
@@ -49,7 +51,7 @@ E o **Docker Hub** é a "padaria pública": um registro com milhares de imagens 
 ### 5. Anatomia de um Dockerfile
 
 ```dockerfile
-FROM nginx:alpine                        # comece da imagem oficial do nginx
+FROM nginx:alpine                        # comece da imagem oficial do nginx (um servidor web)
 COPY index.html /usr/share/nginx/html/   # copie meu app para dentro
 EXPOSE 80                                # documente a porta usada
 ```

@@ -141,3 +141,10 @@ Crie uma branch `experimento`, faça um commit **quebrando** o healthcheck de pr
 | `not a git repository` | Você não está dentro de `~/meu-projeto-devops` |
 | `nothing to commit` | Faltou o `git add` antes do commit, ou nada mudou |
 | Abriu um editor estranho no merge/commit | É o editor de mensagem; salve e saia (`Ctrl+X` no nano; `Esc :wq` no vim) |
+| `git log` abriu uma tela que não sai | É o visualizador de páginas: navegue com as setas e saia com `q` |
+
+## Missão até a próxima aula 📌
+
+1. Faça pelo menos **dois commits reais** até a próxima aula: melhore um comentário num script, acrescente uma linha ao `README.txt`, ajuste o health check. Mensagens que dizem *o que* e *por quê*.
+2. Antes de cada commit, rode `git status` e `git diff` — e só depois `git add`. Esse ritual é o que separa quem usa Git de quem sofre com Git.
+3. Veja sua história crescer: `git log --oneline`.

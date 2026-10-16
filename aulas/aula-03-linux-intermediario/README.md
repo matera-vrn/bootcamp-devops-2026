@@ -1,6 +1,8 @@
 # Aula 03 — Linux 2: Comandos intermediários
 
 > **Objetivo:** dar o próximo passo: permissões, processos, instalação de pacotes, filtros com pipes e os conceitos de rede que todo profissional DevOps precisa dominar (IP, portas, DNS, HTTP).
+>
+> 📖 Apareceu uma palavra nova? Consulte o [glossário](../../glossario.md).
 
 ## 🔁 Revisão da Aula 02 (5 min)
 
@@ -41,7 +43,7 @@
 
 - `ps aux` — fotografia de todos os processos.
 - `top` — monitor ao vivo (CPU, memória). Sai com `q`.
-- `kill <PID>` — encerra um processo pelo número dele.
+- `kill <PID>` — encerra um processo pelo número dele (o **PID**, que o `ps` mostra na segunda coluna).
 
 ### 4. Instalando programas com `apt`
 
@@ -52,7 +54,7 @@ sudo apt update        # atualiza o catálogo
 sudo apt install btop  # instala um pacote
 ```
 
-> 🔐 **Segurança desde o dia zero:** instalar de repositórios oficiais (em vez de baixar binários de sites aleatórios) é a primeira prática de DevSecOps que você aprende — origem confiável e versões auditadas.
+> 🔐 **Segurança desde o dia zero:** instalar de repositórios oficiais (em vez de baixar programas prontos (binários) de sites aleatórios) é a primeira prática de DevSecOps que você aprende — origem confiável e versões auditadas.
 
 ### 5. Superpoderes: pipes e filtros
 
@@ -75,6 +77,7 @@ ls -la | grep ".txt"        # só os .txt
 | **Porta** | A porta da casa: cada serviço atende em uma (web: 80/443, SSH: 22) |
 | **DNS** | A agenda de contatos: traduz `matera.com` em IP |
 | **HTTP/HTTPS** | O idioma da conversa web (o S = conversa criptografada 🔒) |
+| **localhost** | O endereço da própria máquina (`127.0.0.1`): falar com `localhost` é falar consigo mesmo |
 
 Comandos: `ping` (o servidor responde?), `curl` (faz requisições HTTP), `ip a` (qual meu IP?).
 

@@ -1,6 +1,8 @@
 # Aula 01 — DevOps: Overview + Comunidades
 
 > **Objetivo:** nivelar todos os participantes. Explicar por que o DevOps nasceu, a dor que ele cura e por que o mercado paga tão bem por isso. Garantir que todos saiam com o ambiente funcionando.
+>
+> 📖 Apareceu uma palavra nova? Consulte o [glossário](../../glossario.md).
 
 ## Agenda
 
@@ -37,7 +39,7 @@ Os pilares:
 - **Cultura e comunicação:** todos falam a mesma língua e olham para o mesmo objetivo.
 - **Empatia e quebra de silos:** o Dev entende a dor de operar; o Ops entende a dor de entregar.
 - **Automação:** tudo que é repetitivo e manual vira código (spoiler das próximas aulas!).
-- **Cultura blameless:** quando algo quebra, a pergunta é *"o que no processo permitiu esse erro?"* — nunca *"quem errou?"*. Post-mortem sem culpados.
+- **Cultura blameless:** quando algo quebra, a pergunta é *"o que no processo permitiu esse erro?"* — nunca *"quem errou?"*. Post-mortem (a análise feita depois de um incidente) sem culpados.
 
 ### 3. O ciclo de vida DevOps ♾️
 
@@ -52,6 +54,7 @@ Desmistificando os termos que você vai ouvir o bootcamp inteiro:
 | **CI** (Integração Contínua) | Integrar e testar o código várias vezes ao dia, automaticamente |
 | **CD** (Entrega Contínua) | Deixar cada versão pronta para ir ao ar com um clique (ou nenhum) |
 | **Pipeline / Esteira** | A sequência automatizada de etapas que o código percorre até produção |
+| **Build** | Montar/empacotar o programa a partir do código |
 | **Deploy** | Colocar uma versão do sistema no ar |
 
 ### 4. Por que o mercado paga tão bem?
