@@ -141,9 +141,4 @@ Rode um **segundo** container da mesma imagem na porta 8081 (`--name meu-projeto
 | `DEPRECATED: The legacy builder is deprecated` | Só um aviso — o build funciona. Ele some instalando o `docker-buildx` (Passo 1) |
 | `port is already allocated` | Já existe container na 8080 — `docker ps` e pare o antigo |
 | `COPY failed: ... not found` | Rode o `docker build` de dentro de `~/meu-projeto-devops` e gere o `app/index.html` antes (`./scripts/build.sh`) |
-| `Unable to find image` demorando | É o download da imagem — normal na primeira vez |
-
-## Missão até a próxima aula 📌
-
-1. Suba o container do projeto de novo (`docker run -d --name meu-projeto -p 8080:80 meu-projeto:1.0`), abra no navegador, e derrube (`docker stop` + `docker rm`). Repita até fazer sem olhar.
-2. Explore um Linux dentro do Linux: `docker run --rm -it alpine sh` abre um terminal **dentro** de um container Alpine (uma distribuição minúscula). Rode `ls /` e `cat /etc/os-release` lá dentro e saia com `exit`. Tudo que você aprendeu nas aulas de Linux vale ali também.
+| `Unable to find image` | É o download da imagem — está demorando? é normal na primeira vez |
