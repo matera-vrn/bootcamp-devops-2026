@@ -115,4 +115,4 @@ Rode um **segundo** container da mesma imagem na porta 8081 (`--name meu-projeto
 | `permission denied ... docker.sock` | Rode o `usermod` + `newgrp docker` do Passo 1 (ou use `sudo docker`) |
 | `port is already allocated` | Já existe container na 8080 — `docker ps` e pare o antigo |
 | `COPY failed: ... not found` | Rode o `docker build` de dentro de `~/meu-projeto-devops` e gere o `app/index.html` antes (`./scripts/build.sh`) |
-| `Unable to find image` demorando | É o download da imagem — normal na primeira vez |
+| `Unable to find image` | É o download da imagem — está demorando? é normal na primeira vez |
