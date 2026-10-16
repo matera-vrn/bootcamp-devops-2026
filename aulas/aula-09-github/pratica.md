@@ -12,19 +12,24 @@ Ainda não? Crie agora em **https://github.com/signup** (nome de usuário profis
 
 ## Passo 2 — Crie o repositório
 
-No GitHub: botão **New repository** (ou https://github.com/new):
+No GitHub: botão **New** (ou https://github.com/new):
 
 | Campo | Valor |
 |-------|-------|
 | Repository name | `meu-projeto-devops` |
 | Description | Projeto do Bootcamp DevOps Matera 2026 |
-| Visibilidade | **Public** (é portfólio!) |
-| Initialize | **NÃO** marque nada (README, .gitignore etc.) — o projeto já existe na VM |
+| Choose visibility | **Public** (é portfólio!) |
+| Add README | **Off** |
+| Add .gitignore | **No .gitignore** |
+| Add license | **No license** |
+
+
+> Click no botão **"Create repository"**
 
 ## Passo 3 — Crie um token de acesso (PAT)
 
-1. GitHub → seu avatar → **Settings** → **Developer settings** → **Personal access tokens** → **Fine-grained tokens** → **Generate new token**.
-2. Nome: `bootcamp-vm` · Expiração: 30 dias · *Repository access*: **Only select repositories** → `meu-projeto-devops` · *Repository permissions*: **Contents: Read and write** e **Workflows: Read and write** (a segunda é obrigatória na Aula 10, quando você enviará a pipeline).
+1. GitHub → seu avatar → **Settings** → **Developer settings** → **Personal access tokens** → **Fine-grained tokens** → **Generate new token**
+2. Token Name: `bootcamp-matera` · Description: `Token bootcamp-matera` · Resource owner: `Seu username` · Expiration: `30 dias` · *Repository access*: **Only select repositories** → `meu-projeto-devops` · *Permissions*: **+ Add permissions** · **Contents: Read and write** e **Workflows: Read and write** (a segunda é obrigatória na Aula 10, quando você enviará a pipeline).
 3. **Copie o token** (ele aparece uma única vez!).
 
 > 🔐 O token é sua senha para esta VM. **Não** o salve em arquivos do projeto, **não** poste print dele no chat.
