@@ -6,7 +6,7 @@ O **VirtualBox** é um software gratuito e de código aberto que permite rodar u
 
 ## 1. Baixe o instalador
 
-A **versão homologada pelo bootcamp é Ubuntu 24.04**. Baixe o instalador direto do servidor oficial do VirtualBox, conforme o **seu sistema operacional**:
+Baixe o instalador direto do servidor oficial do VirtualBox, conforme o **sistema operacional do seu computador** (o Ubuntu 24.04 citado na tabela é o caso de quem já usa Ubuntu no próprio computador):
 
 | Seu computador | Download — VirtualBox 7.2.20 |
 |----------------|------------------------------|
@@ -16,7 +16,7 @@ A **versão homologada pelo bootcamp é Ubuntu 24.04**. Baixe o instalador diret
 | **Linux — Ubuntu 24.04 (homologado)** | [virtualbox-7.2_7.2.20-175154~Ubuntu~noble_amd64.deb](https://download.virtualbox.org/virtualbox/7.2.20/virtualbox-7.2_7.2.20-175154~Ubuntu~noble_amd64.deb) |
 | **Outras distribuições Linux** | Página oficial de downloads: https://www.virtualbox.org/wiki/Linux_Downloads |
 
-> 💡 **Qual Mac é o meu?** Se o seu Mac tem chip **Apple M** (M1, M2, M3...), baixe a versão **Apple Silicon**; caso contrário, use a **Intel**.
+> 💡 **Qual Mac é o meu?** Se o seu Mac tem chip **Apple M** (M1, M2, M3...), baixe a versão **Apple Silicon**; caso contrário, use a **Intel**. Menu Apple → *Sobre este Mac* mostra "Chip: Apple M…" ou "Processador: Intel…". Atenção: o VirtualBox para Apple Silicon só roda sistemas **ARM** — por isso, no próximo guia, você baixará a ISO **arm64** do Ubuntu.
 
 > 🐧 **Ubuntu 24.04 (host):** com o `.deb` baixado, instale com `sudo apt install ./virtualbox-7.2_7.2.20-175154~Ubuntu~noble_amd64.deb` — o `apt` resolve as dependências sozinho.
 
@@ -40,8 +40,11 @@ Próximo passo: **[criar a máquina virtual Ubuntu](instalacao-ubuntu-vm.md)**.
 
 | Sintoma | O que verificar |
 |---------|-----------------|
-| "VT-x is not available" / "AMD-V is disabled" | Habilite a virtualização na BIOS/UEFI do computador (procure por *Virtualization Technology*, *Intel VT-x* ou *SVM Mode*). |
-| Erro de instalação no Windows | Verifique se você tem permissão de administrador e se o Hyper-V não está conflitando (o guia oficial acima orienta sobre isso). |
-| macOS bloqueou a extensão | Vá em *Ajustes → Privacidade e Segurança* e clique em **Permitir** para a Oracle. |
+| "VT-x is not available" / "AMD-V is disabled" / "VERR_VMX_NO_VMX" | A virtualização está desligada no firmware do computador. **Como conferir (Windows):** Gerenciador de Tarefas → Desempenho → CPU → "Virtualização: Habilitado". **Como ligar:** reinicie e entre na BIOS/UEFI (tecla `F2`, `Del`, `F10` ou `Esc` logo ao ligar — varia por fabricante; no Windows 11 dá para ir por *Configurações → Sistema → Recuperação → Inicialização avançada → Reiniciar agora → Solucionar problemas → Opções avançadas → Configurações de firmware UEFI*). Procure *Virtualization Technology*, *Intel VT-x*, *SVM Mode* ou *AMD-V* e marque **Enabled**. Salve e reinicie. Na dúvida, mande foto da tela no `#setup-ambiente` |
+| VM **muito lenta** ou ícone de **tartaruga verde** no rodapé da janela (Windows) | O Windows está rodando o Hyper-V "por baixo" e o VirtualBox perde desempenho. Para resolver: (1) *Painel de Controle → Programas → Ativar ou desativar recursos do Windows* → desmarque **Hyper-V**, **Plataforma de Máquina Virtual** e **Plataforma do Hipervisor do Windows**; (2) *Segurança do Windows → Segurança do dispositivo → Detalhes do isolamento de núcleo* → desligue **Integridade de memória**; (3) reinicie. ⚠️ Isso desativa o WSL2 e o Docker Desktop enquanto estiver assim (e a *Integridade de memória* é uma proteção do Windows): se você usa esses recursos, reative tudo ao final do bootcamp |
+| Instalador reclama de **"Microsoft Visual C++ 2019 Redistributable"** (Windows) | Instale o pacote oficial da Microsoft e rode o instalador de novo: https://aka.ms/vs/17/release/vc_redist.x64.exe |
+| Erro de instalação no Windows (outros) | Verifique se você tem permissão de administrador. Se o antivírus bloquear, autorize o instalador baixado do site oficial |
+| macOS bloqueou a extensão | Vá em *Ajustes → Privacidade e Segurança* e clique em **Permitir** para a Oracle; depois reinicie o Mac |
+| macOS com chip M: a VM não inicia | Confira se baixou o VirtualBox **Apple Silicon** e se a ISO do Ubuntu é a **arm64** (próximo guia) |
 
 Se travar em qualquer passo, poste a mensagem de erro nos canais da comunidade — os monitores vão te ajudar!

@@ -2,7 +2,7 @@
 
 **Objetivo:** declarar um sistema com **dois serviços** — a página do seu projeto + um banco Redis de apoio — e subir tudo com um único comando.
 
-**Onde:** dentro da VM Ubuntu.
+**Onde:** no terminal conectado à VM via SSH (como no [setup](../../setup/instalacao-ubuntu-vm.md)). A janela do VirtualBox também serve, mas sem copiar e colar.
 
 ## Passo 1 — Instale o plugin do Compose
 

@@ -2,7 +2,7 @@
 
 **Objetivo:** fazer o GitHub buildar e testar seu projeto **automaticamente a cada push** — a pipeline da Aula 05, agora executada por um robô de verdade.
 
-**Onde:** terminal da VM + navegador (GitHub).
+**Onde:** terminal conectado à VM **via SSH** (necessário para colar o badge) + navegador (GitHub).
 
 ## Passo 1 — Crie o arquivo do workflow
 
