@@ -1,6 +1,8 @@
 # Aula 09 — GitHub: seu código na nuvem, seu portfólio no mundo
 
 > **Objetivo:** publicar o projeto no GitHub, entender remotos (`push`/`pull`), abrir o primeiro Pull Request e começar a construir o portfólio que recrutadores realmente olham.
+>
+> 📖 Apareceu uma palavra nova? Consulte o [glossário](../../glossario.md).
 
 ## 🔁 Revisão da Aula 08 (5 min)
 

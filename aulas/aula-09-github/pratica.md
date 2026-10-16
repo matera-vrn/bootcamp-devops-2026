@@ -2,16 +2,13 @@
 
 **Objetivo:** criar sua conta e repositório no GitHub, enviar o `meu-projeto-devops` para a nuvem e abrir seu primeiro Pull Request.
 
-**Onde:** navegador do **seu computador** (host) + terminal da VM.
+**Onde:** navegador do **seu computador** + terminal conectado à VM **via SSH** — obrigatório hoje: você vai precisar colar um token longo (veja o [setup](../../setup/instalacao-ubuntu-vm.md), passo 6).
 
-## Passo 1 — Crie sua conta no GitHub
+## Passo 1 — Conta no GitHub pronta?
 
-No navegador: **https://github.com/signup**
+Você criou a conta na missão da Aula 08? Então siga para o Passo 2. 😉
 
-- Escolha um nome de usuário profissional (ele aparecerá no seu portfólio!).
-- Confirme o e-mail.
-
-> Já tem conta? Pule para o Passo 2. 😉
+Ainda não? Crie agora em **https://github.com/signup** (nome de usuário profissional — ele aparecerá no seu portfólio — e confirme o e-mail). Se o cadastro pedir alguma verificação, chame um monitor para não perder o ritmo.
 
 ## Passo 2 — Crie o repositório
 
@@ -27,7 +24,7 @@ No GitHub: botão **New repository** (ou https://github.com/new):
 ## Passo 3 — Crie um token de acesso (PAT)
 
 1. GitHub → seu avatar → **Settings** → **Developer settings** → **Personal access tokens** → **Fine-grained tokens** → **Generate new token**.
-2. Nome: `bootcamp-vm` · Expiração: 30 dias · Repositório: somente `meu-projeto-devops` · Permissão: **Contents: Read and write**.
+2. Nome: `bootcamp-vm` · Expiração: 30 dias · *Repository access*: **Only select repositories** → `meu-projeto-devops` · *Repository permissions*: **Contents: Read and write** e **Workflows: Read and write** (a segunda é obrigatória na Aula 10, quando você enviará a pipeline).
 3. **Copie o token** (ele aparece uma única vez!).
 
 > 🔐 O token é sua senha para esta VM. **Não** o salve em arquivos do projeto, **não** poste print dele no chat.
@@ -48,22 +45,24 @@ git remote -v
 git push -u origin main
 ```
 
-Quando pedir usuário: seu usuário do GitHub. Quando pedir senha: **cole o token**.
+Quando pedir usuário: seu usuário do GitHub. Quando pedir senha: **cole o token** (nada aparece na tela — é normal; dê Enter).
 
-Resultado esperado: várias linhas terminando com `main -> main`. Atualize a página do repositório no navegador: **seu projeto está na nuvem!** Scripts, Dockerfile, compose, histórico — tudo lá. 🎉
+Resultado esperado: várias linhas, entre elas `main -> main` e, por último, `branch 'main' set up to track 'origin/main'`. Atualize a página do repositório no navegador: **seu projeto está na nuvem!** Scripts, Dockerfile, compose, histórico — tudo lá. 🎉
 
-> 💡 Para não digitar o token a cada push: `git config credential.helper store` (o Git guarda a credencial dentro da VM).
+> 💡 Para não colar o token a cada push: `git config credential.helper store`.
+>
+> ⚠️ Isso grava o token **em texto puro** no arquivo `~/.git-credentials` da VM. Aceitável aqui — é uma VM de estudo e o token vale 30 dias para um único repositório. Num computador de trabalho, prefira `git config --global credential.helper 'cache --timeout=7200'` (guarda só na memória, por 2 horas). E, ao fim do bootcamp, **revogue o token** em *Developer settings*.
 
 ## Passo 6 — Seu primeiro Pull Request
 
-Vamos fazer uma melhoria pelo fluxo profissional completo:
+Vamos fazer uma melhoria pelo fluxo profissional completo. O GitHub mostra automaticamente, na página do repositório, um arquivo chamado `README.md` — então vamos renomear o `README.txt` da Aula 02 (`git mv` renomeia e já avisa o Git) e reescrevê-lo:
 
 ```bash
 git checkout -b docs-readme
-nano README.md
+vi README.md
 ```
 
-Escreva um README caprichado (markdown!), por exemplo:
+Apague o que estava lá e escreva um README caprichado em **markdown** — a linguagem de formatação do GitHub, em que `#` vira título e `-` vira lista. Por exemplo:
 
 ```markdown
 # Meu Projeto DevOps
@@ -89,7 +88,7 @@ git push -u origin docs-readme
 
 ## Passo 7 — Abra e integre o PR
 
-1. No navegador, o GitHub mostrará um aviso amarelo: **Compare & pull request** — clique.
+1. No navegador, o GitHub mostra por alguns minutos um aviso amarelo **Compare & pull request** — clique. (Sumiu? Aba **Pull requests** → **New pull request** → em *compare*, escolha `docs-readme`.)
 2. Título: `Adiciona README do projeto`. Descreva **o que** e **por quê**.
 3. **Create pull request**.
 4. Explore a aba **Files changed** — é assim que um colega revisaria seu código.
@@ -114,5 +113,12 @@ Capriche no seu **perfil** do GitHub: foto, bio ("Estudante de DevOps — Bootca
 |----------|----------------|
 | `Authentication failed` | Token colado errado/expirado, ou usou a senha da conta — gere/cole o PAT |
 | `remote origin already exists` | `git remote remove origin` e refaça o Passo 4 |
-| `error: failed to push some refs` | O repositório remoto foi criado com README — recrie **sem** inicializar, ou rode `git pull origin main --rebase` antes |
+| `error: src refspec main does not match any` | Sua branch se chama `master` (faltou o `init.defaultBranch` da Aula 06). Renomeie com `git branch -M main` e repita o push |
+| Colei o token e nada apareceu | Normal: senhas não aparecem. Dê Enter |
+| `error: failed to push some refs` | O repositório remoto foi criado com README — rode `git pull origin main --allow-unrelated-histories` (salve a mensagem com `Ctrl+X`) e repita o push |
 | `Repository not found` | URL com typo no usuário ou nome do repositório — confira com `git remote -v` |
+
+## Missão até a próxima aula 📌
+
+1. Faça o desafio bônus (perfil + repositório fixado): é a sua vitrine a partir de agora.
+2. Abra um **segundo Pull Request** sozinho(a): corrija ou melhore qualquer coisa no `README.md` pelo fluxo completo — branch → commit → push → PR → merge → `git pull`. Na próxima aula, a pipeline vai rodar dentro desse mesmo fluxo.

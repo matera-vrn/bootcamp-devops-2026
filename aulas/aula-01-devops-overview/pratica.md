@@ -6,7 +6,7 @@
 
 ## Passo 1 — Ligue a VM e faça login
 
-Abra o VirtualBox, selecione a VM `bootcamp-devops` e clique em **Iniciar**. Faça login com seu usuário e senha.
+Abra o VirtualBox, selecione a VM `bootcamp-devops` e clique em **Iniciar**. Faça login com o usuário `aluno` e sua senha (ela não aparece enquanto você digita).
 
 Resultado esperado:
 
@@ -14,9 +14,17 @@ Resultado esperado:
 aluno@bootcamp:~$
 ```
 
+Agora conecte-se do jeito que usaremos em todas as aulas: abra o terminal **do seu computador** (Terminal/PowerShell no Windows, Terminal no macOS/Linux) e digite:
+
+```bash
+ssh aluno@localhost -p 2222
+```
+
+O mesmo prompt deve aparecer na sua janela — com copiar e colar funcionando. Dúvidas? Passo 6 do [guia da VM](../../setup/instalacao-ubuntu-vm.md).
+
 ## Passo 2 — Execute o roteiro de testes
 
-Siga o **[roteiro de testes](../../setup/roteiro-de-testes.md)** completo (6 testes: login, versão do Ubuntu, internet, DNS/HTTPS, `apt` e disco).
+Siga o **[roteiro de testes](../../setup/roteiro-de-testes.md)** completo (8 testes: login, teclado, versão do Ubuntu, internet, DNS/HTTPS, `apt`, disco e SSH).
 
 ## Passo 3 — Deixe sua marca 🖋️
 
@@ -45,8 +53,10 @@ uptime
 Digite o comando abaixo, tire um print do resultado e poste no chat/comunidade:
 
 ```bash
-echo "Ambiente pronto! $(whoami) reportando da VM $(hostname) 🚀"
+echo "Ambiente pronto! $(whoami) reportando da VM $(hostname)"
 ```
+
+(`hostname` mostra o nome da máquina e `whoami`, o seu usuário — o terminal montou a frase para você.)
 
 ## Deu errado? 😥
 

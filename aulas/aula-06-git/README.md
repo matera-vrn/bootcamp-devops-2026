@@ -1,6 +1,8 @@
 # Aula 06 — Git: onde o código vive
 
 > **Objetivo:** entender o que é controle de versão, por que o Git é a **fonte única da verdade** do DevOps e dominar o fluxo básico: `init`, `add`, `commit`, `branch`, `merge`.
+>
+> 📖 Apareceu uma palavra nova? Consulte o [glossário](../../glossario.md).
 
 ## 🔁 Revisão da Aula 05 (5 min)
 
@@ -51,6 +53,8 @@ No DevOps, o repositório Git não guarda só código da aplicação:
 | `git add arquivo` | Coloca a mudança na "caixa" (staging) |
 | `git commit -m "mensagem"` | Sela a caixa no histórico, com autor e data |
 | `git log` | Mostra a linha do tempo |
+| `git checkout` | Utilizado para alternar entre ramificações (branches) |
+| `git merge` | Traz o conteúdo da branch informada para a branch atual |
 
 > 🧠 **Boas mensagens de commit** dizem o *o quê* e o *porquê*: `"adiciona teste de disco ao healthcheck"` ✔ · `"ajustes"` ✖
 

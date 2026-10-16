@@ -2,7 +2,7 @@
 
 **Objetivo:** fazer o GitHub buildar e testar seu projeto **automaticamente a cada push** — a pipeline da Aula 05, agora executada por um robô de verdade.
 
-**Onde:** terminal da VM + navegador (GitHub).
+**Onde:** terminal conectado à VM **via SSH** (necessário para colar o badge) + navegador (GitHub).
 
 ## Passo 1 — Crie o arquivo do workflow
 
@@ -11,7 +11,7 @@ O caminho é sagrado: `.github/workflows/` (com ponto, no plural!):
 ```bash
 cd ~/meu-projeto-devops
 mkdir -p .github/workflows
-nano .github/workflows/ci.yml
+vi .github/workflows/ci.yml
 ```
 
 Conteúdo (indentação com 2 espaços!):
@@ -51,14 +51,14 @@ git push
 
 No navegador: seu repositório → aba **Actions**. Você verá o workflow `CI` rodando (bolinha amarela). Clique nele → clique no job `build-e-teste` → expanda os steps **Build** e **Teste**.
 
-Resultado esperado: ✅ verde, com os mesmos `🔨 [BUILD] OK` e `🧪 [TEST] OK` que você via na VM — só que executados numa máquina do GitHub, disparados pelo seu push. **Essa é a Integração Contínua.**
+Resultado esperado: ✅ verde, com os mesmos `[BUILD] OK` e `[TEST] OK` que você via na VM — só que executados numa máquina do GitHub, disparados pelo seu push. **Essa é a Integração Contínua.**
 
-## Passo 4 — O selo de qualidade no README
+## Passo 4 — O selo de qualidade no README (se der tempo; senão, missão de casa)
 
 Na página do workflow: botão `···` → **Create status badge** → copie o markdown. Na VM:
 
 ```bash
-nano README.md    # cole o badge na primeira linha
+vi README.md    # cole o badge na primeira linha
 git add README.md
 git commit -m "adiciona badge de status da CI"
 git push
@@ -72,7 +72,7 @@ O gran finale: vamos tentar integrar um código quebrado — pelo fluxo da Aula 
 
 ```bash
 git checkout -b quebra-proposital
-nano scripts/build.sh
+vi scripts/build.sh
 ```
 
 Troque `Bootcamp DevOps Matera 2026` por `Ola mundo` (o teste vai reprovar, lembra?).
@@ -83,12 +83,12 @@ git commit -m "altera titulo da pagina"
 git push -u origin quebra-proposital
 ```
 
-No navegador, abra o **Pull Request** dessa branch. Aguarde alguns segundos e observe: o check **CI / build-e-teste** fica ❌ **vermelho, dentro do PR**. O GitHub avisa que o merge não é seguro — **antes** de o erro chegar à main. Clique em **Details** e encontre a linha exata do `🧪 [TEST] FALHOU`.
+No navegador, abra o **Pull Request** dessa branch. Aguarde alguns segundos e observe: o check **CI / build-e-teste** fica ❌ **vermelho, dentro do PR**. O GitHub avisa que o merge não é seguro — **antes** de o erro chegar à main (o botão de merge continua ativo: aqui é você quem decide não clicar; em projetos reais, uma regra de proteção da branch bloqueia o botão). Clique em **Details** e encontre a linha exata do `[TEST] FALHOU`.
 
 ## Passo 6 — Conserte e veja o PR ficar verde
 
 ```bash
-nano scripts/build.sh     # desfaça a mudança
+vi scripts/build.sh     # desfaça a mudança
 git add scripts/build.sh
 git commit -m "corrige titulo da pagina"
 git push
@@ -110,3 +110,8 @@ Tire prints do repositório com o badge verde e da aba Actions, e prepare seu po
 | `Permission denied` no step Build | Os scripts perderam o `+x`? Rode `git update-index --chmod=+x scripts/*.sh`, commit e push |
 | Erro de YAML no workflow | Indentação — compare com o modelo; 2 espaços, sem Tab |
 | Pipeline verde mas badge não aparece | O markdown do badge aponta para a branch certa? Regenere pelo botão *Create status badge* |
+| `refusing to allow a Personal Access Token to create or update workflow` no push | O token não tem a permissão **Workflows**. Edite-o em *Settings → Developer settings → Fine-grained tokens* (ou gere outro com *Contents* + *Workflows: Read and write*) e repita o `git push`. Se o Git guardou o token antigo, apague a linha dele em `~/.git-credentials` com o `nano` para ele pedir o novo |
+
+## Missão para depois do bootcamp 📌
+
+O loop não termina — recomeça. Leia o guia [continuando com Linux](../../recursos/continuando-com-linux.md), escolha o seu caminho (manter a VM, WSL2 no Windows ou o Terminal do Mac) e aceite o **desafio dos 30 dias**: 10 minutos de terminal por dia. Daqui a um mês, conte na comunidade o que você automatizou.
