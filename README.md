@@ -10,7 +10,7 @@ Levar você **do zero ao primeiro deploy automatizado**: ao final das 10 aulas, 
 
 ## 📅 Grade das aulas
 
-> As aulas acontecem em **novembro de 2026**, de 3 a 18/11, sempre ao vivo das **19:30 às 21:45**.
+> As aulas acontecem em **novembro de 2026**, de 03 a 06 | 10 a 13 | 17 e 18 Novembro, sempre ao vivo das **19:30 às 21:45**.
 
 | Aula | Data | Tema | Parte 1 (conceitos) | Parte 2 (prática) |
 |------|------|------|---------------------|-------------------|
@@ -42,7 +42,7 @@ A partir da Aula 02, cada aula começa com uma **revisão rápida da aula anteri
 
 Todas as práticas rodam em uma **máquina virtual Ubuntu no VirtualBox**, para que todo mundo — Windows, Linux ou macOS — tenha exatamente o mesmo ambiente.
 
-👉 **Siga o guia em [`setup/`](setup/) antes da primeira aula.** Uma semana antes do início enviaremos um formulário para confirmar que seu ambiente está pronto. Na Aula 01 haverá um momento dedicado a ajudar quem tiver dificuldades.
+👉 **Siga o guia em [`setup/`](setup/README.md) antes da primeira aula.** Uma semana antes do início enviaremos um formulário para confirmar que seu ambiente está pronto. Na Aula 01 haverá um momento dedicado a ajudar quem tiver dificuldades.
 
 ## 📂 Como usar este repositório
 
