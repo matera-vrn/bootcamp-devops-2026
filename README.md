@@ -53,7 +53,7 @@ Todas as práticas rodam em uma **máquina virtual Ubuntu no VirtualBox**, para 
 
 ## 🏅 Certificado
 
-Para receber o certificado do Instituto Matera, ao final do bootcamp você deverá **publicar no LinkedIn o projeto prático** que desenvolveu ao longo das aulas, marcando a **@Matera**. Detalhes em [`organizacao/certificado.md`](organizacao/certificado.md).
+O Instituto Matera emitirá certificado de participação ao final do bootcamp. As orientações serão comunicadas pela organização durante o programa.
 
 ## 🤝 Comunidade
 

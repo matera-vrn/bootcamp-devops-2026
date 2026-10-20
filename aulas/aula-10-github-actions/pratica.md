@@ -98,9 +98,9 @@ O PR reexecuta a pipeline sozinho → ✅ verde → **Merge pull request**. Na V
 
 **Ciclo DevOps completo, de ponta a ponta, no seu projeto.** 🏆
 
-## Passo 7 — O post do certificado 🏅
+## Passo 7 — Guarde o seu portfólio 🏅
 
-Tire prints do repositório com o badge verde e da aba Actions, e prepare seu post no LinkedIn marcando a **@Matera** com **#BootcampDevOpsMatera** — critérios no [certificado.md](../../organizacao/certificado.md).
+Anote o link do seu repositório e tire um print da pipeline verde na aba Actions: esse é o seu portfólio, construído por você em 10 aulas. O certificado de participação será enviado pelo Instituto Matera, conforme as orientações da organização.
 
 ## Deu errado? 😥
 
