@@ -6,7 +6,7 @@ Documento de organização da equipe: tudo que precisa estar pronto **antes da A
 
 - [x] Datas das 10 aulas confirmadas e atualizadas no [README](../README.md): 3, 4, 5, 6, 10, 11, 12, 13, 17 e 18 de novembro de 2026.
 - [ ] Repositório público revisado.
-- [ ] Guia de setup **testado de ponta a ponta** por alguém da equipe em: Windows com teclado ABNT2 (instalador tela a tela, SSH pelo PowerShell), macOS com chip Apple M (VirtualBox Apple Silicon + ISO arm64) e Linux. Anotar o tempo gasto e ajustar o guia.
+- [ ] Guia de setup **testado de ponta a ponta** por alguém da equipe em: Windows com teclado ABNT2 (instalação automática pela tela do VirtualBox, OpenSSH + porta 2222, SSH pelo PowerShell), macOS com chip Apple M (VirtualBox Apple Silicon + ISO arm64) e Linux. Anotar o tempo gasto e ajustar o guia.
 - [ ] Canais de comunidade criados (Discord ou Slack), com canal por tema: `#setup-ambiente`, `#duvidas-gerais`, `#aula-do-dia`.
 - [ ] Monitores voluntários da Matera confirmados e com acesso aos canais.
 - [ ] **Imagem backup da VM** montada e testada: Ubuntu com **todos os binários usados no curso** já instalados (git, docker, docker compose, curl, btop, vim), hostname `bootcamp`, usuário `aluno`, OpenSSH ativo. Publicar em local de download controlado pela equipe.

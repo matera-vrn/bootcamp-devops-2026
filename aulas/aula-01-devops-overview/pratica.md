@@ -24,7 +24,7 @@ O mesmo prompt deve aparecer na sua janela — com copiar e colar funcionando. D
 
 ## Passo 2 — Execute o roteiro de testes
 
-Siga o **[roteiro de testes](../../setup/roteiro-de-testes.md)** completo (8 testes: login, teclado, versão do Ubuntu, internet, DNS/HTTPS, `apt`, disco e SSH).
+Siga o **[roteiro de testes](../../setup/roteiro-de-testes.md)** completo (8 testes: login, SSH, teclado, versão do Ubuntu, internet, DNS/HTTPS, `apt` e disco).
 
 ## Passo 3 — Deixe sua marca 🖋️
 
