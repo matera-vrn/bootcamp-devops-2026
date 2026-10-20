@@ -81,6 +81,24 @@ ls -la | grep ".txt"        # só os .txt
 
 Comandos: `ping` (o servidor responde?), `curl` (faz requisições HTTP), `ip a` (qual meu IP?).
 
+### 7. Micro aula: o editor `vi` (5 min)
+
+A partir da próxima aula vamos **escrever arquivos** — scripts, receitas, configurações. O editor do bootcamp é o `vi`: ele existe em **todo** Linux do planeta, inclusive em servidores onde não há mais nada instalado. Dominar o básico dele é habilidade de carreira.
+
+A única ideia nova: o `vi` tem **modos**. Ele abre no modo **normal** (as teclas são comandos — como um controle remoto); `i` entra no modo de **inserção** (as teclas viram texto — como uma máquina de escrever, e aparece `-- INSERT --` no rodapé); `Esc` volta ao normal; e os comandos que começam com `:` são o "menu".
+
+| Tecla | Faz |
+|-------|-----|
+| `i` | Começa a escrever (modo de inserção) |
+| `Esc` | Volta ao modo normal |
+| `:wq` + Enter | Salva e sai |
+| `:q!` + Enter | Sai **sem** salvar — a saída de emergência |
+| `u` | Desfaz |
+
+> 💬 **Interação:** "Quem já ficou preso dentro de um editor no terminal e não sabia sair?" (todo mundo 🙋) — "a partir de hoje: `Esc`, `:q!`, Enter."
+
+Roteiro completo, exercício e pegadinhas: **[micro aula de vi](../../recursos/micro-aula-vi.md)**. Na prática de hoje vocês já criam o primeiro arquivo com ele.
+
 ---
 
 ## Parte 2 — Mão na massa
@@ -91,4 +109,4 @@ Comandos: `ping` (o servidor responde?), `curl` (faz requisições HTTP), `ip a`
 
 ## O que levamos para a próxima aula 🔗
 
-> **Gancho para a Aula 04:** "Vocês já executam comandos como profissionais. Mas profissional de DevOps de verdade não digita a mesma sequência duas vezes — ele **automatiza**. Na próxima aula, seus comandos viram **scripts**: o primeiro passo da automação."
+> **Gancho para a Aula 04:** "Vocês já executam comandos como profissionais. Mas profissional de DevOps de verdade não digita a mesma sequência duas vezes — ele **automatiza**. Na próxima aula, seus comandos viram **scripts** — escritos no `vi` que vocês acabaram de conhecer: o primeiro passo da automação."

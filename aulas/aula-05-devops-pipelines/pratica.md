@@ -17,7 +17,7 @@ cd ~/meu-projeto-devops/scripts
 vi build.sh
 ```
 
-Conteúdo (a linha do `echo "<h1>...` é uma só, comprida — não aperte Enter no meio dela):
+Conteúdo (a linha do `echo "<h1>...` é uma só, comprida — não aperte Enter no meio dela; via SSH, use `:set paste` antes de colar):
 
 ```bash
 #!/bin/bash
@@ -126,7 +126,7 @@ cat ~/producao/index.html
 
 ## Passo 6 — Quebre a pipeline (de propósito!) 💥
 
-Cultura blameless na prática: vamos provocar uma falha e ver a esteira nos proteger. Edite o `build.sh` (`nano build.sh`) e troque `Bootcamp DevOps Matera 2026` por `Ola mundo`. Rode de novo:
+Cultura blameless na prática: vamos provocar uma falha e ver a esteira nos proteger. Edite o `build.sh` (`vi build.sh`) e troque `Bootcamp DevOps Matera 2026` por `Ola mundo`. Rode de novo:
 
 ```bash
 ./pipeline.sh
@@ -164,7 +164,7 @@ chmod +x build.sh test.sh deploy.sh pipeline.sh
 | `No such file or directory` ao rodar `./pipeline.sh` | Rode a pipeline de dentro da pasta `scripts` (`cd ~/meu-projeto-devops/scripts`) |
 | `grep: ... No such file or directory` | O `test.sh` rodou antes do `build.sh` — rode `./build.sh` primeiro (a pipeline faz isso na ordem certa) |
 | Pipeline não para no erro | Confira o `set -e` no topo do `pipeline.sh` e o `exit 1` no `test.sh` |
-| A página saiu sem a data | A linha do `echo "<h1>...` ficou quebrada em duas no nano — ela é uma linha só |
+| A página saiu sem a data | A linha do `echo "<h1>...` ficou quebrada em duas no `vi` — ela é uma linha só |
 
 ## Missão até a próxima aula 📌
 

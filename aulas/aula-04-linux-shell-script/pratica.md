@@ -12,20 +12,20 @@ Lembra do relatório da Aula 03, montado comando por comando? Vamos gravá-lo nu
 
 ```bash
 cd ~/meu-projeto-devops/scripts
-nano relatorio.sh
+vi relatorio.sh
 ```
 
-> ✏️ **nano em 1 minuto** — o `nano` é um editor de texto que roda no terminal. O mouse **não** funciona: mova-se com as setas.
+> ✏️ **vi em 1 minuto** (relembrando a [micro aula](../../recursos/micro-aula-vi.md)) — o `vi` abre no modo **normal**; o mouse não funciona, use as setas.
 >
 > | Tecla | Faz |
 > |-------|-----|
-> | `Ctrl + O`, depois `Enter` | **Salva** (ele mostra o nome do arquivo; confirme com Enter) |
-> | `Ctrl + X` | **Sai** (se houver mudança não salva, pergunta `Save modified buffer?` — responda `Y` e Enter) |
-> | `Ctrl + K` / `Ctrl + U` | Recorta a linha / cola de volta |
-> | `Ctrl + W` | Procura um texto |
-> | `Alt + U` | Desfaz |
+> | `i` | Entra no modo de **inserção** (aparece `-- INSERT --`) — só então digite |
+> | `Esc` | Volta ao modo normal |
+> | `:wq` + Enter | **Salva e sai** |
+> | `:q!` + Enter | Sai **sem** salvar |
+> | `u` | Desfaz · `dd` apaga a linha · `o` abre uma linha nova abaixo |
 >
-> Na barra de baixo, `^` significa `Ctrl`. Via SSH, cole com `Ctrl + V` (Windows), `Cmd + V` (Mac) ou `Ctrl + Shift + V` (Linux).
+> Para **colar** via SSH: `Esc`, `:set paste`, Enter, `i`, e cole com `Ctrl + V` (Windows), `Cmd + V` (Mac) ou `Ctrl + Shift + V` (Linux). Depois `Esc`, `:wq`.
 
 Conteúdo:
 
@@ -37,7 +37,7 @@ uptime
 df -h / | grep -v Filesystem
 ```
 
-Salve (`Ctrl + O`, Enter) e saia (`Ctrl + X`). A primeira linha, `#!/bin/bash`, é o **shebang**: diz que o `bash` deve executar este arquivo. As outras quatro você já conhece da Aula 03.
+Salve e saia (`Esc`, `:wq`, Enter). A primeira linha, `#!/bin/bash`, é o **shebang**: diz que o `bash` deve executar este arquivo. As outras quatro você já conhece da Aula 03.
 
 ## Passo 2 — Dê permissão e execute
 
@@ -62,7 +62,7 @@ Quatro comandos, um só toque. **Isso é automação.** O `./` na frente signifi
 Agora um script que **decide**: verifica internet e disco e responde `[OK]` ou `[FALHA]`.
 
 ```bash
-nano healthcheck.sh
+vi healthcheck.sh
 ```
 
 Conteúdo:

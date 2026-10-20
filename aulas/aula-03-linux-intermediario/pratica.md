@@ -28,22 +28,44 @@ Quantos processos estão rodando agora?
 ps aux | wc -l
 ```
 
-## Passo 3 — Permissões na prática
+## Passo 3 — Seu primeiro arquivo no `vi` + permissões na prática
+
+Hora de usar o editor da [micro aula](../../recursos/micro-aula-vi.md). Vamos criar um arquivo com uma linha dentro:
 
 ```bash
 cd ~/meu-projeto-devops/scripts
-touch teste.sh
+vi teste.sh
+```
+
+Dentro do `vi`, siga o ritual — **devagar, uma tecla por vez**:
+
+1. Aperte `i` (aparece `-- INSERT --` no rodapé).
+2. Digite: `echo "ola, vi!"`
+3. Aperte `Esc` (o `-- INSERT --` some).
+4. Digite `:wq` e dê Enter.
+
+De volta ao terminal, confira:
+
+```bash
+cat teste.sh
 ls -l teste.sh
 ```
 
-Repare: sem `x` nas permissões. Agora:
+Resultado esperado: a linha `echo "ola, vi!"` e, nas permissões, `-rw-rw-r--` — repare: **sem `x`**. Tente executar:
+
+```bash
+./teste.sh
+```
+
+Resultado esperado: `Permission denied`. O Linux se recusa a executar um arquivo sem permissão de execução. Agora dê a permissão e tente de novo:
 
 ```bash
 chmod +x teste.sh
 ls -l teste.sh
+./teste.sh
 ```
 
-Resultado esperado: as permissões mudaram de `-rw-rw-r--` para `-rwxrwxr-x`. Esse `x` é o que permitirá **executar** scripts na próxima aula.
+Resultado esperado: as permissões viraram `-rwxrwxr-x` e o arquivo imprime `ola, vi!`. Esse `x` é o que permitirá **executar** os scripts da próxima aula — e você acabou de escrever o seu primeiro.
 
 ## Passo 4 — Descubra seu endereço na rede
 
@@ -104,6 +126,8 @@ Usando pipes, conte quantos arquivos de configuração `.conf` existem em `/etc`
 | `Permission denied` no `apt` | Faltou o `sudo` |
 | `ping: Name or service not known` | VM sem internet — confira o adaptador NAT e rode o [roteiro de testes](../../setup/roteiro-de-testes.md) |
 | `curl: command not found` | Instale com `sudo apt install -y curl` |
+| Entrei no `vi` e não consigo sair | `Esc`, depois `:q!` e Enter (sai sem salvar) — ou `:wq` para salvar |
+| Digitei no `vi` e apareceram coisas estranhas / linhas sumiram | Você estava no modo normal (as letras viraram comandos). `Esc`, `u` até voltar ao normal, e `i` para escrever |
 
 ## Missão até a próxima aula 📌
 

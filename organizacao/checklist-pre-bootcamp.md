@@ -9,7 +9,7 @@ Documento de organização da equipe: tudo que precisa estar pronto **antes da A
 - [ ] Guia de setup **testado de ponta a ponta** por alguém da equipe em: Windows com teclado ABNT2 (instalador tela a tela, SSH pelo PowerShell), macOS com chip Apple M (VirtualBox Apple Silicon + ISO arm64) e Linux. Anotar o tempo gasto e ajustar o guia.
 - [ ] Canais de comunidade criados (Discord ou Slack), com canal por tema: `#setup-ambiente`, `#duvidas-gerais`, `#aula-do-dia`.
 - [ ] Monitores voluntários da Matera confirmados e com acesso aos canais.
-- [ ] **Imagem backup da VM** montada e testada: Ubuntu com **todos os binários usados no curso** já instalados (git, docker, docker compose, curl, btop, nano), hostname `bootcamp`, usuário `aluno`, OpenSSH ativo. Publicar em local de download controlado pela equipe.
+- [ ] **Imagem backup da VM** montada e testada: Ubuntu com **todos os binários usados no curso** já instalados (git, docker, docker compose, curl, btop, vim), hostname `bootcamp`, usuário `aluno`, OpenSSH ativo. Publicar em local de download controlado pela equipe.
 - [ ] Versão **arm64** da imagem backup (exportada de um Mac com chip M) — sem ela, alunos de Mac M não têm plano B.
 
 ## T-1 semana — Prévia da configuração do ambiente

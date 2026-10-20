@@ -44,11 +44,11 @@ Resultado esperado: arquivos em vermelho como *untracked* — o Git os vê, mas 
 
 ## Passo 4 — Primeiro commit! 🎉
 
-Antes, duas arrumações que todo profissional faz: o arquivo vazio `scripts/teste.sh` (Aula 03) não precisa entrar no histórico, e arquivos **gerados** — logs, relatórios, a página que o build cria — não se versionam; versiona-se o *código que os gera*. O `.gitignore` é a lista do que o Git deve ignorar:
+Antes, duas arrumações que todo profissional faz: o arquivo de teste `scripts/teste.sh` (Aula 03) não precisa entrar no histórico, e arquivos **gerados** — logs, relatórios, a página que o build cria — não se versionam; versiona-se o *código que os gera*. O `.gitignore` é a lista do que o Git deve ignorar:
 
 ```bash
 rm scripts/teste.sh
-nano .gitignore
+vi .gitignore
 ```
 
 Conteúdo:
@@ -140,7 +140,7 @@ Crie uma branch `experimento`, faça um commit **quebrando** o healthcheck de pr
 | `Please tell me who you are` | Faltou o `git config` do Passo 1 |
 | `not a git repository` | Você não está dentro de `~/meu-projeto-devops` |
 | `nothing to commit` | Faltou o `git add` antes do commit, ou nada mudou |
-| Abriu um editor estranho no merge/commit | É o editor de mensagem; salve e saia (`Ctrl+X` no nano; `Esc :wq` no vim) |
+| Abriu um editor no merge/commit | É o `vi` pedindo a mensagem do commit: `Esc`, depois `:wq` e Enter |
 | `git log` abriu uma tela que não sai | É o visualizador de páginas: navegue com as setas e saia com `q` |
 
 ## Missão até a próxima aula 📌
