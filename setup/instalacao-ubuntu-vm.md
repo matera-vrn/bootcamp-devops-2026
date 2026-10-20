@@ -126,22 +126,33 @@ Resultado esperado: 4 respostas e, no final, `4 received, 0% packet loss`.
 - ✅ **Recebeu respostas?** Internet OK — siga para o SSH.
 - ❌ **`Name or service not known` ou `100% packet loss`?** A VM está sem rede. Desligue a VM (`sudo poweroff`), abra **Configurações → Rede** no VirtualBox e confirme que o adaptador está **habilitado** e em modo **NAT**. Ligue a VM e teste de novo. Se persistir, veja se o seu computador está com internet e chame os monitores no canal `#setup-ambiente`.
 
-## 6. Conecte-se à VM pelo terminal do seu computador (SSH) — o jeito oficial do bootcamp
+## 6. Instale o servidor SSH na VM
 
-A janela do VirtualBox funciona, mas é desconfortável: a letra é pequena, não dá para rolar a tela nem **copiar e colar**. Profissionais não usam servidores por essa janela — eles se conectam por **SSH** a partir do próprio terminal. Vamos fazer igual.
-
-### 6.1 Instale o servidor SSH na VM
-
-A instalação automática não traz o OpenSSH. Ainda na janela da VM (os comandos só usam letras e hífen):
+A imagem do Ubuntu Server, instalada automaticamente, **não traz o servidor SSH** — e é por ele que você vai usar a VM em todas as aulas. Então este passo faz parte do processo, não é opcional. Ainda na janela da VM (os comandos só usam letras, números e hífen — funcionam mesmo com o teclado em US):
 
 ```bash
 sudo apt update
 sudo apt install -y openssh-server
 ```
 
-Em `[sudo] password for aluno:` digite sua senha (invisível) e Enter. Resultado esperado: várias linhas e, no fim, algo como `Setting up openssh-server` — sem mensagens de erro.
+Em `[sudo] password for aluno:` digite sua senha (invisível) e Enter. Resultado esperado: várias linhas de download e instalação e, no fim, algo como `Setting up openssh-server` — sem mensagens de erro.
 
-### 6.2 Abra uma "porta" entre o seu computador e a VM
+Confirme que o serviço está no ar:
+
+```bash
+systemctl is-active ssh
+```
+
+Resultado esperado: `active`.
+
+- ✅ **`active`?** Siga para o passo 7.
+- ❌ **`Unable to locate package` ou erro de rede?** A VM está sem internet — volte ao passo 5. **`inactive`?** Rode `sudo systemctl enable --now ssh` e teste de novo.
+
+## 7. Conecte-se à VM pelo terminal do seu computador (SSH) — o jeito oficial do bootcamp
+
+A janela do VirtualBox funciona, mas é desconfortável: a letra é pequena, não dá para rolar a tela nem **copiar e colar**. Profissionais não usam servidores por essa janela — eles se conectam por **SSH** a partir do próprio terminal. Vamos fazer igual.
+
+### 7.1 Abra uma "porta" entre o seu computador e a VM
 
 A VM está escondida atrás de uma rede interna (**NAT**). Vamos criar um redirecionamento: tudo que chegar na porta `2222` do seu computador vai para a porta `22` (SSH) da VM. Pode fazer com a VM ligada:
 
@@ -157,7 +168,7 @@ A VM está escondida atrás de uma rede interna (**NAT**). Vamos criar um redire
    (A regra `WEB` será usada nas aulas de Docker, para abrir no navegador a página que você vai criar.)
 4. **OK** e **OK**.
 
-### 6.3 Conecte-se
+### 7.2 Conecte-se
 
 Abra o terminal **do seu computador**:
 
@@ -184,11 +195,11 @@ Se você vê o prompt `aluno@bootcamp:~$` **na janela do seu terminal**, pronto:
 > | macOS (Terminal) | **Cmd + V** |
 > | Linux (terminal) | **Ctrl + Shift + V** |
 >
-> 🐧 **A partir de agora, use sempre o SSH nas aulas.** Deixe a janela do VirtualBox minimizada (ou inicie a VM sem janela, veja o passo 8). Para encerrar a sessão SSH, digite `exit`.
+> 🐧 **A partir de agora, use sempre o SSH nas aulas.** Deixe a janela do VirtualBox minimizada (ou inicie a VM sem janela, veja o passo 9). Para encerrar a sessão SSH, digite `exit`.
 
 > ⚠️ **`ssh` não é reconhecido no Windows?** Em *Configurações → Aplicativos → Recursos opcionais → Adicionar um recurso*, instale **Cliente OpenSSH**. Guia oficial da Microsoft: https://learn.microsoft.com/windows-server/administration/openssh/openssh_install_firstuse
 
-## 7. Sobrevivendo à janela do VirtualBox (quando precisar dela)
+## 8. Sobrevivendo à janela do VirtualBox (quando precisar dela)
 
 Você vai precisar da janela da VM só para ligar/desligar ou se o SSH falhar. Quatro dicas:
 
@@ -199,7 +210,7 @@ Você vai precisar da janela da VM só para ligar/desligar ou se o SSH falhar. Q
 | A saída de um comando passou e sumiu (não há rolagem) | Rode `comando \| less` — navegue com as setas e saia com `q`. Ou limpe a tela com `clear` |
 | Desligar a VM | Digite `sudo poweroff` no terminal, **ou** menu **Máquina → Desligamento por ACPI**. Se fechar a janela no X, escolha **Enviar sinal de desligamento** — nunca *Desligar a máquina*, que é como puxar o cabo da tomada |
 
-## 8. Sua rotina em cada aula
+## 9. Sua rotina em cada aula
 
 1. Abra o VirtualBox, selecione `bootcamp-devops` e clique na setinha ao lado de **Iniciar** → **Início sem janela** (*Headless Start*). A VM liga "escondida".
 2. Abra o terminal do seu computador e conecte: `ssh aluno@localhost -p 2222`.
@@ -215,7 +226,7 @@ Você vai precisar da janela da VM só para ligar/desligar ou se o SSH falhar. Q
 | **Tela preta** ao iniciar a VM | (1) Virtualização desligada na BIOS/UEFI — veja o [guia do VirtualBox](instalacao-virtualbox.md). (2) **Mac com chip Apple M usando a ISO `amd64`** — baixe a `arm64` (passo 1) |
 | VM **muito lenta**, ícone de **tartaruga verde** no rodapé (Windows) | O Windows está com o Hyper-V ativo "por baixo". Veja *Problemas comuns* do [guia do VirtualBox](instalacao-virtualbox.md) |
 | A **instalação automática parou com erro** ou pediu para você escolher coisas | Confira se a ISO é a **Server** certa para o seu processador (passo 1) e se *Skip Unattended Installation* ficou **desmarcado**. Apague a VM (botão direito → **Remover** → **Apagar todos os arquivos**) e recrie pelo passo 2 |
-| `ssh: connect to host localhost port 2222: Connection refused` | OpenSSH não instalado (passo 6.1), regra de redirecionamento não salva (passo 6.2) ou VM desligada |
+| `ssh: connect to host localhost port 2222: Connection refused` | OpenSSH não instalado (passo 6), regra de redirecionamento não salva (passo 7.1) ou VM desligada |
 | `Permission denied, please try again` no SSH | Senha errada (lembre: nada aparece ao digitar). Confira também se digitou `aluno` |
 | `~` não aparece / sai `~~` | Tecla morta do ABNT2: aperte `~` e depois **Espaço** |
 | Na janela da VM, `/`, `ç` ou `;` saem trocados | O console está com teclado US (instalação automática). Use o SSH — ou corrija com `sudo dpkg-reconfigure keyboard-configuration` (box do passo 3) |

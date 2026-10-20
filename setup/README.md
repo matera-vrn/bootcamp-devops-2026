@@ -9,7 +9,7 @@ Para que **todo mundo tenha exatamente o mesmo ambiente** — não importa se se
 Siga os guias **nesta ordem**, antes da primeira aula:
 
 1. **[Instalar o VirtualBox](instalacao-virtualbox.md)** no seu computador (Windows, Linux ou macOS).
-2. **[Criar a máquina virtual Ubuntu](instalacao-ubuntu-vm.md)** dentro do VirtualBox — inclui a instalação automática do Ubuntu (tudo preenchido numa tela do VirtualBox) e a conexão por **SSH**, o jeito como você vai usar a VM nas aulas.
+2. **[Criar a máquina virtual Ubuntu](instalacao-ubuntu-vm.md)** dentro do VirtualBox — inclui a instalação automática do Ubuntu (tudo preenchido numa tela do VirtualBox), a **instalação do servidor SSH** na VM e a conexão por **SSH**, o jeito como você vai usar a VM nas aulas.
 3. **[Executar o roteiro de testes](roteiro-de-testes.md)** para confirmar que está tudo funcionando.
 
 ⏱️ **Reserve cerca de 2 horas** para tudo (o download da imagem do Ubuntu tem ~4 GB) e faça **pelo menos uma semana antes** da Aula 01, para dar tempo de pedir ajuda se algo travar.
