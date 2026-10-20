@@ -98,9 +98,9 @@ O PR reexecuta a pipeline sozinho → ✅ verde → **Merge pull request**. Na V
 
 **Ciclo DevOps completo, de ponta a ponta, no seu projeto.** 🏆
 
-## Passo 7 — O post do certificado 🏅
+## Passo 7 — Guarde o seu portfólio 🏅
 
-Tire prints do repositório com o badge verde e da aba Actions, e prepare seu post no LinkedIn marcando a **@Matera** com **#BootcampDevOpsMatera** — critérios no [certificado.md](../../organizacao/certificado.md).
+Anote o link do seu repositório e tire um print da pipeline verde na aba Actions: esse é o seu portfólio, construído por você em 10 aulas. O certificado de participação será enviado pelo Instituto Matera, conforme as orientações da organização.
 
 ## Deu errado? 😥
 
@@ -110,7 +110,7 @@ Tire prints do repositório com o badge verde e da aba Actions, e prepare seu po
 | `Permission denied` no step Build | Os scripts perderam o `+x`? Rode `git update-index --chmod=+x scripts/*.sh`, commit e push |
 | Erro de YAML no workflow | Indentação — compare com o modelo; 2 espaços, sem Tab |
 | Pipeline verde mas badge não aparece | O markdown do badge aponta para a branch certa? Regenere pelo botão *Create status badge* |
-| `refusing to allow a Personal Access Token to create or update workflow` no push | O token não tem a permissão **Workflows**. Edite-o em *Settings → Developer settings → Fine-grained tokens* (ou gere outro com *Contents* + *Workflows: Read and write*) e repita o `git push`. Se o Git guardou o token antigo, apague a linha dele em `~/.git-credentials` com o `nano` para ele pedir o novo |
+| `refusing to allow a Personal Access Token to create or update workflow` no push | O token não tem a permissão **Workflows**. Edite-o em *Settings → Developer settings → Fine-grained tokens* (ou gere outro com *Contents* + *Workflows: Read and write*) e repita o `git push`. Se o Git guardou o token antigo, apague a linha dele em `~/.git-credentials` com o `vi` para ele pedir o novo |
 
 ## Missão para depois do bootcamp 📌
 

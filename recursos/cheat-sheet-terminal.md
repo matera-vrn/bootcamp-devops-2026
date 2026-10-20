@@ -40,7 +40,7 @@ Caminho **absoluto** começa em `/` (`/var/log`); **relativo** parte de onde voc
 | `cp origem destino` · `cp -r pasta destino` | Copia · copia pasta |
 | `mv origem destino` | Move ou renomeia |
 | `rm arquivo` · `rm -r pasta` | Apaga (sem lixeira!) · apaga pasta |
-| `nano arquivo` | Edita |
+| `vi arquivo` | Edita (veja *vi em 30 segundos*) |
 
 ## Ver conteúdo
 
@@ -109,9 +109,9 @@ echo "primeiro parametro: $1"
 
 `chmod +x script.sh` e depois `./script.sh`. Código de saída: `0` = deu certo; qualquer outro = falhou.
 
-## nano em 30 segundos
+## vi em 30 segundos
 
-`Ctrl + O` + `Enter` salva · `Ctrl + X` sai (responda `Y` se perguntar) · `Ctrl + K` recorta a linha · `Ctrl + U` cola · `Ctrl + W` procura · `Alt + U` desfaz. O `^` na barra de baixo significa `Ctrl`. O mouse não funciona: use as setas.
+Abre no modo **normal** (teclas = comandos). `i` entra no modo de **inserção** (teclas = texto; aparece `-- INSERT --`) · `Esc` volta ao normal · `:wq` + Enter salva e sai · `:q!` + Enter sai sem salvar · `u` desfaz · `dd` apaga a linha · `o` abre linha abaixo · `/texto` procura · `yy` / `p` copia / cola a linha. Para colar via SSH: `:set paste` antes do `i`. Preso? `Esc`, `:q!`, Enter. Tutorial completo: [micro aula de vi](micro-aula-vi.md).
 
 ## Git essencial
 

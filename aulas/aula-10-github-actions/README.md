@@ -79,7 +79,7 @@ E quando a pipeline precisa de uma senha (um registro de imagens — *registry* 
 ### 6. Carreira e comunidade
 
 - Seu diferencial ao final de hoje: um repositório público com **projeto funcional e pipeline verde** — mais do que muito candidato júnior tem.
-- Poste no LinkedIn marcando a **@Matera** (#BootcampDevOpsMatera) — é o critério do [certificado](../../organizacao/certificado.md) e o começo da sua rede.
+- Compartilhe o link do seu repositório com quem quiser — ele é o seu portfólio — e continue nos canais da comunidade.
 - Continuem nos canais da comunidade; as portas do Instituto Matera seguem abertas.
 
 ---

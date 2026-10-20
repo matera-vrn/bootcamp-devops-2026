@@ -53,7 +53,7 @@ O GitHub não aceita senha em `git push` — usaremos um **Personal Access Token
 
 ### 5. GitHub como portfólio
 
-Recrutadores de tecnologia **olham o GitHub**. Um perfil com projetos reais, commits com mensagens caprichadas e README bem escrito vale mais que dez cursos listados. O `meu-projeto-devops` que você constrói desde a Aula 02 vira hoje sua peça de portfólio — e é o que você postará no LinkedIn para o certificado!
+Recrutadores de tecnologia **olham o GitHub**. Um perfil com projetos reais, commits com mensagens caprichadas e README bem escrito vale mais que dez cursos listados. O `meu-projeto-devops` que você constrói desde a Aula 02 vira hoje sua peça de portfólio.
 
 ---
 

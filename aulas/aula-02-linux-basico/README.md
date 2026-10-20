@@ -128,7 +128,7 @@ Oito teclas que resolvem 90% dos sustos de quem está começando:
 | `↑` `↓` | Navega pelos comandos que você já digitou — ninguém redigita comando |
 | `Ctrl + C` | **Cancela** o comando atual. O terminal "travou"? É isto |
 | `Ctrl + L` (ou `clear`) | Limpa a tela |
-| `q` | Sai de telas de leitura (`man`, `less`, o histórico do Git) |
+| `q` | Sai de telas de leitura (`man`, `less`, o histórico do Git). Entrou no editor `vi` sem querer? `Esc`, depois `:q!` e Enter |
 | `Ctrl + R` | Busca no histórico: comece a digitar e ele encontra |
 | `Ctrl + D` (ou `exit`) | Encerra a sessão |
 | `comando --help` | Ajuda resumida, quando o `man` for longo demais |

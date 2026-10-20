@@ -38,7 +38,6 @@ Os termos do bootcamp explicados em uma linha, em ordem alfabética. Não decore
 | **LTS** | *Long Term Support*: versão com suporte longo (5 anos no Ubuntu), a preferida em empresas |
 | **markdown** | Linguagem simples de formatação de texto usada em READMEs: `#` vira título, `-` vira lista |
 | **merge** | Juntar uma branch em outra (ex.: integrar sua branch na `main`) |
-| **nano** | Um editor de texto simples que roda no terminal |
 | **NAT** | Modo de rede em que a VM fica "escondida" atrás do seu computador, usando a internet dele |
 | **nginx** | Um servidor web muito usado: entrega páginas HTML para quem acessa |
 | **PAT (token)** | *Personal Access Token*: uma "senha de aplicativo" do GitHub, com validade e permissões limitadas |
@@ -65,6 +64,7 @@ Os termos do bootcamp explicados em uma linha, em ordem alfabética. Não decore
 | **systemctl / systemd** | O gerenciador de serviços do Linux; `systemctl` liga, desliga e consulta serviços (ssh, docker, cron...) |
 | **terminal** | A janela onde você digita comandos para o shell |
 | **variável** | Um nome que guarda um valor: `NOME="Matera"`, lido com `$NOME` |
+| **vi (Vim)** | O editor de texto presente em todo Linux. É *modal*: `i` para escrever, `Esc` para voltar aos comandos, `:wq` salva e sai, `:q!` sai sem salvar |
 | **VM (máquina virtual)** | Um computador completo simulado por software dentro do seu — a VM Ubuntu do bootcamp roda no VirtualBox |
 | **volume** | Um espaço de armazenamento que sobrevive à destruição de um container |
 | **workflow** | A pipeline, no vocabulário do GitHub Actions |

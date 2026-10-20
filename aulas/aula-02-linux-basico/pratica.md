@@ -144,6 +144,7 @@ Segundo desafio: usando **um único comando** com caminho absoluto, a partir da 
 | O terminal "travou" e o prompt não volta | `Ctrl + C` cancela o que estiver rodando |
 | Apareceu um `>` sozinho e nada acontece | Você abriu aspas e não fechou — `Ctrl + C` e digite de novo |
 | Abriu uma tela que não sai (`man`, `less`) | Aperte `q` |
+| Entrei no editor `vi` sem querer | `Esc`, depois `:q!` e Enter (você vai conhecer o `vi` na próxima aula) |
 
 ## Missão até a próxima aula 📌
 

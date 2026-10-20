@@ -64,6 +64,7 @@ Vamos fazer uma melhoria pelo fluxo profissional completo. O GitHub mostra autom
 
 ```bash
 git checkout -b docs-readme
+git mv README.txt README.md
 vi README.md
 ```
 

@@ -23,7 +23,7 @@ O impacto inicial é o "uau" (e um friozinho na barriga 😅). A mensagem final 
 3. **Rodar o prompt** (abaixo) na frente de todos, narrando o que a IA vai fazendo — e conectando cada arquivo gerado à aula em que a turma o construiu ("olha o `set -e` da Aula 04!", "olha o `depends_on` da Aula 08!").
 4. **Executar o resultado:** `./scripts/pipeline.sh` verde, `docker compose up -d`, `curl localhost:8080`, push e pipeline verde no Actions.
 5. **A virada:** perguntar ao chat — "a IA errou algo? o que vocês fariam diferente?" — e deixar a turma **revisar a IA**. É o momento em que eles percebem que sabem.
-6. Fechar com a mensagem pedagógica acima + convite ao post do LinkedIn/certificado.
+6. Fechar com a mensagem pedagógica acima, o encerramento e o aviso de que o certificado será enviado pela organização.
 
 ## O prompt da demo
 
