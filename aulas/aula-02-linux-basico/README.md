@@ -44,7 +44,7 @@ aluno@bootcamp:~$ ls -l /home
 | Pedaço | Significado |
 |--------|-------------|
 | `aluno` | usuário logado |
-| `bootcamp` | nome da máquina |
+| `bootcamp-devops` | nome da máquina |
 | `~` | diretório atual (`~` = sua pasta pessoal) |
 | `$` | usuário comum (`#` seria o superusuário root) |
 | `ls` | o **comando** |
