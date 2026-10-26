@@ -28,7 +28,7 @@ Resultado esperado: depois de `yes` (só na primeira vez) e da senha, o mesmo pr
 
 - [ ] SSH funcionando e consigo colar
 
-> Deu `Connection refused`? Falta instalar o OpenSSH na VM (passo 6 do [guia da VM](instalacao-ubuntu-vm.md)) ou a regra de porta 2222 (passo 7.1).
+> Deu `Connection refused`? Falta instalar o OpenSSH na VM (passo 5.1 do [guia da VM](instalacao-ubuntu-vm.md)) ou a regra de porta 2222 (passo 5.2).
 
 ## Teste 3 — O teclado está certo
 

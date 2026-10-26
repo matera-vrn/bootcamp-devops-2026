@@ -83,7 +83,7 @@
   {
    "tipo": "conteudo",
    "bloco": "parte1",
-   "titulo": "CI — Integração Contínua",
+   "titulo": "CI — Integração Contínua (Continuous Integration)",
    "paragrafos": [
     "Cada mudança de código entra no repositório várias vezes ao dia e, a cada entrada, um robô:"
    ],

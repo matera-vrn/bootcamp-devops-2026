@@ -20,7 +20,7 @@ Agora conecte-se do jeito que usaremos em todas as aulas: abra o terminal **do s
 ssh aluno@localhost -p 2222
 ```
 
-O mesmo prompt deve aparecer na sua janela — com copiar e colar funcionando. Dúvidas? Passos 6 e 7 do [guia da VM](../../setup/instalacao-ubuntu-vm.md).
+O mesmo prompt deve aparecer na sua janela — com copiar e colar funcionando. Dúvidas? Passo 5 do [guia da VM](../../setup/instalacao-ubuntu-vm.md).
 
 ## Passo 2 — Execute o roteiro de testes
 

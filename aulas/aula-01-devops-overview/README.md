@@ -1,6 +1,6 @@
 # Aula 01 — DevOps: Overview + Comunidades
 
-> **Objetivo:** nivelar todos os participantes. Explicar por que o DevOps nasceu, a dor que ele cura e por que o mercado paga tão bem por isso. Garantir que todos saiam com o ambiente funcionando.
+> **Objetivo:** nivelar todos os participantes. Explicar por que o DevOps nasceu, a dor que ele cura e por que o mercado paga bem por isso. Garantir que todos saiam com o ambiente funcionando.
 >
 > 📖 Apareceu uma palavra nova? Consulte o [glossário](../../glossario.md).
 >
@@ -59,9 +59,9 @@ Desmistificando os termos que você vai ouvir o bootcamp inteiro:
 | **Build** | Montar/empacotar o programa a partir do código |
 | **Deploy** | Colocar uma versão do sistema no ar |
 
-### 4. Por que o mercado paga tão bem?
+### 4. Por que o mercado paga bem?
 
-Empresas que dominam DevOps entregam **mais rápido, com menos erro e mais segurança**. Na Matera, sistemas financeiros processam milhões de transações — sem automação, cultura e monitoramento, isso simplesmente não funciona em escala. Profissionais que sabem construir e operar essas esteiras são disputados.
+Empresas que dominam DevOps entregam **mais rápido, com menos erro e mais segurança**. Na Matera, sistemas financeiros processam bilhões de transações — sem automação, cultura e monitoramento, isso simplesmente não funciona em escala. Profissionais que sabem construir e operar essas esteiras são disputados.
 
 ### 5. Comunidades: ninguém aprende DevOps sozinho
 

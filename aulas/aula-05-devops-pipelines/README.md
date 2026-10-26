@@ -23,7 +23,7 @@ Antes do CI/CD: meses de código acumulado, integração na véspera, deploy de 
 
 > 💬 **Interação:** "O que pode dar errado quando 10 pessoas juntam 3 meses de código de uma vez só? Joga no chat!"
 
-### 2. CI — Integração Contínua
+### 2. CI — Integração Contínua ( Continuous Integration )
 
 **Integrar pouco, integrar sempre.** Cada mudança de código entra no repositório várias vezes ao dia e, a cada entrada, um robô:
 

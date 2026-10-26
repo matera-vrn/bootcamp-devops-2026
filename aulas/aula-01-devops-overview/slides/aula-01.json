@@ -152,16 +152,16 @@
   {
    "tipo": "conteudo",
    "bloco": "parte1",
-   "titulo": "Por que o mercado paga tão bem?",
+   "titulo": "Por que o mercado paga bem?",
    "paragrafos": [
     "Empresas que dominam DevOps entregam **mais rápido, com menos erro e mais segurança**."
    ],
    "bullets": [
-    "Na Matera, sistemas financeiros processam milhões de transações.",
+    "Na Matera, sistemas financeiros processam bilhões de transações.",
     "Sem automação, cultura e monitoramento, isso simplesmente não funciona em escala."
    ],
    "destaque": "Profissionais que sabem construir e operar essas esteiras são disputados.",
-   "notas": "⏱ 4 min — Conecte com a realidade da Matera: milhões de transações financeiras; sem automação, cultura e monitoramento não há escala. Por isso o mercado paga bem: entregar rápido, com menos erro e com segurança vale dinheiro. Mensagem motivacional: \"É exatamente isso que vocês vão aprender a construir aqui.\"",
+   "notas": "⏱ 4 min — Conecte com a realidade da Matera: bilhões de transações financeiras; sem automação, cultura e monitoramento não há escala. Por isso o mercado paga bem: entregar rápido, com menos erro e com segurança vale dinheiro. Mensagem motivacional: \"É exatamente isso que vocês vão aprender a construir aqui.\"",
    "minutos": 4
   },
   {

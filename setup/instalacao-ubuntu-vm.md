@@ -22,10 +22,10 @@ Baixe **somente dos espelhos oficiais do Ubuntu**. Qual arquivo baixar depende d
 
 | Seu computador | Arquivo | Onde baixar (oficial) |
 |----------------|---------|-----------------------|
-| **Windows** (qualquer) | `ubuntu-24.04.x-live-server-amd64.iso` | https://releases.ubuntu.com/24.04/ |
-| **Linux** (qualquer) | `ubuntu-24.04.x-live-server-amd64.iso` | https://releases.ubuntu.com/24.04/ |
-| **Mac com processador Intel** | `ubuntu-24.04.x-live-server-amd64.iso` | https://releases.ubuntu.com/24.04/ |
-| **Mac com chip Apple M** (M1, M2, M3, M4...) | `ubuntu-24.04.x-live-server-arm64.iso` | https://cdimage.ubuntu.com/releases/24.04/release/ |
+| **Windows** (qualquer) | `ubuntu-24.04.5-live-server-amd64.iso` | https://releases.ubuntu.com/24.04/ |
+| **Linux** (qualquer) | `ubuntu-24.04.5-live-server-amd64.iso` | https://releases.ubuntu.com/24.04/ |
+| **Mac com processador Intel** | `ubuntu-24.04.5-live-server-amd64.iso` | https://releases.ubuntu.com/24.04/ |
+| **Mac com chip Apple M** (M1, M2, M3, M4...) | `ubuntu-24.04.5-live-server-arm64.iso` | https://cdimage.ubuntu.com/releases/24.04/release/ |
 
 > 🍎 **Qual Mac é o meu?** Menu Apple → *Sobre este Mac*. Se aparecer **"Chip: Apple M…"**, baixe a versão **arm64**. Se aparecer **"Processador: Intel…"**, baixe a **amd64**. A ISO errada simplesmente não inicia (tela preta).
 
@@ -41,61 +41,28 @@ Na mesma página há um arquivo `SHA256SUMS` com a "impressão digital" oficial 
 
 Se o código for igual ao da linha correspondente do `SHA256SUMS`, o download está íntegro. Guia oficial: https://ubuntu.com/tutorials/how-to-verify-ubuntu
 
-## 2. Crie a VM no VirtualBox — toda a configuração em uma só tela
+## 2. Crie a VM no VirtualBox
 
-Abra o VirtualBox e clique em **Nova** (*New*). A janela **New Virtual Machine** tem cinco seções que se abrem ao clicar na setinha (▶). Preencha **todas** antes de clicar em **Finish**:
 
-**▶ Virtual machine name and operating system** (nome e sistema)
-- **Name**: `bootcamp-devops`
-- **Folder**: deixe o padrão sugerido
-- **ISO Image**: selecione o arquivo `.iso` que você baixou. O VirtualBox reconhece o Ubuntu e preenche *Type* e *Version* sozinho.
-- **Skip Unattended Installation**: deixe **desmarcado** — é justamente a instalação automática que vamos usar.
+1. Abra o VirtualBox e clique em **Nova** (*New*). Dependendo da versão, as opções aparecem em páginas sucessivas ou todas numa única janela — os campos são os mesmos:
+2. **Preencha - Virtual machine name and operating systems**
+   - **Nome:** (*VM Name*) `bootcamp-devops`
+   - **Diretório:** (*VM Folder*) `/home/seu.usuario/VirtualBox VMs`
+   - **ISO Image:** selecione o arquivo `.iso` baixado (ex.: `ubuntu-24.04.5-live-server-amd64.iso`)
+3. **Usuário e Senha - Set up unattended guest OS installation**
+   - User Name: **aluno**
+   - Password: ************ (*Digite sua senha*)
+   - Confirm Password: ************ (*Digite sua senha*)
+4. **Hardware - Specify virtual hardware:**
+   - Memória: **2048 MB** (ou 4096 MB se seu computador tiver 16 GB de RAM)
+   - Processadores: **2 CPUs**
+5. **Disco - Specify virtual Hard** 
+   - Disk Size: **25 GB** (padrão, alocado dinamicamente).
+6. Conclua e clique em **Finalizar** (*Finish*).
+7. Selecione a opção:
+   - `*Try or Install Ubuntu` e aguarde finalizar a instalação.
 
-**▶ Set up unattended guest OS installation** (instalação automática — é aqui que você define usuário, senha e nome da máquina)
-- **User Name**: `aluno`
-- **Password** e **Confirm Password**: uma senha simples que você **vai lembrar** (anote! ela será pedida em todas as aulas). O aviso *Password must match* some quando as duas ficam iguais.
-- **Product Key**: em branco (só serve para Windows)
-- **Host Name**: `bootcamp` — é o nome que aparece no prompt (`aluno@bootcamp`)
-- **Domain Name**: deixe o padrão (`myguest.virtualbox.org`)
-- **Install in Background**: desmarcado (queremos ver a instalação acontecer)
-
-**▶ Install Guest Additions**: deixe **desmarcado**.
-
-**▶ Specify virtual hardware** (hardware)
-- **Base Memory**: `2048` MB (ou `4096` MB se seu computador tiver 16 GB de RAM ou mais)
-- **Processors**: `2`
-- **Enable EFI**: deixe como está
-
-**▶ Specify virtual hard disk** (disco)
-- **Create a Virtual Hard Disk Now** (já selecionado)
-- **Disk Size**: `25` GB. Não se assuste: é "alocado dinamicamente" — só ocupa no seu computador o que a VM realmente usar
-- **Pre-allocate Full Size**: desmarcado
-
-Confira o resumo e clique em **Finish**.
-
-## 3. Aguarde a instalação automática (10–20 min)
-
-A VM liga sozinha e o Ubuntu se instala **sem perguntar nada**: telas do instalador passam por conta própria, uma barra de progresso avança e, no fim, a máquina reinicia. **Não clique dentro da janela nem aperte teclas** durante esse tempo. (Clicou e o mouse "sumiu"? Aperte a **tecla Host**: `Ctrl` **da direita** no Windows/Linux, `⌘` **da esquerda** no Mac.)
-
-O que a instalação automática configura, a partir do que você preencheu:
-
-| Item | Como fica |
-|------|-----------|
-| Usuário | `aluno`, com poderes de administrador (`sudo`) e a senha que você escolheu |
-| Nome da máquina | `bootcamp` |
-| Disco | Os 25 GB inteiros para o sistema (sem partições extras) |
-| Teclado **da janela da VM** | Inglês (US) — veja o box abaixo; pelo SSH isso não importa |
-| Servidor SSH | **Não vem instalado** — instalamos no passo 6 |
-
-Está pronto quando aparecer `bootcamp login:` na tela.
-
-> ⌨️ **Teclado: por que a janela da VM fica "em inglês" e por que isso não importa.** A instalação automática não pergunta o layout e deixa o console com teclado **US**: num teclado ABNT2, `/`, `ç`, `;` e `~` saem trocados **dentro da janela do VirtualBox**. Por isso usamos a janela só para o login, o teste de internet e a instalação do SSH — comandos sem esses caracteres. Daí em diante, **pelo SSH o teclado é o do seu computador** e tudo funciona.
->
-> Quer corrigir o console mesmo assim? Depois do login, rode `sudo dpkg-reconfigure keyboard-configuration` (escolha *Generic 105-key PC*, depois *Portuguese (Brazil)* duas vezes; nas outras telas, só Enter) e `sudo reboot`.
->
-> No terminal do seu computador valem as pegadinhas do ABNT2: `~` e `^` são **teclas mortas** (aperte e depois **Espaço**; apertar duas vezes dá `~~`); `|` é **Shift + `\`**, a tecla ao lado do `Z`; `/` fica ao lado do Shift direito.
-
-## 4. Primeiro login
+## 3. Primeiro login
 
 Depois de reiniciar, a tela mostra várias mensagens e, no meio delas, `bootcamp login:`. **Aperte Enter** se o cursor ficar escondido atrás das mensagens.
 
@@ -104,12 +71,12 @@ Digite `aluno`, dê Enter, digite a senha e dê Enter — **a senha não aparece
 Se você está vendo isto, o Ubuntu está instalado:
 
 ```text
-aluno@bootcamp:~$
+aluno@bootcamp-devops:~$
 ```
 
-## 5. Valide a conexão com a internet
+## 4. Valide a conexão com a internet
 
-Antes de seguir, confirme que a VM enxerga a internet — sem isso, nenhuma prática do bootcamp funciona (instalação de pacotes, Docker, GitHub...). Ainda na janela da VM, digite (este comando só usa letras, números, ponto e hífen — funciona mesmo com o teclado em US):
+Antes de seguir, confirme que a VM enxerga a internet — sem isso, nenhuma prática do bootcamp funciona (instalação de pacotes, Docker, GitHub...). Ainda logado(a) na VM, digite:
 
 ```bash
 ping -c 4 google.com
@@ -126,33 +93,18 @@ Resultado esperado: 4 respostas e, no final, `4 received, 0% packet loss`.
 - ✅ **Recebeu respostas?** Internet OK — siga para o SSH.
 - ❌ **`Name or service not known` ou `100% packet loss`?** A VM está sem rede. Desligue a VM (`sudo poweroff`), abra **Configurações → Rede** no VirtualBox e confirme que o adaptador está **habilitado** e em modo **NAT**. Ligue a VM e teste de novo. Se persistir, veja se o seu computador está com internet e chame os monitores no canal `#setup-ambiente`.
 
-## 6. Instale o servidor SSH na VM
-
-A imagem do Ubuntu Server, instalada automaticamente, **não traz o servidor SSH** — e é por ele que você vai usar a VM em todas as aulas. Então este passo faz parte do processo, não é opcional. Ainda na janela da VM (os comandos só usam letras, números e hífen — funcionam mesmo com o teclado em US):
-
-```bash
-sudo apt update
-sudo apt install -y openssh-server
-```
-
-Em `[sudo] password for aluno:` digite sua senha (invisível) e Enter. Resultado esperado: várias linhas de download e instalação e, no fim, algo como `Setting up openssh-server` — sem mensagens de erro.
-
-Confirme que o serviço está no ar:
-
-```bash
-systemctl is-active ssh
-```
-
-Resultado esperado: `active`.
-
-- ✅ **`active`?** Siga para o passo 7.
-- ❌ **`Unable to locate package` ou erro de rede?** A VM está sem internet — volte ao passo 5. **`inactive`?** Rode `sudo systemctl enable --now ssh` e teste de novo.
-
-## 7. Conecte-se à VM pelo terminal do seu computador (SSH) — o jeito oficial do bootcamp
+## 5. Conecte-se à VM pelo terminal do seu computador (SSH) — o jeito oficial do bootcamp
 
 A janela do VirtualBox funciona, mas é desconfortável: a letra é pequena, não dá para rolar a tela nem **copiar e colar**. Profissionais não usam servidores por essa janela — eles se conectam por **SSH** a partir do próprio terminal. Vamos fazer igual.
 
-### 7.1 Abra uma "porta" entre o seu computador e a VM
+### 5.1 Instalação do serviço SSH na VM
+```text
+aluno@bootcamp-devops:~$ sudo apt update
+[sudo] password for aluno: *************
+aluno@bootcamp-devops:~$ sudo apt install openssh-server -y
+```
+
+### 5.2 Abra uma "porta" entre o seu computador e a VM
 
 A VM está escondida atrás de uma rede interna (**NAT**). Vamos criar um redirecionamento: tudo que chegar na porta `2222` do seu computador vai para a porta `22` (SSH) da VM. Pode fazer com a VM ligada:
 
@@ -168,7 +120,7 @@ A VM está escondida atrás de uma rede interna (**NAT**). Vamos criar um redire
    (A regra `WEB` será usada nas aulas de Docker, para abrir no navegador a página que você vai criar.)
 4. **OK** e **OK**.
 
-### 7.2 Conecte-se
+### 5.3 Conecte-se
 
 Abra o terminal **do seu computador**:
 
@@ -195,11 +147,11 @@ Se você vê o prompt `aluno@bootcamp:~$` **na janela do seu terminal**, pronto:
 > | macOS (Terminal) | **Cmd + V** |
 > | Linux (terminal) | **Ctrl + Shift + V** |
 >
-> 🐧 **A partir de agora, use sempre o SSH nas aulas.** Deixe a janela do VirtualBox minimizada (ou inicie a VM sem janela, veja o passo 9). Para encerrar a sessão SSH, digite `exit`.
+> 🐧 **A partir de agora, use sempre o SSH nas aulas.** Deixe a janela do VirtualBox minimizada (ou inicie a VM sem janela, veja o passo 8). Para encerrar a sessão SSH, digite `exit`.
 
 > ⚠️ **`ssh` não é reconhecido no Windows?** Em *Configurações → Aplicativos → Recursos opcionais → Adicionar um recurso*, instale **Cliente OpenSSH**. Guia oficial da Microsoft: https://learn.microsoft.com/windows-server/administration/openssh/openssh_install_firstuse
 
-## 8. Sobrevivendo à janela do VirtualBox (quando precisar dela)
+## 6. Sobrevivendo à janela do VirtualBox (quando precisar dela)
 
 Você vai precisar da janela da VM só para ligar/desligar ou se o SSH falhar. Quatro dicas:
 
@@ -210,7 +162,7 @@ Você vai precisar da janela da VM só para ligar/desligar ou se o SSH falhar. Q
 | A saída de um comando passou e sumiu (não há rolagem) | Rode `comando \| less` — navegue com as setas e saia com `q`. Ou limpe a tela com `clear` |
 | Desligar a VM | Digite `sudo poweroff` no terminal, **ou** menu **Máquina → Desligamento por ACPI**. Se fechar a janela no X, escolha **Enviar sinal de desligamento** — nunca *Desligar a máquina*, que é como puxar o cabo da tomada |
 
-## 9. Sua rotina em cada aula
+## 7. Sua rotina em cada aula
 
 1. Abra o VirtualBox, selecione `bootcamp-devops` e clique na setinha ao lado de **Iniciar** → **Início sem janela** (*Headless Start*). A VM liga "escondida".
 2. Abra o terminal do seu computador e conecte: `ssh aluno@localhost -p 2222`.
@@ -225,11 +177,10 @@ Você vai precisar da janela da VM só para ligar/desligar ou se o SSH falhar. Q
 |---------|-----------------|
 | **Tela preta** ao iniciar a VM | (1) Virtualização desligada na BIOS/UEFI — veja o [guia do VirtualBox](instalacao-virtualbox.md). (2) **Mac com chip Apple M usando a ISO `amd64`** — baixe a `arm64` (passo 1) |
 | VM **muito lenta**, ícone de **tartaruga verde** no rodapé (Windows) | O Windows está com o Hyper-V ativo "por baixo". Veja *Problemas comuns* do [guia do VirtualBox](instalacao-virtualbox.md) |
-| A **instalação automática parou com erro** ou pediu para você escolher coisas | Confira se a ISO é a **Server** certa para o seu processador (passo 1) e se *Skip Unattended Installation* ficou **desmarcado**. Apague a VM (botão direito → **Remover** → **Apagar todos os arquivos**) e recrie pelo passo 2 |
-| `ssh: connect to host localhost port 2222: Connection refused` | OpenSSH não instalado (passo 6), regra de redirecionamento não salva (passo 7.1) ou VM desligada |
+| Depois do reboot, o **instalador apareceu de novo** | A ISO continuou "no drive". Desligue a VM, vá em **Configurações → Armazenamento**, clique no `.iso` e remova-o do drive virtual. Ligue de novo |
+| `ssh: connect to host localhost port 2222: Connection refused` | Regra de redirecionamento não salva (passo 5.1 ou 5.2), VM desligada, ou o OpenSSH não foi instalado — na janela da VM rode `sudo apt install -y openssh-server` |
 | `Permission denied, please try again` no SSH | Senha errada (lembre: nada aparece ao digitar). Confira também se digitou `aluno` |
 | `~` não aparece / sai `~~` | Tecla morta do ABNT2: aperte `~` e depois **Espaço** |
-| Na janela da VM, `/`, `ç` ou `;` saem trocados | O console está com teclado US (instalação automática). Use o SSH — ou corrija com `sudo dpkg-reconfigure keyboard-configuration` (box do passo 3) |
-| Esqueci a senha | Mais rápido: apague a VM (botão direito → **Remover** → **Apagar todos os arquivos**) e recrie pelo passo 2 (~20 min). Anote a nova senha! |
+| `Esqueci a senha` | Mais rápido: reinstalar a VM (passo 2 em diante, ~20 min). Anote a nova senha! |
 | Sem internet na VM | Adaptador de rede em modo **NAT** (padrão) e internet funcionando no seu computador |
-| Teste 8 do roteiro: **menos de 10G livres** | A VM foi criada com um disco menor que 25 GB. Recrie-a pelo passo 2 com **25 GB** |
+| Teste 7 do roteiro: **menos de 15G livres** | Provavelmente a instalação ficou com LVM e disco pequeno. Rode: `sudo lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv && sudo resize2fs /dev/ubuntu-vg/ubuntu-lv` e confira com `df -h /`. Se o disco tiver 20 GB, aumente para 40 GB nas configurações da VM (Armazenamento) ou reinstale |
