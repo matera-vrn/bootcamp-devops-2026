@@ -1,0 +1,446 @@
+{
+ "aula": 8,
+ "tempo": {
+  "abertura": 5,
+  "revisao": 5,
+  "parte1": 40,
+  "intervalo": 15,
+  "parte2": 45,
+  "qa": 25
+ },
+ "slides": [
+  {
+   "tipo": "capa",
+   "bloco": "abertura",
+   "titulo": "Aula 08",
+   "subtitulo": "Docker 2: Docker Compose",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Slide de capa enquanto o pessoal entra. Dê boas-vindas, confirme áudio e vídeo no chat. Hoje é 13/11, sexta, das 19:30 às 21:45. Tema: sair de 'um container' para 'um sistema' com o Docker Compose."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "abertura",
+   "titulo": "Agenda do encontro",
+   "bullets": [
+    "19:30 — Abertura e boas-vindas",
+    "19:35 — Parte 1: Orquestrando containers",
+    "20:20 — Intervalo (15 min)",
+    "20:35 — Parte 2: Mão na massa — um sistema inteiro com `docker compose`",
+    "21:20 — Perguntas & Respostas",
+    "21:45 — Encerramento"
+   ],
+   "destaque": "Objetivo de hoje: orquestrar vários containers com um único arquivo declarativo, o `compose.yaml`.",
+   "minutos": 5,
+   "notas": "⏱ 5 min — Apresente a agenda e o objetivo da noite. Lembre: Parte 1 é conceito, Parte 2 é teclado na VM. Peça para quem ainda não ligou a VM começar a subir agora, para estar pronta às 20:35. Pergunta para o chat: 'Quem conseguiu fazer a missão da Aula 07 e deixou a página rodando no container?'. Reforce o glossário no repositório para qualquer palavra nova."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "revisao",
+   "titulo": "Revisão da aula anterior",
+   "bullets": [
+    "Container = a carga na caixa padronizada: roda igual em qualquer lugar.",
+    "Receita (**Dockerfile**) → bolo (**imagem**) → fatia servida (**container**).",
+    "Vocês containerizaram a página do projeto e a serviram com `docker run -p 8080:80`."
+   ],
+   "destaque": "Gancho: foi só **um** container. Sistemas de verdade têm app + banco + cache... Hoje um único arquivo sobe tudo por nós.",
+   "minutos": 5,
+   "notas": "⏱ 5 min — Retome a analogia da caixa padronizada e a tríade receita → bolo → fatia. Relembre o docker run -p 8080:80 da prática passada. Pergunta para o chat: 'Qual a diferença entre imagem e container?' (imagem é o bolo, container é a fatia servida). Feche com o gancho: subir app + banco + cache na mão, com os parâmetros certos, na ordem certa, todo dia? Hoje um arquivo faz isso. Transição para a Parte 1."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "parte1",
+   "titulo": "PARTE 1",
+   "subtitulo": "Orquestrando containers",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Divisor. Avise: são 40 minutos de conceito, com perguntas no chat. Comandos de verdade só depois do intervalo."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "A dor: o comando que não acaba mais",
+   "paragrafos": [
+    "Imagine subir um sistema com 3 serviços na mão:"
+   ],
+   "codigo": "docker run -d --name banco -e SENHA=... -v dados:/var/lib/... rede...\ndocker run -d --name api -p 3000:3000 --link banco ...\ndocker run -d --name site -p 8080:80 ...",
+   "destaque": "Três comandos gigantes, ordem certa, parâmetros decorados. E amanhã, tudo de novo. 😫",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Mostre os três comandos e deixe o pessoal sentir o peso: senha, volume, rede, portas, dependência entre eles. Não explique cada flag; o ponto é o tamanho e a fragilidade. Diga: 'Isso é um sistema pequeno, com 3 serviços. Imagina com 10.'"
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Três comandos, todo dia",
+   "bullets": [
+    "**Ordem certa**: o banco antes da API, a API antes do site.",
+    "**Parâmetros decorados**: senha, volume, rede, portas — um erro e nada sobe.",
+    "**Amanhã, tudo de novo**: a mesma sequência, a cada vez que o sistema precisa subir."
+   ],
+   "destaque": "💬 Interação: quem já perdeu uma tarde subindo um ambiente 'na mão'? Conta no chat.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Leia os três problemas. Pergunta para o chat: 'Quem já perdeu uma tarde subindo um ambiente na mão?'. Leia uma ou duas respostas em voz alta. Faça a ponte: 'A dor é repetir passos. A solução é parar de ditar passos.'"
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Declarar em vez de digitar",
+   "paragrafos": [
+    "O **Docker Compose** lê um arquivo `compose.yaml` que **declara** o sistema inteiro — serviços, portas, volumes e dependências.",
+    "E o materializa com um único comando:"
+   ],
+   "codigo": "docker compose up -d",
+   "destaque": "Um arquivo descreve o sistema; um comando faz ele existir.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Apresente o Docker Compose: um plugin do Docker (um pedaço a mais que se instala) que lê o compose.yaml. Defina o jargão: 'declarar' é descrever o que você quer, por escrito. Mostre o comando único. Diga que o -d é o mesmo 'detached' da Aula 07: roda em segundo plano. Transição: 'Esse jeito de pensar tem nome, e é o conceito mais importante da noite.'"
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Declarativo vs. imperativo",
+   "bullets": [
+    "**Imperativo**: você dita os passos, um por um (os três `docker run`).",
+    "**Declarativo**: você descreve o **estado desejado** e a ferramenta faz acontecer.",
+    "Guarde essa ideia: é a base da Infraestrutura como Código e do Kubernetes."
+   ],
+   "destaque": "💡 Conceito-chave do DevOps: descrever o que se quer, não como fazer.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Este é o slide mais importante da Parte 1. Imperativo = receita passo a passo ('faça isso, depois aquilo'). Declarativo = o pedido ('quero um sistema com site e banco'). A ferramenta descobre os passos. Pergunta para o chat: 'Os três docker run do começo são imperativos ou declarativos?' (imperativos). Defina Infraestrutura como Código: descrever servidores e serviços em arquivos de texto, como código. Avise que a ideia volta na Aula 10 com Kubernetes."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Anatomia de um compose.yaml (1/2)",
+   "codigo": "services:            # a lista de containers do sistema\n  site:              # nome do serviço (você escolhe)\n    build: .         # construa a partir do Dockerfile desta pasta\n    ports:\n      - \"8080:80\"    # VM:container — igual ao -p!",
+   "bullets": [
+    "`services`: a lista de containers do sistema — cada serviço = um container.",
+    "`build: .` usa o Dockerfile da pasta — o da Aula 07."
+   ],
+   "minutos": 2,
+   "notas": "⏱ 2 min — Percorra o arquivo de cima para baixo. services é a lista; site é um nome que você escolhe. build: . é o Dockerfile da Aula 07. ports é o mesmo -p 8080:80 (VM:container). Mostre que os comentários (#) são só explicação, não vão no arquivo da prática. Transição: 'Falta o segundo serviço.'"
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Anatomia de um compose.yaml (2/2)",
+   "codigo": "  visitas:\n    image: redis:alpine   # imagem pronta do Hub",
+   "bullets": [
+    "`image:` usa uma imagem pronta do Hub, no lugar de `build:`.",
+    "`redis:alpine` é o **Redis**, um banco de dados em memória — hoje, serviço de apoio."
+   ],
+   "minutos": 2,
+   "notas": "⏱ 2 min — O segundo serviço: visitas também é um nome que você escolhe. image: é uma imagem pronta do Docker Hub, sem Dockerfile. Defina Redis: banco de dados em memória, usado aqui como serviço de apoio. Lembre que os dois serviços ficam dentro do mesmo services:, no mesmo nível de indentação — gancho para o próximo slide, sobre YAML."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "YAML: indentação é tudo",
+   "bullets": [
+    "**YAML**: formato de texto sensível a **indentação** — os espaços no início de cada linha.",
+    "A indentação diz \"isto está dentro daquilo\": `ports` está dentro de `site`.",
+    "2 espaços por nível, **nunca Tab!**"
+   ],
+   "destaque": "O erro mais comum da noite será de indentação. Olhe os espaços antes de culpar o Docker.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Defina YAML: formato de texto para configuração, lido por humanos e máquinas. Volte ao slide anterior mentalmente: cada nível para dentro são 2 espaços. Tab quebra o arquivo. Avise que no vi a tecla Tab pode entrar sem você perceber; na prática, digite os espaços. Esse é o 'yaml: line X' da tabela de erros."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Serviços se enxergam pelo nome",
+   "bullets": [
+    "Cada serviço = um container.",
+    "O Compose cria automaticamente uma **rede interna** entre os serviços.",
+    "O `site` acessa o `visitas` pelo hostname `visitas` — sem decorar IP."
+   ],
+   "destaque": "DNS da Aula 03 em ação: nome vira endereço, automaticamente.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Explique a rede interna: o Compose cria uma rede privada só para os serviços do arquivo. Dentro dela, o nome do serviço funciona como hostname (o nome pelo qual uma máquina é chamada na rede): DNS automático. Relembre a Aula 03: DNS é a agenda de contatos, traduz nome em endereço. Pergunta para o chat: 'Qual hostname o site usa para falar com o Redis?' (visitas). Na prática vamos provar isso com ping."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Comandos do dia a dia",
+   "bullets": [
+    "`docker compose up -d` — sobe o sistema inteiro (constrói o que precisar)",
+    "`docker compose ps` — situação dos serviços",
+    "`docker compose logs -f site` — acompanha os logs de um serviço",
+    "`docker compose down` — derruba tudo, limpo"
+   ],
+   "destaque": "💬 Interação: qual desses lembra um comando `docker` da Aula 07? Responde no chat.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Apresente os quatro comandos. up -d constrói e sobe; ps mostra a situação; logs -f acompanha ao vivo (o -f é 'follow', seguir); down derruba e limpa. Pergunta para o chat: 'Qual desses lembra um comando docker da Aula 07?' (docker ps, docker logs). Diga: 'docker compose' é o prefixo; o resto é familiar."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Onde isso te leva: o time",
+   "bullets": [
+    "Ambiente de desenvolvimento de um time inteiro: `git clone` + `docker compose up`.",
+    "Fim do \"configura aí que na sexta eu te ajudo\"."
+   ],
+   "destaque": "💬 Interação: quanto tempo leva hoje para alguém novo rodar um sistema pela primeira vez? Chuta no chat.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Pinte o cenário real: uma pessoa nova entra no time, faz git clone e docker compose up, e o sistema inteiro sobe igual ao de todo mundo. Nada de 'funciona na minha máquina'. Pergunta para o chat: 'Quanto tempo vocês acham que leva hoje para um dev novo rodar um sistema pela primeira vez?'. Leia uma ou duas respostas."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Infraestrutura versionada",
+   "bullets": [
+    "O `compose.yaml` vive no Git — **infraestrutura versionada** junto com o código.",
+    "Em produção, essa ideia cresce e vira **Kubernetes** (spoiler da Aula 10!)."
+   ],
+   "destaque": "Declarativo hoje no Compose, declarativo amanhã no Kubernetes: a mesma ideia, em escala.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Conecte com o Git da Aula 06: o compose.yaml é um arquivo de texto, então entra no repositório e tem histórico. Isso é Infraestrutura como Código na prática. Spoiler: Kubernetes faz o mesmo para produção, em escala, e é tema da Aula 10. Hoje vocês vão commitar o compose.yaml no Passo 7."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Hoje na prática",
+   "paragrafos": [
+    "O projeto ganha um `compose.yaml` com **dois serviços** — sua página e um serviço de apoio (Redis) — subindo juntos com um comando."
+   ],
+   "bullets": [
+    "Instalar o plugin do Compose",
+    "Declarar o sistema e subir tudo",
+    "Espiar logs, provar a rede interna, derrubar e recriar",
+    "Versionar a infraestrutura no Git"
+   ],
+   "minutos": 3,
+   "notas": "⏱ 3 min — Resuma o roteiro da Parte 2. Avise: quem tiver dúvida de conceito, guarde para o Q&A; quem tiver erro na prática, mande a mensagem exata no chat. Peça para todo mundo deixar a VM ligada e a sessão SSH aberta durante o intervalo. Transição para o intervalo."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "intervalo",
+   "titulo": "INTERVALO",
+   "subtitulo": "Voltamos às 20:35",
+   "minutos": 15,
+   "notas": "⏱ 15 min — Intervalo. Deixe o slide na tela. Aproveite para ler o chat e separar as dúvidas para o Q&A. Lembre, ao voltar, de pedir que confirmem no chat que a VM está ligada e o SSH conectado."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "parte2",
+   "titulo": "PARTE 2",
+   "subtitulo": "Mão na massa",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Divisor. Prática 08: um sistema inteiro com docker compose. Compartilhe o terminal e vá fazendo junto, passo a passo, esperando o chat confirmar cada resultado esperado."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Objetivo e onde",
+   "paragrafos": [
+    "**Objetivo:** declarar um sistema com dois serviços — a página do seu projeto + um banco Redis de apoio — e subir tudo com um único comando.",
+    "**Onde:** no terminal conectado à VM via SSH (como no setup). A janela do VirtualBox também serve, mas sem copiar e colar."
+   ],
+   "destaque": "Confirme no chat: VM ligada e sessão SSH aberta?",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Leia o objetivo e o onde. Pergunta para o chat: 'VM ligada e SSH conectado? Manda um ok.' Quem estiver na janela do VirtualBox pode seguir, mas vai digitar tudo (sem copiar e colar). Mostre na tela o pratica.md aberto no repositório para quem quiser acompanhar."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 1 — Instale o plugin do Compose",
+   "codigo": "sudo apt update\nsudo apt install -y docker-compose-v2\ndocker compose version",
+   "bullets": [
+    "O Compose é um **plugin** do Docker: um pacote a mais, o `docker-compose-v2`.",
+    "`docker compose version` confirma que o plugin foi reconhecido."
+   ],
+   "rodape": "Resultado esperado: `Docker Compose version 2.x...`.",
+   "minutos": 5,
+   "notas": "⏱ 5 min — Rode os três comandos na tela. O apt update e o install levam alguns segundos. Peça para o chat colar a saída do docker compose version. Se aparecer ''compose' is not a docker command', o plugin não instalou: refazer o Passo 1. Espere a maioria confirmar antes de seguir."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 2 — Declare o sistema",
+   "codigo": "cd ~/meu-projeto-devops\nvi compose.yaml",
+   "bullets": [
+    "Entre na pasta do projeto: é onde está o `Dockerfile` da Aula 07.",
+    "Crie o arquivo `compose.yaml` com o `vi` (próximo slide: o conteúdo).",
+    "No `vi`: `i` para inserir, `Esc` e `:wq` para salvar e sair."
+   ],
+   "rodape": "Atenção à indentação — 2 espaços, nunca Tab! Salve com `:wq`.",
+   "minutos": 2,
+   "notas": "⏱ 2 min — Entre na pasta do projeto e abra o vi. Relembre rapidamente o fluxo do vi da micro aula: i para inserir, Esc, :wq para salvar e sair. Avise desde já: indentação com 2 espaços, nunca Tab. Não digite o conteúdo ainda; o próximo slide mostra o arquivo inteiro."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 2 — O compose.yaml",
+   "codigo": "services:\n  site:\n    build: .\n    ports:\n      - \"8080:80\"\n    depends_on:\n      - visitas\n  visitas:\n    image: redis:alpine",
+   "bullets": [
+    "`site`: do seu `Dockerfile` (Aula 07), porta 8080; `visitas`: imagem oficial do Redis.",
+    "`depends_on`: o `site` só sobe depois do `visitas`."
+   ],
+   "minutos": 6,
+   "notas": "⏱ 6 min — Digite o arquivo devagar na tela, falando a indentação em voz alta: 'services na margem; site com 2 espaços; build com 4; o traço do ports com 6'. Explique depends_on: é a ordem certa que antes era decorada. Salve com :wq. Peça para o chat comparar o arquivo com a tela, linha por linha. Esse é o passo com mais erro: dê tempo."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 3 — Suba o sistema inteiro 🚀",
+   "codigo": "docker compose up -d\ndocker compose ps\ncurl http://localhost:8080",
+   "bullets": [
+    "Na primeira vez o Compose constrói a imagem do `site` e baixa o `redis:alpine`.",
+    "`docker compose ps` lista os dois serviços e o estado de cada um.",
+    "No navegador do seu computador: **http://localhost:8080**."
+   ],
+   "rodape": "Resultado esperado: dois serviços com status `Up`/`running` e a sua página no `curl` e no navegador.",
+   "minutos": 6,
+   "notas": "⏱ 6 min — Rode o up -d e narre a saída: build da imagem do site, pull do redis:alpine, criação da rede e dos dois containers. Mostre o ps com os dois serviços Up/running. Rode o curl e abra o navegador em http://localhost:8080. Pergunta para o chat: 'Dois serviços Up? Página apareceu?'. Erro comum: 'port is already allocated' = sobrou container da Aula 07; docker ps + docker stop."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 4 — Espie os bastidores",
+   "codigo": "docker compose logs visitas | grep Ready",
+   "bullets": [
+    "Logs de cada serviço, chamando pelo nome do serviço.",
+    "Quer ver o log inteiro? `docker compose logs visitas`.",
+    "O aviso `WARNING Memory overcommit must be enabled!` é inofensivo aqui."
+   ],
+   "rodape": "Resultado esperado: a linha `Ready to accept connections tcp` do log do Redis.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Mostre o log do Redis filtrado com grep: a linha Ready to accept connections tcp. Relembre o pipe e o grep da Aula 03. Se alguém mostrar o log inteiro e assustar com o WARNING de memory overcommit, tranquilize: é inofensivo aqui."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 5 — A mágica da rede interna",
+   "codigo": "docker compose exec site ping -c 2 visitas",
+   "bullets": [
+    "`exec site` entra no container do site e roda um comando lá dentro.",
+    "O `ping` chama o `visitas` pelo **hostname** — nenhum IP decorado."
+   ],
+   "destaque": "Os serviços se enxergam pelo nome.",
+   "rodape": "Resultado esperado: o `visitas` responde! Rede privada com DNS automático (Aula 03 mandou lembranças 📡).",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Explique o exec: executa um comando dentro de um container que já está rodando. O ping -c 2 manda dois pacotes para o hostname visitas, e o Redis responde. Pergunta para o chat: 'Quem resolveu o nome visitas para um IP?' (o DNS interno que o Compose criou). Conecte com a Aula 03."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 5 — Dados vivendo no serviço",
+   "codigo": "docker compose exec visitas redis-cli INCR visitas_do_site\ndocker compose exec visitas redis-cli GET visitas_do_site",
+   "bullets": [
+    "`redis-cli` é o cliente do Redis; `INCR` incrementa um contador, `GET` lê o valor.",
+    "Rode o `INCR` mais vezes e veja o contador subir.",
+    "Dados vivendo em um serviço, consultados de fora dele."
+   ],
+   "rodape": "Resultado esperado: `(integer) 1` e, no `GET`, `\"1\"`.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Grave uma 'visita' no Redis: INCR cria e incrementa o contador visitas_do_site; GET devolve o valor. Rode o INCR duas ou três vezes para o chat ver o número subir. Pergunta para o chat: 'Em qual número está o seu contador?'. Diga: guardem esse número, vai ser importante no próximo passo."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 6 — Derrube e suba de novo (1/2)",
+   "codigo": "docker compose down\ndocker compose ps\ndocker compose up -d",
+   "bullets": [
+    "Um comando derruba o sistema; outro o recria."
+   ],
+   "destaque": "Esse é o superpoder do declarativo: o arquivo é a verdade, o ambiente é descartável.",
+   "rodape": "Resultado esperado: `ps` vazio depois do `down`; depois do `up -d`, tudo de volta em segundos.",
+   "minutos": 2,
+   "notas": "⏱ 2 min — Rode o down e mostre o ps vazio. Rode o up -d de novo: tudo volta em segundos, sem decorar nada. Mensagem-chave: o arquivo é a verdade, o ambiente é descartável. Transição: 'E o contador que vocês guardaram no Passo 5?'"
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 6 — Derrube e suba de novo (2/2)",
+   "codigo": "docker compose exec visitas redis-cli GET visitas_do_site",
+   "bullets": [
+    "Os dados viviam dentro do container: ambiente descartável, dados descartados.",
+    "Para dados sobreviverem, usa-se um **volume** — tema para explorar depois do bootcamp."
+   ],
+   "rodape": "Resultado esperado: `(nil)` — o contador sumiu. Não é bug: o Redis foi destruído e recriado do zero.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Rode o GET: (nil). Pergunta para o chat: 'Cadê o contador?'. Explique: não é bug; o container do Redis foi destruído e recriado, e os dados viviam dentro dele. Cite volume (um espaço de dados que sobrevive ao container) como solução, sem aprofundar."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 7 — Versione a infraestrutura",
+   "codigo": "git add compose.yaml\ngit commit -m \"adiciona compose.yaml com site e redis\"\ngit log --oneline",
+   "bullets": [
+    "O `compose.yaml` é texto: entra no Git como qualquer arquivo do projeto.",
+    "Seu repositório conta a história completa: app, scripts, receita da imagem e sistema. 📜"
+   ],
+   "rodape": "Resultado esperado: o novo commit no topo do `git log --oneline`.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Commit do compose.yaml. Mostre o git log --oneline com o histórico do projeto desde a Aula 06: scripts, página, Dockerfile e agora o compose. Isso é a infraestrutura versionada da Parte 1. Peça para o chat confirmar o commit."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Deu errado? 😥",
+   "bullets": [
+    "`yaml: line X: ...` → indentação errada: use 2 espaços, remova Tabs",
+    "`port is already allocated` → container da Aula 07 na 8080: `docker ps` + `docker stop`",
+    "`permission denied ... docker.sock` → sessão sem o grupo docker: `exit` e volte pelo SSH",
+    "`no configuration file provided` → rode de dentro de `~/meu-projeto-devops`",
+    "`'compose' is not a docker command` → plugin não instalado: refaça o Passo 1",
+    "`pull access denied` → erro de digitação no nome da imagem (`redis:alpine`)"
+   ],
+   "minutos": 2,
+   "notas": "⏱ 2 min — Passe rápido pela tabela de erros. Pergunta para o chat: 'Alguém travou em algum passo? Cole a mensagem exata.' Os dois mais prováveis: indentação do YAML e porta 8080 ocupada por container da Aula 07. Quem não terminou pode seguir depois com o pratica.md."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Desafio bônus 🏆",
+   "bullets": [
+    "Adicione um terceiro serviço ao `compose.yaml`: imagem `traefik/whoami`, porta `8081:80`.",
+    "Suba com `docker compose up -d` — só o novo serviço será criado!",
+    "Teste com `curl http://localhost:8081`."
+   ],
+   "destaque": "Declarou mais um serviço, rodou o mesmo comando: o Compose só cria o que falta.",
+   "minutos": 1,
+   "notas": "⏱ 1 min — Apresente o bônus para quem terminou cedo ou para fazer em casa: terceiro serviço com a imagem traefik/whoami, porta 8081:80. Destaque que o up -d só cria o que ainda não existe: é o declarativo de novo. Não resolva ao vivo."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Missão até a próxima aula 📌",
+   "paragrafos": [
+    "Na Aula 09 o seu projeto vai para o GitHub — e criar a conta no meio da aula consome tempo precioso. Faça antes:"
+   ],
+   "bullets": [
+    "1. Crie sua conta em **https://github.com/signup** — nome de usuário profissional.",
+    "2. Confirme o e-mail.",
+    "3. Recomendado: verificação em duas etapas (**Settings → Password and authentication**)."
+   ],
+   "destaque": "Já tem conta? Missão cumprida. 😉",
+   "minutos": 1,
+   "notas": "⏱ 1 min — Missão: criar a conta no GitHub antes da Aula 09 (confirmação de e-mail e verificações tomam tempo). Reforce o nome de usuário profissional, porque ele vai aparecer no portfólio. Confirmar o e-mail e, se possível, ativar a verificação em duas etapas. Quem já tem conta está liberado. Transição para o Q&A."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "qa",
+   "titulo": "PERGUNTAS & RESPOSTAS",
+   "subtitulo": "21:20 – 21:45",
+   "minutos": 25,
+   "notas": "⏱ 25 min — Abra o chat para perguntas. Comece pelas dúvidas separadas no intervalo. Temas que costumam aparecer: diferença entre docker run e docker compose, o que é Redis, por que o contador sumiu e o que é volume, depends_on. Se sobrar tempo, mostre o desafio bônus ao vivo."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "fechamento",
+   "titulo": "O que levamos para a próxima aula",
+   "bullets": [
+    "Um `compose.yaml` declara o sistema; `docker compose up -d` materializa tudo de uma vez.",
+    "Declarativo vs. imperativo: descrever o estado desejado, não ditar os passos.",
+    "Rede interna com DNS: serviços se enxergam pelo nome; infra versionada no Git."
+   ],
+   "destaque": "Tudo commitado, mas preso na sua VM. Se ela morrer, morre junto. E o recrutador, como vê? Próxima aula: **GitHub**.",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Recapitule os três aprendizados. Leia o gancho da Aula 09: o projeto tem código, scripts, Dockerfile, compose, tudo commitado, mas preso na VM; se ela morrer, morre junto, e o recrutador não vê. Próxima aula: o repositório vai para a nuvem, no GitHub. Lembre da missão: conta criada e e-mail confirmado antes da aula. Agradeça e encerre."
+  },
+  {
+   "tipo": "encerramento",
+   "bloco": "fechamento",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Slide final com o logo do Instituto Matera. Agradeça a presença, lembre a missão do GitHub e encerre a transmissão."
+  }
+ ]
+}

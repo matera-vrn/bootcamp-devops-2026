@@ -1,0 +1,445 @@
+{
+ "aula": 3,
+ "tempo": {
+  "abertura": 5,
+  "revisao": 5,
+  "parte1": 40,
+  "intervalo": 15,
+  "parte2": 45,
+  "qa": 25
+ },
+ "slides": [
+  {
+   "tipo": "capa",
+   "bloco": "abertura",
+   "titulo": "Aula 03",
+   "subtitulo": "Linux 2: Comandos intermediários",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Slide de capa no ar enquanto o pessoal entra (19:25–19:30). Dar boas-vindas pelo microfone, pedir para testarem o áudio e confirmarem no chat que a VM está ligada e o SSH conectado. Lembrar: hoje tem bastante prática, então deixem o terminal aberto desde já."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "abertura",
+   "titulo": "Agenda do encontro",
+   "bullets": [
+    "19:30 — Abertura e boas-vindas",
+    "19:35 — Parte 1: Virando o síndico do servidor",
+    "20:20 — Intervalo (15 min)",
+    "20:35 — Parte 2: Mão na massa",
+    "21:20 — Perguntas & Respostas",
+    "21:45 — Encerramento"
+   ],
+   "destaque": "Hoje: permissões, processos, instalação de programas, pipes, rede e o editor `vi`.",
+   "minutos": 5,
+   "notas": "⏱ 5 min — Apresentar a agenda em voz alta. Objetivo da aula: dar o próximo passo no Linux — permissões, processos, instalação de pacotes, filtros com pipes e os conceitos de rede que todo profissional DevOps precisa dominar (IP, portas, DNS, HTTP). Lembrar: apareceu palavra nova? O glossário está no repositório. Pergunta para o chat: 'Quem conseguiu fazer a missão da aula 02? Manda um ✅.' Mostrar na tela: a agenda e o repositório aberto na pasta aulas/aula-03-linux-intermediario."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "revisao",
+   "titulo": "Revisão da aula anterior",
+   "bullets": [
+    "O Linux domina os servidores do mundo — e o terminal é a língua nativa dele.",
+    "A árvore parte da raiz `/`: `/home`, `/etc`, `/var/log`, `/usr/bin`, `/tmp`",
+    "Caminhos absolutos e relativos; `~` é a sua casa, `..` é a pasta de cima",
+    "Navegar (`pwd`, `cd`, `ls`), criar (`mkdir`, `touch`, `echo >`), ler (`cat`)",
+    "Organizar arquivos (`cp`, `mv`, `rm`)",
+    "Nasceu o `meu-projeto-devops` — ele cresce a cada aula."
+   ],
+   "destaque": "Vocês já sabem andar pela casa. Hoje recebem as **chaves do prédio**: permissões, processos, instalação de programas e rede.",
+   "minutos": 5,
+   "notas": "⏱ 5 min — Revisão rápida, sem reexplicar: só relembrar. Caminhos absolutos começam com /, relativos partem de onde você está; ~ é a sua casa, .. é a pasta de cima. Perguntar no chat: 'Qual comando mostra onde você está?' (pwd) e 'Qual lista os arquivos?' (ls). Fechar com o gancho: já sabem andar pela casa, hoje ganham as chaves do prédio. Mostrar na tela: um terminal na VM com `ls ~/meu-projeto-devops` para provar que o projeto está lá."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "parte1",
+   "titulo": "PARTE 1",
+   "subtitulo": "Virando o síndico do servidor",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Transição: 'Síndico do servidor: quem decide quem entra, quem pode o quê, o que fica ligado e quem conversa com quem.' Avisar que a Parte 1 é conceitual e curta — tudo vai ser usado na prática depois do intervalo."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Usuários, root e sudo",
+   "bullets": [
+    "Todo arquivo e processo pertence a um **usuário**.",
+    "O **root** é o superusuário: pode tudo (inclusive destruir tudo).",
+    "`sudo` = \"super user do\": executa **um** comando como root."
+   ],
+   "destaque": "Com grandes poderes... você já sabe. 🕷️",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Definir o jargão: usuário é a identidade dona dos arquivos e processos; root é o superusuário, o 'síndico com chave mestra'. sudo não transforma você em root para sempre: ele executa UM comando com poderes de root, e depois você volta a ser aluno. Por isso é mais seguro usar sudo do que logar como root. Mostrar na tela: `whoami` (aluno) e `sudo whoami` (root) — a primeira vez pede a senha do aluno. Frase do Homem-Aranha para fechar."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Permissões: quem faz o quê",
+   "paragrafos": [
+    "Três blocos de três letras: **dono**, **grupo** e **outros**. Um traço `-` significa 'não pode'."
+   ],
+   "codigo": "-rwxr-xr--  1 aluno aluno  120 nov 10 19:40 script.sh",
+   "bullets": [
+    "`rwx` — o **dono** pode ler (r), escrever (w) e executar (x)",
+    "`r-x` — o **grupo** pode ler e executar",
+    "`r--` — os **outros** só podem ler"
+   ],
+   "minutos": 4,
+   "notas": "⏱ 4 min — Ler a linha do ls -l da esquerda para a direita, apontando na tela. O primeiro caractere é o tipo (- arquivo, d diretório). Depois três blocos de três: dono, grupo, outros. r = read (ler), w = write (escrever), x = execute (executar). Traço = não pode. 'aluno aluno' são o dono e o grupo. Mostrar na tela: `ls -l ~/meu-projeto-devops` e ler uma linha em voz alta — é exatamente o exercício da missão de hoje."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "chmod e chown",
+   "bullets": [
+    "`chmod` muda permissões — ex.: `chmod +x script.sh` torna o arquivo executável",
+    "Esse `+x` é essencial para a próxima aula (scripts)!",
+    "`chown` muda o dono do arquivo"
+   ],
+   "destaque": "💬 Interação: por que será que um arquivo de senha não deve ter `r` para 'outros'?",
+   "minutos": 3,
+   "notas": "⏱ 3 min — chmod = change mode (muda permissões); chown = change owner (muda o dono). O exemplo que importa hoje: chmod +x torna executável — vamos fazer isso na prática com o teste.sh. Lançar a pergunta para o chat: 'Por que um arquivo de senha não deve ter r para outros?' Esperar respostas: porque qualquer usuário da máquina conseguiria ler as senhas. Reforçar: permissão é a primeira camada de segurança do Linux."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Processos: o que roda agora?",
+   "paragrafos": [
+    "**PID** é o número de identificação do processo — o `ps` mostra na segunda coluna."
+   ],
+   "bullets": [
+    "`ps aux` — fotografia de todos os processos",
+    "`top` — monitor ao vivo (CPU, memória). Sai com `q`",
+    "`kill <PID>` — encerra um processo pelo número dele"
+   ],
+   "minutos": 3,
+   "notas": "⏱ 3 min — Processo = um programa em execução. ps aux é uma foto do momento; top é o vídeo ao vivo (sai com q — anotem, é a tecla de sair de quase tudo hoje). kill encerra pelo PID, o número da segunda coluna do ps. Mostrar na tela: `ps aux` rolando e apontar a coluna PID; abrir `top` por 10 segundos e sair com q. Avisar que na prática vamos instalar o btop, um top bem mais bonito."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Instalando com apt",
+   "paragrafos": [
+    "No Ubuntu, programas vêm de **repositórios oficiais** via `apt` — o catálogo de programas do sistema."
+   ],
+   "codigo": "sudo apt update        # atualiza o catálogo\nsudo apt install btop  # instala um pacote",
+   "bullets": [
+    "`update` baixa o catálogo atualizado; `install` instala o pacote",
+    "Repare no `sudo`: instalar programas é tarefa de root"
+   ],
+   "minutos": 3,
+   "notas": "⏱ 3 min — Definir: repositório é o 'catálogo de loja' oficial do Ubuntu; pacote é o programa empacotado. Sempre dois passos: apt update (atualiza o catálogo, não instala nada) e apt install (instala). Os dois precisam de sudo porque mexem no sistema inteiro. Erro clássico: 'Unable to locate package' = esqueceu o update. Mostrar na tela: só o comando, sem rodar — vão rodar no Passo 1 da prática."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Segurança desde o dia zero 🔐",
+   "bullets": [
+    "Repositórios oficiais, sim; binários (programas prontos) de sites aleatórios, não",
+    "Origem confiável e versões auditadas"
+   ],
+   "destaque": "Esta é a primeira prática de DevSecOps que você aprende.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — DevSecOps = DevOps com segurança embutida desde o começo, não colada no fim. Binário é o programa já compilado, pronto para rodar: baixar de qualquer site é como instalar um app de fonte desconhecida no celular. O apt garante origem confiável e versões auditadas pela comunidade do Ubuntu. Pergunta para o chat: 'Quem já instalou programa no Windows baixando um .exe de um site estranho?' Fechar: no servidor, isso não se faz."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Superpoderes: pipes",
+   "paragrafos": [
+    "O `|` (pipe) conecta a saída de um comando à entrada do próximo — é LEGO de comandos."
+   ],
+   "codigo": "ps aux | grep bash          # filtra só o que contém \"bash\"\ncat arquivo | wc -l          # conta linhas\nls -la | grep \".txt\"        # só os .txt",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Mostrar onde fica a tecla | no teclado (Shift + a tecla ao lado do Enter ou do Z, dependendo do layout). Explicar a ideia do LEGO: cada comando faz uma coisa pequena e bem feita; o pipe encaixa um no outro. Ler cada exemplo em voz alta: 'ps aux lista tudo, o pipe entrega para o grep, que só deixa passar o que tem bash'. wc -l = word count, contando linhas. Mostrar na tela: rodar `ps aux | grep bash` ao vivo e comparar com `ps aux` puro."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "grep e redirecionamento",
+   "bullets": [
+    "`grep` — procura texto (o comando mais usado da sua carreira!)",
+    "`>` grava em arquivo (substitui o conteúdo)",
+    "`>>` acrescenta ao final do arquivo"
+   ],
+   "destaque": "O pipe liga comando a comando; o `>` liga comando a arquivo.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — grep: procurar texto em qualquer saída ou arquivo — vai ser o comando mais usado da carreira de vocês, para achar erro em log, por exemplo. Diferença crucial: > cria/substitui (cuidado, apaga o que tinha); >> acrescenta no fim. Eles já usaram echo > na aula 02. Mostrar na tela: `echo oi > /tmp/x.txt`, `echo de novo >> /tmp/x.txt`, `cat /tmp/x.txt`. No Passo 6 da prática vamos juntar tudo num relatório."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Redes em 4 conceitos",
+   "bullets": [
+    "**IP** — o endereço da casa (ex.: `192.168.0.10`)",
+    "**Porta** — a porta da casa: cada serviço atende em uma (web: 80/443, SSH: 22)",
+    "**DNS** — a agenda de contatos: traduz `matera.com` em IP",
+    "**HTTP/HTTPS** — o idioma da conversa web (o S = conversa criptografada 🔒)",
+    "**localhost** — o endereço da própria máquina (`127.0.0.1`)"
+   ],
+   "destaque": "Falar com `localhost` é falar consigo mesmo.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Usar a analogia da casa do começo ao fim. IP é o endereço da casa; porta é por qual porta você bate (web atende na 80/443, SSH na 22 — a que vocês usam para entrar na VM!). DNS é a agenda do celular: você decora o nome, ele traduz para o número (IP). HTTP é o idioma da conversa web; HTTPS é a mesma conversa, só que criptografada. localhost é 'minha própria casa'. Pergunta para o chat: 'Em qual porta vocês conectam na VM pelo SSH?' (22)."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Comandos de rede",
+   "bullets": [
+    "`ping` — o servidor responde?",
+    "`curl` — faz requisições HTTP",
+    "`ip a` — qual é o meu IP?"
+   ],
+   "destaque": "Na prática de hoje vocês vão usar os três.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — ping é o 'alô, tem alguém aí?'; curl conversa em HTTP com um site a partir do terminal, sem navegador (requisição = o pedido que o navegador faz ao site); ip a mostra o endereço da sua máquina. Mostrar na tela: `ip a` e apontar a linha inet. Não aprofundar: cada um aparece em um passo da prática (Passos 4 e 5). Transição: 'Falta só uma ferramenta antes do intervalo: o editor.'"
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Micro aula: o editor vi",
+   "paragrafos": [
+    "O `vi` existe em **todo** Linux do planeta — até em servidores sem mais nada instalado. A única ideia nova: ele tem **modos**."
+   ],
+   "bullets": [
+    "**Normal** (como abre) — controle remoto 🎮: cada tecla é um comando",
+    "**Inserção** (`i`) — máquina de escrever ⌨️; aparece `-- INSERT --`",
+    "**Linha de comando** (`:`) — menu 📋: salvar, sair, procurar"
+   ],
+   "codigo": "vi arquivo → [normal] → i → [inserção] → Esc → [normal] → :wq → Enter",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Por que vi: está em todo Linux, do servidor da Matera ao roteador de casa; no Ubuntu o comando vi abre o Vim. Quem sabe o básico edita configuração em qualquer lugar do mundo. A ideia que muda tudo: num editor comum, tudo que digita vira texto; no vi depende do modo. Normal = controle remoto (teclas são comandos). Inserção = máquina de escrever (teclas viram texto) — aparece -- INSERT -- no canto inferior esquerdo; se não aparece, você está no normal. Dois pontos = menu. Ler o ciclo de vida da linha de código em voz alta. Mostrar na tela: abrir `vi /tmp/demo.txt`, apertar i, mostrar o -- INSERT --, Esc, mostrar que sumiu."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "vi: as teclas que salvam",
+   "bullets": [
+    "`i` — começa a escrever (modo de inserção)",
+    "`Esc` — volta ao modo normal (aperte sem medo, quantas vezes quiser)",
+    "`:wq` + Enter — salva e sai",
+    "`:q!` + Enter — sai **sem** salvar: a saída de emergência 🚪",
+    "`u` — desfaz"
+   ],
+   "destaque": "💬 Interação: quem já ficou preso dentro de um editor no terminal? A partir de hoje: `Esc`, `:q!`, Enter.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Essas cinco teclas resolvem o bootcamp inteiro. :wq = write + quit; :q! = quit sem salvar, descarta tudo. u = undo, a melhor amiga de quem digitou no modo errado. Lançar a pergunta para o chat: 'Quem já ficou preso dentro de um editor no terminal e não sabia sair?' (todo mundo 🙋). Responder em coro: Esc, :q!, Enter. Mostrar na tela: a saída de emergência ao vivo — digitar qualquer coisa, Esc, :q!, Enter, `cat` mostra que nada mudou. Lembrar que o roteiro completo, o exercício e as pegadinhas estão em recursos/micro-aula-vi.md e que daqui a pouco criam o primeiro arquivo com ele."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "intervalo",
+   "titulo": "INTERVALO",
+   "subtitulo": "Voltamos às 20:35",
+   "minutos": 15,
+   "notas": "⏱ 15 min — Deixar o slide no ar, mutar o microfone. Sugerir: 'Aproveitem para deixar o terminal aberto, conectado via SSH, dentro de ~/meu-projeto-devops.' Quem tiver problema de VM ou internet pode chamar no chat durante o intervalo."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "parte2",
+   "titulo": "PARTE 2",
+   "subtitulo": "Mão na massa",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Retomar: 'Agora vocês viram síndico de verdade.' Lembrar a regra da prática: eu mostro, vocês fazem, quem terminar manda ✅ no chat; quem travar manda a mensagem de erro."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Objetivo e onde",
+   "paragrafos": [
+    "**Objetivo:** investigar o sistema, controlar permissões e falar com a internet — tudo dentro do `meu-projeto-devops`.",
+    "**Onde:** no terminal conectado à VM via SSH. A janela do VirtualBox também serve, mas sem copiar e colar."
+   ],
+   "destaque": "Prática 03 — Permissões, processos, pacotes e rede 🔧",
+   "minutos": 2,
+   "notas": "⏱ 2 min — Ler o objetivo. Reforçar o 'onde': SSH é melhor porque permite copiar e colar os comandos do pratica.md; pela janela do VirtualBox dá, mas tem que digitar. Mostrar na tela: o pratica.md aberto no repositório e o terminal SSH lado a lado. Pedir para todos confirmarem no chat que estão conectados."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 1 — Instale sua primeira ferramenta",
+   "codigo": "sudo apt update\nsudo apt install -y btop\nbtop",
+   "bullets": [
+    "`btop` é um `top` turbinado e colorido: veja CPU, memória, rede e processos",
+    "Explore à vontade — e saia com `q`"
+   ],
+   "rodape": "Resultado esperado: o btop abre em tela cheia com CPU, memória, rede e processos; sai com `q`.",
+   "minutos": 6,
+   "notas": "⏱ 6 min — Rodar junto com a turma. O sudo vai pedir a senha do aluno (não aparece nada enquanto digita — é normal). O apt update demora alguns segundos; o install baixa o pacote (o -y responde 'sim' à confirmação automaticamente). Abrir o btop e dar 1 minuto para explorarem: CPU, memória, rede, lista de processos. Pedir no chat: 'Qual processo aparece no topo da lista de vocês?' Saída com q. Erros prováveis: 'Unable to locate package' (faltou o update) e 'Permission denied' (faltou o sudo)."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 2 — Investigue processos com pipes",
+   "codigo": "ps aux | grep systemd | head -5\n\nps aux | wc -l",
+   "bullets": [
+    "Primeiro comando: você acabou de encadear **três** comandos!",
+    "Segundo comando: quantos processos estão rodando agora?"
+   ],
+   "rodape": "Resultado esperado: as 5 primeiras linhas de processos que contêm \"systemd\"; depois, o total de linhas.",
+   "minutos": 5,
+   "notas": "⏱ 5 min — Ler o primeiro encadeamento: ps aux lista tudo → grep deixa só o que tem systemd → head -5 mostra as 5 primeiras linhas. Três comandos, dois pipes. Depois ps aux | wc -l conta as linhas, ou seja, quantos processos estão rodando. Pergunta para o chat: 'Quantos processos deu na VM de vocês?' Os números variam, e isso é esperado. Mostrar na tela: os dois comandos rodando na VM do apresentador."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 3 — Seu primeiro arquivo no vi",
+   "codigo": "cd ~/meu-projeto-devops/scripts\nvi teste.sh",
+   "bullets": [
+    "1. Aperte `i` (aparece `-- INSERT --` no rodapé)",
+    "2. Digite: `echo \"ola, vi!\"`",
+    "3. Aperte `Esc` (o `-- INSERT --` some)",
+    "4. Digite `:wq` e dê Enter"
+   ],
+   "destaque": "O ritual do `vi`: devagar, uma tecla por vez.",
+   "rodape": "Resultado esperado: você volta ao terminal e o arquivo `teste.sh` existe dentro de `scripts`.",
+   "minutos": 7,
+   "notas": "⏱ 7 min — Este é o momento mais delicado da noite: fazer tecla a tecla, narrando. 'cd para a pasta scripts do projeto. vi teste.sh abre o arquivo (ele não existe, o vi cria). Agora: i — olhem o -- INSERT -- lá embaixo. Digitem echo \"ola, vi!\" com as aspas. Esc — o -- INSERT -- sumiu. Agora dois pontos, w, q — aparece no rodapé — e Enter.' Esperar o ✅ de todos no chat antes de seguir. Quem travou: Esc, :q!, Enter e começa de novo. Se apareceram coisas estranhas, estava no modo normal: Esc, u até voltar, i para escrever. Mostrar na tela: o vi do apresentador em fonte grande."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 3 — Permissões na prática (1/2)",
+   "bullets": [
+    "`ls -l` mostra `-rw-rw-r--` — repare: **sem** `x`",
+    "`./teste.sh` → `Permission denied`: sem `x`, o Linux se recusa a executar"
+   ],
+   "codigo": "cat teste.sh\nls -l teste.sh\n./teste.sh",
+   "rodape": "Resultado esperado: `Permission denied` — isso é o Linux funcionando, não um erro.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Primeira etapa: cat (confere a linha) e ls -l (ler as permissões em voz alta: dono lê e escreve, grupo lê e escreve, outros só leem — e nenhum x). Tentar ./teste.sh: Permission denied — isso é o Linux funcionando, não um erro. Transição: 'Agora vamos dar a permissão que falta.'"
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 3 — Permissões na prática (2/2)",
+   "bullets": [
+    "Depois do `chmod +x`: `-rwxrwxr-x` e o arquivo imprime `ola, vi!`",
+    "Esse `x` é o que permitirá executar os scripts da próxima aula"
+   ],
+   "codigo": "chmod +x teste.sh\nls -l teste.sh\n./teste.sh",
+   "rodape": "Resultado esperado: `ola, vi!` na tela. Você escreveu o seu primeiro script!",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Agora chmod +x, ls -l de novo (apareceu o x nos três blocos) e ./teste.sh imprime ola, vi!. Mensagem-chave: esse x é o que permitirá executar os scripts da próxima aula — e vocês acabaram de escrever o primeiro. Pedir no chat: 'Manda a linha do ls -l depois do chmod.'"
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 4 — Descubra seu endereço na rede",
+   "codigo": "ip a | grep inet",
+   "bullets": [
+    "`ip a` lista as placas de rede (interfaces); o `grep inet` deixa só as linhas com IP",
+    "`10.0.2.15` é o IP da sua VM na rede NAT do VirtualBox"
+   ],
+   "rodape": "Resultado esperado: entre as linhas, algo como `inet 10.0.2.15/24`.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Mais um pipe: ip a sozinho é verboso; o grep inet deixa só as linhas com IP. Vão aparecer o 127.0.0.1 (localhost, a própria máquina — lembram?) e o 10.0.2.15, o endereço da VM na rede NAT do VirtualBox (NAT = a VM pega carona na conexão do seu computador). Pergunta para o chat: 'Qual IP apareceu para vocês?' A maioria vai ter o mesmo 10.0.2.15 porque a NAT do VirtualBox é igual para todos — e isso é esperado."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 5 — Converse com a internet (1/2)",
+   "bullets": [
+    "`ping`: o servidor da Matera responde?",
+    "Se responder, DNS e internet estão funcionando"
+   ],
+   "codigo": "ping -c 3 matera.com",
+   "rodape": "Resultado esperado: `matera.com` responde aos três pings.",
+   "minutos": 2,
+   "notas": "⏱ 2 min — ping -c 3 manda três 'alôs' para matera.com; se responder, DNS e internet estão funcionando. Erro: 'Name or service not known' = VM sem internet, conferir o adaptador NAT. Transição: 'Agora uma conversa HTTP de verdade, direto do terminal.'"
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 5 — Converse com a internet (2/2)",
+   "bullets": [
+    "`curl -IL`: uma requisição HTTP de verdade, vendo só os cabeçalhos",
+    "`302`/`307` = \"vá para outro endereço\" (redirecionamento); o `-L` segue até o `200`",
+    "`200` = o famoso \"OK\" do HTTP. Repare no `https` 🔒: conversa criptografada"
+   ],
+   "codigo": "curl -IL https://www.matera.com | grep HTTP",
+   "rodape": "Resultado esperado: linhas de status como `HTTP/2 302`, `HTTP/2 307` e `HTTP/2 200` — o que importa é a última.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Requisição HTTP de verdade, mostrando só os cabeçalhos (as informações que o site manda antes do conteúdo da página); o grep HTTP filtra as linhas de status. Explicar a sequência: o site responde 302 e 307 (vá para outro endereço — redirecionamento), o -L segue até chegar ao 200, o OK do HTTP. O número de linhas pode variar; o que importa é a última ser 200. Apontar o https: conversa criptografada. Erro: 'curl: command not found' = sudo apt install -y curl."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 6 — Grave um relatório do sistema",
+   "codigo": "cd ~/meu-projeto-devops\necho \"=== Relatorio do sistema ===\" > relatorio.txt\ndate >> relatorio.txt\nuptime >> relatorio.txt\ndf -h / | grep -v Filesystem >> relatorio.txt\ncat relatorio.txt",
+   "bullets": [
+    "`>` cria o arquivo; `>>` vai acrescentando ao final",
+    "`date`, `uptime` e `df -h /`: data, tempo ligado e uso de disco"
+   ],
+   "destaque": "Guarde esse encadeamento: ele vira um script na próxima aula!",
+   "rodape": "Resultado esperado: um arquivo com data, tempo ligado e uso de disco.",
+   "minutos": 5,
+   "notas": "⏱ 5 min — Combinar tudo: voltar para a raiz do projeto, o echo com > cria o relatorio.txt com o título (substituindo se existir), e cada >> acrescenta uma linha: date (data), uptime (há quanto tempo a máquina está ligada), df -h / (uso do disco) passando por um grep -v que tira a linha de cabeçalho (o -v inverte: deixa só o que NÃO contém Filesystem). cat mostra o resultado. Pedir no chat: 'Cola aqui o seu relatorio.txt.' Mensagem-chave: guardem esse encadeamento — na próxima aula ele vira um script escrito no vi."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Deu errado? 😥",
+   "bullets": [
+    "`Unable to locate package` → rode `sudo apt update` antes do `install`",
+    "`Permission denied` no `apt` → faltou o `sudo`",
+    "`ping: Name or service not known` → VM sem internet: confira o adaptador NAT",
+    "`curl: command not found` → instale com `sudo apt install -y curl`",
+    "Entrei no `vi` e não consigo sair → `Esc`, depois `:q!` e Enter (ou `:wq` para salvar)",
+    "Coisas estranhas no `vi` → modo normal: `Esc`, `u` até voltar, depois `i`"
+   ],
+   "minutos": 2,
+   "notas": "⏱ 2 min — Passar rápido: é a tabela 'Deu errado?' do pratica.md, para consultarem depois. Ler só as duas do vi em voz alta, porque são as que mais vão acontecer esta semana: quem digitou no modo normal viu as letras virarem comandos — Esc, u até voltar ao normal, i para escrever. Para a VM sem internet, lembrar do roteiro de testes do setup. Pedir que quem ainda estiver travado mande a mensagem de erro exata no chat."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Desafio bônus 🏆",
+   "paragrafos": [
+    "Usando pipes, conte quantos arquivos de configuração `.conf` existem em `/etc`."
+   ],
+   "codigo": "ls /etc | grep ... | wc -l",
+   "destaque": "Poste o número no chat!",
+   "minutos": 2,
+   "notas": "⏱ 2 min — Desafio para quem terminou antes: a dica já entrega a estrutura, falta descobrir o que vai no grep. Não dar a resposta na hora; esperar os números aparecerem no chat e comentar que podem variar um pouco entre VMs. Quem não terminou pode fazer depois da aula."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Missão até a próxima aula 📌",
+   "bullets": [
+    "1. Abra o `btop` amanhã: qual processo mais consome memória na sua VM? Feche com `q`.",
+    "2. Com `grep`: quantas linhas do `/etc/passwd` contêm `nologin`? (Dica: `grep -c`.)",
+    "3. Rode `ls -l /etc | head -20` e leia as permissões de três arquivos em voz alta"
+   ],
+   "destaque": "Em voz alta mesmo: \"dono pode ler e escrever, grupo pode ler...\"",
+   "minutos": 1,
+   "notas": "⏱ 1 min — Ler as três missões. A terceira parece boba, mas é a que mais fixa: ler permissões em voz alta ('dono pode ler e escrever, grupo pode ler...') até virar automático. Lembrar que a missão está no fim do pratica.md e que na próxima aula começamos com a revisão dela."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "qa",
+   "titulo": "PERGUNTAS & RESPOSTAS",
+   "subtitulo": "21:20 – 21:45",
+   "minutos": 25,
+   "notas": "⏱ 25 min — Abrir o chat e o microfone. Priorizar quem travou na prática (vi, permissões, curl). Perguntas frequentes esperadas: 'posso usar outro editor?' (o editor do bootcamp é o vi, porque está em todo Linux, inclusive onde não há mais nada instalado); 'kill é perigoso?' (só encerra o processo daquele PID); 'por que o IP é igual ao do colega?' (NAT do VirtualBox). Se sobrar tempo, mostrar o exercício guiado da micro aula do vi (dd, u, o) ao vivo."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "fechamento",
+   "titulo": "O que levamos para a próxima aula",
+   "bullets": [
+    "Permissões (`rwx`, `chmod +x`) e o poder do `sudo`",
+    "Pipes e `grep`: encadear comandos e filtrar o que importa",
+    "O editor `vi`: `i`, `Esc`, `:wq`, `:q!` — e o seu primeiro `teste.sh` executável"
+   ],
+   "destaque": "DevOps de verdade não digita a mesma sequência duas vezes — ele **automatiza**. Na próxima aula, seus comandos viram **scripts**.",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Ler o gancho completo para a Aula 04: 'Vocês já executam comandos como profissionais. Mas profissional de DevOps de verdade não digita a mesma sequência duas vezes — ele automatiza. Na próxima aula, seus comandos viram scripts — escritos no vi que vocês acabaram de conhecer: o primeiro passo da automação.' Lembrar do relatório do Passo 6: ele vira o primeiro script. Agradecer e pedir para fazerem a missão."
+  },
+  {
+   "tipo": "encerramento",
+   "bloco": "fechamento",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Logo do Instituto Matera no ar. Agradecer, lembrar da próxima aula (Aula 04 — scripts) e encerrar a transmissão."
+  }
+ ]
+}

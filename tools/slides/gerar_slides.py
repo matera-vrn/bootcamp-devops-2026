@@ -23,6 +23,7 @@ def tstyle(name, font, size, color, bold=False):
 EXTRA_STYLES = "".join([
     tstyle("TB", "Poppins", 14, "#000000"),                 # corpo 14pt
     tstyle("TBb", "Poppins", 14, "#000000", bold=True),     # corpo negrito
+    '<style:style style:name="TBi" style:family="text"><style:text-properties fo:color="#000000" style:font-name="Poppins" fo:font-size="14pt" fo:font-style="italic" style:font-name-asian="Poppins" style:font-size-asian="14pt" style:font-style-asian="italic" style:font-name-complex="Poppins" style:font-size-complex="14pt" style:font-style-complex="italic"/></style:style>',
     tstyle("TBm", "Liberation Mono", 13, "#00048d"),        # inline code
     tstyle("TBh", "Poppins", 14, "#00048d", bold=True),     # destaque
     tstyle("TBs", "Poppins", 11, "#555555"),                # rodape
@@ -63,13 +64,19 @@ def esc_text(s):
             out.append(f'<text:s text:c="{len(part)}"/>')
     return "".join(out)
 
-def inline(s, base="TB", bold="TBb", mono="TBm"):
-    """Converte **negrito** e `codigo` em spans."""
+def plain(s):
+    """Remove marcacao (para titulos e subtitulos, que tem estilo unico)."""
+    return re.sub(r"\*\*([^*]+)\*\*|\*([^*]+)\*|`([^`]+)`", lambda m: m.group(1) or m.group(2) or m.group(3), s)
+
+def inline(s, base="TB", bold="TBb", mono="TBm", italic="TBi"):
+    """Converte **negrito**, *italico* e `codigo` em spans."""
     spans = []
-    for tok in re.split(r"(\*\*[^*]+\*\*|`[^`]+`)", s):
+    for tok in re.split(r"(\*\*[^*]+\*\*|\*[^*\s][^*]*\*|`[^`]+`)", s):
         if not tok: continue
         if tok.startswith("**") and tok.endswith("**"):
             spans.append(f'<text:span text:style-name="{bold}">{esc_text(tok[2:-2])}</text:span>')
+        elif tok.startswith("*") and tok.endswith("*") and len(tok) > 2:
+            spans.append(f'<text:span text:style-name="{italic if base == "TB" else base}">{esc_text(tok[1:-1])}</text:span>')
         elif tok.startswith("`") and tok.endswith("`"):
             spans.append(f'<text:span text:style-name="{mono}">{esc_text(tok[1:-1])}</text:span>')
         else:
@@ -101,7 +108,7 @@ def page_open(n, dp):
 
 # ---------- tipos de slide ----------
 def slide_capa(n, s):
-    l1, l2 = s.get("titulo", ""), s.get("subtitulo", "")
+    l1, l2 = plain(s.get("titulo", "")), plain(s.get("subtitulo", ""))
     t2 = "T2" if len(l1) <= 10 else "TT2b"
     t3 = "T3" if len(l2) <= 16 else "TT3b"
     body = (f'<text:p text:style-name="P1"><text:span text:style-name="T1">. <text:s/></text:span></text:p>'
@@ -110,7 +117,7 @@ def slide_capa(n, s):
     return page_open(n, "dp1") + shape(f"s{n}a", "gr1", 1.59, 1.014, 18.183, 7.366, body) + notes_xml(n, s.get("notas")) + "</draw:page>"
 
 def slide_secao(n, s):
-    l1, l2 = s.get("titulo", ""), s.get("subtitulo", "")
+    l1, l2 = plain(s.get("titulo", "")), plain(s.get("subtitulo", ""))
     t8 = "T8" if len(l1) <= 12 else "TT8b"
     t9 = "T9" if len(l2) <= 16 else "TT9b"
     body = (f'<text:p text:style-name="P1"><text:span text:style-name="T7">. <text:s/></text:span></text:p>'
@@ -122,7 +129,7 @@ def slide_encerramento(n, s):
     return page_open(n, "dp5") + notes_xml(n, s.get("notas")) + "</draw:page>"
 
 def slide_conteudo(n, s):
-    titulo = s.get("titulo", "")
+    titulo = plain(s.get("titulo", ""))
     if len(titulo) <= 24:   t4, cpl, lh = "T4",   24, 1.45   # 34pt
     elif len(titulo) <= 34: t4, cpl, lh = "TT4b", 30, 1.20   # 28pt
     else:                   t4, cpl, lh = "TT4c", 36, 1.05   # 24pt

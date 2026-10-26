@@ -1,0 +1,470 @@
+{
+ "aula": 5,
+ "tempo": {
+  "abertura": 5,
+  "revisao": 5,
+  "parte1": 40,
+  "intervalo": 15,
+  "parte2": 45,
+  "qa": 25
+ },
+ "slides": [
+  {
+   "tipo": "capa",
+   "bloco": "abertura",
+   "titulo": "Aula 05",
+   "subtitulo": "DevOps: Esteiras e Pipelines",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Slide parado enquanto o pessoal entra (10/11, terça, 19:30). Confira som, câmera e chat. Dê boas-vindas pelo nome a quem chegar. Pergunte no chat: quem conseguiu rodar o healthcheck.sh da Aula 04 pelo menos uma vez?"
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "abertura",
+   "titulo": "Agenda de hoje",
+   "bullets": [
+    "19:30 — Abertura, boas-vindas e avisos",
+    "19:35 — Parte 1: a esteira que mudou a indústria de software",
+    "20:20 — Intervalo ☕",
+    "20:35 — Parte 2: montando uma pipeline manual",
+    "21:20 — Perguntas & Respostas",
+    "21:45 — Encerramento pontual"
+   ],
+   "destaque": "Hoje entramos no coração do DevOps: CI/CD e o conceito de esteira (pipeline).",
+   "minutos": 5,
+   "notas": "⏱ 5 min — Boas-vindas e avisos. Apresente a agenda: Parte 1 é conceito, Parte 2 é mão na massa com quatro scripts curtos. Avise: quem ainda não tem a VM ligada e o terminal SSH aberto, aproveite a Parte 1 para deixar tudo pronto. Lembre que o glossário está no repositório para qualquer palavra nova."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "revisao",
+   "titulo": "Revisão da aula anterior",
+   "bullets": [
+    "Comandos viraram **scripts**: shebang, variáveis, `if`, `for`, códigos de saída.",
+    "O `healthcheck.sh` verifica a VM em segundos e guarda histórico em log.",
+    "`set -e`: em automação, **falhar rápido é uma virtude**."
+   ],
+   "destaque": "Um script automatiza uma tarefa. Uma esteira automatiza o caminho inteiro do código até produção.",
+   "minutos": 5,
+   "notas": "⏱ 5 min — Recapitule rápido: na Aula 04 transformamos comandos em scripts com shebang, variáveis, if, for e códigos de saída. O healthcheck.sh é o exemplo vivo. Reforce o set -e: em automação, parar no primeiro erro é virtude, e hoje isso vai ser o coração da esteira. Pergunta para o chat: 'o que significa um script terminar com exit 1?' (resposta: falhou). Faça o gancho: um script automatiza uma tarefa; uma esteira automatiza o caminho inteiro do código até produção. Hoje entramos no coração do DevOps."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "parte1",
+   "titulo": "PARTE 1",
+   "subtitulo": "A esteira que mudou o software",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Divisor. Anuncie: 40 minutos de conceito, com analogias e perguntas no chat. Peça para manterem o chat aberto."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "A dor: o dia do deploy",
+   "paragrafos": [
+    "Antes do CI/CD: meses de código acumulado, integração na véspera, deploy de madrugada, todo mundo rezando.",
+    "**Deploy** = colocar a versão nova no ar, em produção. Era um evento — e dava medo."
+   ],
+   "bullets": [
+    "Cada um trabalhou meses no seu canto; a **integração** só acontecia na véspera",
+    "Quando quebrava (e quebrava), começava a **caça ao culpado**"
+   ],
+   "minutos": 4,
+   "notas": "⏱ 4 min — Conte a história como quem viveu: o 'dia do deploy' era um evento. Meses de código de várias pessoas juntados de uma vez, integração na véspera, deploy de madrugada para não derrubar cliente. Quando quebrava, e quebrava, vinha a caça ao culpado. Defina 'deploy' no primeiro uso: colocar a versão nova no ar, em produção. Deixe a dor clara antes de apresentar a solução."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "💬 O que pode dar errado?",
+   "paragrafos": [
+    "Cada resposta do chat é uma dor que o CI/CD nasceu para resolver."
+   ],
+   "destaque": "💬 Interação: \"O que pode dar errado quando 10 pessoas juntam 3 meses de código de uma vez só? Joga no chat!\"",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Faça a pergunta e espere as respostas chegarem. Leia algumas em voz alta: conflito no mesmo arquivo, funcionalidade que parou, ninguém sabe o que mudou, erro que só aparece em produção. Agradeça e conecte: cada item dessa lista é exatamente o que a integração contínua evita."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "CI — Integração Contínua",
+   "paragrafos": [
+    "Cada mudança de código entra no repositório várias vezes ao dia e, a cada entrada, um robô:"
+   ],
+   "bullets": [
+    "1. Pega o código",
+    "2. **Builda** (compila/empacota)",
+    "3. **Testa** automaticamente",
+    "4. Avisa imediatamente se algo quebrou"
+   ],
+   "destaque": "Integrar pouco, integrar sempre.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Apresente CI, Integração Contínua. Lema: integrar pouco, integrar sempre. Em vez de juntar tudo no fim, cada mudança pequena entra várias vezes ao dia. Defina 'build' no primeiro uso: compilar ou empacotar o código para ele virar algo executável. Passe pelos 4 passos do robô: pega, builda, testa, avisa. Reforce que ninguém precisa lembrar de fazer isso: é automático."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Erro barato, erro caro",
+   "paragrafos": [
+    "Erro descoberto em 5 minutos custa quase nada.",
+    "O mesmo erro descoberto em produção custa caro — em dinheiro e em sono. 😴"
+   ],
+   "destaque": "Quanto mais cedo o erro aparece, mais barato ele é.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — O argumento econômico do CI. Um erro apontado 5 minutos depois de escrever o código: você ainda lembra o que fez, conserta em um minuto. O mesmo erro descoberto em produção semanas depois: cliente afetado, madrugada acordado, investigação longa. Pergunte ao chat: 'alguém já descobriu um erro tarde demais?'. Mensagem-chave: quanto mais cedo, mais barato."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "CD — Entrega/Implantação Contínua",
+   "bullets": [
+    "**Entrega Contínua (Continuous Delivery)**",
+    "Toda versão que passa na esteira fica **pronta para produção**",
+    "O deploy vira uma decisão de negócio, a um clique",
+    "**Implantação Contínua (Continuous Deployment)**",
+    "Nem clique precisa — passou nos testes, vai pro ar"
+   ],
+   "destaque": "Delivery: pronta para o ar, a um clique. Deployment: passou nos testes, foi.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Agora o CD. Explique que a sigla tem dois significados parecidos. Entrega Contínua (Delivery): toda versão que passou na esteira está pronta para produção, e alguém do negócio decide quando apertar o botão. Implantação Contínua (Deployment): nem botão tem, passou nos testes vai pro ar sozinho. Diga que as duas existem no mercado e que a diferença é só quem aperta o botão."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "A esteira de fábrica 🏭",
+   "paragrafos": [
+    "Uma fábrica moderna não monta um carro inteiro e só no final verifica se ele liga.",
+    "Cada estação da esteira **verifica e agrega valor**; se algo está errado, a esteira **para na hora**."
+   ],
+   "destaque": "O andon da Toyota — a corda que para a linha — inspirou o DevOps!",
+   "minutos": 4,
+   "notas": "⏱ 4 min — A analogia central da aula. Na fábrica, ninguém monta o carro inteiro e só no final testa se liga: cada estação verifica a sua parte e agrega valor. Se algo está errado, qualquer operário puxa a corda (o andon da Toyota) e a linha para na hora para consertar. Diga que essa cultura inspirou o DevOps. Pipeline é só a palavra em inglês para esteira."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Os stages da pipeline",
+   "paragrafos": [
+    "No software, a esteira (pipeline) tem estações chamadas **stages**:"
+   ],
+   "codigo": "[ Código ] → [ Build ] → [ Testes ]\n    → [ Qualidade/Segurança ] → [ Deploy ]",
+   "bullets": [
+    "Cada stage só roda se o anterior **passou**",
+    "Quem decide se passou? Os **códigos de saída** da Aula 04!"
+   ],
+   "minutos": 4,
+   "notas": "⏱ 4 min — Mostre o desenho da esteira: código entra, passa por build, testes, qualidade/segurança e só então deploy. Defina 'stage' no primeiro uso: uma estação da esteira. Regra de ouro: cada stage só roda se o anterior passou. E quem decide isso? O código de saída do stage anterior: 0 passa, diferente de zero para tudo. É literalmente o exit 1 da Aula 04 fazendo a esteira funcionar. Daqui a pouco vocês vão escrever isso."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Verde ou vermelha",
+   "bullets": [
+    "Pipeline **verde** ✅ = pode confiar",
+    "Pipeline **vermelha** ❌ = pare e conserte antes de seguir"
+   ],
+   "destaque": "Vermelha não é vergonha: é a esteira te protegendo antes de ir para o ar.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — O vocabulário do dia a dia: pipeline verde significa que todos os stages passaram e dá para confiar; pipeline vermelha significa que algo falhou e o certo é parar e consertar antes de seguir. Conecte com a cultura blameless (sem culpados) das Aulas 01 e 02: vermelha não é culpa de ninguém, é o sistema protegendo a produção. Pergunta para o chat: 'o que vocês acham que acontece com o deploy quando a pipeline fica vermelha?'. Guarde a resposta para o Passo 6."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Qualidade antes de ir para o ar",
+   "paragrafos": [
+    "O que uma esteira verifica na vida real:"
+   ],
+   "bullets": [
+    "**Build** — o código sequer compila/empacota?",
+    "**Testes automatizados** — o que funcionava continua funcionando?",
+    "**Análise estática (lint)** — o código segue os padrões?",
+    "**Segurança (DevSecOps)** — há dependências vulneráveis? Segredos vazados no código?"
+   ],
+   "minutos": 4,
+   "notas": "⏱ 4 min — Passe pela tabela do material, uma pergunta por verificação. Build: compila? Testes: o que funcionava continua funcionando? Lint (defina: um programa que lê o código e aponta o que foge do padrão). Segurança, o DevSecOps: dependências com vulnerabilidade conhecida e segredos (senhas, chaves) esquecidos no código. Diga que hoje a nossa esteira terá build, teste e deploy; os outros stages aparecem nas próximas aulas."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Ferramentas de mercado",
+   "bullets": [
+    "Jenkins, GitHub Actions, GitLab CI, Tekton, CircleCI...",
+    "No bootcamp usaremos o **GitHub Actions** (Aula 10) — gratuito e acessível"
+   ],
+   "destaque": "Os conceitos são os mesmos em todas. Aprenda o conceito e você troca de ferramenta em uma semana.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Cite as ferramentas sem se aprofundar: Jenkins, GitHub Actions, GitLab CI, Tekton, CircleCI. Todas fazem a mesma coisa: rodam stages em ordem e param no erro. No bootcamp vamos usar o GitHub Actions na Aula 10, porque é gratuito e acessível. Mensagem-chave: quem entende o conceito troca de ferramenta em uma semana. Por isso hoje a gente constrói a esteira na mão, sem ferramenta nenhuma."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Hoje o robô é você 🤖",
+   "paragrafos": [
+    "Na Parte 2 vamos construir uma esteira — build, teste e deploy — onde **cada stage é um script** e a esteira para se algum falhar."
+   ],
+   "bullets": [
+    "Deixe o terminal conectado à VM via SSH",
+    "Vamos trabalhar em `~/meu-projeto-devops/scripts`"
+   ],
+   "destaque": "Hoje o robô é você. Na Aula 10, o GitHub assume.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Feche a Parte 1 apontando para a prática: três scripts, um por stage, e um quarto script que liga tudo e para no primeiro erro. Hoje quem aperta o botão é o aluno; na Aula 10, o GitHub assume. Peça para, durante o intervalo, deixarem o terminal SSH conectado na VM e abrirem o pratica.md da Aula 05 no navegador. Lembre o horário de volta: 20:35."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "intervalo",
+   "titulo": "INTERVALO",
+   "subtitulo": "Voltamos às 20:35",
+   "minutos": 15,
+   "notas": "⏱ 15 min — Intervalo. Deixe o slide na tela e o microfone desligado. Volte pontualmente às 20:35. Aproveite para checar no chat quem está com a VM ligada e conectado via SSH."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "parte2",
+   "titulo": "PARTE 2",
+   "subtitulo": "Montando uma pipeline manual",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Divisor. Compartilhe o seu terminal conectado à VM. Avise que vai digitar junto com a turma, bloco a bloco, e que quem travar tem as versões prontas para baixar no fim do pratica.md."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Objetivo e onde",
+   "paragrafos": [
+    "**Objetivo:** 3 stages — **build**, **teste** e **deploy** — cada stage é um script e a esteira **para no primeiro erro**.",
+    "**Onde:** no terminal conectado à VM via SSH, dentro de `~/meu-projeto-devops/scripts`."
+   ],
+   "bullets": [
+    "Nossa \"aplicação\" é uma página `index.html` — simples de propósito",
+    "O build monta a página, o teste verifica, o deploy publica numa pasta que simula produção",
+    "⌨️ Quatro scripts curtos (28 linhas no total). Digite com calma ou cole bloco a bloco"
+   ],
+   "minutos": 2,
+   "notas": "⏱ 2 min — Leia o objetivo: três stages, cada um é um script, a esteira para no primeiro erro. É exatamente assim que uma pipeline de verdade funciona; na Aula 10 quem aperta o botão é o GitHub. Mostre na tela: cd ~/meu-projeto-devops/scripts. Explique o cenário: a aplicação é uma página index.html; build monta, teste verifica, deploy publica em uma pasta que simula o servidor de produção. Tranquilize: são 28 linhas no total, só caracteres do teclado."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 1 — Stage de build",
+   "codigo": "cd ~/meu-projeto-devops/scripts\nvi build.sh",
+   "bullets": [
+    "Entre na pasta `scripts` e abra o primeiro script no `vi`",
+    "Via SSH, digite `:set paste` no vi antes de colar — assim o texto não se desalinha",
+    "Vamos escrever o conteúdo do `build.sh` no próximo slide (6 linhas)"
+   ],
+   "rodape": "Resultado esperado: o vi aberto em um arquivo build.sh vazio, dentro de ~/meu-projeto-devops/scripts.",
+   "minutos": 1,
+   "notas": "⏱ 1 min — Entre na pasta scripts e abra o vi build.sh na tela. Lembre o modo de inserção do vi (tecla i) da micro aula da Aula 03. Avise quem vai colar via SSH: antes, digite :set paste no vi. Passe para o conteúdo no próximo slide."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 1 — Conteúdo do build.sh",
+   "codigo": "#!/bin/bash\nset -e\necho \"[BUILD] Montando a aplicacao...\"\nmkdir -p ~/meu-projeto-devops/app\necho \"<h1>Bootcamp DevOps Matera 2026</h1><p>Build em $(date '+%d/%m/%Y %H:%M:%S')</p>\" > ~/meu-projeto-devops/app/index.html\necho \"[BUILD] OK - app/index.html gerado.\"",
+   "bullets": [
+    "A linha do `echo \"<h1>...` é **uma só**, comprida — não aperte Enter no meio dela",
+    "O \"build\" aqui gera a página com a data e hora — numa aplicação real, seria compilar"
+   ],
+   "rodape": "Salve com :wq. Ainda não execute — primeiro escrevemos os quatro scripts.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Digite as 6 linhas junto com a turma. Avise com ênfase: a linha do echo com o <h1> é uma linha só, comprida, que na tela aparece dobrada. Explique: set -e para no erro; mkdir -p cria a pasta app; o echo com $(date) gera a página com data e hora; numa aplicação real esse stage compilaria o código. Salve com :wq. Dê 2 minutos para a turma alcançar e peça um 'ok' no chat."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 2 — Stage de teste (1/2)",
+   "codigo": "#!/bin/bash\nset -e\necho \"[TEST] Verificando a aplicacao...\"\nif grep -q \"Bootcamp DevOps\" ~/meu-projeto-devops/app/index.html; then\n    echo \"[TEST] OK - conteudo esperado encontrado.\"\nelse\n    echo \"[TEST] FALHOU - conteudo esperado nao encontrado!\"\n    exit 1\nfi",
+   "bullets": [
+    "Abra com `vi test.sh` e digite as 9 linhas acima",
+    "Salve com :wq — a explicação vem no próximo slide"
+   ],
+   "minutos": 4,
+   "notas": "⏱ 4 min — Abra vi test.sh e digite as 9 linhas junto com a turma. Atenção à indentação das linhas de echo: são 4 espaços, mas o bash não exige. Salve com :wq e aguarde o 'ok' no chat antes de explicar o que cada linha faz no próximo slide."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 2 — Stage de teste (2/2)",
+   "bullets": [
+    "O `if` pergunta ao `grep -q` se o texto está lá: achou → OK; não achou → FALHOU",
+    "`exit 1` é o coração da esteira: código de saída diferente de zero significa **\"falhei\"**",
+    "Quem chamou o script fica sabendo — é isso que faz a esteira parar"
+   ],
+   "rodape": "Salve com :wq. O teste procura o texto \"Bootcamp DevOps\" na página gerada pelo build.",
+   "minutos": 2,
+   "notas": "⏱ 2 min — Explique o if: grep -q procura 'Bootcamp DevOps' no index.html em silêncio; se achou, imprime OK; se não achou, imprime FALHOU e sai com exit 1. Destaque o exit 1: é o coração da esteira, um código de saída diferente de zero avisa quem chamou que o teste falhou. Lembre a Aula 04: é o mesmo código de saída que o healthcheck usava."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 3 — Stage de deploy",
+   "codigo": "vi deploy.sh\n#!/bin/bash\nset -e\necho \"[DEPLOY] Publicando em 'producao'...\"\nmkdir -p ~/producao\ncp ~/meu-projeto-devops/app/index.html ~/producao/\necho \"[DEPLOY] OK - publicado em ~/producao/index.html\"",
+   "bullets": [
+    "1ª linha é o comando no terminal; as 6 seguintes são o arquivo",
+    "Copia a página gerada para `~/producao` — nossa \"produção\" de mentira"
+   ],
+   "rodape": "Salve com :wq. mkdir -p garante a pasta antes do cp. Três stages prontos; falta a esteira que liga tudo.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Abra vi deploy.sh e digite as 6 linhas. Explique: a pasta ~/producao simula o servidor de produção; mkdir -p cria a pasta se não existir e o cp copia a página para lá. Numa aplicação real, o deploy enviaria a versão para o servidor de verdade. Salve com :wq. Esse é o script mais simples dos quatro, então o ritmo pode ser um pouco mais rápido."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 4 — A esteira liga tudo",
+   "codigo": "vi pipeline.sh\n#!/bin/bash\nset -e\necho \"===== PIPELINE INICIADA - $(date '+%H:%M:%S') =====\"\n./build.sh\n./test.sh\n./deploy.sh\necho \"===== PIPELINE VERDE - aplicacao em producao! =====\"",
+   "bullets": [
+    "Um script chamando os outros três, na ordem: build → test → deploy",
+    "Com `set -e`, se um stage devolver erro, a esteira **para ali**"
+   ],
+   "rodape": "Salve com :wq. Esta é a pipeline: 7 linhas e nenhuma ferramenta além do bash.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Abra vi pipeline.sh e digite as 7 linhas (a primeira linha do bloco é o comando no terminal). Esta é a esteira: um script que chama os outros três na ordem build, test, deploy. O set -e no topo faz a mágica: se qualquer um dos três devolver código de saída diferente de zero, a esteira para ali e os stages seguintes não rodam. Mostre na tela que cada ./nome.sh é um stage. Salve com :wq e peça o 'ok' no chat."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Comandos novos",
+   "bullets": [
+    "`mkdir -p pasta` — cria a pasta se não existir (e não reclama se já existir)",
+    "`grep -q \"texto\" arquivo` — procura o texto **em silêncio** (quiet), sem imprimir nada",
+    "Só responde \"achei\" (sucesso) ou \"não achei\" (erro) — perfeito para um `if`",
+    "`exit 1` — encerra o script avisando que falhou (`0` = sucesso; outro número = falha)",
+    "`./build.sh` dentro de outro script — um script pode chamar outros e encadear os stages"
+   ],
+   "minutos": 2,
+   "notas": "⏱ 2 min — Resumo dos comandos novos da prática, um por bullet. mkdir -p: cria sem reclamar se já existe. grep -q: o q é de quiet, procura em silêncio e só responde com o código de saída, por isso cabe direto no if. exit 1: encerra avisando falha; zero é sucesso. E a novidade estrutural: um script pode chamar outro script, e é assim que a pipeline encadeia os stages."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 5 — Execute a esteira!",
+   "codigo": "chmod +x build.sh test.sh deploy.sh pipeline.sh\n./pipeline.sh\ncat ~/producao/index.html",
+   "bullets": [
+    "`chmod +x` dá permissão de execução aos 4 scripts de uma vez",
+    "`./pipeline.sh` chama os três stages na ordem",
+    "Depois, confira a \"produção\" com o `cat`"
+   ],
+   "rodape": "Resultado esperado: termina com ===== PIPELINE VERDE - aplicacao em producao! =====",
+   "minutos": 3,
+   "notas": "⏱ 3 min — O momento de rodar. Primeiro chmod +x nos quatro scripts de uma vez só (lembre a Aula 04: sem permissão de execução dá Permission denied). Depois ./pipeline.sh. Mostre a saída na tela, stage por stage. Em seguida cat ~/producao/index.html para provar que a página chegou na produção com a data e hora do build. Peça para a turma colar no chat a linha PIPELINE VERDE quando aparecer."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 5 — Pipeline verde ✅",
+   "codigo": "===== PIPELINE INICIADA - 20:50:12 =====\n[BUILD] Montando a aplicacao...\n[BUILD] OK - app/index.html gerado.\n[TEST] Verificando a aplicacao...\n[TEST] OK - conteudo esperado encontrado.\n[DEPLOY] Publicando em 'producao'...\n[DEPLOY] OK - publicado em ~/producao/index.html\n===== PIPELINE VERDE - aplicacao em producao! =====",
+   "bullets": [
+    "Cada stage imprime o seu prefixo: `[BUILD]`, `[TEST]`, `[DEPLOY]`",
+    "A hora da sua pipeline será diferente — o resto deve ser igual"
+   ],
+   "rodape": "Resultado esperado: cat ~/producao/index.html mostra o <h1> com a data e hora do build.",
+   "minutos": 2,
+   "notas": "⏱ 2 min — Compare a saída de vocês com esta. Os prefixos [BUILD], [TEST] e [DEPLOY] mostram qual stage está falando; a hora muda, o resto é igual. O cat da produção deve mostrar o <h1>Bootcamp DevOps Matera 2026</h1> com a data e hora do build. Quem não chegou aqui: olhe o slide 'Deu errado?' daqui a pouco ou chame no chat. Comemore: a primeira pipeline da turma está verde."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 6 — Quebre a pipeline 💥 (1/2)",
+   "paragrafos": [
+    "Cultura **blameless** (sem culpados) na prática: vamos provocar uma falha e ver a esteira nos proteger."
+   ],
+   "codigo": "./pipeline.sh",
+   "bullets": [
+    "`vi build.sh`: troque `Bootcamp DevOps Matera 2026` por `Ola mundo` e salve",
+    "Rode a pipeline de novo e observe **onde** ela para — os stages seguintes não rodam"
+   ],
+   "rodape": "Resultado esperado: [TEST] FALHOU e nenhum [DEPLOY].",
+   "minutos": 5,
+   "notas": "⏱ 5 min — O clímax da aula. Diga que vamos quebrar de propósito, sem culpa: cultura blameless na prática. Abra vi build.sh e troque 'Bootcamp DevOps Matera 2026' por 'Ola mundo'; salve. Rode ./pipeline.sh e deixe a turma ver: [BUILD] OK, [TEST] FALHOU, e... nada de [DEPLOY]. Pare e pergunte ao chat: 'cadê o deploy?'. Resposta: nunca executou, o set -e parou a esteira no exit 1 do teste e os stages seguintes não rodaram. Dê tempo para a turma repetir antes de passar ao próximo slide."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 6 — Quebre a pipeline 💥 (2/2)",
+   "bullets": [
+    "🔎 Confirme: `cat ~/producao/index.html` ainda mostra a versão boa anterior",
+    "Depois desfaça a mudança no `build.sh`, rode de novo e deixe tudo verde 💚"
+   ],
+   "destaque": "O deploy nunca executou. A versão quebrada não chegou em produção. Isso é qualidade antes de ir para o ar!",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Rode cat ~/producao/index.html: a produção ainda tem a versão boa, porque o deploy nunca executou. É isso que a esteira faz: qualidade antes de ir para o ar. Depois, volte o build.sh ao texto original, rode ./pipeline.sh de novo e mostre a pipeline verde. Peça para a turma repetir e colar a linha PIPELINE VERDE no chat."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Travou na digitação?",
+   "bullets": [
+    "Os quatro scripts estão no repositório do bootcamp (pratica.md, \"Travou na digitação?\")",
+    "Via SSH, baixe com `curl -O` para `~/meu-projeto-devops/scripts`, um comando por script",
+    "**Leia antes de executar** (`cat build.sh`) e dê `chmod +x` nos quatro"
+   ],
+   "minutos": 2,
+   "notas": "⏱ 2 min — Para quem travou na digitação: o pratica.md tem um bloco pronto com cd na pasta scripts, quatro curl -O (um por script, apontando para o repositório do bootcamp no GitHub) e o chmod +x. Mostre o bloco na tela a partir do pratica.md. Reforce o hábito de segurança: antes de executar qualquer script baixado da internet, leia com cat. Esse é o jeito certo de lidar com código de terceiros."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Deu errado? 😥",
+   "bullets": [
+    "`Permission denied` → faltou `chmod +x` em algum dos 4 scripts",
+    "`No such file or directory` ao rodar `./pipeline.sh` → rode de dentro da pasta `scripts`",
+    "`grep: ... No such file or directory` → o `test.sh` rodou antes do `build.sh`",
+    "Pipeline não para no erro → confira o `set -e` no `pipeline.sh` e o `exit 1` no `test.sh`",
+    "A página saiu sem a data → a linha do `echo \"<h1>...` ficou quebrada em duas no `vi`"
+   ],
+   "minutos": 3,
+   "notas": "⏱ 3 min — Os erros mais prováveis, mensagem e causa. Permission denied: chmod +x. No such file or directory ao rodar ./pipeline.sh: está fora da pasta scripts, faça cd ~/meu-projeto-devops/scripts. grep reclamando que não acha o arquivo: o test rodou antes do build; rode ./build.sh primeiro (a pipeline faz isso na ordem certa). Pipeline que não para: falta set -e no pipeline.sh ou exit 1 no test.sh. Página sem a data: a linha longa do echo foi quebrada em duas no vi. Peça para quem travou mandar a mensagem de erro no chat."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Desafio bônus 🏆",
+   "bullets": [
+    "**1. Smoke test:** 4º stage — o `healthcheck.sh` da Aula 04 rodando **depois** do deploy",
+    "Na vida real, checar se produção segue saudável após a mudança se chama \"smoke test\"",
+    "**2. Teste mais claro:** se o `index.html` não existir, o `grep` reclama em inglês",
+    "Adicione antes do `grep` um teste só para isso (`-f` = \"o arquivo existe?\"; `!` = \"não\"):"
+   ],
+   "codigo": "if [ ! -f ~/meu-projeto-devops/app/index.html ]; then echo \"[TEST] FALHOU - index.html nao existe!\"; exit 1; fi",
+   "minutos": 2,
+   "notas": "⏱ 2 min — Dois desafios para quem quiser ir além. Primeiro: um quarto stage na pipeline, o healthcheck.sh da Aula 04 rodando depois do deploy; na vida real isso se chama smoke test, checar se a produção continua saudável após a mudança. Segundo: hoje, se o index.html não existir, o grep reclama em inglês; a linha no slide entra antes do grep no test.sh e dá uma mensagem sua. Explique -f (o arquivo existe?) e ! (não)."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Missão até a próxima aula 📌",
+   "bullets": [
+    "1. Rode a pipeline mais duas vezes esta semana e provoque uma falha **diferente** da aula",
+    "Apague a página (`rm ~/meu-projeto-devops/app/index.html`) e rode só o `./test.sh`",
+    "Ele reprova mesmo sem o arquivo? Depois faça o desafio bônus 2 para a mensagem ficar sua",
+    "2. Faça o desafio bônus 1 (health check como 4º stage)",
+    "Na próxima aula você vai versionar tudo isso — é bom que esteja do seu jeito"
+   ],
+   "minutos": 2,
+   "notas": "⏱ 2 min — A missão da semana. Um: rodar a pipeline mais duas vezes e provocar uma falha diferente: apagar o index.html com rm e rodar só o ./test.sh; ele reprova mesmo sem o arquivo? Depois, o bônus 2 para a mensagem ficar sua. Dois: o bônus 1, health check como quarto stage. Motive: na Aula 06 vamos versionar esses scripts com Git, e é bom que estejam do jeito de cada um."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "qa",
+   "titulo": "PERGUNTAS & RESPOSTAS",
+   "subtitulo": "21:20 – 21:45",
+   "minutos": 25,
+   "notas": "⏱ 25 min — Abra para perguntas do chat e do microfone. Perguntas comuns: 'por que o deploy não rodou?' (set -e mais exit 1), 'isso funciona com qualquer linguagem?' (sim, o stage só precisa devolver código de saída), 'qual ferramenta devo aprender?' (o conceito; GitHub Actions na Aula 10). Aproveite para ajudar quem ainda está com a pipeline vermelha. Encerre pontualmente às 21:45."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "fechamento",
+   "titulo": "O que levamos para a próxima aula",
+   "bullets": [
+    "CI: integrar pouco, integrar sempre — build e testes a cada mudança",
+    "CD: toda versão verde fica pronta para produção",
+    "A esteira para no primeiro erro — e é o `exit 1` quem decide"
+   ],
+   "destaque": "Gancho: a esteira roda em cima de qual versão do código? Sem controle de versão não existe CI/CD. Próxima aula: Git.",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Fechamento rápido. Recapitule em três frases: CI é integrar pouco e sempre; CD é toda versão verde pronta para produção; a esteira para no primeiro erro graças ao código de saída. Faça o gancho da Aula 06: nossa esteira já funciona, mas roda em cima de qual versão do código? Se dois colegas mudarem o mesmo arquivo, quem vence? Sem controle de versão não existe CI/CD. Na próxima aula: Git, a fonte única da verdade. Lembre a missão."
+  },
+  {
+   "tipo": "encerramento",
+   "bloco": "fechamento",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Logo do Instituto Matera na tela. Agradeça, lembre a missão da semana e o horário da próxima aula. Encerre a transmissão pontualmente às 21:45."
+  }
+ ]
+}

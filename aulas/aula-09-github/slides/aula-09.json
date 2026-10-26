@@ -1,0 +1,507 @@
+{
+ "aula": 9,
+ "tempo": {
+  "abertura": 5,
+  "revisao": 5,
+  "parte1": 40,
+  "intervalo": 15,
+  "parte2": 45,
+  "qa": 25
+ },
+ "slides": [
+  {
+   "tipo": "capa",
+   "bloco": "abertura",
+   "titulo": "Aula 09",
+   "subtitulo": "GitHub: seu código na nuvem, seu portfólio no mundo",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Slide de abertura enquanto o pessoal entra. Dê boas-vindas, confira som e tela. Diga que hoje o projeto sai da VM e vai para a nuvem: GitHub."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "abertura",
+   "titulo": "Agenda de hoje",
+   "bullets": [
+    "19:30 — Abertura e boas-vindas",
+    "19:35 — Parte 1: Git não é GitHub (e por que você precisa dos dois)",
+    "20:20 — Intervalo (15 min)",
+    "20:35 — Parte 2: Mão na massa — publicando seu projeto no GitHub",
+    "21:20 — Perguntas & Respostas",
+    "21:45 — Encerramento"
+   ],
+   "destaque": "Hoje: primeiro `push`, primeiro Pull Request e o começo do seu portfólio.",
+   "minutos": 5,
+   "notas": "⏱ 5 min — Boas-vindas. Apresente a agenda e o objetivo do encontro: publicar o projeto no GitHub, entender remotos (push/pull) e abrir o primeiro Pull Request. Avise desde já: hoje o terminal via SSH é obrigatório, porque vai colar um token longo. Quem ainda não configurou, veja o passo 7 do setup durante a Parte 1. Pergunta para o chat: \"Quem já tem conta no GitHub? Responda 'já tenho' ou 'vou criar'.\""
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "revisao",
+   "titulo": "Revisão da aula anterior",
+   "bullets": [
+    "`compose.yaml` declara o sistema inteiro; `docker compose up -d` materializa",
+    "Declarativo > imperativo",
+    "Serviços se enxergam pelo nome na rede interna",
+    "A infraestrutura está **versionada no Git**"
+   ],
+   "destaque": "Gancho: todo esse trabalho está **preso na VM**. Hoje ele vai para a nuvem — e vira vitrine: **GitHub**.",
+   "minutos": 5,
+   "notas": "⏱ 5 min — Recapitule a Aula 08: o compose.yaml descreve app + Redis e o docker compose up -d sobe tudo; declarativo vence imperativo. Os serviços se encontram pelo nome na rede interna. Tudo isso está commitado no Git, dentro da VM. Pergunta para o chat: \"Se a VM de vocês sumisse agora, o que aconteceria com o projeto?\" Resposta esperada: perderia tudo. É exatamente o problema que o GitHub resolve hoje."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "parte1",
+   "titulo": "PARTE 1",
+   "subtitulo": "Git não é GitHub: por que os dois?",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Divisor. Anuncie: nos próximos 40 minutos vamos entender a diferença entre Git e GitHub, o que é um remoto, a cerimônia do Pull Request, como autenticar com segurança e por que o GitHub é portfólio."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Git não é GitHub",
+   "bullets": [
+    "**Git** = a ferramenta de controle de versão — roda na sua máquina (Aula 06)",
+    "**GitHub** = a **plataforma na nuvem** que hospeda repositórios Git",
+    "E adiciona colaboração: Pull Requests, revisão de código, issues, automação (Actions!)",
+    "... e visibilidade: o mundo pode ver o seu trabalho"
+   ],
+   "destaque": "Git você já usa desde a Aula 06. Hoje entra o GitHub: os dois juntos.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Muita gente confunde os dois nomes. Git é o programa instalado na VM que guarda o histórico: você já deu git init, git add, git commit. GitHub é um site, uma plataforma na nuvem, que hospeda repositórios Git e coloca colaboração em cima: Pull Requests, revisão de código, issues (o registro de tarefas e problemas do projeto), automação com Actions (tema da Aula 10) e visibilidade. Reforce: Git funciona sem GitHub; GitHub não existe sem Git."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Editor de texto × biblioteca",
+   "paragrafos": [
+    "**Git** é o editor de texto: onde você escreve e guarda cada versão da obra.",
+    "**GitHub** é a biblioteca pública: onde a obra fica disponível, com histórico de edições e espaço para revisores."
+   ],
+   "destaque": "Sem o GitHub, seu projeto é um livro guardado na gaveta — só você lê.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Analogia do material. O editor de texto (Git) é onde você escreve e salva cada versão. A biblioteca pública (GitHub) é onde a obra fica disponível para outras pessoas, com o histórico de edições e um espaço para revisores comentarem. Até hoje o projeto de vocês ficou na gaveta (a VM). Hoje ele vai para a estante."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Remotos: o elo local e nuvem",
+   "codigo": "[ Repo local (VM) ]  --git push-->  [ Repo remoto (GitHub) ]\n                     <--git pull--",
+   "bullets": [
+    "**Remoto** = a cópia do repositório que vive no GitHub (o nome padrão é `origin`)",
+    "`git push` envia seus commits para lá; `git pull` traz os commits novos de lá"
+   ],
+   "destaque": "Local e remoto são dois repositórios Git completos — o push e o pull mantêm os dois em sincronia.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Defina o jargão: remoto é a cópia do repositório que fica no GitHub; por convenção chamamos de origin. Mostre o diagrama: a seta para a direita é o push (envia commits), a seta para a esquerda é o pull (traz commits). Nenhum dos dois é 'o verdadeiro': são dois repositórios completos que você mantém em sincronia."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Os comandos de remoto",
+   "bullets": [
+    "`git remote add origin <url>` — aponta o repositório local para o remoto",
+    "`git push` — envia seus commits para o GitHub",
+    "`git pull` — traz os commits novos do GitHub",
+    "`git clone <url>` — baixa um repositório inteiro"
+   ],
+   "destaque": "Hoje você vai usar os três primeiros na prática — e o `clone` fica na manga.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Leia a tabela comando a comando. git remote add origin <url> é feito uma vez só: liga o repositório local ao endereço do GitHub. git push envia; git pull traz. git clone baixa um repositório inteiro quando você ainda não tem nada local. Pergunta para o chat: \"Qual desses comandos vocês acham que vão rodar primeiro hoje?\" Resposta: remote add, depois push."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "git clone: qualquer repo público",
+   "paragrafos": [
+    "`git clone <url>` baixa um repositório inteiro — código e todo o histórico de commits.",
+    "Funciona com **qualquer repositório público** do GitHub, não só com os seus."
+   ],
+   "destaque": "É assim que você pega o código de um projeto que não começou na sua máquina.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Destaque o clone separadamente porque é o caminho inverso do que faremos hoje: em vez de subir o seu projeto, você baixa um projeto que já existe no GitHub. Qualquer repositório público pode ser clonado. Hoje não vamos usar, mas é o comando para pegar o código de um projeto que já existe, por exemplo o de um time."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Pull Request: o pedido formal",
+   "paragrafos": [
+    "O **PR** (Pull Request) é o pedido formal: \"revisem minha branch e, se estiver boa, integrem na main\".",
+    "É a cerimônia mais importante do dia a dia de quem trabalha com código."
+   ],
+   "bullets": [
+    "Você trabalha numa **branch** (Aula 06), não direto na `main`",
+    "Quando termina, abre o PR: o time olha antes de integrar"
+   ],
+   "destaque": "PR não é burocracia: é o momento em que o trabalho vira trabalho de time.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Defina o jargão: PR, Pull Request, é o pedido formal para revisarem a sua branch e, se estiver boa, integrarem na main. Lembre da Aula 06: branch é a linha paralela onde você mexe sem quebrar a main. O PR é a ponte entre a branch e a main, com gente olhando no meio. Hoje cada um abre o seu primeiro PR."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "O que acontece no PR",
+   "bullets": [
+    "**Revisão de código** — outro par de olhos antes de integrar",
+    "**Discussão registrada** — o porquê das decisões fica documentado",
+    "**Verificações automáticas** — a pipeline roda **no PR**, antes do merge"
+   ],
+   "destaque": "Amanhã você fará exatamente isso: a pipeline da Aula 05 rodando dentro do PR.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Três coisas acontecem no PR. Revisão: outra pessoa lê o código antes de entrar na main. Discussão: os comentários ficam registrados, então daqui a um ano alguém entende por que a decisão foi tomada. Verificações automáticas: a pipeline (build, test) roda no PR, antes do merge (a integração na main, Aula 06), e bloqueia se quebrar. Conecte com a Aula 10: amanhã o GitHub Actions vai rodar a pipeline da Aula 05 em cada PR."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "PR e cultura blameless",
+   "paragrafos": [
+    "No PR, a revisão aponta o que pode melhorar no **código** — nunca julga a **pessoa**.",
+    "É a cultura blameless (sem culpados) da Aula 01 em ação, todos os dias."
+   ],
+   "destaque": "💬 Interação: Lembra da cultura blameless da Aula 01? O PR é ela em ação: crítica ao **código**, nunca à **pessoa**.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Pergunta para o chat: \"Lembram da cultura blameless da Aula 01? O que era?\" Espere respostas: sem culpados, foco no problema. Mostre que o PR é essa cultura em ação: os comentários apontam o código, nunca a pessoa. O objetivo é o código melhorar, não alguém se sentir julgado."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Autenticação segura",
+   "bullets": [
+    "O GitHub **não aceita senha** em `git push`",
+    "Usaremos um **Personal Access Token (PAT)**: um token de acesso pessoal",
+    "É uma senha gerada pelo GitHub, com prazo e permissões limitadas",
+    "Alternativa: chave **SSH** (não usaremos hoje)",
+    "Hoje: PAT **fine-grained** (escopo restrito), só para o `meu-projeto-devops`"
+   ],
+   "destaque": "Token = senha com prazo de validade e alcance limitado. Hoje: 30 dias, um único repositório.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Defina o jargão: PAT, Personal Access Token, é um token de acesso pessoal: uma senha gerada pelo GitHub, com validade e permissões limitadas. O GitHub não aceita a senha da conta no git push; isso vai aparecer na tabela de erros (Authentication failed). A outra opção é chave SSH, que não usaremos hoje. Fine-grained quer dizer escopo restrito: o token vale só para os repositórios e permissões que você escolher. Explique por que o token é melhor que a senha: se vazar, vale só para um repositório e expira em 30 dias."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Regra de ouro: token é segredo",
+   "bullets": [
+    "**Nunca** commite um token",
+    "**Nunca** cole um token em arquivo do projeto",
+    "**Nunca** compartilhe print com token visível"
+   ],
+   "destaque": "🔐 DevSecOps: trate o token como escova de dentes — só sua e trocada com frequência. 🪥",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Momento DevSecOps. Token é segredo: nunca commitar, nunca colar em arquivo do projeto, nunca postar print com o token visível (inclusive no chat da live, hoje!). Analogia da escova de dentes: só sua e trocada com frequência. Avise: se alguém colar o token no chat por engano, revogue na hora em Developer settings e gere outro."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "GitHub como portfólio",
+   "paragrafos": [
+    "Recrutadores de tecnologia **olham o GitHub**.",
+    "Um perfil com projetos reais, commits com mensagens caprichadas e README bem escrito vale mais que dez cursos listados."
+   ],
+   "destaque": "Seu GitHub é a vitrine que fala por você antes da entrevista.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Mude o tom para carreira. Recrutadores de tecnologia abrem o GitHub do candidato. O que eles olham: projetos reais, mensagens de commit caprichadas (por isso insistimos nisso desde a Aula 06) e um README bem escrito. Isso vale mais do que uma lista de cursos no currículo."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Seu projeto vira vitrine",
+   "bullets": [
+    "O `meu-projeto-devops` que você constrói desde a Aula 02 vira hoje sua peça de portfólio",
+    "Scripts, Dockerfile, compose, histórico de commits — tudo vai para a nuvem",
+    "Na Parte 2: conta, repositório, token, primeiro `push` e primeiro Pull Request"
+   ],
+   "destaque": "Hoje à noite, o seu portfólio começa.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Feche a Parte 1 conectando com a prática: o meu-projeto-devops que vocês constroem desde a Aula 02 (scripts, Dockerfile, compose, histórico) vira hoje a primeira peça do portfólio. Resuma o roteiro da Parte 2: conta, repositório, token, push, branch, PR, merge, pull. Lembre: quem ainda não tem SSH para a VM, aproveite o intervalo para configurar (setup, passo 7)."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "intervalo",
+   "titulo": "INTERVALO",
+   "subtitulo": "Voltamos às 20:35",
+   "minutos": 15,
+   "notas": "⏱ 15 min — Intervalo. Deixe o slide na tela. Lembre no chat: voltamos às 20:35 com o terminal via SSH aberto e o navegador no GitHub. Quem ainda não tem conta, pode começar a criar agora em github.com/signup."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "parte2",
+   "titulo": "PARTE 2",
+   "subtitulo": "Publicando no GitHub ☁️",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Divisor. Anuncie: agora é mão na massa. Peça para todos abrirem o pratica.md da Aula 09, o terminal via SSH na VM e o navegador no GitHub."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Objetivo e onde",
+   "paragrafos": [
+    "**Objetivo:** criar sua conta e repositório no GitHub, enviar o `meu-projeto-devops` para a nuvem e abrir seu primeiro Pull Request."
+   ],
+   "bullets": [
+    "**Onde:** navegador do **seu computador** + terminal conectado à VM **via SSH**",
+    "SSH é obrigatório hoje: você vai colar um token longo (setup, passo 7)",
+    "Troque `SEU-USUARIO` pelo seu usuário do GitHub em todos os comandos"
+   ],
+   "destaque": "Ciclo de hoje: conta → repositório → token → push → branch → PR → merge → pull.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Leia o objetivo e o onde. Hoje são dois ambientes ao mesmo tempo: o navegador do computador (GitHub) e o terminal SSH conectado à VM. O SSH é obrigatório porque o token é longo e precisa ser colado; na tela do VirtualBox não dá para colar. Pergunta para o chat: \"Todo mundo com SSH funcionando? Mandem 'ok' ou 'preciso de ajuda'.\" Monitores atendem quem precisar."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 1 — Conta no GitHub pronta?",
+   "bullets": [
+    "Criou a conta na missão da Aula 08? Siga direto para o Passo 2. 😉",
+    "Ainda não? Crie agora em **https://github.com/signup**",
+    "Nome de usuário **profissional** — ele aparecerá no seu portfólio — e confirme o e-mail",
+    "Se o cadastro pedir alguma verificação, chame um monitor para não perder o ritmo"
+   ],
+   "minutos": 2,
+   "notas": "⏱ 2 min — Quem fez a missão da Aula 08 já tem conta: pode ir direto ao Passo 2. Quem não tem, cria agora em github.com/signup. Insista no nome de usuário profissional: ele vira o endereço do portfólio. Lembre de confirmar o e-mail. Se o cadastro pedir verificação, um monitor ajuda no privado para não travar a turma."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 2 — Crie o repositório",
+   "paragrafos": [
+    "No GitHub: botão **New** (ou https://github.com/new) e preencha:"
+   ],
+   "bullets": [
+    "Repository name: `meu-projeto-devops`",
+    "Description: Projeto do Bootcamp DevOps Matera 2026",
+    "Choose visibility: **Public** (é portfólio!)",
+    "Add README: **Off** · Add .gitignore: **No .gitignore** · Add license: **No license**"
+   ],
+   "destaque": "Clique no botão **\"Create repository\"**.",
+   "rodape": "Resultado esperado: o GitHub abre a página do repositório `meu-projeto-devops`, ainda vazio.",
+   "minutos": 5,
+   "notas": "⏱ 5 min — Mostre na tela: botão New ou github.com/new. Preencha junto com a turma: nome exatamente meu-projeto-devops (igual à pasta da VM), descrição, Public porque é portfólio. Atenção nos três últimos campos: README desligado, sem .gitignore, sem licença. Se marcar README, o push vai falhar (está na tabela de erros). Clique em Create repository. O repositório vazio aparece com instruções de push; vamos usar as nossas."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 3 — Crie um token (PAT) (1/2)",
+   "bullets": [
+    "Avatar → **Settings** → **Developer settings** → **Personal access tokens**",
+    "→ **Fine-grained tokens** → **Generate new token**",
+    "Token Name: `bootcamp-matera` · Description: `Token bootcamp-matera`",
+    "Resource owner: seu username · Expiration: `30 dias`"
+   ],
+   "destaque": "Próximo slide: o alcance do token (repositório e permissões).",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Navegue junto com a turma: Avatar → Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token. Preencha nome, descrição, resource owner e expiração de 30 dias. Explique: fine-grained = escopo restrito; 30 dias = prazo curto de propósito. Quem se perder no menu, chame um monitor."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 3 — Crie um token (PAT) (2/2)",
+   "bullets": [
+    "Repository access: **Only select repositories** → `meu-projeto-devops`",
+    "**+ Add permissions**: **Contents: Read and write** e **Workflows: Read and write**"
+   ],
+   "destaque": "Workflows é obrigatória na Aula 10, quando você enviará a pipeline. Copie o token: ele aparece uma única vez!",
+   "rodape": "🔐 O token é sua senha para esta VM. Não o salve em arquivos do projeto, não poste print dele no chat.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Repository access: Only select repositories → meu-projeto-devops. Add permissions: Contents (Read and write) e Workflows (Read and write) — a de Workflows é obrigatória na Aula 10, quando a pipeline sobe. Clique em Generate token e copie o token: ele aparece uma única vez. Reforce: o token é segredo, nada de salvar em arquivo do projeto nem postar print no chat."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 4 — Conecte local ao remoto",
+   "codigo": "cd ~/meu-projeto-devops\ngit remote add origin https://github.com/SEU-USUARIO/meu-projeto-devops.git\ngit remote -v",
+   "bullets": [
+    "Troque `SEU-USUARIO` pelo seu usuário do GitHub",
+    "`git remote add origin` aponta o repositório local para o remoto na nuvem",
+    "`git remote -v` confere: deve listar `origin` com a URL (fetch e push)"
+   ],
+   "rodape": "Resultado esperado: `origin` listado duas vezes (fetch e push), com a URL do seu repositório.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — No terminal SSH da VM. Entre na pasta do projeto. O git remote add origin recebe a URL do repositório: troque SEU-USUARIO pelo usuário do GitHub (a URL está na página do repositório, botão Code, aba HTTPS). O git remote -v confere: deve mostrar origin duas vezes, fetch e push, com a URL certa. Se aparecer 'remote origin already exists', remova com git remote remove origin e refaça."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 5 — O primeiro push! 🚀",
+   "codigo": "git push -u origin main",
+   "bullets": [
+    "Quando pedir usuário: seu usuário do GitHub",
+    "Quando pedir senha: **cole o token** (nada aparece na tela — é normal; dê Enter)",
+    "Atualize a página do repositório no navegador: **seu projeto está na nuvem!** 🎉"
+   ],
+   "rodape": "Resultado esperado: `main -> main` e, por último, `branch 'main' set up to track 'origin/main'`.",
+   "minutos": 5,
+   "notas": "⏱ 5 min — O momento do dia. git push -u origin main: o -u faz a main local passar a acompanhar a origin/main, então os próximos push e pull não precisam de argumentos. Vai pedir usuário (o do GitHub) e senha: aqui cola o TOKEN, não a senha da conta. Nada aparece ao colar, é normal; dê Enter. Resultado: várias linhas, main -> main e, por último, branch 'main' set up to track 'origin/main'. Peça para todos atualizarem a página do repositório no navegador: scripts, Dockerfile, compose, histórico, tudo lá. Comemore no chat."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Para não colar o token a cada push",
+   "codigo": "git config credential.helper store",
+   "bullets": [
+    "⚠️ Grava o token **em texto puro** em `~/.git-credentials` da VM",
+    "Aceitável aqui: VM de estudo, token de 30 dias para um único repositório",
+    "No trabalho, prefira `git config --global credential.helper 'cache --timeout=7200'`"
+   ],
+   "rodape": "O cache guarda o token só na memória, por 2 horas. Ao fim do bootcamp, **revogue o token** em Developer settings.",
+   "minutos": 2,
+   "notas": "⏱ 2 min — Dica opcional: git config credential.helper store faz o Git lembrar o token depois do próximo push. Seja transparente sobre o custo: o token fica gravado em texto puro em ~/.git-credentials na VM. Aqui é aceitável (VM de estudo, token de 30 dias, um repositório só). Num computador de trabalho, use o helper cache com timeout de 7200 segundos: fica só na memória, por 2 horas. E ao fim do bootcamp, revoguem o token em Developer settings."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 6 — Branch e README.md",
+   "paragrafos": [
+    "O GitHub mostra automaticamente o arquivo `README.md` na página do repositório. Vamos renomear o `README.txt` da Aula 02 e reescrevê-lo."
+   ],
+   "codigo": "git checkout -b docs-readme\ngit mv README.txt README.md\nvi README.md",
+   "bullets": [
+    "`git checkout -b` cria a branch `docs-readme`: a melhoria não vai direto na `main`",
+    "`git mv` renomeia e já avisa o Git"
+   ],
+   "rodape": "Resultado esperado: você está na branch `docs-readme`, com o `README.md` aberto no vi.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Agora a melhoria pelo fluxo completo. Explique a motivação: o GitHub exibe automaticamente um arquivo chamado README.md na página do repositório; o nosso é README.txt desde a Aula 02. Primeiro git checkout -b docs-readme cria a branch (nada direto na main). git mv renomeia o arquivo e já registra a mudança no Git. vi README.md abre o arquivo para reescrever. Lembre os comandos básicos do vi: i para inserir, Esc, :wq para salvar e sair."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 6 — Escreva em markdown (1/2)",
+   "paragrafos": [
+    "Apague o que estava lá e escreva um README caprichado em **markdown**: `#` vira título e `-` vira lista. Por exemplo:"
+   ],
+   "codigo": "# Meu Projeto DevOps\nProjeto construído no Bootcamp DevOps Matera 2026.\n## O que tem aqui\n- `scripts/` — health check e pipeline (build, test, deploy)\n- `Dockerfile` — imagem da aplicação\n- `compose.yaml` — app + Redis com docker compose",
+   "minutos": 2,
+   "notas": "⏱ 2 min — Apague o conteúdo antigo do README.txt e escreva em markdown: # vira título, ## subtítulo, - vira lista. Digite com a turma o cabeçalho e a seção \"O que tem aqui\" listando scripts/, Dockerfile e compose.yaml. O exemplo continua no próximo slide."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 6 — Escreva em markdown (2/2)",
+   "bullets": [
+    "Feche o README com a seção de como rodar o projeto:"
+   ],
+   "codigo": "## Como rodar\ndocker compose up -d",
+   "rodape": "Salve e saia do vi (`:wq`). O exemplo completo, com linhas em branco entre as seções, está no pratica.md.",
+   "minutos": 1,
+   "notas": "⏱ 1 min — Última seção do README: \"Como rodar\" com o docker compose up -d. Salve e saia do vi com :wq. Avise que o exemplo completo, com linhas em branco entre as seções, está no pratica.md — markdown fica mais bonito com elas."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 6 — Commit e push da branch",
+   "codigo": "git add README.md\ngit commit -m \"adiciona README do projeto\"\ngit push -u origin docs-readme",
+   "bullets": [
+    "A branch `docs-readme` sobe para o GitHub — a `main` continua intacta",
+    "Se pedir senha de novo, cole o token (ou já está salvo pelo credential helper)"
+   ],
+   "rodape": "Resultado esperado: push concluído; a branch `docs-readme` já aparece no GitHub.",
+   "minutos": 2,
+   "notas": "⏱ 2 min — Mesmo ritual da Aula 06: git add, git commit com mensagem caprichada, e agora git push -u origin docs-readme para subir a branch. A main no GitHub continua como estava; só a branch nova foi enviada. Se pedir senha, cola o token de novo (ou já está salvo, se usou o credential helper). Peça para conferirem no navegador que a branch docs-readme apareceu."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 7 — Abra o PR",
+   "bullets": [
+    "Logo após o push, o GitHub mostra um aviso amarelo **Compare & pull request** — clique",
+    "Sumiu? Aba **Pull requests** → **New pull request** → em **compare**, escolha `docs-readme`",
+    "Título: `Adiciona README do projeto`. Descreva **o que** e **por quê**",
+    "**Create pull request**"
+   ],
+   "destaque": "Explore a aba **Files changed** — é assim que um colega revisaria seu código.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Compartilhe a tela no navegador. Logo depois do push, o GitHub mostra por alguns minutos o aviso amarelo Compare & pull request; clique nele. Se sumiu: aba Pull requests, New pull request, e em compare escolha docs-readme. Título: Adiciona README do projeto. Na descrição, o que foi feito e por quê (lembre: discussão registrada). Create pull request. Depois abra a aba Files changed (arquivos alterados) e mostre o diff: vermelho saiu, verde entrou. É assim que um colega revisaria."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 7 — Integre e sincronize",
+   "bullets": [
+    "**Merge pull request** → **Confirm merge**",
+    "De volta à VM, sincronize a `main` local:"
+   ],
+   "codigo": "git checkout main\ngit pull",
+   "destaque": "Ciclo completo: branch → push → PR → review → merge → pull. Esse é o fluxo de milhões de devs, e agora é o seu.",
+   "rodape": "Resultado esperado: o README integrado chegou à sua `main` local.",
+   "minutos": 2,
+   "notas": "⏱ 2 min — No PR, clique Merge pull request e depois Confirm merge: a branch docs-readme entrou na main do GitHub. Mas a main da VM ainda está atrasada. De volta ao terminal: git checkout main e git pull. O README integrado chega à main local. Feche o ciclo em voz alta: branch, push, PR, review (revisão), merge, pull. Esse é o fluxo de trabalho de milhões de devs, e agora é o de vocês. Pergunta para o chat: \"Quem fechou o ciclo? Manda um 🎉.\""
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Deu errado? 😥 (1/2)",
+   "bullets": [
+    "`Authentication failed` → token errado/expirado ou senha da conta; gere/cole o PAT",
+    "`remote origin already exists` → `git remote remove origin` e refaça o Passo 4",
+    "`src refspec main does not match any` → branch é `master`; rode `git branch -M main`"
+   ],
+   "minutos": 0.5,
+   "notas": "⏱ 0,5 min — Erros mais comuns do push: Authentication failed (token errado/expirado ou senha da conta: gere/cole o PAT), remote origin already exists (git remote remove origin e refaça o Passo 4) e src refspec main does not match any (branch é master: git branch -M main)."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Deu errado? 😥 (2/2)",
+   "bullets": [
+    "Colei o token e nada apareceu → normal, senhas não aparecem; dê Enter",
+    "`failed to push some refs` → remoto tinha README; pull com `--allow-unrelated-histories`",
+    "`Repository not found` → erro de digitação na URL (usuário/repo); confira `git remote -v`"
+   ],
+   "minutos": 0.5,
+   "notas": "⏱ 0,5 min — Mais três: colou o token e nada apareceu (normal, senhas não aparecem; dê Enter), failed to push some refs (o remoto já tinha README: pull com --allow-unrelated-histories) e Repository not found (erro de digitação na URL; confira git remote -v). Monitores no chat ajudam caso a caso."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Desafio bônus 🏆",
+   "bullets": [
+    "Foto de perfil",
+    "Bio: \"Estudante de DevOps — Bootcamp Matera 2026\"",
+    "Fixe (pin) o repositório `meu-projeto-devops` na página inicial do perfil"
+   ],
+   "destaque": "Capriche no seu **perfil** do GitHub: é a sua vitrine a partir de agora.",
+   "minutos": 1,
+   "notas": "⏱ 1 min — Para quem terminou antes: capriche no perfil do GitHub. Foto, bio (Estudante de DevOps — Bootcamp Matera 2026) e fixe o repositório meu-projeto-devops na página inicial do perfil (Customize your pins). É o que um recrutador vê primeiro."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Missão até a próxima aula 📌",
+   "bullets": [
+    "1. Faça o desafio bônus (perfil + repositório fixado): é a sua vitrine a partir de agora",
+    "2. Abra um **segundo PR** sozinho(a): corrija ou melhore qualquer coisa no `README.md`",
+    "Pelo fluxo completo: branch → commit → push → PR → merge → `git pull`"
+   ],
+   "destaque": "Na próxima aula, a pipeline vai rodar dentro desse mesmo fluxo.",
+   "minutos": 1,
+   "notas": "⏱ 1 min — Missão em duas partes. Primeira: desafio bônus, perfil e repositório fixado. Segunda: abrir um segundo PR sozinho, corrigindo ou melhorando qualquer coisa no README.md, pelo fluxo completo: branch, commit, push, PR, merge, git pull. Avise: amanhã a pipeline do GitHub Actions vai rodar dentro desse mesmo fluxo, então quem praticar hoje chega mais tranquilo."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "qa",
+   "titulo": "PERGUNTAS & RESPOSTAS",
+   "subtitulo": "21:20 – 21:45",
+   "minutos": 25,
+   "notas": "⏱ 25 min — Abra para perguntas do chat e do microfone. Perguntas frequentes: diferença entre merge e pull; por que o token e não a senha; se o repositório público expõe algo (lembre: nunca commitar segredos, o token não está no projeto); como apagar e refazer o repositório se deu errado. Aproveite para atender individualmente quem travou no push."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "fechamento",
+   "titulo": "O que levamos para a próxima aula",
+   "bullets": [
+    "Git é a ferramenta local; GitHub é a plataforma na nuvem (remotos: `push` e `pull`)",
+    "Pull Request: revisão, discussão registrada e verificações automáticas antes do merge",
+    "Token é segredo (nunca no projeto, nunca em print) — e seu projeto já é portfólio"
+   ],
+   "destaque": "Gancho: seu projeto está no GitHub, com PR e tudo. Falta o **robô** que builda e testa a cada push: **GitHub Actions**. 🎁",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Fechamento. Recapitule em três frases: Git local, GitHub na nuvem, push e pull ligando os dois; o PR como cerimônia de revisão; token é segredo e o projeto já é portfólio. Lance o gancho da Aula 10: falta a peça final, o robô que builda e testa a cada push, a pipeline da Aula 05 agora de verdade com GitHub Actions. E teremos uma surpresa no encerramento. Lembre a missão e agradeça."
+  },
+  {
+   "tipo": "encerramento",
+   "bloco": "fechamento",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Slide final com a logo do Instituto Matera. Agradeça, lembre a missão (perfil + segundo PR) e o horário de amanhã: 19:30. Até a Aula 10!"
+  }
+ ]
+}

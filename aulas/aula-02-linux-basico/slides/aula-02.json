@@ -1,0 +1,535 @@
+{
+ "aula": 2,
+ "tempo": {
+  "abertura": 5,
+  "revisao": 5,
+  "parte1": 40,
+  "intervalo": 15,
+  "parte2": 45,
+  "qa": 25
+ },
+ "slides": [
+  {
+   "tipo": "capa",
+   "bloco": "abertura",
+   "titulo": "Aula 02",
+   "subtitulo": "Linux 1: História + Comandos básicos",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Deixe a capa na tela enquanto o pessoal entra (19:30). Dê boas-vindas, peça para confirmarem áudio e vídeo no chat. Hoje o objetivo é um só: perder o medo da tela preta."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "abertura",
+   "titulo": "Agenda de hoje",
+   "paragrafos": [
+    "**Objetivo:** perder o medo da tela preta. Entender por que o Linux domina o mundo DevOps e sair navegando pelo terminal com confiança."
+   ],
+   "bullets": [
+    "19:30 — Abertura e boas-vindas",
+    "19:35 — Parte 1: Por que o Linux domina o DevOps?",
+    "20:20 — Intervalo (15 min)",
+    "20:35 — Parte 2: Mão na massa — primeiros passos no terminal",
+    "21:20 — Perguntas & Respostas",
+    "21:45 — Encerramento"
+   ],
+   "destaque": "💬 Interação: quem já abriu um terminal Linux alguma vez na vida? Responda sim ou não no chat.",
+   "rodape": "Apareceu uma palavra nova? Consulte o glossário do repositório (glossario.md).",
+   "minutos": 5,
+   "notas": "⏱ 5 min — Apresente a agenda e o objetivo da aula. Reforce: ninguém precisa ter usado Linux antes; hoje é o primeiro contato. Pergunta para o chat: quem já abriu um terminal Linux? Use as respostas para calibrar o ritmo. Lembre que o glossário existe para toda palavra nova. Peça para deixarem a VM ligada e o terminal SSH aberto, porque a Parte 2 é prática."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "revisao",
+   "titulo": "Revisão da aula anterior",
+   "bullets": [
+    "DevOps é **cultura**: Dev + Ops num time só, automação e cultura blameless (sem culpados).",
+    "O ciclo de vida DevOps é um loop (um ciclo que nunca para):",
+    "planejar → codificar → buildar → testar → liberar → implantar → operar → monitorar.",
+    "Todos validaram o ambiente: a VM Ubuntu é nosso laboratório."
+   ],
+   "destaque": "Toda essa automação roda em cima de um sistema operacional. Hoje conhecemos o rei deles: o Linux. 🐧",
+   "minutos": 5,
+   "notas": "⏱ 5 min — Retome rapidamente a Aula 01: DevOps é cultura (Dev + Ops juntos, automação, blameless = sem caça a culpados). Relembre o loop do ciclo de vida, etapa por etapa. Confirme no chat: todo mundo conseguiu subir a VM Ubuntu e conectar por SSH? Quem não conseguiu, avise no chat para o apoio ajudar durante o intervalo. Feche com o gancho: toda a automação roda em cima de um sistema operacional, e hoje vamos conhecer o Linux."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "parte1",
+   "titulo": "PARTE 1",
+   "subtitulo": "Por que Linux domina o DevOps?",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Transição: 'Antes de digitar qualquer comando, vamos entender de onde o Linux veio e por que ele é a casa do DevOps.'"
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Um pouco de história",
+   "paragrafos": [
+    "**1991:** Linus Torvalds, um estudante finlandês, publica um **kernel** (o núcleo de um sistema operacional) \"de hobby\" na internet."
+   ],
+   "bullets": [
+    "E convida o mundo todo a colaborar pela internet.",
+    "O Linux cresce como **software livre e de código aberto**.",
+    "Código aberto: qualquer pessoa pode ler, modificar e distribuir.",
+    "Hoje: na **imensa maioria dos servidores** e nos 500 supercomputadores mais rápidos.",
+    "Em todo Android, nos carros, roteadores... e em toda a nuvem."
+   ],
+   "destaque": "💬 Interação: \"Quantos dispositivos com Linux você acha que tem na sua casa? Chuta aí no chat!\"",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Conte a história em tom de conversa: um estudante de 21 anos publica um núcleo de sistema 'de hobby' e convida o mundo a ajudar. Defina kernel no primeiro uso: é o núcleo, a parte que conversa com o hardware. Explique software livre e código aberto: ler, modificar e distribuir. Mostre a escala de hoje: servidores, os 500 supercomputadores mais rápidos (TOP500), Android, carros, roteadores, nuvem. Pergunta para o chat: quantos dispositivos com Linux tem na sua casa? Comente as respostas: roteador, TV, celular Android, smartwatch... geralmente é mais do que a pessoa imagina."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "O mesmo coração, várias roupas",
+   "paragrafos": [
+    "O **kernel** é o núcleo; as **distribuições** (distros) empacotam kernel + ferramentas: Ubuntu, Debian, Fedora, Alpine..."
+   ],
+   "bullets": [
+    "Usamos o **Ubuntu**: popular em servidores e a distro mais amigável para começar.",
+    "O coração é o mesmo (o kernel); mudam as roupas (as ferramentas empacotadas)."
+   ],
+   "destaque": "Aprendeu Ubuntu, aprendeu Linux: o que vale aqui vale em qualquer distro.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Use a analogia do material: o kernel é o coração, as distribuições são as roupas. Cite Ubuntu, Debian, Fedora, Alpine. Explique por que escolhemos o Ubuntu: popular em servidores e amigável para iniciantes. Tranquilize: o que aprendem no Ubuntu vale em qualquer outra distro, porque o coração (kernel) e os comandos são os mesmos."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Por que DevOps = Linux?",
+   "bullets": [
+    "Os servidores onde os sistemas rodam são Linux — quem opera precisa falar a língua deles.",
+    "Containers (Aula 07!) **são** tecnologia do kernel Linux.",
+    "Automação nasce no **terminal**: scripts, pipelines e ferramentas assumem um shell Linux."
+   ],
+   "destaque": "Dominar o terminal Linux é o alicerce de tudo o que vem depois no bootcamp.",
+   "rodape": "Container: uma \"caixinha\" isolada para rodar um programa — você vai conhecer de perto na Aula 07.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Três motivos, um por bullet. 1) Os servidores são Linux: para operar, é preciso falar a língua. 2) Containers (caixinhas isoladas para rodar programas), tema da Aula 07, são tecnologia do kernel Linux. 3) Automação nasce no terminal: scripts, pipelines e ferramentas de infra assumem um shell Linux (shell = o programa que executa comandos; definimos no próximo slide). Mensagem-chave: tudo que vem depois no bootcamp (Git, Docker, CI/CD) depende do que começamos hoje."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Anatomia do terminal (1/2)",
+   "paragrafos": [
+    "A linha que fica esperando seus comandos chama-se **prompt**.",
+    "O programa que lê e executa o que você digita é o **shell** — no Ubuntu, o **bash**."
+   ],
+   "codigo": "aluno@bootcamp:~$ ls -l /home",
+   "bullets": [
+    "`aluno` → usuário logado · `bootcamp` → nome da máquina",
+    "`~` → diretório atual (`~` = sua pasta pessoal)",
+    "`$` → usuário comum (`#` seria o superusuário root)"
+   ],
+   "minutos": 2,
+   "notas": "⏱ 2 min — Mostre o seu terminal ao vivo com o prompt aluno@bootcamp:~$. Defina prompt (a linha que espera) e shell (o programa que executa; no Ubuntu é o bash). Disseque a parte do prompt pedaço por pedaço: usuário, máquina, diretório atual e o $ de usuário comum (# seria root, o superusuário). Peça para todos olharem o próprio prompt e confirmarem no chat que aparece aluno@bootcamp."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Anatomia do terminal (2/2)",
+   "codigo": "aluno@bootcamp:~$ ls -l /home",
+   "bullets": [
+    "`ls` → o **comando**",
+    "`-l` → uma **opção** (modifica o comportamento)",
+    "`/home` → o **argumento** (em quem o comando age)"
+   ],
+   "minutos": 2,
+   "notas": "⏱ 2 min — Agora a parte depois do prompt, o que você digita: ls é o comando, -l é a opção (modifica o comportamento) e /home é o argumento (em quem o comando age). Esse trio comando + opção + argumento vale para quase tudo o que vem na Parte 2. Rode ls -l /home ao vivo e mostre a saída."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Sem C:\\ — uma única árvore",
+   "bullets": [
+    "Quem vem do Windows conhece `C:\\`, `D:\\` e pastas separadas por `\\`.",
+    "No Linux **não existem letras de unidade**: há uma única árvore, que começa na raiz `/`.",
+    "As pastas são separadas por `/` (barra normal), nunca por `\\`.",
+    "Discos, pendrives e dispositivos são \"encaixados\" (montados) em algum ponto da árvore.",
+    "**Maiúsculas ≠ minúsculas**: `Projeto` e `projeto` são pastas diferentes."
+   ],
+   "destaque": "Tudo começa na raiz `/`. Não existe C:, D: nem barra invertida.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Este slide é a ponte para quem vem do Windows. Compare: C:\\ e D:\\ versus uma única árvore começando em /. Explique montar: o pendrive aparece como uma pasta dentro da árvore. Alerta importante para iniciantes: maiúsculas e minúsculas são diferentes; Projeto e projeto são duas pastas. Muitos erros de 'No such file or directory' na Parte 2 virão daqui."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Tudo é arquivo: o prédio (1/2)",
+   "paragrafos": [
+    "No Linux, **tudo é arquivo**: documentos, programas, configurações, logs, dispositivos.",
+    "E tudo tem um lugar definido. Pense na árvore como um **prédio**, em que cada andar tem uma função:"
+   ],
+   "codigo": "/            ← a raiz: o terreno onde o prédio está\n├── home/    ← apartamentos dos moradores (sua casa: /home/aluno)\n├── root/    ← a cobertura: a casa do superusuário root\n├── etc/     ← a administração: configurações do sistema\n├── bin/ sbin/ ← a caixa de ferramentas: ls, cp, cat...\n├── usr/     ← a loja de departamentos: programas instalados\n├── opt/     ← o depósito: softwares \"opcionais\" de terceiros",
+   "minutos": 2,
+   "notas": "⏱ 2 min — Analogia do prédio, andar por andar. Tudo é arquivo: até um disco ou um terminal aparece como arquivo. / é o terreno. home são os apartamentos (a casa do aluno é /home/aluno). root é a cobertura do superusuário. etc é a administração, onde vivem as configurações. bin e sbin são a caixa de ferramentas (ls, cp, cat). usr é a loja de departamentos, onde fica a maioria dos programas. opt é o depósito de softwares opcionais de terceiros. Continua no próximo slide."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Tudo é arquivo: o prédio (2/2)",
+   "paragrafos": [
+    "Continuando a visita pelos andares:"
+   ],
+   "codigo": "├── var/     ← o arquivo morto que só cresce: logs (/var/log)\n├── tmp/     ← o lixão temporário: pode sumir ao reiniciar\n├── dev/     ← a sala de máquinas: dispositivos (discos, terminais)\n├── proc/ sys/ ← o painel de instrumentos: informações do kernel\n├── boot/    ← os alicerces: o que o sistema precisa para ligar\n├── lib/     ← bibliotecas compartilhadas pelos programas\n├── mnt/ media/ ← as portas de entrada: discos externos e pendrives\n└── srv/     ← dados de serviços servidos pela máquina (sites)",
+   "destaque": "Não precisa decorar: na Parte 2 você vai visitar o prédio pessoalmente.",
+   "minutos": 2,
+   "notas": "⏱ 2 min — Os andares restantes. var é o arquivo morto que não para de crescer: logs (registros do que aconteceu), caches, bancos. tmp é o lixão temporário: pode sumir ao reiniciar. dev é a sala de máquinas, com os dispositivos. proc e sys são o painel de instrumentos: informações vivas do kernel. boot são os alicerces para o sistema ligar. lib guarda bibliotecas compartilhadas. mnt e media são as portas de entrada de discos externos e pendrives. srv guarda dados de serviços, como sites. Tranquilize: não precisam decorar; vão visitar o prédio na Parte 2."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "As pastas que você mais visita",
+   "paragrafos": [
+    "Dos andares do prédio, estes são os que você mais vai frequentar em DevOps:"
+   ],
+   "bullets": [
+    "`/home/aluno` — sua casa (`~`). É onde o projeto do bootcamp vai morar.",
+    "`/etc` — toda configuração de serviço (rede, usuários, SSH, Docker...) vive aqui.",
+    "`/var/log` — primeiro lugar para olhar quando algo quebra: os logs (registros).",
+    "`/usr/bin` — onde ficam os programas que você instala com `apt` (o instalador do Ubuntu).",
+    "`/tmp` — rascunhos descartáveis: nunca guarde nada importante aqui."
+   ],
+   "destaque": "Algo quebrou? Comece por `/var/log`. Quer configurar? Vá em `/etc`.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Cinco pastas para gravar. /home/aluno é a casa, onde o projeto do bootcamp vai morar a partir de hoje. /etc guarda configuração de tudo (rede, usuários, SSH, Docker). /var/log é o primeiro lugar para olhar quando algo quebra: os logs são os registros do que aconteceu. /usr/bin é onde ficam os programas instalados com apt, o instalador de programas do Ubuntu (próxima aula). /tmp é descartável. Mensagem-chave: quebrou, /var/log; configurar, /etc."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Caminhos e atalhos",
+   "bullets": [
+    "**Absoluto**: começa na raiz e vale de qualquer lugar: `/home/aluno/meu-projeto-devops`",
+    "**Relativo**: parte de onde você está. Em `/home/aluno`, basta `meu-projeto-devops`",
+    "`~` → sua pasta pessoal (`/home/aluno`) · `.` → a pasta atual",
+    "`..` → a pasta \"pai\" (um nível acima): `cd ..` sobe um andar",
+    "`/` → a raiz: `cd /` leva ao térreo"
+   ],
+   "destaque": "💬 Interação: \"Se eu estou em `/var/log` e digito `cd ..`, onde fui parar? E com `cd ~`?\"",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Dois jeitos de dizer onde algo está. Absoluto: começa em /, funciona de qualquer lugar, como um endereço completo com CEP. Relativo: parte de onde você está, como 'a padaria na esquina'. Depois os quatro atalhos: ~ (casa), . (aqui), .. (um andar acima), / (térreo). Pergunta para o chat: estou em /var/log, digito cd .., onde fui parar? (resposta: /var). E com cd ~? (resposta: /home/aluno). Espere as respostas antes de revelar."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Os comandos de hoje (1/2)",
+   "paragrafos": [
+    "Dez comandos para começar. Cada um tem um mnemônico (uma frase em inglês que ajuda a lembrar)."
+   ],
+   "bullets": [
+    "`pwd` — mostra onde você está (print working directory)",
+    "`ls` — lista arquivos e pastas (list)",
+    "`cd` — muda de pasta (change directory)",
+    "`mkdir` — cria pasta (make directory)",
+    "`touch` — cria arquivo vazio"
+   ],
+   "minutos": 3,
+   "notas": "⏱ 3 min — Apresente os cinco primeiros comandos com o mnemônico em inglês: pwd (print working directory = imprime o diretório de trabalho), ls (list = listar), cd (change directory = mudar de diretório), mkdir (make directory = criar diretório), touch (cria arquivo vazio). Faça cada um ao vivo no seu terminal enquanto fala, sem pedir que acompanhem ainda: a prática é na Parte 2."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Os comandos de hoje (2/2)",
+   "bullets": [
+    "`cat` — mostra o conteúdo de um arquivo (concatenate)",
+    "`cp` — copia (copy)",
+    "`mv` — move ou renomeia (move)",
+    "`rm` — remove (⚠️ sem lixeira!) (remove)",
+    "`man` — abre o manual de qualquer comando (manual)"
+   ],
+   "destaque": "🧠 Regra de ouro: na dúvida, `man comando`. O terminal vem com a documentação embutida.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Os outros cinco: cat (concatenate; mostra conteúdo), cp (copy; copia), mv (move; move ou renomeia), rm (remove; e avise com ênfase: não tem lixeira) e man (manual). Mostre man ls ao vivo e saia com q. Mensagem-chave: na dúvida, man comando. O terminal já vem com a documentação embutida."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Kit de sobrevivência (1/2)",
+   "paragrafos": [
+    "Oito teclas que resolvem 90% dos sustos de quem está começando:"
+   ],
+   "bullets": [
+    "`Tab` — **autocompleta** nomes de arquivos, pastas e comandos (2x `Tab` mostra as opções)",
+    "Experimente: digite `cd meu-` + `Tab` e veja a mágica",
+    "`↑` `↓` — navega pelos comandos que você já digitou: ninguém redigita comando",
+    "`Ctrl + C` — **cancela** o comando atual. O terminal \"travou\"? É isto",
+    "`Ctrl + L` (ou `clear`) — limpa a tela"
+   ],
+   "minutos": 2,
+   "notas": "⏱ 2 min — As quatro primeiras teclas. Demonstre o Tab ao vivo: digite cd /ho + Tab e veja completar /home/; aperte Tab duas vezes para ver as opções. Mostre a seta para cima trazendo o comando anterior. Ctrl+C é o botão de pânico: cancela o que estiver rodando. Ctrl+L (ou clear) limpa a tela."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Kit de sobrevivência (2/2)",
+   "bullets": [
+    "`q` — sai de telas de leitura (`man`, `less`, o histórico do Git)",
+    "Entrou no editor `vi` sem querer? `Esc`, depois `:q!` e Enter",
+    "`Ctrl + R` — busca no histórico: comece a digitar e ele encontra",
+    "`Ctrl + D` (ou `exit`) — encerra a sessão",
+    "`comando --help` — ajuda resumida, quando o `man` for longo demais"
+   ],
+   "destaque": "Tudo isso está na cola do terminal (recursos/cheat-sheet-terminal.md): imprima e deixe ao lado. 📝",
+   "minutos": 2,
+   "notas": "⏱ 2 min — As outras quatro teclas. q sai de telas de leitura como o man e o less. Se entrar no vi sem querer: Esc, :q! e Enter (o vi é o editor do bootcamp e é tema da próxima aula). Ctrl+R busca no histórico. Ctrl+D ou exit encerra a sessão. comando --help é a ajuda rápida. Indique a cola do terminal no repositório: recursos/cheat-sheet-terminal.md."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Dois sustos clássicos",
+   "bullets": [
+    "**Apareceu um `>` sozinho e nada acontece.** Você abriu aspas e não fechou.",
+    "O shell está esperando o resto: `Ctrl + C` e digite de novo.",
+    "**O `~` não aparece (ou sai `~~`).** No teclado ABNT2 (o brasileiro), `~` é tecla morta.",
+    "Aperte `~` e depois **Espaço**. E `|` é `Shift + \\` (a tecla ao lado do `Z`)."
+   ],
+   "destaque": "Susto no terminal não quebra nada: `Ctrl + C` e tente de novo.",
+   "rodape": "Veja o box de teclado no setup (setup/instalacao-ubuntu-vm.md).",
+   "minutos": 2,
+   "notas": "⏱ 2 min — Dois sustos que vão acontecer na Parte 2. Primeiro: o > sozinho, que significa aspas abertas sem fechar; Ctrl+C resolve. Segundo: no teclado ABNT2 (o padrão brasileiro) o ~ é tecla morta, então ~ seguido de Espaço. E o | é Shift + \\, ao lado do Z. Demonstre os dois ao vivo. Feche a Parte 1 dizendo que susto no terminal não quebra nada e anuncie o intervalo."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "intervalo",
+   "titulo": "INTERVALO",
+   "subtitulo": "Voltamos às 20:35",
+   "minutos": 15,
+   "notas": "⏱ 15 min — Intervalo de 15 minutos. Peça para quem ainda não tem a VM ligada e o SSH conectado aproveitar agora, com apoio no chat. Deixe o slide na tela e volte pontualmente às 20:35."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "parte2",
+   "titulo": "PARTE 2",
+   "subtitulo": "Primeiros passos no terminal",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Transição: 'Agora é com vocês. Terminal aberto, conectado à VM. Vamos construir a pasta do projeto do bootcamp usando só o terminal.' Peça que todos abram a pratica.md da aula 02 no repositório para copiar e colar."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Objetivo e onde",
+   "paragrafos": [
+    "**Objetivo:** usar os comandos básicos para criar a estrutura do **seu projeto do bootcamp** — a pasta que vamos evoluir até a última aula.",
+    "**Onde:** no terminal conectado à VM via SSH (como no setup). A janela do VirtualBox também serve, mas sem copiar e colar."
+   ],
+   "destaque": "💬 Interação: conectou na VM e vê o prompt `aluno@bootcamp:~$`? Mande um 👍 no chat.",
+   "rodape": "Passo a passo completo em aulas/aula-02-linux-basico/pratica.md",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Explique o objetivo: a pasta que criamos hoje vai evoluir até a última aula do bootcamp. Onde: no terminal SSH conectado à VM (permite copiar e colar). A janela do VirtualBox serve, mas sem colar. Peça o joinha no chat de quem vê o prompt aluno@bootcamp:~$. Quem não vê, o apoio ajuda no chat enquanto seguimos."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 1 — Onde estou?",
+   "codigo": "pwd",
+   "bullets": [
+    "Primeiro comando da vida de todo mundo no terminal: onde estou?",
+    "`pwd` = print working directory: imprime o diretório em que você está agora."
+   ],
+   "rodape": "Resultado esperado: /home/aluno (com o seu usuário). Essa é a sua casa, o ~.",
+   "minutos": 2,
+   "notas": "⏱ 2 min — Todos digitam pwd e dão Enter. Resultado esperado: /home/aluno. Explique: essa é a sua casa, o ~ do prompt. Peça para colarem a saída no chat. Deixe 1 minuto para todos confirmarem."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 2 — Um tour pela árvore (1/3)",
+   "codigo": "ls /\ncd /\npwd\ncd ~\npwd",
+   "bullets": [
+    "`ls /` mostra o térreo: todas as outras pastas do sistema estão dentro de uma delas.",
+    "O `~` é o atalho para a sua casa, de qualquer lugar."
+   ],
+   "rodape": "Resultado esperado: bin boot dev etc home lib ... tmp usr var · / · /home/aluno",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Antes de construir, vamos conhecer o prédio. Um comando por vez, todos juntos. ls / mostra as pastas da Parte 1 (bin, boot, dev, etc, home ... tmp, usr, var): o térreo. cd / e pwd mostram /: a raiz. cd ~ e pwd trazem de volta para /home/aluno: o ~ funciona de qualquer lugar. Lembre do teclado ABNT2: ~ e depois Espaço."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 2 — Um tour pela árvore (2/3)",
+   "codigo": "cat /etc/os-release\nls /usr/bin | head -10",
+   "bullets": [
+    "Configurações do sistema vivem em `/etc`.",
+    "O `|` (barra em pé, `Shift + \\`) liga a saída de um comando ao próximo (próxima aula).",
+    "`head -10` mostra só as 10 primeiras linhas: `/usr/bin` tem centenas de programas."
+   ],
+   "rodape": "Resultado esperado: NAME=\"Ubuntu\" e VERSION=\"24.04...\" · os 10 primeiros programas de /usr/bin",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Agora a administração e a loja de departamentos do prédio. cat /etc/os-release mostra NAME=\"Ubuntu\" e VERSION=\"24.04...\": peça para colarem no chat a linha do VERSION. ls /usr/bin | head -10: explique o | só de passagem (liga a saída de um comando ao próximo; vão dominar na próxima aula) e lembre que é Shift + \\. head -10 mostra as 10 primeiras linhas porque /usr/bin tem centenas de programas."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 2 — Um tour pela árvore (3/3)",
+   "codigo": "ls /var/log\ncd /var/log\ncd ..\npwd",
+   "bullets": [
+    "`/var/log` é o primeiro lugar para olhar quando algo quebra.",
+    "Depois, experimente o `..` (subir um nível)."
+   ],
+   "rodape": "Resultado esperado: /var. Volte para casa com cd ~ antes do próximo passo.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Para fechar o tour, o arquivo morto do prédio: ls /var/log mostra os logs. cd /var/log, cd .. e pwd: resultado /var, provando que .. sobe um nível. Importante: todos voltam para casa com cd ~ antes de seguir. Confirme no chat."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 3 — Crie a pasta do projeto",
+   "codigo": "mkdir meu-projeto-devops\ncd meu-projeto-devops\npwd",
+   "bullets": [
+    "`mkdir` cria a pasta; `cd` entra nela; `pwd` confirma onde você está.",
+    "Esta é a pasta que vamos evoluir até a última aula do bootcamp.",
+    "Digite `cd meu-` e aperte `Tab`: o terminal completa o nome para você."
+   ],
+   "rodape": "Resultado esperado: /home/aluno/meu-projeto-devops",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Confirme que todos estão em /home/aluno (pwd). mkdir meu-projeto-devops cria a pasta do projeto. cd meu-projeto-devops entra; incentive o Tab: cd meu- + Tab. pwd confirma /home/aluno/meu-projeto-devops. Atenção com o nome: minúsculas e hífens, exatamente como está. Peça para colarem a saída do pwd no chat."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 4 — Crie a estrutura interna",
+   "codigo": "mkdir scripts app\ntouch README.txt\nls",
+   "bullets": [
+    "`mkdir` aceita vários nomes de uma vez: cria `scripts` e `app` num só comando.",
+    "`touch` cria um arquivo vazio: o `README.txt` do projeto.",
+    "`ls` lista o que você acabou de criar."
+   ],
+   "rodape": "Resultado esperado: app  README.txt  scripts",
+   "minutos": 3,
+   "notas": "⏱ 3 min — mkdir scripts app cria duas pastas de uma vez. touch README.txt cria um arquivo vazio; repare no README em maiúsculas, porque o Linux diferencia maiúsculas de minúsculas. ls mostra app, README.txt e scripts. Comente que o ls ordena ignorando maiúsculas, por isso README aparece entre app e scripts."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 5 — Escreva e leia um arquivo",
+   "codigo": "echo \"Projeto do Bootcamp DevOps Matera 2026\" > README.txt\ncat README.txt",
+   "bullets": [
+    "`echo` imprime um texto; o `>` \"despeja\" a saída do comando para dentro do arquivo.",
+    "`cat` mostra o conteúdo do arquivo: a frase que você acabou de gravar.",
+    "Feche as aspas! Se aparecer um `>` sozinho, é `Ctrl + C` e digite de novo."
+   ],
+   "rodape": "Resultado esperado: o terminal mostra a frase que você gravou.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — echo com a frase entre aspas e o > despejando no README.txt. Explique o > como um funil: o que sairia na tela vai para dentro do arquivo. cat README.txt mostra a frase. Aqui costuma aparecer o susto do > sozinho (aspas sem fechar): Ctrl+C e repetir. Peça para colarem a saída do cat no chat."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 6 — Copie, renomeie, mova",
+   "codigo": "cp README.txt README-backup.txt\nmv README-backup.txt app/\nls app/",
+   "bullets": [
+    "`cp origem destino` copia: agora existem dois arquivos.",
+    "`mv origem destino` move (ou renomeia, se o destino for só um nome novo).",
+    "`ls app/` confirma: o backup foi parar dentro da pasta `app/`."
+   ],
+   "rodape": "Resultado esperado: README-backup.txt agora está dentro de app/",
+   "minutos": 4,
+   "notas": "⏱ 4 min — cp README.txt README-backup.txt cria uma cópia. mv README-backup.txt app/ move a cópia para dentro de app/ (a barra no final deixa claro que é pasta). ls app/ mostra README-backup.txt lá dentro. Explique que mv também renomeia: se o destino for só um nome novo, o arquivo muda de nome. Use o Tab nos nomes."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 7 — Remova com cuidado",
+   "codigo": "rm app/README-backup.txt\nls app/",
+   "bullets": [
+    "`rm` apaga de verdade: **no Linux não existe lixeira no terminal**.",
+    "Antes de remover, respire e confira o caminho.",
+    "Principalmente se um dia você tiver `sudo` (poderes de administrador) na frente. 😄"
+   ],
+   "destaque": "⚠️ `rm` não pergunta e não tem volta. Confira o caminho antes do Enter.",
+   "rodape": "Resultado esperado: app/ vazio de novo.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — rm app/README-backup.txt apaga o backup. ls app/ mostra a pasta vazia. Pare aqui para o aviso mais importante da aula: não existe lixeira no terminal; rm apaga de verdade. Dica: confira o caminho antes do Enter, e redobre o cuidado quando tiver sudo na frente (sudo = executar com poderes de administrador; tema da próxima aula). Peça para confirmarem no chat que app/ ficou vazio."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 8 — Explore o manual",
+   "codigo": "man ls\nls -la",
+   "bullets": [
+    "Navegue no manual com as setas e saia com a tecla `q`.",
+    "Descubra: o que faz a opção `-a`? Depois teste com `ls -la`.",
+    "Viu arquivos começando com `.`? São os ocultos: eles reaparecem na aula de Git!"
+   ],
+   "rodape": "Resultado esperado: o manual do ls abre (q para sair); ls -la lista também os arquivos ocultos, que começam com .",
+   "minutos": 4,
+   "notas": "⏱ 4 min — man ls abre o manual. Peça que naveguem com as setas, procurem a opção -a e saiam com q. Pergunta para o chat: o que faz o -a? (mostra os arquivos ocultos, que começam com ponto). Depois ls -la: aparecem . e .. e, dentro da casa, arquivos como .bashrc. Esses arquivos ocultos voltam na aula de Git (.git, .gitignore)."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Deu errado? 😥",
+   "bullets": [
+    "`No such file or directory` → pasta errada: rode `pwd` e `ls` para se localizar",
+    "`Permission denied` → saiu da sua pasta pessoal: por enquanto, fique dentro de `~`",
+    "`command not found` → erro de digitação no comando: o terminal é implacável com isso",
+    "O prompt não volta ou apareceu um `>` sozinho → `Ctrl + C` e digite de novo",
+    "Abriu uma tela que não sai (`man`, `less`) → aperte `q`",
+    "Entrou no editor `vi` sem querer → `Esc`, depois `:q!` e Enter"
+   ],
+   "destaque": "Erro no terminal é normal. Leia a mensagem: ela quase sempre diz o que aconteceu.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Passe pelos erros mais comuns, um por linha. No such file or directory: quase sempre é pasta errada ou maiúscula/minúscula trocada; pwd e ls para se localizar. Permission denied: saiu da pasta pessoal; permissões são tema da próxima aula. command not found: erro de digitação. Prompt não volta ou > sozinho (aspas abertas): Ctrl+C. Preso no man ou less: q. Preso no vi: Esc, :q!, Enter (o vi é tema da próxima aula). Pergunte no chat quem pegou algum desses hoje."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Desafio bônus 🏆",
+   "paragrafos": [
+    "Sem olhar as respostas: dentro de `meu-projeto-devops`, crie uma pasta `docs` com um arquivo `notas.txt`.",
+    "O arquivo deve conter a frase \"Linux dominado!\". Depois, mostre o conteúdo na tela."
+   ],
+   "bullets": [
+    "**Segundo desafio:** um único comando, com caminho absoluto, a partir da sua casa:",
+    "mostre as 5 primeiras linhas de `/etc/passwd` (a lista de usuários do sistema)."
+   ],
+   "destaque": "💬 Poste o print no chat! Dica do segundo desafio: `head -5`.",
+   "minutos": 5,
+   "notas": "⏱ 5 min — Dois desafios, sem olhar o material. Primeiro: pasta docs com notas.txt contendo 'Linux dominado!' e o conteúdo na tela (mkdir, touch ou echo >, cat). Segundo: um único comando com caminho absoluto, a partir da casa, mostrando as 5 primeiras linhas de /etc/passwd; a dica é head -5. Dê 4 minutos, acompanhe os prints no chat e comente uma ou duas soluções diferentes. Quem terminar antes ajuda no chat."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Missão até a próxima aula 📌",
+   "paragrafos": [
+    "Hábito se faz com frequência: **5 minutos de terminal por dia** até a próxima aula."
+   ],
+   "bullets": [
+    "Todo dia, conecte na VM: vá até `/var/log`, volte com `cd ~`, liste com `ls -la`.",
+    "Faça isso sem olhar o material.",
+    "Use o `Tab` em todo nome que digitar — até virar reflexo.",
+    "Leia o glossário e marque as palavras que ainda não fazem sentido: pergunte na comunidade."
+   ],
+   "destaque": "5 minutos por dia valem mais do que 1 hora na véspera.",
+   "minutos": 2,
+   "notas": "⏱ 2 min — A missão é criar hábito: 5 minutos de terminal por dia. Todo dia: conectar na VM, ir até /var/log, voltar com cd ~, listar com ls -la, sem olhar o material. Tab em todo nome até virar reflexo. Ler o glossário (glossario.md) e trazer as dúvidas para a comunidade. Abra o espaço de perguntas."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "qa",
+   "titulo": "PERGUNTAS & RESPOSTAS",
+   "subtitulo": "21:20 – 21:45",
+   "minutos": 25,
+   "notas": "⏱ 25 min — Abra o chat para perguntas. Priorize quem travou em algum passo da prática: peça para colarem a mensagem de erro e o resultado do pwd. Use o seu terminal para reproduzir ao vivo. Se sobrar tempo, mostre o Tab duplo, o Ctrl + R e o man de outro comando. Perguntas sobre permissões, sudo e vi: avise que são o tema da próxima aula."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "fechamento",
+   "titulo": "O que levamos para a próxima aula",
+   "bullets": [
+    "Linux domina servidores, nuvem e containers: o terminal é o alicerce do DevOps.",
+    "A árvore é um prédio que começa na raiz `/`: `/home`, `/etc`, `/var/log`, `/tmp`.",
+    "Dez comandos (de `pwd` a `man`) e o kit de sobrevivência: `Tab`, `↑`, `Ctrl + C`, `q`."
+   ],
+   "destaque": "Hoje você aprendeu a andar pela casa. Na próxima aula, você vira o síndico: permissões, processos, programas e rede.",
+   "rodape": "Gancho para a Aula 03 — o dia a dia de quem administra servidores de verdade.",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Recapitule em três frases: por que Linux, o prédio de pastas e os dez comandos com as teclas de sobrevivência. Leia o gancho: hoje aprendeu a andar pela casa; na próxima aula vira o síndico, com permissões, processos, instalação de programas e os primeiros comandos de rede, o dia a dia de quem administra servidores de verdade. Lembre a missão dos 5 minutos por dia."
+  },
+  {
+   "tipo": "encerramento",
+   "bloco": "fechamento",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Agradeça a presença, lembre a missão diária e a comunidade para dúvidas. Até a Aula 03!"
+  }
+ ]
+}

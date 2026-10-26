@@ -1,0 +1,506 @@
+{
+ "aula": 10,
+ "tempo": {
+  "abertura": 5,
+  "revisao": 5,
+  "parte1": 40,
+  "intervalo": 15,
+  "parte2": 45,
+  "qa": 25
+ },
+ "slides": [
+  {
+   "tipo": "capa",
+   "bloco": "abertura",
+   "minutos": 0,
+   "titulo": "Aula 10",
+   "subtitulo": "GitHub Actions + Encerramento 🏁",
+   "notas": "⏱ 0 min — Deixe a capa na tela enquanto a turma entra. Dê boas-vindas à última aula: hoje a pipeline manual da Aula 05 vira uma pipeline de verdade, rodando sozinha no GitHub. E no bloco final tem uma surpresa (não conte o que é!)."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "abertura",
+   "minutos": 5,
+   "titulo": "Agenda de hoje",
+   "bullets": [
+    "19:30 — Abertura e boas-vindas",
+    "19:35 — Parte 1: GitHub Actions, a esteira dentro do repositório",
+    "20:20 — Intervalo",
+    "20:35 — Parte 2: Mão na massa (a última!)",
+    "21:20 — Bloco final: no lugar do Q&A de sempre, a surpresa final 🎁",
+    "21:45 — Encerramento"
+   ],
+   "destaque": "Objetivo: fechar o ciclo — a cada push, o GitHub builda e testa o seu projeto sozinho.",
+   "notas": "⏱ 5 min — Leia a agenda em voz alta. Destaque que o Q&A de hoje foi trocado por uma surpresa às 21:20, então a prática precisa terminar no horário. Pergunte no chat: 'Quem está com a VM ligada e conectado via SSH?' (o SSH é necessário para colar o badge mais tarde). Peça para abrirem também o GitHub no navegador, logados."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "revisao",
+   "minutos": 5,
+   "titulo": "Revisão da aula anterior",
+   "bullets": [
+    "Git local + GitHub remoto: `push`, `pull` e o fluxo branch → PR → review → merge",
+    "O `meu-projeto-devops` está público, com README — portfólio no ar"
+   ],
+   "destaque": "Gancho: lembra da pipeline manual da Aula 05, em que **você** era o robô? Hoje o robô assume.",
+   "notas": "⏱ 5 min — Relembre a Aula 09: o projeto saiu da VM e foi para o GitHub, e o fluxo branch → PR → review → merge é o fluxo de time. Pergunte no chat: 'Na Aula 05, quem rodava o ./pipeline.sh?' Vocês mesmos, na mão. Lance o gancho: hoje, a cada push, o GitHub builda e testa sozinho. Esse é o robô assumindo."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "parte1",
+   "minutos": 0,
+   "titulo": "PARTE 1",
+   "subtitulo": "A esteira dentro do repo",
+   "notas": "⏱ 0 min — Transição: 'Parte 1: GitHub Actions, a esteira dentro do repositório.' Avise que são uns 40 minutos de conceito e que a prática vem depois do intervalo."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "minutos": 4,
+   "titulo": "O que é o GitHub Actions",
+   "paragrafos": [
+    "O serviço de **CI/CD embutido no GitHub**: você descreve a pipeline em um arquivo YAML dentro do próprio repositório.",
+    "O GitHub executa em máquinas dele — os **runners** —, de graça para repositórios públicos (como o seu `meu-projeto-devops`)."
+   ],
+   "bullets": [
+    "YAML: texto de configuração; runner: a máquina que roda a pipeline",
+    "O arquivo mora em `.github/workflows/ci.yml`, versionado com `git`",
+    "Mudou a pipeline? Vira commit, com histórico — quem clona leva junto"
+   ],
+   "destaque": "💡 Pipeline versionada junto com o código = a fonte única da verdade da Aula 06 valendo também para a automação.",
+   "notas": "⏱ 4 min — Defina o jargão: GitHub Actions é o CI/CD (Integração Contínua / Entrega Contínua, da Aula 05) embutido no GitHub. YAML é um formato de texto para descrever configurações. Runner é a máquina do GitHub que roda a pipeline — na Aula 05 o runner era a VM de vocês. Frise que é grátis para repositório público, o caso da turma. Conecte com a Aula 06: lá o Git virou a fonte única da verdade do código; agora a automação também mora no repositório. Pergunte no chat: 'Qual a vantagem de a pipeline ter commit e histórico?' Resposta: dá para ver quem mudou, quando, e voltar atrás."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "minutos": 4,
+   "titulo": "Anatomia: o gatilho",
+   "codigo": "name: CI                       # nome da pipeline\n\non:                            # QUANDO rodar (o gatilho)\n  push:\n    branches: [main]\n  pull_request:",
+   "bullets": [
+    "`name`: o nome que aparece na aba Actions",
+    "`on`: QUANDO rodar — a cada `push` na `main` e em todo `pull_request`",
+    "Na Aula 05 o gatilho era você digitando `./pipeline.sh`"
+   ],
+   "notas": "⏱ 4 min — Mostre o começo do arquivo .github/workflows/ci.yml. Explique que YAML usa indentação (espaços) para dizer o que está dentro do quê — como as pastas da Aula 03. 'on' é o gatilho: o evento que acorda o robô. Dois gatilhos: push na main e qualquer pull request. Avise desde já: 2 espaços, nunca Tab — isso vai importar na prática."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "minutos": 4,
+   "titulo": "Anatomia: jobs e steps",
+   "codigo": "jobs:                          # O QUE rodar\n  build-e-teste:\n    runs-on: ubuntu-latest     # em qual máquina (olha o Linux aí! 🐧)\n    steps:                     # os passos, em ordem\n      - uses: actions/checkout@v4      # 1) baixa o código do repo\n      - name: Build\n        run: ./scripts/build.sh        # 2) roda SEU script de build\n      - name: Teste\n        run: ./scripts/test.sh         # 3) roda SEU script de teste",
+   "bullets": [
+    "`runs-on: ubuntu-latest`: o runner é um Ubuntu — os mesmos comandos da sua VM",
+    "`uses`: uma action pronta (passo já feito por alguém); `run`: um comando seu"
+   ],
+   "notas": "⏱ 4 min — Leia o bloco de cima para baixo. jobs = o que rodar. O job build-e-teste roda em um Ubuntu (olha o Linux aí!). steps são os passos em ordem: primeiro o checkout baixa o código do repositório para dentro do runner; depois rodam os scripts build.sh e test.sh que a turma escreveu na Aula 05. Reforce: a pipeline reutiliza os scripts deles, sem reescrever nada."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "minutos": 4,
+   "titulo": "Traduzindo o vocabulário",
+   "bullets": [
+    "**workflow** — a pipeline inteira — equivale ao `pipeline.sh` da Aula 05",
+    "**trigger** (`on`) — o evento que dispara — equivale a você digitando `./pipeline.sh`",
+    "**job** — grupo de passos numa máquina",
+    "**step** — um passo (comando ou action pronta) — equivale a `build.sh`, `test.sh`",
+    "**runner** — a máquina que executa — equivale à sua VM"
+   ],
+   "destaque": "💬 Interação: no chat, qual peça da Aula 05 virou o 'runner' hoje?",
+   "notas": "⏱ 4 min — Passe pela tabela de equivalências: cada termo novo tem um correspondente na pipeline manual da Aula 05. Pergunte ao chat qual peça virou o runner (resposta: a VM deles). Isso tira o medo do vocabulário: eles já fizeram tudo isso na mão."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "minutos": 4,
+   "titulo": "O ciclo completo",
+   "codigo": "git push → GitHub Actions acorda → checkout → build → testes\n   → ✅ verde: badge verde no repo, PR liberado para merge\n   → ❌ vermelho: e-mail na hora, PR sinalizado como inseguro,\n        produção protegida",
+   "bullets": [
+    "Verde: o repositório ganha um selo (o badge) e o PR pode ser integrado",
+    "Vermelho: você é avisado na hora e o erro não chega à `main`"
+   ],
+   "destaque": "Isso é o que você construiu em 10 aulas: um ciclo de integração contínua de ponta a ponta.",
+   "notas": "⏱ 4 min — Narre o fluxo como uma história: o push acorda o robô, ele baixa o código, builda, testa. Verde: badge e PR liberado. Vermelho: e-mail na hora, PR marcado como inseguro, produção protegida. Defina badge: o selinho de status no topo do README. Diga que na prática eles vão ver os dois caminhos, o verde e o vermelho."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "minutos": 4,
+   "titulo": "Avisar não é bloquear",
+   "paragrafos": [
+    "Por padrão, o GitHub **avisa** que os checks (as verificações) falharam, mas ainda deixa o botão de merge ativo."
+   ],
+   "bullets": [
+    "Para **bloquear** de verdade: Settings → Rules → Rulesets → New branch ruleset",
+    "Marque **Require status checks to pass**",
+    "Em times reais isso é regra, não opção"
+   ],
+   "destaque": "🔒 Check vermelho + botão de merge ativo: hoje é você quem decide não clicar. No time, a regra decide.",
+   "notas": "⏱ 4 min — Esclareça uma pegadinha que vai aparecer na prática: com a pipeline vermelha, o botão de merge continua ativo. O GitHub avisa, mas não bloqueia por padrão. Para bloquear, cria-se uma regra de proteção da branch (ruleset) exigindo os checks verdes. Mostre o caminho nos Settings na tela. Diga que isso será o desafio bônus de hoje."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "minutos": 3,
+   "titulo": "Hoje tudo se conecta",
+   "bullets": [
+    "Linux (Aulas 02–04): o runner é um Ubuntu e roda os seus comandos",
+    "Pipeline (Aula 05): `build.sh` e `test.sh` são os steps",
+    "Git (Aula 06): o workflow é versionado com o código",
+    "Containers (Aulas 07–08): a imagem e o compose seguem no projeto",
+    "GitHub (Aula 09): o push dispara tudo e o PR mostra o resultado"
+   ],
+   "destaque": "Cada peça dessa frase você aprendeu numa aula. Hoje tudo se conecta.",
+   "notas": "⏱ 3 min — Momento de orgulho da turma: percorra aula por aula mostrando onde cada peça entra no ciclo. Pergunte no chat: 'Qual aula foi a mais difícil para vocês?' Só para aquecer, sem debate longo."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "minutos": 4,
+   "titulo": "Segredos na pipeline",
+   "paragrafos": [
+    "E quando a pipeline precisa de uma senha — um registro de imagens (registry), a nuvem? **Nunca no YAML!**"
+   ],
+   "bullets": [
+    "O GitHub tem um cofre: Settings → Secrets and variables → Actions",
+    "No workflow, usa-se `${{ secrets.MINHA_SENHA }}`",
+    "O valor nunca aparece nos logs"
+   ],
+   "destaque": "DevSecOps na prática: o segredo fica no cofre do GitHub e o workflow só o chama pelo nome.",
+   "notas": "⏱ 4 min — Defina registry: o lugar onde se guardam imagens Docker (como o Docker Hub da Aula 07). Se a pipeline precisar de senha para publicar lá, ela NUNCA vai no YAML, porque o YAML é público e versionado. O cofre do GitHub guarda o segredo e o workflow só referencia pelo nome; o valor nunca aparece nos logs. Pergunte no chat: 'Por que o segredo não pode ir no ci.yml?' Resposta: o arquivo é público e fica no histórico do Git para sempre."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "minutos": 3,
+   "titulo": "Próximos passos: K8s e DevSecOps",
+   "bullets": [
+    "**Kubernetes (K8s):** o compose 'adulto' — orquestra containers em **muitas máquinas**",
+    "Auto-recuperação e escala automática; padrão da indústria e dia a dia na Matera",
+    "**DevSecOps:** segurança desde o dia zero",
+    "Scanners de vulnerabilidade e de segredos **como stages (etapas) da pipeline**"
+   ],
+   "destaque": "Tudo o que vem depois é a mesma lógica de hoje, em escala maior.",
+   "notas": "⏱ 3 min — Abra o horizonte. Kubernetes: lembra do compose da Aula 08 subindo site + redis numa máquina? O K8s faz isso em muitas máquinas, religa o que cai e escala sozinho. DevSecOps: os scanners de segurança entram como etapas da pipeline, igual ao build e ao teste. Não aprofunde: cada um é um bootcamp inteiro."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "minutos": 3,
+   "titulo": "Próximos passos: a jornada continua",
+   "bullets": [
+    "**Infraestrutura como Código (Terraform)**, observabilidade (métricas, logs, traces)",
+    "Nuvem (AWS/Azure/GCP) — cada um desses dá um bootcamp inteiro",
+    "**Continue no Linux todos os dias:** o guia continuando com Linux",
+    "Na VM, com WSL2 no Windows ou no Terminal do Mac — com um desafio de 30 dias",
+    "A cola de comandos (cheat-sheet-terminal) para ter sempre à mão"
+   ],
+   "destaque": "Terminal é como idioma: quem não usa, esquece. O guia traz um desafio de 30 dias.",
+   "notas": "⏱ 3 min — Cite os outros caminhos: Terraform (infra descrita em arquivo, como a pipeline hoje), observabilidade e nuvem. O mais importante para o iniciante: não parar de usar o terminal. Mostre na tela o guia recursos/continuando-com-linux.md e a cola de comandos recursos/cheat-sheet-terminal.md. O desafio dos 30 dias volta na missão de casa."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "minutos": 3,
+   "titulo": "Carreira e comunidade",
+   "bullets": [
+    "Seu diferencial: um repositório público com **projeto funcional e pipeline verde**",
+    "Isso é mais do que muito candidato júnior tem",
+    "Compartilhe o link do seu repositório com quem quiser — ele é o seu portfólio",
+    "Continuem nos canais da comunidade; as portas do Instituto Matera seguem abertas"
+   ],
+   "destaque": "💬 Interação: o que você vai automatizar primeiro depois do bootcamp? Conta no chat.",
+   "notas": "⏱ 3 min — Feche a Parte 1 com carreira: um repositório público funcional, com pipeline verde, é prova concreta de habilidade. Incentive a compartilhar o link do repositório como portfólio. Reforce que a comunidade continua depois de hoje. Leia algumas respostas do chat e chame o intervalo."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "intervalo",
+   "minutos": 15,
+   "titulo": "INTERVALO",
+   "subtitulo": "Voltamos às 20:35",
+   "notas": "⏱ 15 min — Intervalo de 15 minutos. Peça para voltarem com o terminal conectado via SSH na VM (ssh aluno@localhost -p 2222) e o GitHub aberto no navegador, logados. Quem ainda não tem o token do GitHub da Aula 09 funcionando, aproveite para conferir."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "parte2",
+   "minutos": 0,
+   "titulo": "PARTE 2",
+   "subtitulo": "Mão na massa (a última!)",
+   "notas": "⏱ 0 min — Transição: 'Parte 2, a última mão na massa: sua primeira pipeline no GitHub Actions.' Avise que a prática precisa terminar às 21:20 porque a surpresa final depende disso."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "minutos": 2,
+   "titulo": "Objetivo e onde",
+   "paragrafos": [
+    "**Objetivo:** fazer o GitHub buildar e testar seu projeto **automaticamente a cada push**.",
+    "A pipeline da Aula 05, agora executada por um robô de verdade."
+   ],
+   "bullets": [
+    "**Onde:** terminal conectado à VM **via SSH** (necessário para colar o badge)",
+    "+ navegador com o GitHub aberto e logado",
+    "Roteiro completo em `aulas/aula-10-github-actions/pratica.md`"
+   ],
+   "destaque": "Sete passos: criar o workflow, ver a primeira pipeline verde, quebrar e consertar — blameless (sem culpados) até o fim!",
+   "notas": "⏱ 2 min — Leia o objetivo e o onde. Confirme no chat que todos estão via SSH (não no console do VirtualBox), porque mais tarde vão colar texto do navegador na VM. Mostre o pratica.md na tela para quem quiser acompanhar."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "minutos": 2,
+   "titulo": "Passo 1 — Crie o arquivo do workflow",
+   "codigo": "cd ~/meu-projeto-devops\nmkdir -p .github/workflows\nvi .github/workflows/ci.yml",
+   "bullets": [
+    "O caminho é sagrado: `.github/workflows/` (com ponto, no plural!)",
+    "`mkdir -p` cria as duas pastas de uma vez",
+    "O `vi` abre o arquivo vazio: `i` para inserir, `Esc` e `:wq` para salvar"
+   ],
+   "rodape": "Resultado esperado: o vi aberto em um arquivo novo dentro de .github/workflows/.",
+   "notas": "⏱ 2 min — Todo mundo dentro do ~/meu-projeto-devops. Soletre o caminho: ponto github, barra, workflows no plural. É o único lugar em que o GitHub procura os workflows; errou o nome, a aba Actions fica vazia. Dê o tempo de criarem a pasta e abrirem o vi."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "minutos": 3,
+   "titulo": "Passo 1 — ci.yml (1/2)",
+   "codigo": "name: CI\n\non:\n  push:\n    branches: [main]\n  pull_request:\n\njobs:\n  build-e-teste:",
+   "bullets": [
+    "Indentação com **2 espaços** — sem Tab!",
+    "Digite com calma: o nome do job é `build-e-teste`, com hífens"
+   ],
+   "rodape": "Resultado esperado: primeira metade digitada; a segunda vem no próximo slide.",
+   "notas": "⏱ 3 min — Digite junto com a turma, linha a linha, mostrando onde entram os 2 espaços. Repita: YAML não aceita Tab. Como estão via SSH, quem preferir pode colar do pratica.md (arquivo completo lá). Deixe este slide até a maioria confirmar no chat que chegou em 'build-e-teste:'."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "minutos": 3,
+   "titulo": "Passo 1 — ci.yml (2/2)",
+   "codigo": "    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n\n      - name: Build\n        run: ./scripts/build.sh\n\n      - name: Teste\n        run: ./scripts/test.sh",
+   "bullets": [
+    "💡 Reutiliza **os scripts que você escreveu na Aula 05**",
+    "Salve com `Esc` e `:wq`"
+   ],
+   "rodape": "Resultado esperado: arquivo salvo, igual ao modelo do pratica.md.",
+   "notas": "⏱ 3 min — Continue a digitação: runs-on com 4 espaços, steps, e os três passos. Atenção ao traço e ao espaço antes de 'uses' e 'name'. Repare com eles: nenhum comando novo, só os scripts da Aula 05 — e o runner é um Ubuntu, os mesmos comandos da VM funcionam lá. Peça para conferirem na tela do vi, comparando com o modelo, e salvarem com :wq."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "minutos": 3,
+   "titulo": "Passo 2 — Commit e push",
+   "codigo": "git add .github/workflows/ci.yml\ngit commit -m \"adiciona pipeline de CI com GitHub Actions\"\ngit push",
+   "bullets": [
+    "O mesmo ritual da Aula 06: `add`, `commit`, `push`",
+    "O `push` vai pedir o usuário e o token do GitHub, como na Aula 09"
+   ],
+   "rodape": "Resultado esperado: o push termina sem erro e o commit aparece no repositório no navegador.",
+   "notas": "⏱ 3 min — Ritual conhecido. No push, usuário do GitHub e o token (não a senha). Se aparecer 'refusing to allow a Personal Access Token to create or update workflow', o token não tem a permissão Workflows: isso está no slide 'Deu errado?'. Assim que o push terminar, mande todos para o navegador."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "minutos": 5,
+   "titulo": "Passo 3 — Veja o robô trabalhar 🍿",
+   "bullets": [
+    "No navegador: seu repositório → aba **Actions**",
+    "O workflow `CI` aparece rodando (bolinha amarela)",
+    "Clique nele → clique no job `build-e-teste` → expanda os steps **Build** e **Teste**"
+   ],
+   "destaque": "Os mesmos `[BUILD] OK` e `[TEST] OK` da VM, agora numa máquina do GitHub, disparados pelo seu push. Essa é a Integração Contínua.",
+   "rodape": "Resultado esperado: ✅ verde, com [BUILD] OK e [TEST] OK nos logs dos steps.",
+   "notas": "⏱ 5 min — Compartilhe a tela do seu repositório na aba Actions. Mostre a bolinha amarela virando verde, clique no job e expanda Build e Teste. Aponte os [BUILD] OK e [TEST] OK: são as mesmas linhas que eles viam na VM na Aula 05, agora numa máquina do GitHub. Peça no chat: 'Quem já está verde manda um ✅.' Se a aba Actions estiver vazia, confira o caminho do arquivo (Deu errado?)."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "minutos": 4,
+   "titulo": "Passo 4 — O selo no README (opcional)",
+   "codigo": "vi README.md    # cole o badge na primeira linha\ngit add README.md\ngit commit -m \"adiciona badge de status da CI\"\ngit push",
+   "bullets": [
+    "**Se der tempo; senão, vira missão de casa**",
+    "Na página do workflow: botão `···` → **Create status badge** → copie o markdown",
+    "Por isso o SSH: colar o badge do navegador no `vi` da VM"
+   ],
+   "rodape": "Resultado esperado: atualizando a página do repositório, um selo passing no topo. Portfólio com prova de qualidade. 😎",
+   "notas": "⏱ 4 min — Passo opcional: se a turma estiver atrasada, pule e deixe como missão de casa (a surpresa final às 21:20 não pode atrasar). Se der tempo: no navegador, página do workflow CI, botão de três pontos, Create status badge, copiar o markdown. No vi, colar na primeira linha do README.md. Commit e push, e atualizar a página: selo passing no topo."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "minutos": 3,
+   "titulo": "Passo 5 — Quebre de propósito 💥",
+   "codigo": "git checkout -b quebra-proposital\nvi scripts/build.sh",
+   "bullets": [
+    "O gran finale: integrar um código quebrado pelo fluxo da Aula 09 e ver a esteira barrar",
+    "No `vi`, troque `Bootcamp DevOps Matera 2026` por `Ola mundo`",
+    "O teste vai reprovar — lembra? Ele confere o conteúdo da página"
+   ],
+   "rodape": "Resultado esperado: branch quebra-proposital criada e build.sh alterado com o título errado.",
+   "notas": "⏱ 3 min — Agora o caminho vermelho. Nova branch, como na Aula 09. No vi, trocar o título da página por 'Ola mundo'. Relembre: o test.sh da Aula 05 confere se a página tem o texto certo, então vai falhar. É de propósito, e é blameless: quebrar num PR é exatamente para isso que a esteira existe."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "minutos": 5,
+   "titulo": "Passo 5 — A esteira barra",
+   "codigo": "git add scripts/build.sh\ngit commit -m \"altera titulo da pagina\"\ngit push -u origin quebra-proposital",
+   "bullets": [
+    "No navegador, abra o **Pull Request** dessa branch",
+    "Em segundos, o check **CI / build-e-teste** fica ❌ vermelho, **dentro do PR**",
+    "Clique em **Details** e encontre a linha exata do `[TEST] FALHOU`"
+   ],
+   "destaque": "O GitHub avisa que o merge não é seguro **antes** de o erro chegar à main. O botão segue ativo: você decide não clicar.",
+   "rodape": "Resultado esperado: PR aberto com o check vermelho e o [TEST] FALHOU em Details.",
+   "notas": "⏱ 5 min — Push da branch com -u origin, como na Aula 09. No navegador, abra o PR. Mostre o check ficando vermelho dentro do PR e clique em Details para achar o [TEST] FALHOU. Pergunte no chat: 'O erro chegou na main?' Não: foi barrado antes. Lembre que o botão de merge continua ativo: em projetos reais, uma regra de proteção da branch bloqueia — é o desafio bônus."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "minutos": 5,
+   "titulo": "Passo 6 — Conserte e veja o PR verde",
+   "codigo": "vi scripts/build.sh     # desfaça a mudança\ngit add scripts/build.sh\ngit commit -m \"corrige titulo da pagina\"\ngit push",
+   "bullets": [
+    "O PR reexecuta a pipeline sozinho → ✅ verde → **Merge pull request**",
+    "Na VM: `git checkout main && git pull`"
+   ],
+   "destaque": "Ciclo DevOps completo, de ponta a ponta, no seu projeto. 🏆",
+   "rodape": "Resultado esperado: check verde no PR, merge feito e a main local atualizada com o pull.",
+   "notas": "⏱ 5 min — Volte o título original no build.sh, commit e push (sem -u, a branch já tem upstream). Mostre o PR reexecutando a pipeline sozinho e ficando verde. Clique em Merge pull request. Na VM, voltar para a main e dar git pull. Comemore: é o ciclo completo — código, teste automático, revisão, integração."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "minutos": 2,
+   "titulo": "Passo 7 — Guarde o seu portfólio 🏅",
+   "bullets": [
+    "Anote o link do seu repositório",
+    "Tire um print da pipeline verde na aba **Actions**",
+    "Esse é o seu portfólio, construído por você em 10 aulas"
+   ],
+   "destaque": "O certificado de participação será enviado pelo Instituto Matera, conforme as orientações da organização.",
+   "rodape": "Resultado esperado: link do repositório anotado e print da pipeline verde salvo.",
+   "notas": "⏱ 2 min — Peça para anotarem o link do repositório e tirarem um print da aba Actions verde. Diga em uma frase, sem detalhes: o certificado será enviado pela organização. Não abra discussão sobre critérios aqui."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "minutos": 4,
+   "titulo": "Deu errado? 😥",
+   "bullets": [
+    "Aba Actions vazia → caminho exato `.github/workflows/ci.yml`; `ls -la .github/workflows/`",
+    "`Permission denied` no Build → sem `+x`; `git update-index --chmod=+x scripts/*.sh`",
+    "Erro de YAML → indentação: 2 espaços, sem Tab; compare com o modelo",
+    "Badge não aparece → regenere pelo botão **Create status badge**",
+    "`refusing to allow a Personal Access Token...` → token sem permissão **Workflows**"
+   ],
+   "rodape": "Token: Contents + Workflows: Read and write. Token antigo guardado? Apague a linha em ~/.git-credentials com o vi.",
+   "notas": "⏱ 4 min — Passe pelos erros mais prováveis. Actions vazia: quase sempre o caminho do arquivo. Permission denied: os scripts perderam o +x; o git update-index --chmod=+x conserta, depois commit e push. Erro de YAML: Tab ou indentação. Badge: o markdown aponta para a branch certa? Regenere. Token: edite em Settings → Developer settings → Fine-grained tokens ou gere outro com Contents + Workflows: Read and write; se o Git guardou o token velho, apagar a linha em ~/.git-credentials com o vi."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "minutos": 2,
+   "titulo": "Desafio bônus",
+   "bullets": [
+    "Transforme o aviso em bloqueio: Settings → Rules → Rulesets → New branch ruleset",
+    "Marque **Require status checks to pass** para a `main`",
+    "Reabra um PR quebrado e veja o botão de merge desativado"
+   ],
+   "destaque": "🔒 Em times reais isso é regra, não opção.",
+   "notas": "⏱ 2 min — Para quem terminou antes: criar a regra de proteção da branch main exigindo os checks verdes, como visto na Parte 1. Depois, num PR com a pipeline vermelha, o botão de merge fica desativado. Pode ficar para casa."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "minutos": 2,
+   "titulo": "Missão para depois do bootcamp 📌",
+   "bullets": [
+    "Leia o guia continuando com Linux e escolha o seu caminho",
+    "Manter a VM, WSL2 no Windows ou o Terminal do Mac",
+    "Aceite o **desafio dos 30 dias**: 10 minutos de terminal por dia",
+    "Daqui a um mês, conte na comunidade o que você automatizou",
+    "Badge no README (Passo 4) para quem não fez em aula"
+   ],
+   "destaque": "O loop não termina — recomeça.",
+   "notas": "⏱ 2 min — A missão de casa é a missão para a vida: o guia recursos/continuando-com-linux.md, um caminho para manter o terminal na rotina e o desafio de 30 dias. Quem pulou o badge faz em casa. Agora, sem perder tempo: a surpresa final."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "qa",
+   "minutos": 0,
+   "titulo": "A SURPRESA FINAL",
+   "subtitulo": "21:20 – 21:45",
+   "notas": "⏱ 0 min — Transição: 'No lugar do Q&A de sempre... a surpresa final.' 🎁 Troque para a máquina limpa da demo (CLI de IA autenticada, conta GitHub de demonstração). Confira que nenhum token está visível na tela. Vídeo de backup à mão. Dupla: um narra, outro digita."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "qa",
+   "minutos": 3,
+   "titulo": "Um prompt, um projeto (1/2)",
+   "paragrafos": [
+    "Durante duas semanas, vocês construíram com as próprias mãos: projeto, health check, pipeline, Dockerfile, compose, GitHub e CI."
+   ],
+   "bullets": [
+    "Agora, ao vivo: um único prompt numa CLI de IA (uma IA que roda no terminal)"
+   ],
+   "destaque": "💬 Enquete no chat: vocês levaram 10 aulas para construir esse projeto. Quanto tempo uma IA levaria?",
+   "notas": "⏱ 3 min — Faça a chamada: 'Vocês levaram 10 aulas para construir esse projeto. Alguém quer chutar quanto tempo uma IA levaria?' Deixe a enquete rolar e leia alguns chutes em voz alta. Anuncie: agora, ao vivo, um único prompt numa CLI de IA. Avance para o próximo slide com o pedido."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "qa",
+   "minutos": 12,
+   "titulo": "Um prompt, um projeto (2/2)",
+   "bullets": [
+    "Pedido: build.sh, test.sh, deploy.sh, pipeline.sh e healthcheck.sh",
+    "+ Dockerfile, compose.yaml (site + redis), workflow ci.yml e README.md",
+    "Para provar: `./scripts/pipeline.sh` verde, `docker compose up -d`, `curl localhost:8080`",
+    "Push e pipeline verde no Actions"
+   ],
+   "rodape": "O prompt literal e o checklist de riscos estão em aulas/aula-10-github-actions/plot-twist-ia.md.",
+   "notas": "⏱ 12 min — Cole o prompt completo (literal, do plot-twist-ia.md) na CLI de IA, na frente de todos. Enquanto a IA gera, narre e conecte cada arquivo à aula em que a turma o construiu: 'olha o set -e da Aula 04!', 'olha o build.sh da Aula 05!', 'olha o depends_on da Aula 08!', 'olha o ci.yml que vocês acabaram de escrever!'. Em seguida execute o resultado ao vivo: ./scripts/pipeline.sh verde, docker compose up -d, curl localhost:8080, push e pipeline verde no Actions. Se a internet falhar, vá para o vídeo de backup sem drama. Nenhum token na tela."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "qa",
+   "minutos": 10,
+   "titulo": "A virada",
+   "destaque": "💬 Interação: a IA errou algo? O que vocês fariam diferente? Revisem a IA no chat.",
+   "bullets": [
+    "**A IA só fez em minutos porque VOCÊS agora sabem julgar o que ela fez**",
+    "Sem as 10 aulas, o resultado seria um bloco de texto indecifrável",
+    "**O trabalho do DevOps mudou de lugar:** entender, revisar, decidir e operar",
+    "A IA escreve o script; quem responde pelo deploy em produção é você",
+    "**Quem domina os fundamentos multiplica a produtividade com IA**",
+    "Quem não domina só copia e cola — e não sabe consertar quando quebra (e sempre quebra!)"
+   ],
+   "notas": "⏱ 10 min — A virada: pergunte ao chat 'a IA errou algo? o que vocês fariam diferente?' e deixe a turma revisar a IA. É o momento em que eles percebem que sabem. Depois feche com os três pontos, em tom energizante, não desanimador (o impacto inicial é o 'uau'; o fecho é 'vocês sabem'): 1) eles sabem julgar o resultado; 2) o trabalho mudou de digitar para entender, revisar, decidir e operar; 3) fundamentos multiplicam a produtividade com IA, sem eles é só copiar e colar. Então siga para o encerramento."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "fechamento",
+   "minutos": 0,
+   "titulo": "O que levamos para a vida 🔗",
+   "paragrafos": [
+    "Vocês chegaram sem saber o que era um terminal. Saem com Linux, scripts, Git, Docker, GitHub e uma esteira de CI num projeto público."
+   ],
+   "bullets": [
+    "Uma pipeline de verdade: a cada push, o GitHub builda e testa sozinho",
+    "Segredos no cofre, nunca no YAML; o check vermelho protege a `main`",
+    "Guia continuando com Linux: seu caminho e o desafio dos 30 dias"
+   ],
+   "destaque": "O loop do DevOps não termina — ele recomeça: planejem o próximo aprendizado, codem, testem, monitorem a evolução de vocês.",
+   "rodape": "Certificado enviado pela organização. A comunidade fica. Obrigado, e até a próxima! 💙",
+   "notas": "⏱ 0 min — Leia a mensagem final com calma. Recapitule em uma frase o que foi aprendido hoje. Aponte o guia continuando-com-linux como o próximo passo concreto. Diga, em uma frase neutra, que o certificado será enviado pela organização. Agradeça a turma e lembre que a comunidade continua."
+  },
+  {
+   "tipo": "encerramento",
+   "bloco": "fechamento",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Logo do Instituto Matera na tela. Despedida final, encerre a transmissão."
+  }
+ ]
+}
