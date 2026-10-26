@@ -3,6 +3,8 @@
 > **Objetivo:** entender o que é controle de versão, por que o Git é a **fonte única da verdade** do DevOps e dominar o fluxo básico: `init`, `add`, `commit`, `branch`, `merge`.
 >
 > 📖 Apareceu uma palavra nova? Consulte o [glossário](../../glossario.md).
+>
+> 📽️ Slides desta aula: [`slides/aula-06.odp`](slides/aula-06.odp) (roteiro editável em [`slides/aula-06.json`](slides/aula-06.json) — veja [tools/slides](../../tools/slides/README.md)).
 
 ## 🔁 Revisão da Aula 05 (5 min)
 

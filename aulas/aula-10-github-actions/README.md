@@ -3,6 +3,8 @@
 > **Objetivo:** fechar o ciclo: a pipeline manual da Aula 05 vira uma pipeline **de verdade**, executada automaticamente pelo GitHub a cada push. E encerrar o bootcamp olhando para frente: DevSecOps, Kubernetes, carreira — e uma surpresa. 🎁
 >
 > 📖 Apareceu uma palavra nova? Consulte o [glossário](../../glossario.md).
+>
+> 📽️ Slides desta aula: [`slides/aula-10.odp`](slides/aula-10.odp) (roteiro editável em [`slides/aula-10.json`](slides/aula-10.json) — veja [tools/slides](../../tools/slides/README.md)).
 
 ## 🔁 Revisão da Aula 09 (5 min)
 

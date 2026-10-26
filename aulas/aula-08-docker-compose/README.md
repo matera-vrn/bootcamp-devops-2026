@@ -3,6 +3,8 @@
 > **Objetivo:** sair de "um container" para "um sistema": orquestrar múltiplos containers com um único arquivo declarativo, o `compose.yaml`.
 >
 > 📖 Apareceu uma palavra nova? Consulte o [glossário](../../glossario.md).
+>
+> 📽️ Slides desta aula: [`slides/aula-08.odp`](slides/aula-08.odp) (roteiro editável em [`slides/aula-08.json`](slides/aula-08.json) — veja [tools/slides](../../tools/slides/README.md)).
 
 ## 🔁 Revisão da Aula 07 (5 min)
 

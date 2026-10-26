@@ -3,6 +3,8 @@
 > **Objetivo:** nivelar todos os participantes. Explicar por que o DevOps nasceu, a dor que ele cura e por que o mercado paga tão bem por isso. Garantir que todos saiam com o ambiente funcionando.
 >
 > 📖 Apareceu uma palavra nova? Consulte o [glossário](../../glossario.md).
+>
+> 📽️ Slides desta aula: [`slides/aula-01.odp`](slides/aula-01.odp) (roteiro editável em [`slides/aula-01.json`](slides/aula-01.json) — veja [tools/slides](../../tools/slides/README.md)).
 
 ## Agenda
 

@@ -3,6 +3,8 @@
 > **Objetivo:** dar o próximo passo: permissões, processos, instalação de pacotes, filtros com pipes e os conceitos de rede que todo profissional DevOps precisa dominar (IP, portas, DNS, HTTP).
 >
 > 📖 Apareceu uma palavra nova? Consulte o [glossário](../../glossario.md).
+>
+> 📽️ Slides desta aula: [`slides/aula-03.odp`](slides/aula-03.odp) (roteiro editável em [`slides/aula-03.json`](slides/aula-03.json) — veja [tools/slides](../../tools/slides/README.md)).
 
 ## 🔁 Revisão da Aula 02 (5 min)
 

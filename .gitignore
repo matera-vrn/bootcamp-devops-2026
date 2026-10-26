@@ -1,0 +1,3 @@
+# saidas de renderizacao dos slides (PDF/PNG de conferencia)
+aulas/*/slides/render/
+tools/slides/render/
