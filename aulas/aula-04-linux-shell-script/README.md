@@ -3,6 +3,8 @@
 > **Objetivo:** transformar comandos em **automação**. Escrever, entender e executar os primeiros shell scripts — a porta de entrada para tudo que vem depois (pipelines!).
 >
 > 📖 Apareceu uma palavra nova? Consulte o [glossário](../../glossario.md).
+>
+> 📽️ Slides desta aula: [`slides/aula-04.odp`](slides/aula-04.odp) (roteiro editável em [`slides/aula-04.json`](slides/aula-04.json) — veja [tools/slides](../../tools/slides/README.md)).
 
 ## 🔁 Revisão da Aula 03 (5 min)
 

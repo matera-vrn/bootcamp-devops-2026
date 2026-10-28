@@ -1,0 +1,477 @@
+{
+ "aula": 4,
+ "tempo": {
+  "abertura": 5,
+  "revisao": 5,
+  "parte1": 40,
+  "intervalo": 15,
+  "parte2": 45,
+  "qa": 25
+ },
+ "slides": [
+  {
+   "tipo": "capa",
+   "bloco": "abertura",
+   "titulo": "Aula 04",
+   "subtitulo": "Linux 3: Shell Script",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Slide de capa enquanto o pessoal entra (19:30). Dê boas-vindas, confira se o áudio está ok e peça para quem chegou dizer 'oi' no chat. Hoje é o dia em que os comandos viram automação."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "abertura",
+   "titulo": "Agenda de hoje",
+   "paragrafos": [
+    "Objetivo da aula: transformar comandos em **automação**. Escrever, entender e executar os primeiros shell scripts."
+   ],
+   "bullets": [
+    "19:30 — Abertura e boas-vindas",
+    "19:35 — Parte 1: Automatizando a vida com Shell Script",
+    "20:20 — Intervalo (15 min)",
+    "20:35 — Parte 2: Mão na massa — seus primeiros scripts",
+    "21:20 — Perguntas & Respostas",
+    "21:45 — Encerramento"
+   ],
+   "destaque": "Shell script é a porta de entrada para tudo que vem depois: pipelines!",
+   "rodape": "Apareceu uma palavra nova? Consulte o glossário do repositório.",
+   "minutos": 5,
+   "notas": "⏱ 5 min — Apresente a agenda e o objetivo: hoje os comandos que vocês digitaram na Aula 03 viram arquivos que rodam sozinhos. Combine o formato: Parte 1 é conceito (40 min), intervalo, Parte 2 é mão na massa com a VM ligada. Peça para já deixarem a VM ligando e o terminal SSH aberto. Lembre do glossário para qualquer palavra nova."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "revisao",
+   "titulo": "Revisão da aula anterior",
+   "bullets": [
+    "Permissões (`chmod +x` — lembram do `x`? Hoje ele brilha!).",
+    "Processos (`ps`, `top`), pacotes (`apt`) e pipes (`|`).",
+    "Rede: IP é o endereço, porta é a porta da casa, DNS é a agenda, HTTP é o idioma.",
+    "Fechamos gerando um `relatorio.txt` encadeando vários comandos... digitados um a um. 😓"
+   ],
+   "destaque": "Gancho: e se aquele relatório se gerasse sozinho, com um único comando? Hoje seus comandos viram scripts.",
+   "minutos": 5,
+   "notas": "⏱ 5 min — Revisão rápida da Aula 03. Pergunte ao chat: 'quem ainda lembra o que o x do chmod faz?'. Retome as analogias de rede (endereço, porta da casa, agenda, idioma). Relembre a dor: o relatório da Aula 03 foi digitado comando por comando. Feche com o gancho: hoje aquilo vira um único comando. Transição para a Parte 1."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "parte1",
+   "titulo": "PARTE 1",
+   "subtitulo": "Automatizando com Shell Script",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Divisor. Avise que a Parte 1 é conceito, com exemplos curtos na tela; a prática fica para depois do intervalo. Material de apoio recomendado: 'Shell Script — um guia básico' (Diego Mariano), link no README."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "O que é um shell script?",
+   "paragrafos": [
+    "Um **arquivo de texto com comandos** que o shell executa em sequência, de cima para baixo.",
+    "Tudo que você digita no terminal pode virar script. É a forma mais antiga — e ainda a mais usada — de automação em DevOps."
+   ],
+   "destaque": "💡 Toda pipeline de CI/CD que você verá na carreira é, no fundo, uma sequência de shell scripts executados por um robô.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Defina o jargão: 'shell' é o programa que lê seus comandos (o bash); 'script' é um arquivo de texto com esses comandos, um por linha. Analogia: uma receita — a receita (script) lista os passos e o cozinheiro (shell) executa de cima para baixo. Leia o destaque e plante a semente da Aula 05: CI/CD (integração e entrega contínuas) é, por baixo, uma sequência de scripts rodados por um robô; não aprofunde agora. Pergunte no chat: 'qual comando vocês mais repetiram na Aula 03?' — é candidato a virar script."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Anatomia de um script",
+   "codigo": "#!/bin/bash\n# Meu primeiro script (isto é um comentário)\n\necho \"Olá, bootcamp!\"",
+   "bullets": [
+    "`#!/bin/bash` — o **shebang**: diz qual interpretador executa o arquivo.",
+    "`#` — comentários: explique o **porquê**, o computador ignora.",
+    "`echo` imprime o texto na tela."
+   ],
+   "minutos": 4,
+   "notas": "⏱ 4 min — Mostre o script linha a linha. Defina o jargão: 'shebang' é a primeira linha, com #! seguido do interpretador — diz ao sistema 'use o bash para ler este arquivo'. Comentários começam com # e são ignorados; servem para o humano do futuro (que pode ser você). Pergunte no chat: 'o que esse script imprime quando roda?' (Olá, bootcamp!)."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Como executar um script",
+   "codigo": "chmod +x script.sh\n./script.sh",
+   "bullets": [
+    "`chmod +x` dá permissão de execução — o `x` da Aula 03 preparou você!",
+    "`./` significa 'o script que está nesta pasta'.",
+    "Sem o `chmod +x`: `Permission denied`. Sem o `./`: `command not found`."
+   ],
+   "destaque": "Dois passos, sempre nesta ordem: dar permissão, depois executar.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Reforce a ponte com a Aula 03: o x do chmod finalmente faz sentido. Explique o ./: o shell só procura comandos nas pastas do sistema; o ./ diz 'procure aqui'. Antecipe os dois erros mais comuns da prática (Permission denied e command not found) — eles voltam no slide 'Deu errado?'."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Variáveis",
+   "codigo": "NOME=\"Matera\"\necho \"Bootcamp $NOME\"        # usa a variável\nDATA=$(date +%d/%m/%Y)        # guarda a SAÍDA de um comando\necho \"Hoje é $DATA\"",
+   "bullets": [
+    "Uma variável é uma **caixinha com nome** onde você guarda um valor.",
+    "`$NOME` lê o que está dentro da caixinha.",
+    "`$(comando)` executa o comando e guarda a saída dele."
+   ],
+   "minutos": 4,
+   "notas": "⏱ 4 min — Analogia da caixinha com etiqueta: NOME é a etiqueta, Matera é o conteúdo. Mostre que $(date ...) executa o comando date e guarda o resultado — isso vai aparecer no health check com $(hostname). Pergunte ao chat: 'o que a segunda linha imprime?' (Bootcamp Matera)."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Variáveis: as regras",
+   "bullets": [
+    "**Sem espaço** em volta do `=`: `NOME=\"Matera\"` funciona, `NOME = \"Matera\"` quebra.",
+    "Use `$VARIAVEL` para ler o valor.",
+    "`$(comando)` captura a saída de um comando.",
+    "Nomes em MAIÚSCULAS e descritivos ajudam a enxergar as variáveis no script."
+   ],
+   "destaque": "💬 Interação: `NOME = \"Matera\"` com espaços — o que acontece?",
+   "minutos": 4,
+   "notas": "⏱ 4 min — As três regras do README valem para todos os scripts do bootcamp. O erro do espaço em volta do = é o mais clássico: o bash entende NOME como um comando a executar e falha. Faça a pergunta do destaque e deixe o chat tentar explicar antes de dar a resposta."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Condicionais: o script que decide",
+   "codigo": "if ping -c 1 matera.com > /dev/null 2>&1; then\n    echo \"[OK] Internet\"\nelse\n    echo \"[FALHA] Sem internet\"\nfi",
+   "bullets": [
+    "`if` testa se o comando deu certo; `then` faz uma coisa, `else` faz outra, `fi` fecha.",
+    "`ping -c 1` manda um único pacote para o site e espera a resposta."
+   ],
+   "destaque": "Um script que decide é um script que pode avisar você — é isso que o health check da Parte 2 faz.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Leia o bloco em voz alta como uma frase: 'se o ping responder, então imprima OK, senão imprima FALHA, fim'. Destaque que fi é if ao contrário e fecha o bloco. Esse é exatamente o formato do health check da Parte 2."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Código de saída e /dev/null",
+   "bullets": [
+    "Todo comando devolve um **código de saída**: 0 = sucesso, qualquer outro = falha.",
+    "O `if` olha esse código — é assim que pipelines sabem se um passo falhou!",
+    "`> /dev/null 2>&1` joga fora toda a saída do `ping`: só queremos saber se deu certo.",
+    "O `/dev/null` é o 'buraco negro' do Linux: tudo que entra, some."
+   ],
+   "destaque": "💬 Interação: por que esconder a saída do ping dentro de um script?",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Defina o jargão: código de saída é um número que todo comando devolve ao terminar; zero quer dizer 'deu certo'. É o que o if usa e o que as pipelines usam. Explique o /dev/null como buraco negro: a saída do ping poluiria o relatório. Pergunta do destaque ao chat; resposta esperada: só queremos o OK/FALHA, não as linhas do ping."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Loops: repetição sem sofrimento",
+   "codigo": "for SERVICO in ssh cron systemd-resolved; do\n    echo \"Verificando $SERVICO...\"\n    systemctl is-active \"$SERVICO\"\ndone",
+   "bullets": [
+    "`for ... in lista; do ... done`: repete o bloco uma vez para cada item da lista.",
+    "A cada volta, `$SERVICO` recebe o próximo nome.",
+    "`systemctl` gerencia os serviços do sistema; `is-active` diz se o serviço está rodando."
+   ],
+   "minutos": 4,
+   "notas": "⏱ 4 min — Analogia: conferir uma lista de chamada — para cada nome da lista, faça a mesma coisa. Mostre que a variável SERVICO muda de valor a cada volta: ssh, depois cron, depois systemd-resolved. Defina systemctl: o comando que gerencia os serviços do sistema (o comentário do README virou o terceiro bullet). Pergunte: 'quantas vezes o echo roda?' (três)."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Entrada do usuário e parâmetros",
+   "codigo": "read -p \"Seu nome: \" NOME     # pergunta interativa\necho \"Bem-vindo, $NOME!\"\n\n# ou por parâmetro: ./script.sh Maria\necho \"Olá, $1!\"               # $1 = primeiro parâmetro",
+   "bullets": [
+    "`read -p` faz uma pergunta e guarda a resposta na variável.",
+    "`$1` é o primeiro parâmetro: o que veio depois do nome do script na linha de comando.",
+    "Parâmetro é o que torna um script útil para qualquer pessoa, não só para você."
+   ],
+   "minutos": 4,
+   "notas": "⏱ 4 min — Dois jeitos de o script receber informação: perguntando (read, interativo) ou recebendo na chamada ($1, parâmetro). Em automação, parâmetro é melhor: um robô não responde perguntas. O desafio bônus 3 da prática usa $1 para escolher o site do ping. Pergunte: 'em ./script.sh Maria, o que $1 vale?' (Maria)."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Boas práticas desde o primeiro script",
+   "bullets": [
+    "Comece com `set -e`: o script **para no primeiro erro**. Falhar rápido é virtude.",
+    "Nomes de variáveis MAIÚSCULOS e descritivos.",
+    "**Nunca** coloque senhas ou tokens dentro do script — segredos ficam fora do código."
+   ],
+   "destaque": "Você verá onde os segredos ficam na Aula 10. Por enquanto: nunca dentro do script.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Três hábitos para levar desde hoje. set -e: sem ele, o script continua mesmo depois de um erro e pode fazer bobagem. Nomes descritivos: USO_DISCO é melhor que X. Segredos: um script vai parar num repositório, e repositórios vazam — senha dentro do script é senha pública. Feche a Parte 1: 'no intervalo, deixem a VM ligada e o SSH conectado'."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "intervalo",
+   "titulo": "INTERVALO",
+   "subtitulo": "Voltamos às 20:35",
+   "minutos": 15,
+   "notas": "⏱ 15 min — Intervalo. Peça para voltarem com a VM ligada e o terminal SSH conectado (usuário aluno, hostname bootcamp). Quem ainda não tem a pasta ~/meu-projeto-devops/scripts (criada na Aula 02) pode aproveitar para criá-la."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "parte2",
+   "titulo": "PARTE 2",
+   "subtitulo": "Seus primeiros scripts 🩺",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Divisor da prática. Compartilhe o seu terminal; a partir daqui é todo mundo fazendo junto, passo a passo. Lembre: o editor do bootcamp é o vi."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Objetivo e onde",
+   "paragrafos": [
+    "**Objetivo:** o relatório da Aula 03 vira um script de 5 linhas; depois, um **health check** que responde `[OK]` ou `[FALHA]`.",
+    "**Onde:** no terminal conectado à VM via SSH. A janela do VirtualBox também serve, mas sem copiar e colar."
+   ],
+   "bullets": [
+    "Health check (checagem de saúde): o script que verifica a saúde da VM.",
+    "Os scripts usam só caracteres do teclado (sem emoji nem acento).",
+    "Digite com calma — errar e corrigir faz parte — ou, se estiver via SSH, cole.",
+    "Travou na digitação? No fim há como baixar as versões prontas."
+   ],
+   "destaque": "O health check fica no projeto até o fim do bootcamp.",
+   "minutos": 2,
+   "notas": "⏱ 2 min — Dois entregáveis: relatorio.sh (vitória rápida) e healthcheck.sh (o importante). Defina health check: checagem de saúde da máquina. Peça para todo mundo confirmar no chat que está no terminal SSH da VM. Avise que os scripts não têm acento nem emoji de propósito, para evitar erro de digitação."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 1 — O relatório vira script (1/2)",
+   "codigo": "cd ~/meu-projeto-devops/scripts\nvi relatorio.sh",
+   "bullets": [
+    "**vi em 1 minuto:** abre no modo normal; o mouse não funciona, use as setas.",
+    "`i` entra na inserção (aparece `-- INSERT --`) · `Esc` volta ao normal."
+   ],
+   "rodape": "Resultado esperado: o vi abre vazio, pronto para receber o conteúdo do relatorio.sh.",
+   "minutos": 2,
+   "notas": "⏱ 2 min — Entre na pasta scripts (criada na Aula 02) e abra o vi no relatorio.sh. Relembre a micro aula de vi: o vi abre no modo normal, o mouse não funciona; i entra na inserção (aparece -- INSERT --) e Esc volta ao normal. Espere o chat confirmar que o vi abriu; os atalhos de salvar e colar vêm no próximo slide."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 1 — O relatório vira script (2/2)",
+   "bullets": [
+    "`:wq` + Enter salva e sai · `:q!` + Enter sai sem salvar · `dd` apaga a linha.",
+    "Colar via SSH: `Esc`, `:set paste`, Enter, `i`, cole; depois `Esc`, `:wq`."
+   ],
+   "destaque": "Com o vi aberto, o próximo slide traz as cinco linhas do relatorio.sh.",
+   "minutos": 2,
+   "notas": "⏱ 2 min — Continuação da micro aula de vi: :wq salva e sai, :q! sai sem salvar, dd apaga a linha, u desfaz. Quem vai colar via SSH: :set paste antes do i, para o vi não bagunçar a indentação. Atalhos de colar: Ctrl + V no Windows, Cmd + V no Mac, Ctrl + Shift + V no Linux. Transição: no próximo slide, o conteúdo do relatorio.sh."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 1 — Conteúdo do relatorio.sh",
+   "codigo": "#!/bin/bash\necho \"=== Relatorio do sistema ===\"\ndate\nuptime\ndf -h / | grep -v Filesystem",
+   "bullets": [
+    "A primeira linha é o **shebang**: diz que o `bash` deve executar este arquivo.",
+    "As outras quatro você já conhece da Aula 03.",
+    "Salve e saia: `Esc`, `:wq`, Enter."
+   ],
+   "rodape": "Resultado esperado: o vi fecha e você volta ao terminal, com o relatorio.sh salvo na pasta scripts.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Digite (ou cole) as cinco linhas. Cuidado com o shebang: #! sem espaço, /bin/bash. Mostre que date, uptime e df -h / | grep -v Filesystem são exatamente os comandos do relatório da Aula 03. Salve com Esc, :wq, Enter. Dê um tempo para todo mundo digitar; peça um 'salvei' no chat."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 2 — Dê permissão e execute",
+   "codigo": "chmod +x relatorio.sh\n./relatorio.sh",
+   "bullets": [
+    "Quatro comandos, um só toque. **Isso é automação.**",
+    "O `./` na frente significa 'o script que está nesta pasta'.",
+    "O `x` do `chmod` é o da Aula 03."
+   ],
+   "destaque": "💬 Interação: deu certo? Cole no chat a linha do disco que apareceu para você.",
+   "rodape": "Resultado esperado: === Relatorio do sistema ===, a data, o uptime e a linha /dev/sda2 ... 17% / (com os seus números).",
+   "minutos": 4,
+   "notas": "⏱ 4 min — chmod +x e depois ./relatorio.sh. O resultado esperado tem quatro linhas: o cabeçalho, a data (Fri Nov 6 ...), o uptime e a linha do disco (/dev/sda2 37G 5.9G 29G 17% /) — os números de cada um vão variar. Comemore: é a primeira automação do bootcamp. Quem receber Permission denied esqueceu o chmod; quem receber command not found esqueceu o ./."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 3 — O health check (versão mínima)",
+   "codigo": "vi healthcheck.sh",
+   "bullets": [
+    "Agora um script que **decide**: verifica internet e disco e responde `[OK]` ou `[FALHA]`.",
+    "Vamos digitar em três blocos: cabeçalho, internet e disco.",
+    "Lembre: `i` para inserir; se for colar via SSH, `:set paste` antes."
+   ],
+   "rodape": "Resultado esperado: o vi abre vazio, pronto para receber o conteúdo do healthcheck.sh.",
+   "minutos": 2,
+   "notas": "⏱ 2 min — Ainda na pasta scripts, abra o vi no novo arquivo. Avise que o script tem 21 linhas e que vamos digitar em três blocos, um por slide, para ninguém se perder. Quem vai colar: :set paste primeiro."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 3 — Bloco 1: cabeçalho",
+   "codigo": "#!/bin/bash\n# healthcheck.sh - verifica a saude basica da maquina\nset -e\necho \"=== Health Check - $(hostname) - $(date '+%d/%m/%Y %H:%M') ===\"",
+   "bullets": [
+    "`set -e`: se qualquer comando falhar, o script para na hora.",
+    "`$(hostname)` vira `bootcamp`; `$(date ...)` vira a data e a hora.",
+    "Deixe uma linha em branco antes do próximo bloco."
+   ],
+   "rodape": "Resultado esperado: quatro linhas digitadas, sem acento; o cabeçalho será a primeira linha da saída.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Bloco 1, quatro linhas. A linha do echo é a mais longa: aspas duplas por fora, aspas simples dentro do date. Reforce: $(hostname) e $(date ...) são o 'guarda a saída de um comando' da Parte 1. set -e é a boa prática do fim da Parte 1. Espere o chat confirmar."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 3 — Bloco 2: internet",
+   "codigo": "# 1) Internet: o ping respondeu?\nif ping -c 1 ubuntu.com > /dev/null 2>&1; then\n    echo \"[OK] Internet\"\nelse\n    echo \"[FALHA] Internet\"\nfi",
+   "bullets": [
+    "O mesmo `if` da Parte 1: se o `ping` responder, `[OK]`; senão, `[FALHA]`.",
+    "`> /dev/null 2>&1` esconde a saída do `ping` — só queremos o veredito.",
+    "Os quatro espaços antes do `echo` são só para ler melhor."
+   ],
+   "rodape": "Resultado esperado: seis linhas; o fi fecha o if. Linha em branco antes do próximo bloco.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Bloco 2, seis linhas, o if do slide de condicionais. Cuidado com o ponto e vírgula antes do then e com o fi no final — é a causa do 'syntax error near unexpected token'. Os quatro espaços de indentação são opcionais, mas ajudam a ler. Confirme no chat antes de seguir."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 3 — Bloco 3: disco e fim",
+   "codigo": "# 2) Disco: acima de 80% de uso, alerta\nUSO_DISCO=$(df / --output=pcent | tail -1 | tr -d ' %')\nif [ \"$USO_DISCO\" -lt 80 ]; then\n    echo \"[OK] Disco: ${USO_DISCO}% usado\"\nelse\n    echo \"[FALHA] Disco: ${USO_DISCO}% usado (acima de 80%!)\"\nfi\n\necho \"=== Fim do health check ===\"",
+   "bullets": [
+    "`USO_DISCO` guarda só o número do percentual de uso do disco.",
+    "`[ \"$USO_DISCO\" -lt 80 ]` testa se o número é menor que 80."
+   ],
+   "rodape": "Salve com Esc, :wq, Enter. Resultado: healthcheck.sh com 21 linhas, salvo na pasta scripts.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Bloco 3, o mais delicado: a linha USO_DISCO= tem um pipe de três comandos e é onde nasce o 'integer expression expected' — peça para conferirem caractere por caractere: df / --output=pcent, tail -1, tr -d ' %'. Nos colchetes do if há espaço depois do [ e antes do ]. Salve com Esc, :wq, Enter (a instrução está no rodapé). Peça um 'salvei' no chat."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Comandos novos nesta prática (1/2)",
+   "bullets": [
+    "`set -e` → se qualquer comando falhar, o script para na hora (falhar rápido é virtude).",
+    "`$(comando)` → executa o comando e usa a saída no lugar: `$(hostname)` vira `bootcamp`.",
+    "`> /dev/null 2>&1` → joga fora o que o comando imprime; só importa se ele deu certo."
+   ],
+   "minutos": 2,
+   "notas": "⏱ 2 min — Antes de rodar, uma pausa para entender o que foi digitado. Os três primeiros trechos da tabela do pratica.md: set -e (falhar rápido), $(comando) (guarda a saída: hostname vira bootcamp) e > /dev/null 2>&1 (joga a saída fora; só o código de saída importa). Pergunte no chat: 'o que o $(hostname) vira na VM de vocês?' (bootcamp)."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Comandos novos nesta prática (2/2)",
+   "bullets": [
+    "`df / --output=pcent` → mostra só a coluna de percentual de uso do disco.",
+    "`tail -1` → pega só a última linha.",
+    "`tr -d ' %'` → apaga os espaços e o `%`, sobrando só o número.",
+    "`[ \"$USO_DISCO\" -lt 80 ]` → testa se o número é menor que (**less than**) 80.",
+    "`${USO_DISCO}` → o mesmo que `$USO_DISCO`, com chaves para não grudar no texto ao lado."
+   ],
+   "minutos": 2,
+   "notas": "⏱ 2 min — O pipe df | tail | tr transforma a saída do df em um número puro: df mostra a coluna de percentual, tail -1 fica com a última linha, tr -d apaga espaço e %. -lt é less than (menor que). As chaves em ${USO_DISCO} evitam que o bash procure uma variável chamada USO_DISCO%. Pergunte no chat: 'o que o tr -d apaga?'"
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 4 — Execute! 🚀",
+   "codigo": "chmod +x healthcheck.sh\n./healthcheck.sh",
+   "bullets": [
+    "Primeiro a permissão, depois a execução — sempre nesta ordem.",
+    "Quatro linhas na saída: cabeçalho, internet, disco e fim."
+   ],
+   "destaque": "💬 Interação: tire um print e poste no chat! 🎉",
+   "rodape": "Resultado esperado: 4 linhas — cabeçalho com bootcamp e a hora, [OK] Internet, [OK] Disco: 17% usado e a linha de fim.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — chmod +x e ./healthcheck.sh. A saída esperada: === Health Check - bootcamp - 06/11/2026 20:45 === (com a data/hora de hoje), [OK] Internet, [OK] Disco: 17% usado (o número varia) e === Fim do health check ===. Se aparecer [FALHA] Internet, a VM está sem rede — o if trata a falha, o script segue. Peça o print no chat e comemore cada um. Quem tiver erro: vá direto para o slide 'Deu errado?'."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 5 — Grave o resultado em um log",
+   "codigo": "./healthcheck.sh >> ~/meu-projeto-devops/healthcheck.log\ncat ~/meu-projeto-devops/healthcheck.log",
+   "bullets": [
+    "Automação de verdade guarda histórico.",
+    "`>>` acrescenta no fim do arquivo (um `>` só sobrescreveria).",
+    "Execute 2–3 vezes e veja o log crescer — cada execução com seu horário."
+   ],
+   "rodape": "Resultado esperado: o cat mostra os blocos de health check empilhados, um por execução, cada um com seu horário.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Rode o health check com >> para o log e depois o cat. Peça para executarem duas ou três vezes e verem o log crescer com horários diferentes. Defina: log é o registro histórico — a diferença entre 'está ok agora' e 'estava ok ontem às 20:45'. Esse log será a missão da semana."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Travou na digitação? Baixe a versão pronta",
+   "codigo": "cd ~/meu-projeto-devops/scripts\ncurl -O https://raw.githubusercontent.com/matera-vrn/bootcamp-devops-2026/main/aulas/aula-04-linux-shell-script/scripts/relatorio.sh\ncurl -O https://raw.githubusercontent.com/matera-vrn/bootcamp-devops-2026/main/aulas/aula-04-linux-shell-script/scripts/healthcheck.sh\nchmod +x relatorio.sh healthcheck.sh",
+   "bullets": [
+    "`curl -O` baixa o arquivo para a pasta atual, com o mesmo nome. Cole a URL via SSH.",
+    "**Leia antes de executar** (`cat healthcheck.sh`): hábito de quem leva segurança a sério.",
+    "Compare com o que você digitou, linha a linha: a diferença é o seu erro."
+   ],
+   "minutos": 2,
+   "notas": "⏱ 2 min — Plano B para quem travou: via SSH, na pasta scripts, os dois curl -O baixam relatorio.sh e healthcheck.sh direto do repositório (as URLs são longas: cole a partir do pratica.md). Insista no hábito: cat no arquivo antes de dar chmod +x e executar — nunca rode script baixado sem ler. Depois comparar com a versão digitada: a diferença é o erro, e é assim que se aprende."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Deu errado? 😥",
+   "bullets": [
+    "`Permission denied` → faltou o `chmod +x`.",
+    "`command not found` ao rodar → use `./healthcheck.sh` (com `./` na frente).",
+    "`No such file or directory` → fora da pasta: `cd ~/meu-projeto-devops/scripts`.",
+    "`syntax error near unexpected token` → `if`/`then`/`fi` incompleto; compare com o modelo.",
+    "`integer expression expected` → linha `USO_DISCO=` errada; confira cada caractere.",
+    "O terminal 'travou' → `Ctrl + C`; se foi o `ping`, confira se escreveu `-c 1`."
+   ],
+   "minutos": 2,
+   "notas": "⏱ 2 min — Percorra os seis erros mais prováveis. Os três primeiros são de permissão e caminho; os dois seguintes são de digitação no script (if sem fi; linha do USO_DISCO errada: df / --output=pcent, tail -1, tr -d ' %'); o último é o ping sem -c 1, que fica rodando para sempre. Peça para quem travou mandar a mensagem de erro no chat."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Desafio bônus 🏆",
+   "codigo": "echo \"[OK] Memoria disponivel: $(free -m | grep Mem | awk '{print $7}') MB\"\nps aux | wc -l\nSITE=${1:-ubuntu.com}\nping -c 1 \"$SITE\"",
+   "bullets": [
+    "**Memória:** 3ª verificação antes da última linha (`free -m` mostra a memória em MB).",
+    "**Processos:** mais uma linha com quantos processos estão rodando.",
+    "**Parâmetro:** o site do teste de internet vem em `$1`, com `ubuntu.com` como padrão."
+   ],
+   "rodape": "awk '{print $7}' pega a 7ª coluna do free, a available (disponível). O desafio 3 vira missão da semana.",
+   "minutos": 2,
+   "notas": "⏱ 2 min — Três desafios para quem terminou cedo ou para casa. 1) Memória: a linha do echo entra antes do 'Fim do health check'; awk '{print $7}' pega a 7ª coluna (available). 2) Processos: ps aux | wc -l conta as linhas, uma por processo. 3) Parâmetro: SITE=${1:-ubuntu.com} usa o $1 se veio, senão ubuntu.com; depois o ping usa \"$SITE\". O terceiro é o mais importante — vira missão."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Missão até a próxima aula 📌",
+   "codigo": "~/meu-projeto-devops/scripts/healthcheck.sh >> ~/meu-projeto-devops/healthcheck.log\ntail -5 ~/meu-projeto-devops/healthcheck.log\nmkdir ~/rascunho-$(date +%d-%m)",
+   "bullets": [
+    "Toda vez que ligar a VM, rode o health check para o log e veja-o crescer com `tail -5`.",
+    "Faça o desafio bônus 3 (site como parâmetro `$1`): um script que serve para qualquer um.",
+    "Automatize uma chatice sua: um script de 3 linhas que cria a pasta do dia já conta."
+   ],
+   "minutos": 1,
+   "notas": "⏱ 1 min — Três missões: rodar o health check para o log toda vez que ligar a VM esta semana (e conferir com tail -5), fazer o bônus 3 do parâmetro $1 e automatizar alguma chatice pessoal com um script de três linhas (o mkdir da pasta do dia já conta). Combine que na próxima aula vocês vão perguntar quem automatizou o quê."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "qa",
+   "titulo": "PERGUNTAS & RESPOSTAS",
+   "subtitulo": "21:20 – 21:45",
+   "minutos": 25,
+   "notas": "⏱ 25 min — Abra para perguntas. Priorize quem ainda está com erro no health check: peça a mensagem no chat e resolva ao vivo compartilhando a tela. Sobrou tempo? Mostre o desafio bônus 3 rodando (./healthcheck.sh matera.com) e pergunte onde mais eles usariam um if num script."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "fechamento",
+   "titulo": "O que levamos para a próxima aula",
+   "paragrafos": [
+    "Seu script verifica a máquina em 2 segundos."
+   ],
+   "bullets": [
+    "Um script é um arquivo de texto com comandos: shebang, `chmod +x`, `./script.sh`.",
+    "Variáveis, `if`, `for` e `$1` fazem o script **decidir** e servir para qualquer um.",
+    "`set -e`, nomes descritivos e **nunca** segredos dentro do script."
+   ],
+   "destaque": "Gancho: encadear scripts de build, teste e deploy, executados por um robô a cada mudança de código. Isso tem nome: **pipeline**.",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Resuma em três frases e leia o gancho: o health check roda em dois segundos; encadear scripts de build (montar o programa), teste e deploy (colocar no ar), rodados por um robô a cada mudança de código, é uma pipeline — o coração do DevOps e o tema da Aula 05. Lembre a missão e o log. Agradeça e peça para deixarem o print do health check no chat."
+  },
+  {
+   "tipo": "encerramento",
+   "bloco": "fechamento",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Slide final com o logo do Instituto Matera. Despedida, até a próxima aula (Aula 05: pipelines). Encerre a transmissão às 21:45."
+  }
+ ]
+}

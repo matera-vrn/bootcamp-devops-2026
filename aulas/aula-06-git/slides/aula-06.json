@@ -1,0 +1,453 @@
+{
+ "aula": 6,
+ "tempo": {
+  "abertura": 5,
+  "revisao": 5,
+  "parte1": 40,
+  "intervalo": 15,
+  "parte2": 45,
+  "qa": 25
+ },
+ "slides": [
+  {
+   "tipo": "capa",
+   "bloco": "abertura",
+   "titulo": "Aula 06",
+   "subtitulo": "Git: onde o código vive",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Slide de abertura enquanto o pessoal entra na live. Cumprimentar, pedir para confirmarem no chat que áudio e tela estão ok. Hoje é 11/11, sexta aula: Git."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "abertura",
+   "titulo": "Agenda de hoje",
+   "paragrafos": [
+    "Objetivo: entender o que é controle de versão, por que o Git é a **fonte única da verdade** do DevOps e dominar o fluxo básico."
+   ],
+   "bullets": [
+    "19:30 — Abertura e boas-vindas",
+    "19:35 — Parte 1: Controle de versão e a fonte única da verdade",
+    "20:20 — Intervalo (15 min)",
+    "20:35 — Parte 2: Mão na massa — o `meu-projeto-devops` vira repositório Git",
+    "21:20 — Perguntas & Respostas",
+    "21:45 — Encerramento"
+   ],
+   "destaque": "Ao final de hoje: `init`, `add`, `commit`, `branch` e `merge` na ponta dos dedos.",
+   "minutos": 5,
+   "notas": "⏱ 5 min — Boas-vindas. Apresentar a agenda e os horários. Lembrar: VM ligada e terminal SSH aberto para a Parte 2. Apareceu palavra nova? Glossário no repositório. Perguntar no chat: quem já ouviu falar de Git? Quem já usou?"
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "revisao",
+   "titulo": "Revisão da aula anterior",
+   "bullets": [
+    "CI = integrar pouco e sempre; CD = toda versão pronta (ou indo) para produção.",
+    "Vocês montaram uma pipeline com stages de build → teste → deploy.",
+    "A esteira **para no primeiro erro** — e vocês viram um teste barrar uma versão quebrada."
+   ],
+   "destaque": "Mas a esteira roda em cima de qual versão do código? Se dois colegas mudam o mesmo arquivo, quem vence?",
+   "rodape": "Hoje conhecemos a fonte única da verdade: o Git.",
+   "minutos": 5,
+   "notas": "⏱ 5 min — Relembrar a Aula 05 em frases curtas: CI/CD e a pipeline que para no primeiro erro. Perguntar no chat: alguém fez a missão da aula passada? Lançar o gancho: de qual versão do código a esteira parte? Quem vence quando dois mudam o mesmo arquivo? Responder: o Git. Transição para a Parte 1."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "parte1",
+   "titulo": "PARTE 1",
+   "subtitulo": "A fonte única da verdade",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Divisor. Anunciar: Parte 1, controle de versão e a fonte única da verdade. Só conceito agora; o terminal fica para depois do intervalo."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "A dor que o Git cura",
+   "codigo": "sistema_final.zip\nsistema_final_v2.zip\nsistema_final_AGORA_VAI.zip  😅",
+   "bullets": [
+    "Sem controle de versão: ninguém sabe qual é a versão atual.",
+    "Ninguém sabe quem mudou o quê, nem como voltar atrás.",
+    "Em equipe, vira caos multiplicado."
+   ],
+   "destaque": "Controle de versão = registrar cada mudança para saber o que é atual, quem mudou e como voltar.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Mostrar os zips e deixar o pessoal rir: todo mundo já fez isso. Perguntar no chat: quem já teve um 'final_v2_AGORA_VAI'? Definir o jargão: controle de versão é o registro de cada mudança de cada arquivo. Sem ele: não sabemos qual é a versão atual, quem mudou, nem como desfazer. Em equipe, piora."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "O que é o Git",
+   "paragrafos": [
+    "Criado em 2005 por Linus Torvalds (o mesmo do Linux!) para organizar o desenvolvimento do kernel — o núcleo do Linux."
+   ],
+   "bullets": [
+    "Registra **cada mudança**, de **cada arquivo**, feita por **cada pessoa**, para sempre.",
+    "Nasceu para um projeto gigante e distribuído: milhares de pessoas no mesmo código.",
+    "Hoje é o padrão em praticamente toda equipe de software."
+   ],
+   "destaque": "Git = a memória completa do seu projeto.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Contar a origem: 2005, Linus Torvalds, o mesmo do Linux que vocês usam na VM. Kernel é o núcleo do sistema. Ele precisava organizar milhares de pessoas mexendo no mesmo código. A ideia central: registrar cada mudança, de cada arquivo, de cada pessoa, para sempre."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "O que o Git guarda",
+   "bullets": [
+    "**Histórico completo:** quem, quando, o quê e por quê (a mensagem de commit!).",
+    "**Volta no tempo:** qualquer versão pode ser restaurada.",
+    "**Em paralelo:** cada um na sua linha do tempo (branch), juntando depois (merge)."
+   ],
+   "destaque": "Commit = uma foto do projeto com autor, data e motivo. Branch = uma linha do tempo paralela.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Os três superpoderes. Definir os jargões no primeiro uso: commit é uma 'foto' selada do projeto, com autor, data e mensagem explicando o porquê. Branch é uma linha do tempo paralela; merge é juntar duas linhas. Perguntar no chat: o 'por quê' de uma mudança, onde vocês anotam hoje?"
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Git no DevOps",
+   "paragrafos": [
+    "No DevOps, o repositório Git (a pasta do projeto com todo o seu histórico) não guarda só código da aplicação:"
+   ],
+   "bullets": [
+    "Scripts de automação ✔ (os seus da Aula 04–05!)",
+    "Definição da pipeline ✔ (Aula 10)",
+    "Infraestrutura como código ✔",
+    "Documentação ✔"
+   ],
+   "destaque": "É do Git que a esteira parte; é o Git que conta a história do sistema.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Definir repositório: a pasta do projeto mais o seu histórico completo. Conectar com as aulas anteriores: os scripts de healthcheck e a pipeline que vocês fizeram entram no Git. Infraestrutura como código (a infra descrita em arquivos) e documentação também. A esteira da Aula 05 parte do repositório: é daí que ela pega a versão. Isso responde o gancho da revisão."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Se não está no Git, não existe",
+   "paragrafos": [
+    "O repositório é a **fonte única da verdade**: o lugar onde todo mundo concorda sobre qual é a versão atual."
+   ],
+   "bullets": [
+    "Não é 'a versão que está na máquina do fulano'.",
+    "Não é o zip no e-mail nem a pasta compartilhada.",
+    "Este próprio bootcamp vive em um repositório Git!"
+   ],
+   "destaque": "Se não está no Git, não existe.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Frase para gravar: se não está no Git, não existe. Explicar 'fonte única da verdade': o único lugar que define o que é atual. Mostrar na tela o repositório do bootcamp (as aulas, o glossário) e comentar que todo o material está versionado ali."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Os três estados de um arquivo",
+   "codigo": "[ Working Directory ]   (sua bancada)\n          |  git add\n          v\n[ Staging Area ]        (a caixa a enviar)\n          |  git commit\n          v\n[ Repositório ]         (o cofre com histórico)",
+   "bullets": [
+    "**Bancada** (working directory): onde você edita os arquivos.",
+    "**Caixa** (staging area): o que você escolheu enviar nesta versão.",
+    "**Cofre** (repositório): o histórico, selado para sempre."
+   ],
+   "minutos": 4,
+   "notas": "⏱ 4 min — Analogia central da aula. Working directory é a bancada onde se trabalha. git add coloca a mudança na caixa (staging area). git commit sela a caixa e guarda no cofre, com autor e data. Reforçar: o arquivo passa por esses três lugares sempre. Perguntar no chat: faz sentido ter uma 'caixa' antes do cofre? Por quê? (escolher o que entra em cada versão)."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Comandos do dia a dia",
+   "bullets": [
+    "`git init` — transforma uma pasta em repositório.",
+    "`git status` — o comando que você mais vai usar: o que mudou?",
+    "`git add arquivo` — coloca a mudança na \"caixa\" (staging).",
+    "`git commit -m \"mensagem\"` — sela a caixa no histórico, com autor e data."
+   ],
+   "destaque": "Ritual: `git status` → `git add` → `git commit`. Sempre nessa ordem.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Ligar cada comando ao diagrama anterior. init cria o cofre. status mostra o que mudou na bancada: vão usar o tempo todo. add põe na caixa. commit sela com mensagem. Mostrar o ritual status → add → commit, que vão repetir na Parte 2."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Comandos: histórico e branches",
+   "bullets": [
+    "`git log` — mostra a linha do tempo.",
+    "`git checkout` — alterna entre ramificações (branches).",
+    "`git merge` — traz o conteúdo da branch informada para a branch atual."
+   ],
+   "destaque": "`log` para olhar o passado; `checkout` e `merge` para navegar entre linhas do tempo.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Completar a tabela. log mostra a linha do tempo de commits. checkout troca de branch (ramificação). merge traz a branch informada para a atual. Não precisa decorar agora: vamos digitar cada um na prática."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Boas mensagens de commit",
+   "paragrafos": [
+    "🧠 Boas mensagens de commit dizem **o quê** e **o porquê**."
+   ],
+   "bullets": [
+    "`\"adiciona teste de disco ao healthcheck\"` ✔",
+    "`\"ajustes\"` ✖"
+   ],
+   "destaque": "A mensagem é para o você de daqui a seis meses — e para o colega que nunca viu esse código.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Comparar as duas mensagens. 'ajustes' não diz nada; 'adiciona teste de disco ao healthcheck' diz o quê e deixa claro o porquê. Perguntar no chat: qual das duas vocês gostariam de encontrar no histórico daqui a seis meses?"
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Branches: universos paralelos",
+   "bullets": [
+    "`main` — a linha do tempo oficial, sempre funcional.",
+    "`git branch minha-ideia` + `git checkout minha-ideia` (ou `git checkout -b minha-ideia`).",
+    "Experimente sem medo, longe da `main`.",
+    "`git merge minha-ideia` — ideia aprovada? Junta na linha oficial."
+   ],
+   "destaque": "A `main` nunca quebra: toda experiência acontece numa branch e só entra depois de aprovada.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — main é a linha oficial, sempre funcional. Criar branch = abrir um universo paralelo para experimentar sem risco. checkout -b cria e já entra. Quando a ideia dá certo, merge junta na main. É assim que times inteiros trabalham ao mesmo tempo no mesmo código."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Onde o histórico mora",
+   "paragrafos": [
+    "Lembram do `ls -la` da Aula 02, que mostrou arquivos ocultos?"
+   ],
+   "destaque": "💬 Interação: rodem `ls -la` na pasta do projeto depois do `git init` e me digam o que apareceu!",
+   "rodape": "Resposta: a pasta `.git`, onde o histórico mora.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Interação de fechamento da Parte 1. Quem já tem o terminal aberto pode testar: cd ~/meu-projeto-devops, git init, ls -la. Esperar o chat responder: a pasta oculta .git. Explicar: ali dentro vive todo o histórico; apagou a pasta .git, perdeu o cofre. Fazer a ponte para o intervalo: na volta fazemos isso passo a passo."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "intervalo",
+   "titulo": "INTERVALO",
+   "subtitulo": "Voltamos às 20:35",
+   "minutos": 15,
+   "notas": "⏱ 15 min — Intervalo. Pedir que deixem a VM ligada e o terminal SSH conectado para a Parte 2. Voltamos às 20:35."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "parte2",
+   "titulo": "PARTE 2",
+   "subtitulo": "Versionando o projeto",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Divisor. Parte 2: mão na massa. Abrir o pratica.md na tela ao lado do terminal."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Objetivo e onde",
+   "paragrafos": [
+    "**Objetivo:** transformar o `meu-projeto-devops` em um repositório Git, fazer os primeiros commits, criar uma branch e fazer um merge."
+   ],
+   "bullets": [
+    "**Onde:** no terminal conectado à VM via SSH (como no setup).",
+    "A janela do VirtualBox também serve, mas sem copiar e colar.",
+    "Siga o `pratica.md` da aula 06 no repositório do bootcamp."
+   ],
+   "destaque": "Ao final: histórico, branch e merge de verdade no seu projeto.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Ler o objetivo. Confirmar no chat: todo mundo conectado na VM via SSH? Quem estiver na janela do VirtualBox vai digitar à mão, sem colar. Combinar o ritmo: eu rodo, vocês rodam, quem travar escreve no chat."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 1 — Apresente-se ao Git",
+   "codigo": "git --version\ngit config --global user.name \"Seu Nome\"\ngit config --global user.email \"seu-email@exemplo.com\"\ngit config --global init.defaultBranch main",
+   "bullets": [
+    "O Git já vem no Ubuntu Server; se der `command not found`: `sudo apt install -y git`.",
+    "O Git assina cada commit com seu nome. Configure uma vez só.",
+    "💡 O e-mail fica **público** no GitHub (Aula 09). Prefere não expor? Use o noreply de lá."
+   ],
+   "rodape": "Resultado esperado: `git version 2.43.x`; os `git config` não mostram nada — silêncio é sucesso.",
+   "minutos": 5,
+   "notas": "⏱ 5 min — Rodar git --version e mostrar a saída. Se alguém ver command not found, sudo apt install -y git. Depois as três linhas de config, trocando pelo nome e e-mail de cada um. Avisar sobre o e-mail público no GitHub e a opção noreply (endereço 'sem resposta' que o GitHub oferece em Settings → Emails; dá para trocar depois com o mesmo comando). Dar tempo para todos digitarem; perguntar no chat quem terminou."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 2 — Nasce um repositório",
+   "codigo": "cd ~/meu-projeto-devops\ngit init\nls -la",
+   "bullets": [
+    "`git init` transforma a pasta em repositório.",
+    "O `ls -la` mostra a pasta oculta `.git` — o cofre do histórico."
+   ],
+   "rodape": "Resultado esperado: `Initialized empty Git repository...` e, no `ls -la`, a pasta oculta `.git`.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Entrar na pasta do projeto e rodar git init. Mostrar a mensagem Initialized empty Git repository. Rodar ls -la e apontar a pasta .git: é a resposta da interação da Parte 1. Quem errou a pasta vai ver 'not a git repository' nos próximos passos."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 3 — Status, o seu melhor amigo",
+   "codigo": "git status",
+   "bullets": [
+    "Arquivos em vermelho como untracked (não rastreados): o Git os vê, mas não os protege.",
+    "Esse é o comando que você mais vai usar daqui para a frente."
+   ],
+   "rodape": "Resultado esperado: arquivos em vermelho como untracked.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Rodar git status e ler a saída junto com a turma. Untracked, em vermelho: o Git vê o arquivo mas ainda não cuida dele. Nada está no cofre ainda. Repetir: git status é o melhor amigo; na dúvida, rode."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 4 — Primeiro commit! 🎉 (1/3)",
+   "codigo": "rm scripts/teste.sh\nvi .gitignore",
+   "bullets": [
+    "`rm` tira o `scripts/teste.sh` (Aula 03); `vi .gitignore` cria a lista do que ignorar.",
+    "Duas arrumações antes do primeiro commit. O conteúdo do `.gitignore` vem no próximo slide."
+   ],
+   "rodape": "Lembrete do vi: `i` para inserir, `Esc`, `:wq` para salvar.",
+   "minutos": 2,
+   "notas": "⏱ 2 min — Duas arrumações antes do primeiro commit. Remover o scripts/teste.sh da Aula 03. Abrir o vi no .gitignore: lembrar i para inserir. As quatro linhas de conteúdo do arquivo estão no próximo slide."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 4 — Primeiro commit! 🎉 (2/3)",
+   "codigo": "# arquivos gerados - nao versionar\n*.log\nrelatorio.txt\napp/index.html",
+   "bullets": [
+    "Estas 4 linhas são o **conteúdo** do `.gitignore`: gerados não se versionam.",
+    "Salve no vi (`Esc`, `:wq`) e rode `git status` de novo."
+   ],
+   "rodape": "Resultado esperado: `healthcheck.log`, `relatorio.txt` e `app/index.html` sumiram da lista do `git status`.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Digitar as quatro linhas no .gitignore (são o conteúdo do arquivo, não comandos). Salvar com Esc, :wq. Explicar: logs, relatórios e a página do build são gerados; versiona-se o código que os gera. Rodar git status de novo e mostrar que log, relatório e index.html sumiram da lista."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 4 — Primeiro commit! 🎉 (3/3)",
+   "codigo": "git add .\ngit commit -m \"primeiro commit: scripts de healthcheck e pipeline\"\ngit status\ngit log",
+   "bullets": [
+    "`git add .` coloca tudo que mudou na caixa.",
+    "`git commit -m` sela a caixa com seu nome, data e mensagem.",
+    "Essa versão agora existe para sempre."
+   ],
+   "rodape": "Resultado esperado: `nothing to commit, working tree clean` e um `git log` com seu nome, data e mensagem.",
+   "minutos": 5,
+   "notas": "⏱ 5 min — Agora sim: git add ponto, commit com a mensagem, status limpo, log mostrando o commit com nome e data. Celebrar o primeiro commit. Se o git log abrir uma tela que não sai: setas para navegar, q para sair. Se aparecer 'Please tell me who you are': faltou o config do Passo 1."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 5 — Mude algo e veja o Git perceber",
+   "codigo": "echo \"Projeto versionado com Git!\" >> README.txt\ngit status\ngit diff\ngit add README.txt\ngit commit -m \"atualiza README com nota sobre versionamento\"\ngit log --oneline",
+   "bullets": [
+    "O `git diff` mostra exatamente **a linha** que mudou.",
+    "Depois de conferir, sele a mudança: `add` e `commit`."
+   ],
+   "rodape": "Resultado esperado: duas linhas no `git log --oneline` — sua linha do tempo cresceu.",
+   "minutos": 5,
+   "notas": "⏱ 5 min — Acrescentar uma linha ao README.txt com echo. git status mostra modified; git diff mostra a linha nova em verde. Depois add do arquivo, commit, e git log --oneline com duas linhas. Reforçar o ritual: status, diff, só então add e commit."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 6 — Branch: experimente sem medo (1/2)",
+   "codigo": "git checkout -b melhoria-healthcheck\nvi scripts/healthcheck.sh\n\necho \"[OK] Tempo ligado: $(uptime -p)\"",
+   "bullets": [
+    "`checkout -b` cria a branch e já entra nela.",
+    "A linha do `echo` é **conteúdo** do script: vai no final, antes da última linha `echo`."
+   ],
+   "rodape": "Lembrete do vi: `i` para inserir, `Esc`, `:wq` para salvar.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Criar a branch com checkout -b. Abrir o healthcheck.sh no vi e acrescentar a linha do echo com uptime -p (há quanto tempo a máquina está ligada) antes do último echo do script; a linha destacada é conteúdo do arquivo, não comando do terminal. Salvar com :wq. O add e o commit vêm no próximo slide."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 6 — Branch: experimente sem medo (2/2)",
+   "codigo": "git add scripts/healthcheck.sh\ngit commit -m \"adiciona tempo ligado ao healthcheck\"",
+   "bullets": [
+    "Commit na branch: a `main` continua intocada.",
+    "Sem \"Resultado esperado\" aqui: a prova vem no Passo 7."
+   ],
+   "minutos": 2,
+   "notas": "⏱ 2 min — Add e commit do healthcheck.sh na branch. Explicar: essa mudança vive só na branch; a main ainda não sabe dela. A prova vem no Passo 7, quando compararmos os dois universos."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 7 — Compare os universos paralelos",
+   "codigo": "git checkout main\ncat scripts/healthcheck.sh | tail -3\ngit merge melhoria-healthcheck\ncat scripts/healthcheck.sh | tail -3\ngit log --oneline",
+   "bullets": [
+    "Na `main`, sua mudança **não existe**! Ela vive só na branch.",
+    "Depois do `merge`, a mudança chegou à `main`.",
+    "Em miniatura, é assim que times inteiros trabalham."
+   ],
+   "rodape": "Resultado esperado: a mudança chegou à `main` — ideia testada, aprovada e integrada; o log mostra o novo commit.",
+   "minutos": 5,
+   "notas": "⏱ 5 min — Voltar para a main e mostrar com tail -3 que a linha do uptime não está lá. Rodar o merge e repetir o tail: agora está. git log --oneline com o commit integrado. Se abrir um editor no merge, é o vi pedindo a mensagem: Esc, :wq, Enter. Fechar: é assim que times trabalham em paralelo sem quebrar a main."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Deu errado? 😥",
+   "bullets": [
+    "`Please tell me who you are` → faltou o `git config` do Passo 1",
+    "`not a git repository` → você não está dentro de `~/meu-projeto-devops`",
+    "`nothing to commit` → faltou o `git add` antes do commit, ou nada mudou",
+    "Abriu um editor no merge/commit → é o `vi` pedindo a mensagem: `Esc`, `:wq` e Enter",
+    "`git log` abriu uma tela que não sai → visualizador de páginas: setas navegam, `q` sai"
+   ],
+   "minutos": 2,
+   "notas": "⏱ 2 min — Passar pelos erros mais comuns. Perguntar no chat quem travou em algum passo e resolver ao vivo. A tabela completa está no pratica.md."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Desafio bônus 🏆",
+   "bullets": [
+    "Crie uma branch `experimento`.",
+    "Faça um commit **quebrando** o healthcheck de propósito.",
+    "Volte para a `main`... e simplesmente **apague a branch**: `git branch -D experimento`."
+   ],
+   "destaque": "Sinta o poder: o erro nunca tocou a linha oficial.",
+   "minutos": 2,
+   "notas": "⏱ 2 min — Apresentar o desafio para quem terminou cedo ou para fazer em casa: branch experimento, commit que quebra o script, voltar para a main e apagar a branch com git branch -D. A main nunca viu o erro."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Missão até a próxima aula 📌",
+   "bullets": [
+    "Faça pelo menos **dois commits reais** até a próxima aula.",
+    "Ideias: melhorar um comentário, acrescentar linha ao `README.txt`, ajustar o health check.",
+    "Mensagens que dizem o que e por quê.",
+    "Antes de cada commit: `git status` e `git diff` — e só depois `git add`.",
+    "Veja sua história crescer: `git log --oneline`."
+   ],
+   "destaque": "Esse ritual é o que separa quem usa Git de quem sofre com Git.",
+   "minutos": 1,
+   "notas": "⏱ 1 min — Ler a missão: dois commits reais até a próxima aula, com mensagens que dizem o quê e por quê. Ritual status → diff → add → commit. Acompanhar o histórico com git log --oneline."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "qa",
+   "titulo": "PERGUNTAS & RESPOSTAS",
+   "subtitulo": "21:20 – 21:45",
+   "minutos": 25,
+   "notas": "⏱ 25 min — Abrir para perguntas do chat. Puxar as dúvidas que ficaram pelo caminho na prática (vi no merge, visualizador do log, e-mail público). Se sobrar tempo, fazer o desafio bônus ao vivo."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "fechamento",
+   "titulo": "O que levamos para a próxima aula",
+   "bullets": [
+    "Git é a **fonte única da verdade**: se não está no Git, não existe.",
+    "Bancada → caixa (`add`) → cofre (`commit`). Ritual: `status`, `diff`, `add`, `commit`.",
+    "Branch para experimentar sem medo; `merge` para integrar o que foi aprovado."
+   ],
+   "destaque": "Seu projeto agora tem histórico e versão. Mas quando ele rodar na máquina de outra pessoa... será que funciona? 🐳",
+   "rodape": "Aula 07 (amanhã, 12/11): 'na minha máquina funciona' — containers e Docker.",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Resumir os três aprendizados. Lançar o gancho da Aula 07: o projeto tem histórico, mas funciona na máquina de outra pessoa? Amanhã (12/11) atacamos a frase mais famosa do software, 'na minha máquina funciona', com containers e Docker."
+  },
+  {
+   "tipo": "encerramento",
+   "bloco": "fechamento",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Agradecer, lembrar da missão (dois commits reais até amanhã) e encerrar a live."
+  }
+ ]
+}

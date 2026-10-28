@@ -3,6 +3,8 @@
 > **Objetivo:** perder o medo da tela preta. Entender por que o Linux domina o mundo DevOps e sair navegando pelo terminal com confiança.
 >
 > 📖 Apareceu uma palavra nova? Consulte o [glossário](../../glossario.md).
+>
+> 📽️ Slides desta aula: [`slides/aula-02.odp`](slides/aula-02.odp) (roteiro editável em [`slides/aula-02.json`](slides/aula-02.json) — veja [tools/slides](../../tools/slides/README.md)).
 
 ## 🔁 Revisão da Aula 01 (5 min)
 

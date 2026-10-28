@@ -1,0 +1,479 @@
+{
+ "aula": 7,
+ "tempo": {
+  "abertura": 5,
+  "revisao": 5,
+  "parte1": 40,
+  "intervalo": 15,
+  "parte2": 45,
+  "qa": 25
+ },
+ "slides": [
+  {
+   "tipo": "capa",
+   "bloco": "abertura",
+   "titulo": "Aula 07",
+   "subtitulo": "Docker 1: Overview + Comandos",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Slide de abertura enquanto o pessoal entra. Dar boas-vindas, pedir para quem chegou escrever 'cheguei' no chat. Dizer que hoje é a aula em que o bootcamp resolve o clássico 'na minha máquina funciona'."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "abertura",
+   "titulo": "Agenda de hoje",
+   "subtitulo": "12/11 (qui), 19:30–21:45",
+   "bullets": [
+    "19:30 — Abertura e boas-vindas",
+    "19:35 — Parte 1: O poder dos containers",
+    "20:20 — Intervalo (15 min)",
+    "20:35 — Parte 2: Mão na massa — primeiro container e primeira imagem",
+    "21:20 — Perguntas & Respostas",
+    "21:45 — Encerramento"
+   ],
+   "destaque": "Objetivo: entender o que são containers, a diferença real para a máquina virtual e rodar os primeiros containers com Docker.",
+   "minutos": 5,
+   "notas": "⏱ 5 min — Apresentar a agenda. Lembrar que a Parte 2 é na VM via SSH: quem ainda não ligou a VM pode ir ligando agora. Avisar que vamos instalar o Docker hoje, então a VM precisa de internet. Perguntar no chat: 'quem está com a VM ligada?'. Pedir para deixar o glossário aberto numa aba para palavras novas."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "revisao",
+   "titulo": "Revisão da aula anterior",
+   "subtitulo": "Aula 06 — Git",
+   "bullets": [
+    "Git = fonte única da verdade: `add` → `commit` → histórico para sempre",
+    "Branches para experimentar, merge para integrar",
+    "O `meu-projeto-devops` agora tem linha do tempo própria"
+   ],
+   "destaque": "O código está versionado... mas rodar na máquina do colega ainda é loteria. Hoje empacotamos o ambiente inteiro com o código! 🐳",
+   "minutos": 5,
+   "notas": "⏱ 5 min — Recapitular rápido: add, commit, branch, merge. Perguntar no chat: 'quem fez a missão da aula 06 e commitou algo no meu-projeto-devops?'. Fechar com o gancho: o código viaja pelo Git, mas o ambiente (versão de sistema, bibliotecas, configurações) fica para trás. Hoje a gente leva o ambiente junto: containers."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "parte1",
+   "titulo": "PARTE 1",
+   "subtitulo": "O poder dos containers",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Divisor. Anunciar: primeiro os conceitos (40 min), depois do intervalo a mão na massa."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "\"Na minha máquina funciona\"",
+   "paragrafos": [
+    "O app funciona na máquina do dev e quebra no servidor. Por quê?",
+    "Porque o **ambiente** é diferente."
+   ],
+   "bullets": [
+    "Outra versão de linguagem",
+    "Outra biblioteca",
+    "Outro sistema operacional"
+   ],
+   "destaque": "O código viajou, mas o ambiente ficou para trás.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Contar a cena clássica: dev entrega, servidor quebra, ninguém entende. Perguntar no chat: 'quem já ouviu ou já disse na minha máquina funciona?'. Explicar que o problema não é o código, é tudo que está em volta dele: versão de linguagem, biblioteca, sistema. Definir 'ambiente' como esse conjunto de coisas que o app precisa para rodar."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Antes do contêiner padrão 🚢",
+   "paragrafos": [
+    "Antes dos anos 1950, cada carga era embarcada do seu jeito: sacas, barris, caixas."
+   ],
+   "bullets": [
+    "Lento",
+    "Caro",
+    "Quebrava tudo"
+   ],
+   "destaque": "Aí veio o contêiner padronizado: não importa o que tem dentro, todo navio, trem, caminhão e guindaste sabe transportá-lo.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Analogia dos navios cargueiros. Descrever o porto antigo: cada mercadoria embarcada de um jeito, estivadores carregando saca por saca. Então o contêiner de metal padronizado: a caixa é sempre a mesma por fora, e o mundo inteiro (navio, trem, caminhão, guindaste) sabe lidar com ela. Deixar a pergunta no ar: o que isso tem a ver com software?"
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Docker fez isso com software",
+   "paragrafos": [
+    "Sua aplicação + todas as dependências dentro de uma \"caixa padrão\"."
+   ],
+   "bullets": [
+    "Roda **igual** na sua VM",
+    "Roda **igual** no servidor da empresa",
+    "Roda **igual** na nuvem"
+   ],
+   "destaque": "A caixa padrão do software: o container roda igual em qualquer lugar.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Fechar a analogia: o Docker é o contêiner padronizado do software. Dentro da caixa vai a aplicação e tudo que ela precisa (as dependências: bibliotecas, versão da linguagem, configurações). Por fora, qualquer máquina com Docker sabe rodar a caixa do mesmo jeito. Voltar ao 'na minha máquina funciona': se a caixa roda na minha, roda na sua."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Container vs. Máquina Virtual",
+   "bullets": [
+    "**Carrega:** VM = sistema operacional inteiro + app · Container = só app + dependências",
+    "**Tamanho:** VM = gigabytes · Container = megabytes",
+    "**Inicia em:** VM = minutos · Container = segundos",
+    "**Isolamento:** VM = hardware virtual completo · Container = processos isolados (kernel)"
+   ],
+   "destaque": "💬 Interação: vocês construíram uma VM no setup — quanto tempo levou até ela ficar pronta?",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Mostrar a tabela linha por linha. Pergunta para o chat: quanto tempo levou para instalar a VM Ubuntu no setup (baixar ISO, instalar, configurar)? Usar as respostas para contrastar: um container sobe em segundos. Explicar que a VM carrega um sistema operacional inteiro; o container carrega só o app e o que ele precisa, por isso é megabytes e não gigabytes."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Casa vs. apartamento 🏠",
+   "bullets": [
+    "**VM** = casa completa: fundação, encanamento, tudo próprio",
+    "Vocês construíram uma casa dessas no setup!",
+    "**Container** = apartamento: isolado, com fechadura própria, mas na estrutura do prédio",
+    "A estrutura do prédio = o **kernel do Linux** (o núcleo do sistema, da Aula 02)"
+   ],
+   "destaque": "💡 Lembra da Aula 02? Containers são tecnologia do kernel Linux — por isso o Linux veio primeiro no bootcamp.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Analogia da casa e do apartamento. A VM é a casa: tudo próprio, inclusive a fundação. O container é o apartamento: tem a sua porta com fechadura (isolamento), mas divide a estrutura do prédio com os vizinhos. A estrutura é o kernel do Linux (o núcleo do sistema, que vimos na Aula 02). Reforçar a mensagem: é por isso que aprendemos Linux antes de Docker. Containers são Linux."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Os três conceitos do Docker",
+   "bullets": [
+    "**Dockerfile** = a receita 📝: texto com o passo a passo para montar o ambiente",
+    "**Imagem** = o bolo pronto congelado 🎂: pacote imutável construído a partir da receita",
+    "**Container** = a fatia servida 🍰: uma imagem em execução (pode haver várias!)"
+   ],
+   "destaque": "Receita → bolo → fatia: Dockerfile → imagem → container.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Este slide é o coração da aula; ir devagar. Dockerfile é um arquivo de texto com a receita. Imagem é o bolo pronto e congelado: imutável, não muda depois de pronto. Container é a fatia servida: a imagem rodando. Da mesma imagem posso servir várias fatias ao mesmo tempo (vários containers). Pedir para o chat repetir: 'o que é a imagem?' e ver se respondem 'o bolo'."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Docker Hub: a padaria pública",
+   "paragrafos": [
+    "Um **registro** (depósito de imagens na internet) com milhares de imagens prontas: `ubuntu`, `nginx`, `python`..."
+   ],
+   "bullets": [
+    "Você não precisa assar todo bolo do zero: muita coisa já vem pronta",
+    "`docker run` baixa a imagem de lá automaticamente (vamos ver na prática)"
+   ],
+   "destaque": "Milhares de imagens prontas para você começar: a padaria pública do Docker.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Definir registro: um lugar na internet que guarda imagens. O Docker Hub é a padaria pública: tem bolo de ubuntu, de nginx, de python. Na prática de hoje vamos usar duas imagens prontas de lá: hello-world e nginx:alpine. Explicar que nginx é um servidor web (um programa que entrega páginas para o navegador)."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Anatomia de um Dockerfile",
+   "codigo": "FROM nginx:alpine\nCOPY index.html /usr/share/nginx/html/\nEXPOSE 80",
+   "bullets": [
+    "`FROM` — comece da imagem oficial do nginx (um servidor web)",
+    "`COPY` — copie meu app para dentro",
+    "`EXPOSE` — documente a porta usada"
+   ],
+   "destaque": "Três linhas de receita: de onde parto, o que coloco dentro, qual porta uso.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Ler linha por linha. FROM: toda receita começa de um bolo que já existe na padaria (nginx:alpine, uma versão pequena do nginx). COPY: leva o meu arquivo para dentro da imagem, na pasta que o nginx usa para servir páginas. EXPOSE: documenta que a porta 80 é usada. Avisar que na prática vamos escrever um Dockerfile quase idêntico para a página do projeto."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Comandos essenciais (1/2)",
+   "bullets": [
+    "`docker run <imagem>` — baixa (se preciso) e executa um container",
+    "`docker ps` / `docker ps -a` — containers rodando / todos",
+    "`docker build -t nome .` — constrói uma imagem a partir do Dockerfile"
+   ],
+   "destaque": "run executa, ps lista, build constrói.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Apresentar os três comandos que mais usaremos. docker run: se a imagem não está na máquina, ele baixa do Docker Hub e executa. docker ps: só os que estão rodando; com -a, todos, inclusive os que já terminaram. docker build: pega o Dockerfile da pasta atual (o ponto final) e produz a imagem com o nome dado em -t. Não precisa decorar: a prática vai fixar."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Comandos essenciais (2/2)",
+   "bullets": [
+    "`docker stop` / `docker rm` — para / remove um container",
+    "`docker images` — lista as imagens locais",
+    "Ciclo que vamos repetir hoje: `run` → `ps` → `stop` → `rm`"
+   ],
+   "destaque": "Parar não é remover: o container parado continua na lista do `docker ps -a`.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — docker stop para o container (a fatia sai da mesa, mas o prato fica). docker rm remove de vez. docker images lista os bolos no congelador local. Dizer que a prática tem um passo chamado 'arrume a casa' justamente com stop + rm, porque a porta precisa ficar livre para a próxima aula."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Publicando portas: -p 8080:80",
+   "paragrafos": [
+    "`-p 8080:80` publica portas: porta 8080 da VM → porta 80 do container."
+   ],
+   "bullets": [
+    "8080 = porta **externa** (da VM)",
+    "80 = porta **interna** (do container)",
+    "Quem bate na VM na 8080 cai no container na 80"
+   ],
+   "destaque": "🔢 Lembra de IP e portas da Aula 03? O `-p externa:interna` é a ponte entre o mundo e o container.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Retomar portas da Aula 03: porta é a 'porta de entrada' numerada de um serviço. O container tem as suas portas isoladas; o -p abre uma ponte: externa:interna. Na prática, 8080 na VM leva para a 80 do nginx dentro do container. E lembrar que o setup já tem a regra WEB de redirecionamento do VirtualBox: por isso o navegador do computador vai conseguir ver a página. Fechar a Parte 1 e anunciar o intervalo."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "intervalo",
+   "titulo": "INTERVALO",
+   "subtitulo": "Voltamos às 20:35",
+   "minutos": 15,
+   "notas": "⏱ 15 min — Intervalo. Pedir para todos voltarem com a VM ligada, terminal conectado via SSH (ssh aluno@localhost -p 2222) e o navegador aberto. Deixar o slide na tela."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "parte2",
+   "titulo": "PARTE 2",
+   "subtitulo": "Mão na massa",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Divisor. Avisar: siga o pratica.md da aula 07 no repositório; vamos passo a passo, juntos."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Objetivo e onde",
+   "bullets": [
+    "Instalar o Docker na VM",
+    "Rodar o primeiro container",
+    "Containerizar a página do seu projeto com um `Dockerfile`",
+    "**Onde:** no terminal conectado à VM via SSH (como no setup)",
+    "A janela do VirtualBox também serve, mas sem copiar e colar"
+   ],
+   "destaque": "Prática 07 — Primeiro container e primeira imagem 🐳",
+   "minutos": 2,
+   "notas": "⏱ 2 min — Ler o objetivo. Reforçar o 'onde': terminal via SSH, para poder copiar e colar os comandos do pratica.md. Perguntar no chat: 'todo mundo conectado na VM?'. Quem estiver na janela do VirtualBox vai ter de digitar na mão, tudo bem."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 1 — Instale o Docker",
+   "codigo": "sudo apt update\nsudo apt install -y docker.io docker-buildx\ndocker --version",
+   "bullets": [
+    "Instalamos do repositório oficial do Ubuntu: simples e confiável",
+    "`docker-buildx` evita o aviso de construtor antigo (\"legacy builder\") no `docker build`",
+    "A instalação baixa alguns pacotes: pode levar um ou dois minutos"
+   ],
+   "rodape": "Resultado esperado: `Docker version 2x.x.x, build ...`",
+   "minutos": 5,
+   "notas": "⏱ 5 min — Mostrar os três comandos na tela e rodar junto. apt update atualiza a lista de pacotes; apt install instala o docker.io e o docker-buildx; docker --version confirma. Enquanto baixa, lembrar que sudo é o 'faça como administrador' das aulas de Linux. Pedir para colarem no chat a linha do docker --version quando aparecer."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 1 — Docker sem sudo",
+   "codigo": "sudo usermod -aG docker $USER\nexit\nssh aluno@localhost -p 2222\ngroups",
+   "bullets": [
+    "Adicione seu usuário ao grupo `docker` e **saia e entre de novo** para valer",
+    "O `ssh aluno@localhost -p 2222` é no terminal do seu computador",
+    "🔐 No grupo `docker` você faz quase tudo que o root faz — na VM de estudo, tudo bem"
+   ],
+   "rodape": "Resultado esperado: a palavra `docker` aparece na lista do `groups`.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — usermod adiciona o usuário aluno ao grupo docker. A mudança só vale numa nova sessão: por isso o exit e o ssh de novo. Depois, groups mostra o grupo docker na lista. Nota de segurança: quem está no grupo docker tem poder quase de root na máquina; na VM de estudo é aceitável, num servidor real é uma decisão de segurança. Se alguém não quiser sair e entrar agora, pode usar sudo docker nos próximos passos."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 2 — O \"hello world\" dos containers",
+   "codigo": "docker run hello-world\ndocker ps -a",
+   "bullets": [
+    "O Docker **baixou** a imagem do Docker Hub e **executou** um container",
+    "O container imprimiu a mensagem e terminou",
+    "`docker ps -a` mostra o container já finalizado"
+   ],
+   "rodape": "Resultado esperado: `Hello from Docker!`",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Rodar docker run hello-world. Narrar o que aparece: 'Unable to find image locally' é o download da padaria; depois a mensagem Hello from Docker!. O container rodou, imprimiu e terminou. Mostrar docker ps -a: ele aparece com status Exited. Pedir no chat: 'quem viu o Hello from Docker?'."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 3 — Um servidor web em UM comando",
+   "codigo": "docker run -d --name meu-nginx -p 8080:80 nginx:alpine\ncurl http://localhost:8080\ndocker stop meu-nginx\ndocker rm meu-nginx",
+   "bullets": [
+    "`-d` = em segundo plano; `--name meu-nginx` = nome do container",
+    "`-p 8080:80` liga a porta **8080 da VM** à porta **80 do container**",
+    "Teste com o `curl` da Aula 03; depois pare e remova"
+   ],
+   "rodape": "Resultado esperado: o HTML de boas-vindas do nginx — um servidor web em segundos, sem instalar nginx na VM!",
+   "minutos": 5,
+   "notas": "⏱ 5 min — Traduzir o comando longo palavra por palavra antes de rodar: -d em segundo plano, --name dá nome, -p publica a porta, nginx:alpine é a imagem oficial. Rodar, depois curl http://localhost:8080 e mostrar o HTML de boas-vindas do nginx. Frase-chave: subimos um servidor web sem instalar nginx na VM. Depois docker stop e docker rm para liberar a porta 8080 para os próximos passos."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 4 — A receita: seu primeiro Dockerfile",
+   "codigo": "cd ~/meu-projeto-devops\n./scripts/build.sh        # garante que app/index.html existe\nvi Dockerfile",
+   "bullets": [
+    "Vamos containerizar a página que a sua pipeline da Aula 05 gera",
+    "O `build.sh` garante que `app/index.html` existe",
+    "O nome é `Dockerfile`: D maiúsculo e sem extensão"
+   ],
+   "minutos": 2,
+   "notas": "⏱ 2 min — Entrar na pasta do projeto, rodar o build.sh da Aula 05 para garantir que a página existe, e abrir o vi no arquivo Dockerfile. Reforçar o nome: Dockerfile, com D maiúsculo e sem extensão. O conteúdo está no próximo slide."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 4 — Conteúdo do Dockerfile",
+   "codigo": "FROM nginx:alpine\nCOPY app/index.html /usr/share/nginx/html/index.html\nEXPOSE 80",
+   "bullets": [
+    "`FROM nginx:alpine` — parte da imagem oficial do nginx",
+    "`COPY` — leva o seu `app/index.html` para dentro da imagem",
+    "`EXPOSE 80` — documenta a porta"
+   ],
+   "destaque": "A mesma receita da Parte 1, agora com a SUA página.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Digitar as três linhas no vi (lembrar: i para inserir, Esc, :wq para salvar e sair). Comparar com a anatomia da Parte 1: só mudou o caminho do COPY, que agora aponta para app/index.html do projeto. Dar um tempo para todos salvarem; pedir 'salvei' no chat."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 5 — Construa a imagem",
+   "codigo": "docker build -t meu-projeto:1.0 .\ndocker images",
+   "bullets": [
+    "`-t meu-projeto:1.0` dá nome e tag (versão) à imagem",
+    "O `.` final diz \"a receita está nesta pasta\"",
+    "`docker images` mostra o bolo pronto no congelador local"
+   ],
+   "rodape": "Resultado esperado: a imagem `meu-projeto` com tag `1.0` na lista.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — Rodar docker build de dentro de ~/meu-projeto-devops. Explicar -t: nome meu-projeto e tag 1.0 (tag é a etiqueta de versão). O ponto final é a pasta onde está a receita. Mostrar docker images com a imagem listada. Se aparecer o aviso DEPRECATED legacy builder, é só aviso: o build funciona."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 6 — Rode a SUA aplicação em container 🚀",
+   "codigo": "docker run -d --name meu-projeto -p 8080:80 meu-projeto:1.0\ncurl http://localhost:8080",
+   "bullets": [
+    "Momento **uau**: abra **http://localhost:8080** no navegador do **seu computador**",
+    "É a regra `WEB` de redirecionamento de porta do setup em ação",
+    "Script → container → nginx → sua tela. Print no chat! 🎉"
+   ],
+   "rodape": "Resultado esperado: a sua página — `Bootcamp DevOps Matera 2026` com a data do build.",
+   "minutos": 6,
+   "notas": "⏱ 6 min — Rodar o container da própria imagem e testar com curl: deve aparecer a página Bootcamp DevOps Matera 2026 com a data do build. Depois o momento uau: abrir http://localhost:8080 no navegador do computador (não da VM). Explicar a cadeia: navegador → regra WEB do VirtualBox → porta 8080 da VM → porta 80 do container → nginx → página gerada pelo script. Pedir print no chat e comemorar."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 7 — Versione a receita",
+   "codigo": "git add Dockerfile\ngit commit -m \"adiciona Dockerfile da aplicacao\"",
+   "bullets": [
+    "O Dockerfile é código — e código vive no Git (Aula 06!)"
+   ],
+   "destaque": "A receita agora faz parte da linha do tempo do projeto.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Conectar com a Aula 06: o Dockerfile é um arquivo de texto, portanto é código, portanto vai para o Git. git add e git commit com a mensagem do material. Quem quiser pode conferir com git log."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 8 — Arrume a casa 🧹",
+   "codigo": "docker stop meu-projeto\ndocker rm meu-projeto\ndocker ps -a",
+   "bullets": [
+    "A porta 8080 precisa estar livre na próxima aula",
+    "A imagem `meu-projeto:1.0` continua guardada (veja com `docker images`)",
+    "É o bolo no congelador, pronto para novas fatias"
+   ],
+   "rodape": "Resultado esperado: lista vazia no `docker ps -a`.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Parar e remover o container antes de encerrar; a lista do docker ps -a deve ficar vazia. Reforçar a diferença: removemos o container (a fatia), mas a imagem (o bolo) continua no congelador: docker images mostra meu-projeto:1.0. Na próxima aula a porta 8080 precisa estar livre."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Deu errado? 😥 (1/2)",
+   "bullets": [
+    "`permission denied ... docker.sock` → faltou o `usermod` (Passo 1) ou sair/entrar de novo",
+    "`DEPRECATED: The legacy builder is deprecated` → só um aviso; some com o `docker-buildx`",
+    "`port is already allocated` → já existe container na 8080: `docker ps` e pare o antigo"
+   ],
+   "minutos": 1,
+   "notas": "⏱ 1 min — Passar pelos erros mais prováveis. permission denied no docker.sock: ou faltou o usermod ou a pessoa não saiu e entrou de novo no SSH (alternativa: sudo docker). Aviso de legacy builder: só aviso. Porta já alocada: tem container antigo na 8080, docker ps e docker stop. Os outros dois erros estão no próximo slide."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Deu errado? 😥 (2/2)",
+   "bullets": [
+    "`COPY failed: ... not found` → build fora da pasta do projeto ou sem `app/index.html`",
+    "`Unable to find image` → é o download da imagem; na primeira vez demora, é normal"
+   ],
+   "destaque": "A tabela completa está no pratica.md. Travou? Cola a mensagem no chat.",
+   "minutos": 1,
+   "notas": "⏱ 1 min — Continuação dos erros prováveis. COPY failed: rodar o build de dentro de ~/meu-projeto-devops e gerar o app/index.html antes com ./scripts/build.sh. Unable to find image: é o download, normal na primeira vez. Lembrar que a tabela completa está no pratica.md e que quem travar deve colar a mensagem no chat."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Desafio bônus 🏆",
+   "bullets": [
+    "Rode um **segundo** container da mesma imagem na porta 8081",
+    "Use `--name meu-projeto-2 -p 8081:80`",
+    "Confirme com `docker ps` e `curl`: duas fatias do mesmo bolo, isoladas, em segundos",
+    "Depois limpe tudo (`docker stop` + `docker rm`)"
+   ],
+   "destaque": "Uma imagem, vários containers: é o bolo rendendo várias fatias.",
+   "minutos": 1,
+   "notas": "⏱ 1 min — Apresentar o desafio para quem terminou antes: segundo container da mesma imagem, agora na porta 8081, com outro nome. docker ps mostra os dois; curl em cada porta responde a mesma página. Depois limpar com docker stop e docker rm. Não precisa fazer ao vivo se o tempo estiver apertado."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Missão até a próxima aula 📌 (1/2)",
+   "codigo": "docker run -d --name meu-projeto -p 8080:80 meu-projeto:1.0",
+   "bullets": [
+    "1. Suba o container do projeto, abra no navegador e derrube (`docker stop` + `docker rm`)",
+    "Repita até fazer sem olhar"
+   ],
+   "minutos": 0.5,
+   "notas": "⏱ 0.5 min — Missão 1: repetir o ciclo run → navegador → stop → rm até ficar automático. O comando é o mesmo do Passo 6. A missão 2 vem no próximo slide."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Missão até a próxima aula 📌 (2/2)",
+   "codigo": "docker run --rm -it alpine sh",
+   "bullets": [
+    "2. Linux dentro do Linux: terminal **dentro** de um container Alpine (distribuição mínima)",
+    "Lá dentro rode `ls /` e `cat /etc/os-release`; saia com `exit`"
+   ],
+   "destaque": "Tudo que você aprendeu nas aulas de Linux vale ali dentro também.",
+   "minutos": 0.5,
+   "notas": "⏱ 0.5 min — Missão 2: docker run --rm -it alpine sh abre um terminal dentro de um container Alpine (uma distribuição Linux minúscula); rodar ls / e cat /etc/os-release lá dentro e sair com exit. Dizer que os comandos de Linux das primeiras aulas funcionam ali dentro também."
+  },
+  {
+   "tipo": "secao",
+   "bloco": "qa",
+   "titulo": "PERGUNTAS & RESPOSTAS",
+   "subtitulo": "21:20 – 21:45",
+   "minutos": 25,
+   "notas": "⏱ 25 min — Abrir para perguntas do chat e do microfone. Perguntas prováveis: diferença entre imagem e container (voltar ao bolo e à fatia), por que precisa do -p, se dá para rodar Docker sem Linux (lembrar: containers são tecnologia do kernel Linux). Aproveitar para ajudar quem travou em algum passo."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "fechamento",
+   "titulo": "O que levamos para a próxima aula",
+   "bullets": [
+    "Container = app + dependências numa caixa padrão que roda igual em qualquer lugar",
+    "Dockerfile (receita) → imagem (bolo) → container (fatia)",
+    "Você instalou o Docker, construiu uma imagem e serviu a sua página com nginx"
+   ],
+   "destaque": "Um container, fácil. Sistemas reais têm vários: app, banco, cache... Na próxima aula, um arquivo orquestra tudo: docker compose.",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Fechar com o gancho da Aula 08: 'Um container, fácil. Mas sistemas reais têm vários: o app, o banco de dados, o cache... Subir cada um na mão, na ordem certa? Ninguém merece. Na próxima aula, um único arquivo orquestra tudo: docker compose.' Lembrar da missão e de deixar a porta 8080 livre."
+  },
+  {
+   "tipo": "encerramento",
+   "bloco": "fechamento",
+   "minutos": 0,
+   "notas": "⏱ 0 min — Logo do Instituto Matera. Agradecer, lembrar da missão e dar boa noite."
+  }
+ ]
+}

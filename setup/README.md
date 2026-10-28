@@ -9,19 +9,19 @@ Para que **todo mundo tenha exatamente o mesmo ambiente** — não importa se se
 Siga os guias **nesta ordem**, antes da primeira aula:
 
 1. **[Instalar o VirtualBox](instalacao-virtualbox.md)** no seu computador (Windows, Linux ou macOS).
-2. **[Criar a máquina virtual Ubuntu](instalacao-ubuntu-vm.md)** dentro do VirtualBox — inclui a instalação do Ubuntu tela a tela e a conexão por **SSH**, o jeito como você vai usar a VM nas aulas.
+2. **[Criar a máquina virtual Ubuntu](instalacao-ubuntu-vm.md)** dentro do VirtualBox — inclui a instalação automática do Ubuntu (tudo preenchido numa tela do VirtualBox), a **instalação do servidor SSH** na VM e a conexão por **SSH**, o jeito como você vai usar a VM nas aulas.
 3. **[Executar o roteiro de testes](roteiro-de-testes.md)** para confirmar que está tudo funcionando.
 
 ⏱️ **Reserve cerca de 2 horas** para tudo (o download da imagem do Ubuntu tem ~4 GB) e faça **pelo menos uma semana antes** da Aula 01, para dar tempo de pedir ajuda se algo travar.
 
-**O que esperar:** o Ubuntu Server é instalado por um assistente em **modo texto**, em inglês, navegado só pelo teclado (setas, Tab, Espaço e Enter). Parece assustador, mas são 17 telas em que, na maioria, basta confirmar — o guia mostra o que escolher em cada uma. Depois disso, você vai usar a VM pelo terminal do seu próprio computador, com copiar e colar funcionando.
+**O que esperar:** você preenche **uma única tela** no VirtualBox (nome, usuário, senha, memória e disco) e o Ubuntu Server se instala **sozinho**, sem perguntar nada, em 10–20 minutos. Depois disso, você vai usar a VM pelo terminal do seu próprio computador (SSH), com copiar e colar funcionando. O sistema pode ficar em português ou em inglês, conforme o idioma do seu computador — os comandos são os mesmos.
 
 ## Requisitos mínimos do computador
 
 | Recurso | Mínimo recomendado |
 |---------|--------------------|
 | Memória RAM | 8 GB (a VM usará 2–4 GB) |
-| Espaço em disco livre | 30 GB |
+| Espaço em disco livre | 30 GB (a VM usa até 25 GB; a imagem de instalação, 4 GB) |
 | Processador | Com suporte a virtualização (VT-x/AMD-V) habilitado na BIOS/UEFI |
 | Internet | Necessária durante as aulas para baixar pacotes |
 

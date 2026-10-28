@@ -3,6 +3,8 @@
 > **Objetivo:** resolver o clássico *"na minha máquina funciona"*. Entender o que são containers, a diferença real entre container e máquina virtual, e rodar os primeiros containers com Docker.
 >
 > 📖 Apareceu uma palavra nova? Consulte o [glossário](../../glossario.md).
+>
+> 📽️ Slides desta aula: [`slides/aula-07.odp`](slides/aula-07.odp) (roteiro editável em [`slides/aula-07.json`](slides/aula-07.json) — veja [tools/slides](../../tools/slides/README.md)).
 
 ## 🔁 Revisão da Aula 06 (5 min)
 

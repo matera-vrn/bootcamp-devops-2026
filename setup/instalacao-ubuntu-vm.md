@@ -178,7 +178,7 @@ Você vai precisar da janela da VM só para ligar/desligar ou se o SSH falhar. Q
 | **Tela preta** ao iniciar a VM | (1) Virtualização desligada na BIOS/UEFI — veja o [guia do VirtualBox](instalacao-virtualbox.md). (2) **Mac com chip Apple M usando a ISO `amd64`** — baixe a `arm64` (passo 1) |
 | VM **muito lenta**, ícone de **tartaruga verde** no rodapé (Windows) | O Windows está com o Hyper-V ativo "por baixo". Veja *Problemas comuns* do [guia do VirtualBox](instalacao-virtualbox.md) |
 | Depois do reboot, o **instalador apareceu de novo** | A ISO continuou "no drive". Desligue a VM, vá em **Configurações → Armazenamento**, clique no `.iso` e remova-o do drive virtual. Ligue de novo |
-| `ssh: connect to host localhost port 2222: Connection refused` | Regra de redirecionamento não salva (passo 6.1), VM desligada, ou o OpenSSH não foi instalado — na janela da VM rode `sudo apt install -y openssh-server` |
+| `ssh: connect to host localhost port 2222: Connection refused` | Regra de redirecionamento não salva (passo 5.1 ou 5.2), VM desligada, ou o OpenSSH não foi instalado — na janela da VM rode `sudo apt install -y openssh-server` |
 | `Permission denied, please try again` no SSH | Senha errada (lembre: nada aparece ao digitar). Confira também se digitou `aluno` |
 | `~` não aparece / sai `~~` | Tecla morta do ABNT2: aperte `~` e depois **Espaço** |
 | `Esqueci a senha` | Mais rápido: reinstalar a VM (passo 2 em diante, ~20 min). Anote a nova senha! |

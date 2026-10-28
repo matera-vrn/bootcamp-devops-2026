@@ -20,11 +20,11 @@ Agora conecte-se do jeito que usaremos em todas as aulas: abra o terminal **do s
 ssh aluno@localhost -p 2222
 ```
 
-O mesmo prompt deve aparecer na sua janela — com copiar e colar funcionando. Dúvidas? Passo 6 do [guia da VM](../../setup/instalacao-ubuntu-vm.md).
+O mesmo prompt deve aparecer na sua janela — com copiar e colar funcionando. Dúvidas? Passo 5 do [guia da VM](../../setup/instalacao-ubuntu-vm.md).
 
 ## Passo 2 — Execute o roteiro de testes
 
-Siga o **[roteiro de testes](../../setup/roteiro-de-testes.md)** completo (8 testes: login, teclado, versão do Ubuntu, internet, DNS/HTTPS, `apt`, disco e SSH).
+Siga o **[roteiro de testes](../../setup/roteiro-de-testes.md)** completo (8 testes: login, SSH, teclado, versão do Ubuntu, internet, DNS/HTTPS, `apt` e disco).
 
 ## Passo 3 — Deixe sua marca 🖋️
 
@@ -64,8 +64,7 @@ echo "Ambiente pronto! $(whoami) reportando da VM $(hostname)"
 |----------|---------|
 | VM não liga / erro de virtualização | Seção *Problemas comuns* do [guia do VirtualBox](../../setup/instalacao-virtualbox.md) |
 | Login não funciona | Confira usuário/senha; se esqueceu a senha, veja o [guia da VM](../../setup/instalacao-ubuntu-vm.md) |
-| Algum teste do roteiro falhou | Anote a mensagem de erro e chame um monitor no canal `#setup-ambiente` |
-| Nada resolveu | Sinalize para a equipe — a partir da Aula 02 existe uma imagem backup para casos extremos |
+| Algum teste do roteiro falhou | Anote a mensagem de erro e chame um monitor |
 
 ## Missão da semana 📌
 

@@ -3,6 +3,8 @@
 > **Objetivo:** publicar o projeto no GitHub, entender remotos (`push`/`pull`), abrir o primeiro Pull Request e começar a construir o portfólio que recrutadores realmente olham.
 >
 > 📖 Apareceu uma palavra nova? Consulte o [glossário](../../glossario.md).
+>
+> 📽️ Slides desta aula: [`slides/aula-09.odp`](slides/aula-09.odp) (roteiro editável em [`slides/aula-09.json`](slides/aula-09.json) — veja [tools/slides](../../tools/slides/README.md)).
 
 ## 🔁 Revisão da Aula 08 (5 min)
 

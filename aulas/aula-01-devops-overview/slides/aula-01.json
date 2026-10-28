@@ -1,0 +1,396 @@
+{
+ "aula": 1,
+ "tempo": {
+  "abertura": 5,
+  "revisao": 0,
+  "parte1": 45,
+  "intervalo": 15,
+  "parte2": 45,
+  "qa": 25
+ },
+ "slides": [
+  {
+   "tipo": "capa",
+   "bloco": "abertura",
+   "titulo": "Aula 01",
+   "subtitulo": "DevOps: Overview + Comunidades",
+   "notas": "⏱ 0 min — Tela de abertura enquanto o pessoal entra na live. Boas-vindas, \"Energia Matera\". Peça para todos dizerem no chat de onde estão falando. Lembre: hoje é nivelamento, ninguém precisa saber nada antes.",
+   "minutos": 0
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "abertura",
+   "titulo": "Agenda do encontro",
+   "bullets": [
+    "19:30 — Abertura, boas-vindas e \"Energia Matera\"",
+    "19:35 — Parte 1: O Mindset DevOps",
+    "20:20 — Intervalo",
+    "20:35 — Parte 2: Apoio à configuração do ambiente + roteiro de testes",
+    "21:20 — Perguntas & Respostas",
+    "21:45 — Encerramento"
+   ],
+   "destaque": "Objetivo de hoje: entender por que o DevOps nasceu, a dor que ele cura e sair com o ambiente funcionando.",
+   "rodape": "📖 Apareceu uma palavra nova? Consulte o glossário do repositório do bootcamp.",
+   "notas": "⏱ 5 min — Apresente a agenda e o objetivo da aula: nivelar todo mundo. Explique que a Parte 1 é conversa (sem terminal) e a Parte 2 é apoio ao ambiente: quem já fez os testes ajuda quem travou. Mostre onde fica o glossário no repositório. Pergunta para o chat: \"Quem já conseguiu ligar a VM e rodar o roteiro de testes? Responda SIM ou AINDA NÃO.\"",
+   "minutos": 5
+  },
+  {
+   "tipo": "secao",
+   "bloco": "parte1",
+   "titulo": "PARTE 1",
+   "subtitulo": "O Mindset DevOps",
+   "notas": "⏱ 0 min — Divisor. Diga: \"DevOps é muito além das ferramentas — vamos começar pela história de uma rivalidade.\"",
+   "minutos": 0
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "A história de uma rivalidade",
+   "paragrafos": [
+    "Era uma vez duas equipes na mesma empresa:"
+   ],
+   "bullets": [
+    "**Dev (Desenvolvimento):** quer entregar funcionalidades novas, rápido.",
+    "Para o Dev, mudança é o seu trabalho.",
+    "**Ops (Operações):** quer o sistema estável, no ar, sem sustos.",
+    "Para o Ops, mudança é o seu maior risco."
+   ],
+   "notas": "⏱ 4 min — Conte como história, não como definição. Dev vive de mudar o sistema; Ops vive de manter o sistema de pé. Os dois estão certos — e é exatamente por isso que brigam. Defina os termos: Dev = quem escreve o código; Ops = quem cuida dos servidores e mantém tudo no ar. Pergunte ao chat: \"Você se identifica mais com o Dev ou com o Ops?\"",
+   "minutos": 4
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "\"No meu ambiente funciona\"",
+   "bullets": [
+    "O Dev \"joga o código por cima do muro\" para o Ops.",
+    "O Ops segura o deploy com medo de quebrar tudo.",
+    "Cada incidente vira caça ao culpado.",
+    "Entregas que deveriam levar dias levam meses."
+   ],
+   "destaque": "💬 Interação: quem aqui já ouviu (ou disse) \"no meu ambiente funciona, o problema é do servidor\"?",
+   "rodape": "Deploy = colocar uma versão do sistema no ar (voltamos a esse termo daqui a pouco).",
+   "notas": "⏱ 3 min — Faça a pergunta do destaque e espere as respostas no chat — essa frase é universal. Mostre o resultado do muro: medo de deploy, caça ao culpado, entregas que atrasam meses. Defina deploy no primeiro uso (rodapé). Gancho: \"Foi dessa dor que nasceu o DevOps.\"",
+   "minutos": 3
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "O que é DevOps, afinal?",
+   "paragrafos": [
+    "É a decisão de derrubar o muro entre Dev e Ops e fazer as duas pontas trabalharem como **um time só**.",
+    "Um time responsável junto pelo produto: do código à produção."
+   ],
+   "destaque": "DevOps não é um cargo, nem uma ferramenta — é uma cultura.",
+   "notas": "⏱ 4 min — Mensagem-chave da aula: DevOps não é cargo, não é ferramenta, é cultura. Repita isso. Explique \"do código à produção\": o mesmo time responde pelo que escreveu e pelo que está no ar. Desmonte a ideia de que \"ser DevOps\" é saber Docker ou Kubernetes — ferramentas vêm depois, nas próximas aulas.",
+   "minutos": 4
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Pilares: cultura e empatia",
+   "bullets": [
+    "**Cultura e comunicação:** todos falam a mesma língua e olham para o mesmo objetivo.",
+    "**Empatia e quebra de silos:** o Dev entende a dor de operar...",
+    "...e o Ops entende a dor de entregar."
+   ],
+   "rodape": "Silo = cada equipe fechada em si mesma, sem conversar com as outras.",
+   "notas": "⏱ 4 min — Dois primeiros pilares. Cultura e comunicação: mesma língua, mesmo objetivo (o produto no ar, funcionando). Empatia: o Dev precisa sentir o que é ser acordado às 3h por um incidente; o Ops precisa sentir a pressão de entregar. Defina silo no primeiro uso (rodapé). Pergunta para o chat: \"Na sua empresa (ou faculdade), existe algum muro entre equipes?\"",
+   "minutos": 4
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Pilares: automação e blameless",
+   "bullets": [
+    "**Automação:** tudo que é repetitivo e manual vira código (spoiler das próximas aulas!).",
+    "**Cultura blameless (sem culpa):** quando algo quebra, ninguém sai procurando culpado.",
+    "**Post-mortem:** a análise feita depois de um incidente — sem culpados."
+   ],
+   "destaque": "A pergunta certa é \"o que no processo permitiu esse erro?\" — nunca \"quem errou?\"",
+   "notas": "⏱ 4 min — Automação é o spoiler do bootcamp: Linux, Git, Docker, CI/CD — tudo que é repetitivo vira código. Blameless = sem culpa: defina o termo em voz alta. Explique post-mortem como a análise depois do incidente — foco no processo, não na pessoa. Diga que o erro humano é sintoma de um processo que deixou o erro passar. Leia o destaque em voz alta.",
+   "minutos": 4
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "O ciclo de vida DevOps ♾️",
+   "paragrafos": [
+    "O famoso \"loop infinito\": o trabalho não termina quando o sistema vai ao ar — ele volta para o planejamento.",
+    "Agora vamos desmistificar os termos que você vai ouvir o bootcamp inteiro."
+   ],
+   "destaque": "Planejar → Codificar → Buildar → Testar → Liberar → Implantar → Operar → Monitorar → (e volta ao Planejar)",
+   "notas": "⏱ 4 min — Mostre o loop e percorra as 8 etapas com o cursor. Destaque que Operar e Monitorar alimentam o próximo Planejar: o que foi visto em produção vira a próxima melhoria. Não aprofunde cada etapa agora; os dois próximos slides traduzem o jargão.",
+   "minutos": 4
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Jargão traduzido: CI e CD",
+   "bullets": [
+    "**CI — Integração Contínua**",
+    "Integrar e testar o código várias vezes ao dia, automaticamente.",
+    "**CD — Entrega Contínua**",
+    "Deixar cada versão pronta para ir ao ar com um clique (ou nenhum)."
+   ],
+   "notas": "⏱ 4 min — \"Tradução para humanos\" dos dois termos mais ouvidos. CI: em vez de juntar o código de todos uma vez por mês (e sofrer), junta-se várias vezes por dia e um robô testa. CD: cada versão já sai pronta para produção, apertar um botão basta. Diga que nas últimas aulas eles vão construir a própria esteira de CI/CD.",
+   "minutos": 4
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Jargão: pipeline, build, deploy",
+   "bullets": [
+    "**Pipeline / Esteira:** a sequência automatizada de etapas do código até a produção.",
+    "**Build:** montar/empacotar o programa a partir do código.",
+    "**Deploy:** colocar uma versão do sistema no ar."
+   ],
+   "destaque": "Guarde esses cinco termos: eles aparecem em todas as aulas daqui para frente.",
+   "notas": "⏱ 3 min — Pipeline/esteira: use a imagem de uma esteira de fábrica, onde o código entra de um lado e sai produto do outro. Build: empacotar. Deploy: colocar no ar (já apareceu no slide do muro). Pergunta para o chat: \"Qual desses termos vocês já tinham ouvido antes de hoje?\"",
+   "minutos": 3
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Por que o mercado paga bem?",
+   "paragrafos": [
+    "Empresas que dominam DevOps entregam **mais rápido, com menos erro e mais segurança**."
+   ],
+   "bullets": [
+    "Na Matera, sistemas financeiros processam bilhões de transações.",
+    "Sem automação, cultura e monitoramento, isso simplesmente não funciona em escala."
+   ],
+   "destaque": "Profissionais que sabem construir e operar essas esteiras são disputados.",
+   "notas": "⏱ 4 min — Conecte com a realidade da Matera: bilhões de transações financeiras; sem automação, cultura e monitoramento não há escala. Por isso o mercado paga bem: entregar rápido, com menos erro e com segurança vale dinheiro. Mensagem motivacional: \"É exatamente isso que vocês vão aprender a construir aqui.\"",
+   "minutos": 4
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Comunidades: ninguém aprende sozinho",
+   "bullets": [
+    "O ecossistema é gigante e muda rápido.",
+    "Comunidade é como você se mantém atualizado.",
+    "Onde participar: comunidades locais e online de DevOps e Cloud.",
+    "Eventos e meetups.",
+    "Os canais deste bootcamp."
+   ],
+   "rodape": "Meetup = encontro (presencial ou online) de uma comunidade para trocar experiências.",
+   "notas": "⏱ 4 min — Seção 5 do README. O ecossistema muda tão rápido que ninguém acompanha sozinho; a comunidade é o filtro. Cite exemplos de comunidades locais e online de DevOps e Cloud que você conhece, eventos e meetups (defina meetup, rodapé). Pergunta para o chat: \"Alguém já participou de algum meetup ou comunidade de tecnologia? Conta aí.\"",
+   "minutos": 4
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Nosso combinado",
+   "paragrafos": [
+    "Usem os canais do bootcamp!"
+   ],
+   "bullets": [
+    "Dúvida de ambiente? Chame um monitor no canal `#setup-ambiente`.",
+    "Quem pergunta aprende e ajuda os outros a aprender."
+   ],
+   "destaque": "Pergunta boba não existe.",
+   "notas": "⏱ 4 min — Feche a Parte 1 com o combinado: os canais do bootcamp são a comunidade de vocês. Reforce o canal #setup-ambiente para dúvidas de VM. Leia o destaque: pergunta boba não existe. Explique que responder a pergunta de um colega também é aprender.",
+   "minutos": 4
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Ambiente funcionando é a primeira entrega!",
+   "paragrafos": [
+    "Na prática de hoje, vamos garantir que **todo mundo** saia com a VM Ubuntu validada."
+   ],
+   "bullets": [
+    "A VM (máquina virtual) é o nosso laboratório para as próximas 9 aulas.",
+    "Depois do intervalo: roteiro de testes + primeiros comandos no terminal.",
+    "Travou em algum passo? Os monitores estão de plantão."
+   ],
+   "rodape": "Já deixe a VM ligando durante o intervalo — voltamos às 20:35.",
+   "notas": "⏱ 3 min — Transição para a Parte 2. Explique que ambiente funcionando é a primeira entrega do bootcamp: sem a VM, nenhuma prática acontece. Defina VM = máquina virtual, um computador dentro do seu computador. Peça que aproveitem o intervalo para ligar a VM (VirtualBox) e deixar o terminal aberto. Quem travou: já avisar no #setup-ambiente para os monitores se organizarem.",
+   "minutos": 3
+  },
+  {
+   "tipo": "secao",
+   "bloco": "intervalo",
+   "titulo": "INTERVALO",
+   "subtitulo": "Voltamos às 20:35",
+   "notas": "⏱ 15 min — Intervalo. Deixe o slide na tela. Monitores aproveitam para começar a atender no #setup-ambiente quem já sinalizou problema.",
+   "minutos": 15
+  },
+  {
+   "tipo": "secao",
+   "bloco": "parte2",
+   "titulo": "PARTE 2",
+   "subtitulo": "Validando seu laboratório",
+   "notas": "⏱ 0 min — Divisor. Diga: \"Agora é mão na massa: vamos validar a VM de todo mundo e dar os primeiros comandos no terminal.\" Compartilhe sua tela com o terminal aberto.",
+   "minutos": 0
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Objetivo da prática",
+   "paragrafos": [
+    "**Objetivo:** garantir que sua VM Ubuntu está pronta para o bootcamp e dar seus primeiros passos no terminal.",
+    "**Pré-requisito:** ter seguido os guias de `setup/` (VirtualBox, VM Ubuntu e roteiro de testes)."
+   ],
+   "bullets": [
+    "Onde: no terminal do **seu computador**, conectado à VM por SSH.",
+    "Travou em algum passo? Este é o momento de pedir ajuda — os monitores estão de plantão!"
+   ],
+   "rodape": "SSH = conexão remota e segura ao terminal da VM; é assim que vamos usar a VM em todas as aulas.",
+   "notas": "⏱ 5 min — Leia o objetivo e o pré-requisito. Explique \"onde\": a prática acontece no terminal do próprio computador (Terminal/PowerShell no Windows, Terminal no macOS/Linux), conectado à VM por SSH — a janela do VirtualBox serve só para ligar a VM. Defina SSH (rodapé). Pergunta para o chat: \"Quem já está com a VM ligada? Manda um ✅.\" Organize: quem já fez os 8 testes vai direto ao Passo 3; quem não fez, acompanha o Passo 2 com os monitores.",
+   "minutos": 5
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 1 — Ligue a VM e faça login",
+   "bullets": [
+    "Abra o VirtualBox, selecione a VM `bootcamp-devops` e clique em **Iniciar**.",
+    "Faça login com o usuário `aluno` e sua senha (ela não aparece enquanto você digita).",
+    "Depois, abra o terminal do **seu computador** e conecte-se por SSH:"
+   ],
+   "codigo": "ssh aluno@localhost -p 2222",
+   "rodape": "Resultado esperado: o prompt `aluno@bootcamp:~$` na VM e, depois do `ssh`, também na janela do seu terminal.",
+   "notas": "⏱ 5 min — Mostre na tela: VirtualBox → VM bootcamp-devops → Iniciar → login aluno. Avise que a senha não mostra nem asteriscos, é normal. Depois, no terminal do seu computador, rode o ssh. Na primeira vez aparece a pergunta yes/no: digite yes. Mostre o prompt aluno@bootcamp:~$ aparecendo na sua janela e teste colar algo (Ctrl+V, Cmd+V ou Ctrl+Shift+V). Dúvidas sobre SSH: passos 6 e 7 do guia da VM em setup/instalacao-ubuntu-vm.md.",
+   "minutos": 5
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 2 — Roteiro de testes (1/3)",
+   "bullets": [
+    "Testes 1 e 2 (login e SSH) você já fez no Passo 1 — daqui em diante, tudo pelo SSH.",
+    "Teste 3: teclado. `~` é tecla morta (aperte `~` e depois Espaço); `|` é Shift + `\\`.",
+    "Teste 4: versão do Ubuntu."
+   ],
+   "codigo": "echo \"teclado: ~ | / > ç\"\nlsb_release -a",
+   "rodape": "Resultado esperado: `teclado: ~ | / > ç` igualzinho, com todos os símbolos; `Description: Ubuntu 24.04.x LTS`.",
+   "notas": "⏱ 8 min — Roteiro em setup/roteiro-de-testes.md, 8 testes. Testes 1 e 2 (login e ssh) já foram feitos no Passo 1 — não repita o ssh dentro da sessão. Teste 3: rode o echo do teclado e mostre que todos os símbolos saem iguais; explique a tecla morta do ~ e que | é Shift + barra invertida. Teste 4: lsb_release -a e aponte a linha Description. Dê tempo para o pessoal digitar e peça no chat: \"Testes 1 a 4 OK? Manda um 4️⃣.\" Connection refused no ssh = falta OpenSSH (passo 6) ou a regra da porta 2222 (passo 7.1).",
+   "minutos": 8
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 2 — Roteiro de testes (2/3)",
+   "bullets": [
+    "Testes 5 e 6: internet, DNS (nome → endereço) e HTTPS.",
+    "Rode um comando por vez e compare com o resultado esperado."
+   ],
+   "codigo": "ping -c 4 google.com\ncurl -I https://www.google.com",
+   "rodape": "Resultado esperado: `4 received, 0% packet loss`; primeira linha `HTTP/2 200`.",
+   "notas": "⏱ 4 min — Rode um comando por vez na sua tela. Teste 5: ping, 4 respostas e 0% packet loss. Teste 6: curl -I, primeira linha HTTP/2 200 (ou HTTP/1.1 200 OK) — explique que DNS é traduzir nome em endereço e HTTPS é a conexão segura. Pergunta para o chat: \"Testes 5 e 6 OK? Manda um 6️⃣.\"",
+   "minutos": 4
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 2 — Roteiro de testes (3/3)",
+   "bullets": [
+    "Testes 7 e 8: `apt` e disco.",
+    "`apt` pede sua senha; avisos em amarelo são OK, só mensagens de erro contam como falha.",
+    "Para encerrar a sessão SSH, digite `exit`."
+   ],
+   "codigo": "sudo apt update\ndf -h /",
+   "rodape": "Resultado esperado: apt sem erros; `Avail` (ou `Disp.`) com pelo menos 10G.",
+   "notas": "⏱ 4 min — Teste 7: sudo apt update pede a senha (invisível); avisos amarelos são OK. Teste 8: df -h /, coluna Avail com pelo menos 10G — menos que isso, a VM foi criada com disco menor que 25 GB. Pergunta para o chat: \"8 de 8? Manda um 🎉.\" Quem falhou: anota qual teste e a mensagem exata e chama monitor.",
+   "minutos": 4
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 3 — Deixe sua marca 🖋️",
+   "bullets": [
+    "`echo` é o comando que \"fala\" no terminal: ele repete a frase de volta.",
+    "`whoami` mostra quem você é para o sistema.",
+    "`uptime` mostra há quanto tempo a máquina está ligada."
+   ],
+   "codigo": "echo \"Meu primeiro comando no bootcamp DevOps!\"\nwhoami\nuptime",
+   "rodape": "Resultado esperado: o terminal repete a frase; `whoami` responde `aluno`; `uptime` mostra o tempo que a VM está ligada.",
+   "notas": "⏱ 5 min — \"Um gostinho do que vem por aí.\" Rode o echo e mostre a frase voltando. Depois whoami (responde aluno) e uptime. Comente que é o primeiro comando de verdade deles em Linux — comemore no chat. Peça que troquem a frase do echo por uma frase própria.",
+   "minutos": 5
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 4 — Compartilhe a vitória 🎉",
+   "bullets": [
+    "Digite o comando, tire um print (captura de tela) do resultado e poste no chat/comunidade.",
+    "`hostname` mostra o nome da máquina e `whoami`, o seu usuário.",
+    "O terminal montou a frase para você."
+   ],
+   "codigo": "echo \"Ambiente pronto! $(whoami) reportando da VM $(hostname)\"",
+   "rodape": "Resultado esperado: `Ambiente pronto! aluno reportando da VM bootcamp`",
+   "notas": "⏱ 5 min — Rode o comando na sua tela e mostre a frase montada. Explique de leve o $( ): o terminal executa o que está dentro e cola o resultado na frase — sem aprofundar, isso volta nas aulas de Linux. Peça o print no chat/comunidade e vá lendo os nomes de quem postou. Esse é o momento de celebração da aula.",
+   "minutos": 5
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Deu errado? 😥 (1/2)",
+   "bullets": [
+    "VM não liga / erro de virtualização → seção *Problemas comuns* do guia do VirtualBox.",
+    "Login não funciona → confira usuário/senha; esqueceu a senha? veja o guia da VM.",
+    "`Connection refused` no SSH → OpenSSH não instalado (passo 6) ou porta 2222 (passo 7.1)."
+   ],
+   "notas": "⏱ 3 min — Passe pelos problemas mais comuns de VM e acesso. VM não liga: virtualização desligada na BIOS/UEFI (seção Problemas comuns do guia do VirtualBox). Login: usuário aluno e senha invisível; esqueceu a senha, o guia da VM manda apagar e recriar a VM (~20 min). Connection refused: OpenSSH não instalado ou regra de porta não salva.",
+   "minutos": 3
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Deu errado? 😥 (2/2)",
+   "bullets": [
+    "`Permission denied` no SSH → senha errada (nada aparece ao digitar) ou usuário errado.",
+    "Algum teste falhou → anote a mensagem de erro e chame um monitor em `#setup-ambiente`.",
+    "Nada resolveu → sinalize para a equipe; a partir da Aula 02 existe uma imagem backup."
+   ],
+   "notas": "⏱ 3 min — Permission denied: senha errada ou usuário diferente de aluno. Teste falhou: anote a mensagem exata e chame monitor no #setup-ambiente. Nada resolveu: sinalize para a equipe; a partir da Aula 02 existe uma imagem backup. Reforce a mensagem do roteiro: \"sem pânico — isso também é DevOps\". Quem está travado fica com os monitores durante o Q&A.",
+   "minutos": 3
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Missão da semana 📌",
+   "bullets": [
+    "Antes da Aula 02: responda o formulário de confirmação do ambiente (se ainda não fez).",
+    "Brinque com o terminal sem medo.",
+    "Se a VM \"quebrar de vez\", é só criar outra. Esse é o superpoder das máquinas virtuais!"
+   ],
+   "destaque": "Dentro da VM você não quebra nada do seu computador.",
+   "notas": "⏱ 3 min — Missão até a Aula 02: formulário de confirmação do ambiente, para quem ainda não respondeu. Incentive a explorar o terminal: dentro da VM não se quebra nada do computador; se quebrar de vez, cria outra — superpoder das máquinas virtuais. Diga que na Aula 02 começa o Linux de verdade.",
+   "minutos": 3
+  },
+  {
+   "tipo": "secao",
+   "bloco": "qa",
+   "titulo": "PERGUNTAS & RESPOSTAS",
+   "subtitulo": "21:20 – 21:45",
+   "notas": "⏱ 25 min — Abra para perguntas do chat. Priorize dúvidas de conceito (Dev x Ops, CI/CD, cultura) e deixe os monitores atendendo os casos de ambiente em paralelo no #setup-ambiente. Se o chat ficar quieto, provoque: \"Qual parte do ciclo DevOps vocês acham mais difícil de fazer na prática?\"",
+   "minutos": 25
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "fechamento",
+   "titulo": "O que levamos para a próxima aula",
+   "bullets": [
+    "DevOps é cultura + automação: Dev e Ops como um time só, do código à produção.",
+    "O ciclo ♾️ e o jargão: CI, CD, pipeline, build e deploy.",
+    "Ambiente validado: a VM Ubuntu é o laboratório das próximas 9 aulas."
+   ],
+   "destaque": "Toda automação roda em cima de um sistema operacional — e em 9 de cada 10 servidores do mundo, esse sistema é o Linux.",
+   "paragrafos": [
+    "Na Aula 02, a tela preta deixa de ser assustadora e vira sua ferramenta de trabalho."
+   ],
+   "notas": "⏱ 0 min — Recapitule os três pontos e leia o gancho da Aula 02: DevOps é cultura + automação, e toda automação roda em cima de um sistema operacional — em 9 de cada 10 servidores do mundo, o Linux. Na próxima aula a tela preta vira ferramenta de trabalho. Lembre da missão (formulário) e agradeça a presença.",
+   "minutos": 0
+  },
+  {
+   "tipo": "encerramento",
+   "bloco": "fechamento",
+   "notas": "⏱ 0 min — Logo do Instituto Matera. Despedida: \"Até a Aula 02 — e usem os canais do bootcamp!\"",
+   "minutos": 0
+  }
+ ]
+}
