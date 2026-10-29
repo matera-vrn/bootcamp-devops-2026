@@ -1,0 +1,21 @@
+tools/slides/pdf-unico.sh
+  s_d9aa151b3beb74::t_fcc17fa8e70ccd 1-12
+tools/slides/README.md
+  s_d9aa151b3beb74::t_bc859159ce3c90 25-32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4cab90760b720bd105b204ce212500460c1f7178",
+  "prompts": {},
+  "sessions": {
+    "s_d9aa151b3beb74": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2585408d-388a-4057-8919-db431ee490b4",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "vrn <vinicius.navarro@matera.com>"
+    }
+  }
+}
