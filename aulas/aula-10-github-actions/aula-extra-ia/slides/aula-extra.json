@@ -8,7 +8,7 @@
    "tipo": "capa",
    "bloco": "abertura",
    "titulo": "Aula Extra",
-   "subtitulo": "IA e DevOps: um prompt, um projeto",
+   "subtitulo": "IA e DevOps: saber o que pedir",
    "notas": "⏱ 0 min — Troque para este deck às 21:20, vindo do slide 'AULA EXTRA' da Aula 10. Máquina limpa da demo pronta (CLI de IA autenticada, conta GitHub de demonstração, nenhum token visível), vídeo de backup à mão. Dupla: um narra, outro digita.",
    "minutos": 0
   },
@@ -16,12 +16,13 @@
    "tipo": "conteudo",
    "bloco": "parte1",
    "minutos": 3,
-   "titulo": "Um prompt, um projeto",
+   "titulo": "Dez aulas… ou um prompt?",
    "paragrafos": [
     "Durante duas semanas, vocês construíram com as próprias mãos: projeto, health check, pipeline, Dockerfile, compose, GitHub e CI."
    ],
    "bullets": [
-    "Agora, ao vivo: um único prompt numa CLI de IA (uma IA que roda no terminal)"
+    "Agora, ao vivo: vamos pedir isso a uma IA que roda no terminal",
+    "Duas vezes — de dois jeitos diferentes"
    ],
    "destaque": "💬 Enquete no chat: vocês levaram 10 aulas para construir esse projeto. Quanto tempo uma IA levaria?",
    "notas": "⏱ 3 min — Faça a chamada: 'Vocês levaram 10 aulas para construir esse projeto. Alguém quer chutar quanto tempo uma IA levaria?' Deixe a enquete rolar e leia alguns chutes em voz alta. Anuncie: agora, ao vivo, um único prompt numa CLI de IA. Avance para o próximo slide com o pedido."
@@ -29,21 +30,46 @@
   {
    "tipo": "conteudo",
    "bloco": "parte1",
-   "minutos": 12,
-   "titulo": "O prompt, ao vivo",
+   "titulo": "Prompt 1 — o pedido simples",
    "bullets": [
-    "O prompt é uma **especificação fechada**: 11 arquivos, nomes, mensagens e comportamentos exatos",
-    "`[OK]`/`[FALHA]`, `set -e`, `grep -q`, `nginx:alpine`, serviço `visitas`, `ci.yml` — tudo que vocês fizeram",
-    "A própria IA prova: pipeline verde → quebra proposital barra o deploy → `compose up` → `git log`",
-    "Ensaio: ~1 minuto do prompt ao commit inicial"
+    "Linguagem natural, com o vocabulário do bootcamp — e pedindo a prova"
    ],
-   "rodape": "O prompt completo está em aulas/aula-10-github-actions/aula-extra-ia/prompt-demo.txt (colar inteiro na CLI de IA).",
-   "notas": "⏱ 12 min — Cole o prompt inteiro (prompt-demo.txt) e narre enquanto a IA cria os arquivos, ligando cada um à aula em que a turma o fez. Deixe a prova rodar sozinha (pipeline verde, quebra, verde de novo, compose, git log) e dê zoom nas saídas: são as mesmas que a turma viu. Prepare a comparação lado a lado do test.sh para o próximo slide."
+   "codigo": "Crie um projeto chamado meu-projeto-devops com scripts em bash:\n- um build que gera uma pagina index.html com a data do build;\n- um teste que verifica a pagina e falha com codigo de saida diferente de zero se ela estiver errada;\n- um deploy que copia a pagina para uma pasta de \"producao\";\n- uma pipeline que roda build, teste e deploy nessa ordem e para no primeiro erro.\nInclua um Dockerfile com nginx para servir a pagina, um compose com o site e um redis,\ne um workflow do GitHub Actions que roda build e teste a cada push.\nRode a pipeline para provar que funciona e depois quebre o teste de proposito\npara mostrar que o deploy nao acontece. Por fim, inicie o repositorio git e faca o primeiro commit.",
+   "notas": "⏱ 7 min — Cole o prompt simples (prompt-simples.txt) e narre enquanto a IA cria os arquivos: 'olha, ela escolheu uma pasta dist', 'o teste dela tem cinco verificações'. Deixe a prova rodar: pipeline verde, teste quebrado sem deploy, commit. Celebre: funcionou! Avance para a comparação.",
+   "minutos": 7
   },
   {
    "tipo": "conteudo",
    "bloco": "parte1",
-   "minutos": 10,
+   "titulo": "Funcionou… mas é o nosso projeto?",
+   "bullets": [
+    "Pasta `dist/` em vez de `app/`; produção dentro do projeto em vez de `~/producao`",
+    "Título \"Meu Projeto DevOps\"; mensagens `[build]`/`[test]`; cinco verificações no teste",
+    "`nginx:1.27-alpine`; serviço `redis` com volume e `restart`; workflow em qualquer push",
+    "`.gitignore` e README que ninguém pediu"
+   ],
+   "destaque": "💬 Interação: é o nosso projeto? O que está diferente? Digitem no chat.",
+   "notas": "⏱ 5 min — Antes de tudo, diga: pipeline verde, teste barrando o deploy, commit — em um minuto. Funcionou. Agora abra o projeto da IA ao lado do projeto de um aluno e pergunte: 'é o nosso projeto?' Vá apontando as diferenças conforme o chat responde. Mensagem: nada disso está errado — a IA decidiu sozinha porque a gente não disse. Quem não fez as 10 aulas não veria diferença nenhuma.",
+   "minutos": 5
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Prompt 2 — a especificação",
+   "bullets": [
+    "63 linhas: os 11 arquivos, nomes, caminhos, mensagens `[OK]`/`[FALHA]`, `set -e`, `grep -q`, `nginx:alpine`, serviço `visitas`, `ci.yml`",
+    "Resultado (ensaiado): **igual ao projeto da turma** — até o `test.sh`",
+    "Mesma IA, mesmo tempo. Mudou só uma coisa: **o pedido**"
+   ],
+   "destaque": "A diferença entre os dois prompts é exatamente o que vocês aprenderam em dez aulas.",
+   "rodape": "Prompt completo em aulas/aula-10-github-actions/aula-extra-ia/prompt-detalhado.txt — mostre na tela e dê zoom em 2 ou 3 trechos.",
+   "notas": "⏱ 4 min — Mostre o prompt detalhado na tela (zoom nas mensagens [OK]/[FALHA], no grep -q, no serviço visitas) e, ao lado, o resultado já ensaiado: o test.sh da IA idêntico ao da turma. Frase-chave: 'a diferença entre os dois prompts é o que vocês aprenderam aqui'. Se sobrar tempo, rode-o ao vivo.",
+   "minutos": 4
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "minutos": 6,
    "titulo": "A virada",
    "destaque": "💬 Interação: a IA errou algo? O que vocês fariam diferente? Revisem a IA no chat.",
    "bullets": [
@@ -54,7 +80,7 @@
     "**Quem domina os fundamentos multiplica a produtividade com IA**",
     "Quem não domina só copia e cola — e não sabe consertar quando quebra (e sempre quebra!)"
    ],
-   "notas": "⏱ 10 min — A virada: pergunte ao chat 'a IA errou algo? o que vocês fariam diferente?' e deixe a turma revisar a IA. É o momento em que eles percebem que sabem. Depois feche com os três pontos, em tom energizante, não desanimador (o impacto inicial é o 'uau'; o fecho é 'vocês sabem'): 1) eles sabem julgar o resultado; 2) o trabalho mudou de digitar para entender, revisar, decidir e operar; 3) fundamentos multiplicam a produtividade com IA, sem eles é só copiar e colar. Então siga para o encerramento."
+   "notas": "⏱ 6 min — A virada: pergunte ao chat 'a IA errou algo? o que vocês fariam diferente?' e deixe a turma revisar a IA. É o momento em que eles percebem que sabem. Depois feche com os três pontos, em tom energizante, não desanimador (o impacto inicial é o 'uau'; o fecho é 'vocês sabem'): 1) eles sabem julgar o resultado; 2) o trabalho mudou de digitar para entender, revisar, decidir e operar; 3) fundamentos multiplicam a produtividade com IA, sem eles é só copiar e colar. Então siga para o encerramento."
   },
   {
    "tipo": "encerramento",

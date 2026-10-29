@@ -1,0 +1,9 @@
+Crie um projeto chamado meu-projeto-devops com scripts em bash:
+- um build que gera uma pagina index.html com a data do build;
+- um teste que verifica a pagina e falha com codigo de saida diferente de zero se ela estiver errada;
+- um deploy que copia a pagina para uma pasta de "producao";
+- uma pipeline que roda build, teste e deploy nessa ordem e para no primeiro erro.
+Inclua um Dockerfile com nginx para servir a pagina, um compose com o site e um redis,
+e um workflow do GitHub Actions que roda build e teste a cada push.
+Rode a pipeline para provar que funciona e depois quebre o teste de proposito
+para mostrar que o deploy nao acontece. Por fim, inicie o repositorio git e faca o primeiro commit.
