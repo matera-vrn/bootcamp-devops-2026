@@ -64,8 +64,7 @@ echo "Ambiente pronto! $(whoami) reportando da VM $(hostname)"
 |----------|---------|
 | VM não liga / erro de virtualização | Seção *Problemas comuns* do [guia do VirtualBox](../../setup/instalacao-virtualbox.md) |
 | Login não funciona | Confira usuário/senha; se esqueceu a senha, veja o [guia da VM](../../setup/instalacao-ubuntu-vm.md) |
-| Algum teste do roteiro falhou | Anote a mensagem de erro e chame um monitor no canal `#setup-ambiente` |
-| Nada resolveu | Sinalize para a equipe — a partir da Aula 02 existe uma imagem backup para casos extremos |
+| Algum teste do roteiro falhou | Anote a mensagem de erro e chame um monitor |
 
 ## Missão da semana 📌
 
