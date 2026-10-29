@@ -4,7 +4,7 @@
 >
 > 📖 Apareceu uma palavra nova? Consulte o [glossário](../../glossario.md).
 >
-> 📽️ Slides desta aula: [`slides/aula-10.odp`](slides/aula-10.odp) (roteiro editável em [`slides/aula-10.json`](slides/aula-10.json) — veja [tools/slides](../../tools/slides/README.md)).
+> 📽️ Slides desta aula: [`slides/aula-10.odp`](slides/aula-10.odp) (roteiro editável em [`slides/aula-10.json`](slides/aula-10.json) — veja [tools/slides](../../tools/slides/README.md)). Deck da [aula extra](aula-extra-ia/README.md): [`aula-extra-ia/slides/aula-extra.odp`](aula-extra-ia/slides/aula-extra.odp).
 
 ## 🔁 Revisão da Aula 09 (5 min)
 
@@ -90,7 +90,7 @@ E quando a pipeline precisa de uma senha (um registro de imagens — *registry* 
 
 👉 Siga o **[pratica.md](pratica.md)**: criar o workflow, ver a primeira pipeline verde, quebrar e consertar (blameless até o fim!).
 
-E no bloco final (21:20), no lugar do Q&A de sempre... **[a surpresa final](plot-twist-ia.md)**. 🤖🎁
+E no bloco final (21:20), no lugar do Q&A de sempre, uma **[aula extra aninhada](aula-extra-ia/README.md)** — a surpresa final, com roteiro, prompt e deck próprios. 🤖🎁
 
 ---
 
