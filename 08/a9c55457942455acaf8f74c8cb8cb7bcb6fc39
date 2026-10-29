@@ -1,0 +1,23 @@
+aulas/aula-10-github-actions/plot-twist-ia.md
+  s_d9aa151b3beb74::t_f8b5e1d725a377 30-31,33-97,100-107,110
+aulas/aula-10-github-actions/prompt-demo.txt
+  s_d9aa151b3beb74::t_de1af0e877e2e3 1-65
+aulas/aula-10-github-actions/slides/aula-10.json
+  s_d9aa151b3beb74::t_447cbe935acc79 458-461,463-464
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "08a9c55457942455acaf8f74c8cb8cb7bcb6fc39",
+  "prompts": {},
+  "sessions": {
+    "s_d9aa151b3beb74": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2585408d-388a-4057-8919-db431ee490b4",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "vrn <vinicius.navarro@matera.com>"
+    }
+  }
+}
