@@ -1,0 +1,65 @@
+Voce e um engenheiro DevOps. Crie, do zero, o projeto "meu-projeto-devops" na pasta ~/meu-projeto-devops,
+exatamente com a estrutura e o comportamento abaixo. Use apenas bash puro (sem dependencias extras),
+somente caracteres ASCII dentro dos scripts (sem acentos nem emojis), e deixe todos os .sh executaveis.
+
+ESTRUTURA
+~/meu-projeto-devops/
+  README.md            (o que e o projeto, o que tem em cada pasta, como rodar:
+                        ./scripts/build.sh e depois docker compose up -d)
+  .gitignore           (ignorar: *.log, relatorio.txt e app/index.html - arquivos gerados nao se versionam)
+  Dockerfile
+  compose.yaml
+  scripts/relatorio.sh
+  scripts/healthcheck.sh
+  scripts/build.sh
+  scripts/test.sh
+  scripts/deploy.sh
+  scripts/pipeline.sh
+  .github/workflows/ci.yml
+
+SCRIPTS (todos comecam com #!/bin/bash; build.sh, test.sh, deploy.sh e pipeline.sh usam set -e;
+relatorio.sh e healthcheck.sh NAO usam, pois precisam continuar mesmo se um comando falhar)
+1. scripts/relatorio.sh: imprime "=== Relatorio do sistema ===", depois a saida de date, uptime e
+   df -h / sem a linha de cabecalho (df -h / | grep -v Filesystem).
+2. scripts/healthcheck.sh: imprime "=== Health Check - <hostname> - <dd/mm/aaaa HH:MM> ===";
+   verifica internet com "ping -c 1 ubuntu.com" (saida descartada) e imprime "[OK] Internet" ou
+   "[FALHA] Internet"; le o percentual de uso do disco raiz com
+   df / --output=pcent | tail -1 | tr -d ' %' e imprime "[OK] Disco: N% usado" se N < 80 ou
+   "[FALHA] Disco: N% usado (acima de 80%!)"; termina com "=== Fim do health check ===".
+3. scripts/build.sh: imprime "[BUILD] Montando a aplicacao...", cria a pasta ~/meu-projeto-devops/app
+   (mkdir -p) e grava em ~/meu-projeto-devops/app/index.html UMA linha:
+   <h1>Bootcamp DevOps Matera 2026</h1><p>Build em dd/mm/aaaa HH:MM:SS</p> (data/hora atuais);
+   imprime "[BUILD] OK - app/index.html gerado.".
+4. scripts/test.sh: imprime "[TEST] Verificando a aplicacao..."; se
+   grep -q "Bootcamp DevOps" ~/meu-projeto-devops/app/index.html der certo, imprime
+   "[TEST] OK - conteudo esperado encontrado."; senao imprime
+   "[TEST] FALHOU - conteudo esperado nao encontrado!" e termina com exit 1.
+5. scripts/deploy.sh: imprime "[DEPLOY] Publicando em 'producao'...", cria ~/producao (mkdir -p),
+   copia ~/meu-projeto-devops/app/index.html para la e imprime
+   "[DEPLOY] OK - publicado em ~/producao/index.html".
+6. scripts/pipeline.sh: imprime "===== PIPELINE INICIADA - HH:MM:SS =====", executa ./build.sh,
+   ./test.sh e ./deploy.sh nesta ordem (ele e executado de dentro da pasta scripts) e, so se todos
+   passarem, imprime "===== PIPELINE VERDE - aplicacao em producao! =====". Se um stage falhar,
+   os seguintes nao rodam (set -e).
+
+CONTAINERS
+- Dockerfile: FROM nginx:alpine; COPY app/index.html /usr/share/nginx/html/index.html; EXPOSE 80.
+- compose.yaml: servico "site" (build: . ; ports "8080:80"; depends_on visitas) e servico "visitas"
+  com a imagem redis:alpine. Nada mais.
+
+CI
+- .github/workflows/ci.yml: name CI; dispara em push na branch main e em pull_request; um job
+  "build-e-teste" em ubuntu-latest com os steps: actions/checkout@v4, "Build" (run: ./scripts/build.sh)
+  e "Teste" (run: ./scripts/test.sh).
+
+PROVA (execute e mostre a saida de cada comando)
+1. cd ~/meu-projeto-devops/scripts && ./relatorio.sh && ./healthcheck.sh
+2. ./pipeline.sh            -> deve terminar com PIPELINE VERDE; depois cat ~/producao/index.html
+3. Troque, no build.sh, "Bootcamp DevOps Matera 2026" por "Ola mundo" e rode ./pipeline.sh de novo
+   -> o TEST deve FALHAR e o deploy NAO deve executar; confirme com cat ~/producao/index.html
+   (a versao boa continua la). Depois desfaca a troca e rode ./pipeline.sh ate ficar VERDE.
+4. Se o Docker estiver disponivel: cd ~/meu-projeto-devops && docker compose up -d &&
+   curl http://localhost:8080 && docker compose down.
+5. cd ~/meu-projeto-devops && git init -b main && git add . && git commit -m "primeiro commit: projeto do bootcamp"
+   && git log --oneline   (a branch precisa se chamar main, como o gatilho do ci.yml)
+Nao crie nada alem do que foi pedido. Nao invente servicos, testes ou arquivos extras.
