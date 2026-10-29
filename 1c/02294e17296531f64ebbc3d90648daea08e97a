@@ -1,0 +1,29 @@
+aulas/aula-10-github-actions/README.md
+  s_d9aa151b3beb74::t_30d898736c14eb 7,93
+tools/slides/pdf-unico.sh
+  s_d9aa151b3beb74::t_30d898736c14eb 7,10
+aulas/aula-10-github-actions/aula-extra-ia/README.md
+  s_d9aa151b3beb74::t_30d898736c14eb 1-128
+aulas/aula-10-github-actions/aula-extra-ia/slides/aula-extra.json
+  s_d9aa151b3beb74::t_30d898736c14eb 1-66
+README.md
+  s_d9aa151b3beb74::t_30d898736c14eb 27,37
+aulas/aula-10-github-actions/slides/aula-10.json
+  s_d9aa151b3beb74::t_30d898736c14eb 30,433-436
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1c02294e17296531f64ebbc3d90648daea08e97a",
+  "prompts": {},
+  "sessions": {
+    "s_d9aa151b3beb74": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2585408d-388a-4057-8919-db431ee490b4",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "vrn <vinicius.navarro@matera.com>"
+    }
+  }
+}
