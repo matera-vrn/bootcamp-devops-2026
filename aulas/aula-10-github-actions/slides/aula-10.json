@@ -27,7 +27,7 @@
     "19:35 — Parte 1: GitHub Actions, a esteira dentro do repositório",
     "20:20 — Intervalo",
     "20:35 — Parte 2: Mão na massa (a última!)",
-    "21:20 — Bloco final: no lugar do Q&A de sempre, a surpresa final 🎁",
+    "21:20 — Aula extra: a surpresa final 🎁 (no lugar do Q&A)",
     "21:45 — Encerramento"
    ],
    "destaque": "Objetivo: fechar o ciclo — a cada push, o GitHub builda e testa o seu projeto sozinho.",
@@ -430,54 +430,10 @@
   {
    "tipo": "secao",
    "bloco": "qa",
-   "minutos": 0,
-   "titulo": "A SURPRESA FINAL",
-   "subtitulo": "21:20 – 21:45",
-   "notas": "⏱ 0 min — Transição: 'No lugar do Q&A de sempre... a surpresa final.' 🎁 Troque para a máquina limpa da demo (CLI de IA autenticada, conta GitHub de demonstração). Confira que nenhum token está visível na tela. Vídeo de backup à mão. Dupla: um narra, outro digita."
-  },
-  {
-   "tipo": "conteudo",
-   "bloco": "qa",
-   "minutos": 3,
-   "titulo": "Um prompt, um projeto (1/2)",
-   "paragrafos": [
-    "Durante duas semanas, vocês construíram com as próprias mãos: projeto, health check, pipeline, Dockerfile, compose, GitHub e CI."
-   ],
-   "bullets": [
-    "Agora, ao vivo: um único prompt numa CLI de IA (uma IA que roda no terminal)"
-   ],
-   "destaque": "💬 Enquete no chat: vocês levaram 10 aulas para construir esse projeto. Quanto tempo uma IA levaria?",
-   "notas": "⏱ 3 min — Faça a chamada: 'Vocês levaram 10 aulas para construir esse projeto. Alguém quer chutar quanto tempo uma IA levaria?' Deixe a enquete rolar e leia alguns chutes em voz alta. Anuncie: agora, ao vivo, um único prompt numa CLI de IA. Avance para o próximo slide com o pedido."
-  },
-  {
-   "tipo": "conteudo",
-   "bloco": "qa",
-   "minutos": 12,
-   "titulo": "Um prompt, um projeto (2/2)",
-   "bullets": [
-    "O prompt é uma **especificação fechada**: 11 arquivos, nomes, mensagens e comportamentos exatos",
-    "`[OK]`/`[FALHA]`, `set -e`, `grep -q`, `nginx:alpine`, serviço `visitas`, `ci.yml` — tudo que vocês fizeram",
-    "A própria IA prova: pipeline verde → quebra proposital barra o deploy → `compose up` → `git log`",
-    "Ensaio: ~1 minuto do prompt ao commit inicial"
-   ],
-   "rodape": "O prompt completo está em aulas/aula-10-github-actions/prompt-demo.txt (colar inteiro na CLI de IA).",
-   "notas": "⏱ 12 min — Cole o prompt inteiro (prompt-demo.txt) e narre enquanto a IA cria os arquivos, ligando cada um à aula em que a turma o fez. Deixe a prova rodar sozinha (pipeline verde, quebra, verde de novo, compose, git log) e dê zoom nas saídas: são as mesmas que a turma viu. Prepare a comparação lado a lado do test.sh para o próximo slide."
-  },
-  {
-   "tipo": "conteudo",
-   "bloco": "qa",
-   "minutos": 10,
-   "titulo": "A virada",
-   "destaque": "💬 Interação: a IA errou algo? O que vocês fariam diferente? Revisem a IA no chat.",
-   "bullets": [
-    "**A IA só fez em minutos porque VOCÊS agora sabem julgar o que ela fez**",
-    "Sem as 10 aulas, o resultado seria um bloco de texto indecifrável",
-    "**O trabalho do DevOps mudou de lugar:** entender, revisar, decidir e operar",
-    "A IA escreve o script; quem responde pelo deploy em produção é você",
-    "**Quem domina os fundamentos multiplica a produtividade com IA**",
-    "Quem não domina só copia e cola — e não sabe consertar quando quebra (e sempre quebra!)"
-   ],
-   "notas": "⏱ 10 min — A virada: pergunte ao chat 'a IA errou algo? o que vocês fariam diferente?' e deixe a turma revisar a IA. É o momento em que eles percebem que sabem. Depois feche com os três pontos, em tom energizante, não desanimador (o impacto inicial é o 'uau'; o fecho é 'vocês sabem'): 1) eles sabem julgar o resultado; 2) o trabalho mudou de digitar para entender, revisar, decidir e operar; 3) fundamentos multiplicam a produtividade com IA, sem eles é só copiar e colar. Então siga para o encerramento."
+   "titulo": "AULA EXTRA",
+   "subtitulo": "A surpresa final · 21:20",
+   "minutos": 25,
+   "notas": "⏱ 25 min — Transição: 'No lugar do Q&A de sempre... uma aula extra: a surpresa final.' 🎁 Troque para o deck da aula extra (aula-extra-ia/slides/aula-extra.odp) e siga o roteiro de aula-extra-ia/README.md. Ao terminar, volte a este deck para o fechamento."
   },
   {
    "tipo": "conteudo",

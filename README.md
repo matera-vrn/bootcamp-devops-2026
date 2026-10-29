@@ -24,6 +24,7 @@ Levar você **do zero ao primeiro deploy automatizado**: ao final das 10 aulas, 
 | [08](aulas/aula-08-docker-compose/) | 13/11 (sex) | Docker 2: Docker Compose | Orquestrando múltiplos containers | Subindo app + serviço com `docker compose` |
 | [09](aulas/aula-09-github/) | 17/11 (ter) | GitHub | Remotos, colaboração e portfólio | Publicando seu projeto + primeiro Pull Request |
 | [10](aulas/aula-10-github-actions/) | 18/11 (qua) | GitHub Actions + Encerramento | CI na prática, DevSecOps e próximos passos | Sua primeira pipeline no GitHub + surpresa final 🎁 |
+| [Extra](aulas/aula-10-github-actions/aula-extra-ia/) | 18/11, 21:20 | Aula extra (dentro da Aula 10): IA e DevOps | Um prompt, um projeto — a surpresa final 🎁 | Demo ao vivo + revisão coletiva |
 
 ## 🕒 Formato das aulas
 
@@ -33,7 +34,7 @@ Levar você **do zero ao primeiro deploy automatizado**: ao final das 10 aulas, 
 | 19:35 – 20:20 | **Parte 1** — Conceitos e analogias |
 | 20:20 – 20:35 | Intervalo ☕ |
 | 20:35 – 21:20 | **Parte 2** — Mão na massa |
-| 21:20 – 21:45 | Perguntas & Respostas |
+| 21:20 – 21:45 | Perguntas & Respostas (na Aula 10: a aula extra) |
 | 21:45 | Encerramento pontual |
 
 A partir da Aula 02, cada aula começa com uma **revisão rápida da aula anterior**, conectando o que você já aprendeu com o conteúdo do dia.

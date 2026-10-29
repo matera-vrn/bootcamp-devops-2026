@@ -1,0 +1,66 @@
+{
+ "aula": "extra",
+ "tempo": {
+  "parte1": 25
+ },
+ "slides": [
+  {
+   "tipo": "capa",
+   "bloco": "abertura",
+   "titulo": "Aula Extra",
+   "subtitulo": "IA e DevOps: um prompt, um projeto",
+   "notas": "⏱ 0 min — Troque para este deck às 21:20, vindo do slide 'AULA EXTRA' da Aula 10. Máquina limpa da demo pronta (CLI de IA autenticada, conta GitHub de demonstração, nenhum token visível), vídeo de backup à mão. Dupla: um narra, outro digita.",
+   "minutos": 0
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "minutos": 3,
+   "titulo": "Um prompt, um projeto",
+   "paragrafos": [
+    "Durante duas semanas, vocês construíram com as próprias mãos: projeto, health check, pipeline, Dockerfile, compose, GitHub e CI."
+   ],
+   "bullets": [
+    "Agora, ao vivo: um único prompt numa CLI de IA (uma IA que roda no terminal)"
+   ],
+   "destaque": "💬 Enquete no chat: vocês levaram 10 aulas para construir esse projeto. Quanto tempo uma IA levaria?",
+   "notas": "⏱ 3 min — Faça a chamada: 'Vocês levaram 10 aulas para construir esse projeto. Alguém quer chutar quanto tempo uma IA levaria?' Deixe a enquete rolar e leia alguns chutes em voz alta. Anuncie: agora, ao vivo, um único prompt numa CLI de IA. Avance para o próximo slide com o pedido."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "minutos": 12,
+   "titulo": "O prompt, ao vivo",
+   "bullets": [
+    "O prompt é uma **especificação fechada**: 11 arquivos, nomes, mensagens e comportamentos exatos",
+    "`[OK]`/`[FALHA]`, `set -e`, `grep -q`, `nginx:alpine`, serviço `visitas`, `ci.yml` — tudo que vocês fizeram",
+    "A própria IA prova: pipeline verde → quebra proposital barra o deploy → `compose up` → `git log`",
+    "Ensaio: ~1 minuto do prompt ao commit inicial"
+   ],
+   "rodape": "O prompt completo está em aulas/aula-10-github-actions/aula-extra-ia/prompt-demo.txt (colar inteiro na CLI de IA).",
+   "notas": "⏱ 12 min — Cole o prompt inteiro (prompt-demo.txt) e narre enquanto a IA cria os arquivos, ligando cada um à aula em que a turma o fez. Deixe a prova rodar sozinha (pipeline verde, quebra, verde de novo, compose, git log) e dê zoom nas saídas: são as mesmas que a turma viu. Prepare a comparação lado a lado do test.sh para o próximo slide."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "minutos": 10,
+   "titulo": "A virada",
+   "destaque": "💬 Interação: a IA errou algo? O que vocês fariam diferente? Revisem a IA no chat.",
+   "bullets": [
+    "**A IA só fez em minutos porque VOCÊS agora sabem julgar o que ela fez**",
+    "Sem as 10 aulas, o resultado seria um bloco de texto indecifrável",
+    "**O trabalho do DevOps mudou de lugar:** entender, revisar, decidir e operar",
+    "A IA escreve o script; quem responde pelo deploy em produção é você",
+    "**Quem domina os fundamentos multiplica a produtividade com IA**",
+    "Quem não domina só copia e cola — e não sabe consertar quando quebra (e sempre quebra!)"
+   ],
+   "notas": "⏱ 10 min — A virada: pergunte ao chat 'a IA errou algo? o que vocês fariam diferente?' e deixe a turma revisar a IA. É o momento em que eles percebem que sabem. Depois feche com os três pontos, em tom energizante, não desanimador (o impacto inicial é o 'uau'; o fecho é 'vocês sabem'): 1) eles sabem julgar o resultado; 2) o trabalho mudou de digitar para entender, revisar, decidir e operar; 3) fundamentos multiplicam a produtividade com IA, sem eles é só copiar e colar. Então siga para o encerramento."
+  },
+  {
+   "tipo": "encerramento",
+   "bloco": "fechamento",
+   "notas": "⏱ 0 min — Volte ao deck da Aula 10 para o slide 'O que levamos para a vida' e o encerramento.",
+   "minutos": 0
+  }
+ ]
+}

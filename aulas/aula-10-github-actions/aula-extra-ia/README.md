@@ -1,6 +1,19 @@
-# 🎁 A surpresa final: o plot twist da IA
+# Aula Extra — IA e DevOps: um prompt, um projeto 🎁
 
-> **Roteiro para os apresentadores** — conduzir ao vivo no **bloco final da Aula 10 (21:20–21:45)**, no lugar do Q&A de sempre. A prática (45 min) precisa terminar no horário: se atrasar, o badge (Passo 4 da prática) vira missão de casa.
+> **Aula extra aninhada na Aula 10**, no bloco final (**18/11, 21:20–21:45**, no lugar do Q&A de sempre). Para a turma, é "a surpresa final": não anunciar o conteúdo antes. Para a equipe, é uma aula com roteiro, prompt e deck próprios.
+>
+> 📽️ Slides: [`slides/aula-extra.odp`](slides/aula-extra.odp) (roteiro editável em [`slides/aula-extra.json`](slides/aula-extra.json)). Prompt da demo: [`prompt-demo.txt`](prompt-demo.txt).
+>
+> ⏱ A prática da Aula 10 (45 min) precisa terminar no horário: se atrasar, o badge (Passo 4 da prática) vira missão de casa.
+
+## Agenda (25 min)
+
+| Horário | Bloco | Minutos |
+|---------|-------|---------|
+| 21:20 | A chamada + enquete no chat | 3 |
+| 21:23 | O prompt, ao vivo: a IA recria o projeto da turma | 12 |
+| 21:35 | A virada: a turma revisa a IA + mensagem pedagógica | 10 |
+| 21:45 | Encerramento da Aula 10 (de volta ao deck da Aula 10) | — |
 
 ## A ideia
 
@@ -16,7 +29,7 @@ O impacto inicial é o "uau" (e um friozinho na barriga 😅). A mensagem final 
 2. **O trabalho do profissional DevOps mudou de lugar:** sai do "digitar comandos" e vai para **entender, revisar, decidir e operar**. A IA escreve o script; quem responde pelo deploy em produção é você.
 3. **Quem domina os fundamentos multiplica a própria produtividade com IA.** Quem não domina, apenas copia e cola — e não sabe consertar quando quebra (e sempre quebra!).
 
-## Roteiro da demo (15–20 min)
+## Roteiro da demo (12 min de prompt + 10 de virada)
 
 1. **Setup prévio:** uma VM/máquina limpa com uma CLI de IA instalada e autenticada, e uma conta GitHub de demonstração. **Ensaiar antes** — demo ao vivo sem ensaio é roleta-russa. Ter um vídeo gravado de backup.
 2. **A chamada:** "Vocês levaram 10 aulas para construir esse projeto. Alguém quer chutar quanto tempo uma IA levaria?" (enquete no chat!)
