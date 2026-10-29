@@ -455,13 +455,13 @@
    "minutos": 12,
    "titulo": "Um prompt, um projeto (2/2)",
    "bullets": [
-    "Pedido: build.sh, test.sh, deploy.sh, pipeline.sh e healthcheck.sh",
-    "+ Dockerfile, compose.yaml (site + redis), workflow ci.yml e README.md",
-    "Para provar: `./scripts/pipeline.sh` verde, `docker compose up -d`, `curl localhost:8080`",
-    "Push e pipeline verde no Actions"
+    "O prompt é uma **especificação fechada**: 11 arquivos, nomes, mensagens e comportamentos exatos",
+    "`[OK]`/`[FALHA]`, `set -e`, `grep -q`, `nginx:alpine`, serviço `visitas`, `ci.yml` — tudo que vocês fizeram",
+    "A própria IA prova: pipeline verde → quebra proposital barra o deploy → `compose up` → `git log`",
+    "Ensaio: ~1 minuto do prompt ao commit inicial"
    ],
-   "rodape": "O prompt literal e o checklist de riscos estão em aulas/aula-10-github-actions/plot-twist-ia.md.",
-   "notas": "⏱ 12 min — Cole o prompt completo (literal, do plot-twist-ia.md) na CLI de IA, na frente de todos. Enquanto a IA gera, narre e conecte cada arquivo à aula em que a turma o construiu: 'olha o set -e da Aula 04!', 'olha o build.sh da Aula 05!', 'olha o depends_on da Aula 08!', 'olha o ci.yml que vocês acabaram de escrever!'. Em seguida execute o resultado ao vivo: ./scripts/pipeline.sh verde, docker compose up -d, curl localhost:8080, push e pipeline verde no Actions. Se a internet falhar, vá para o vídeo de backup sem drama. Nenhum token na tela."
+   "rodape": "O prompt completo está em aulas/aula-10-github-actions/prompt-demo.txt (colar inteiro na CLI de IA).",
+   "notas": "⏱ 12 min — Cole o prompt inteiro (prompt-demo.txt) e narre enquanto a IA cria os arquivos, ligando cada um à aula em que a turma o fez. Deixe a prova rodar sozinha (pipeline verde, quebra, verde de novo, compose, git log) e dê zoom nas saídas: são as mesmas que a turma viu. Prepare a comparação lado a lado do test.sh para o próximo slide."
   },
   {
    "tipo": "conteudo",

@@ -22,6 +22,14 @@ tools/slides/renderizar.sh aulas/aula-03-linux-intermediario/slides/aula-03.json
 
 Requisitos: Python 3 (só biblioteca padrão); para renderizar, LibreOffice (`soffice`) e `pdftoppm` (poppler-utils). Para ver as fontes corretas, instale a **Poppins** (Google Fonts) — sem ela o LibreOffice substitui por outra fonte e as quebras de linha mudam um pouco.
 
+## PDF único com todas as aulas
+
+```bash
+tools/slides/pdf-unico.sh            # gera aulas/slides-bootcamp-devops-2026.pdf (355 páginas)
+```
+
+Converte os 10 `.odp` em PDF e junta na ordem das aulas (requer LibreOffice e `pdfunite`). Instale a fonte **Poppins** antes, para o PDF sair com a tipografia do template.
+
 ## Formato do roteiro
 
 ```json
