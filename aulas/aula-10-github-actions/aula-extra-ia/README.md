@@ -1,8 +1,8 @@
-# Aula Extra — IA e DevOps: um prompt, um projeto 🎁
+# Aula Extra — IA e DevOps: o que importa é saber o que pedir 🎁
 
 > **Aula extra aninhada na Aula 10**, no bloco final (**18/11, 21:20–21:45**, no lugar do Q&A de sempre). Para a turma, é "a surpresa final": não anunciar o conteúdo antes. Para a equipe, é uma aula com roteiro, prompt e deck próprios.
 >
-> 📽️ Slides: [`slides/aula-extra.odp`](slides/aula-extra.odp) (roteiro editável em [`slides/aula-extra.json`](slides/aula-extra.json)). Prompt da demo: [`prompt-demo.txt`](prompt-demo.txt).
+> 📽️ Slides: [`slides/aula-extra.odp`](slides/aula-extra.odp) (roteiro editável em [`slides/aula-extra.json`](slides/aula-extra.json)). Prompts da demo: [`prompt-simples.txt`](prompt-simples.txt) e [`prompt-detalhado.txt`](prompt-detalhado.txt).
 >
 > ⏱ A prática da Aula 10 (45 min) precisa terminar no horário: se atrasar, o badge (Passo 4 da prática) vira missão de casa.
 
@@ -11,8 +11,10 @@
 | Horário | Bloco | Minutos |
 |---------|-------|---------|
 | 21:20 | A chamada + enquete no chat | 3 |
-| 21:23 | O prompt, ao vivo: a IA recria o projeto da turma | 12 |
-| 21:35 | A virada: a turma revisa a IA + mensagem pedagógica | 10 |
+| 21:23 | Prompt 1, ao vivo: o pedido simples (9 linhas) | 7 |
+| 21:30 | Funcionou… mas é o nosso projeto? Comparação lado a lado | 5 |
+| 21:35 | Prompt 2: a especificação — o resultado igual ao da turma | 4 |
+| 21:39 | A virada: a turma revisa a IA + mensagem pedagógica | 6 |
 | 21:45 | Encerramento da Aula 10 (de volta ao deck da Aula 10) | — |
 
 ## A ideia
@@ -20,6 +22,8 @@
 Durante duas semanas, a turma construiu com as próprias mãos: estrutura de projeto, health check, pipeline de build/teste/deploy, Dockerfile, compose, repositório no GitHub e CI com Actions.
 
 O plot twist: **mostrar, ao vivo, uma IA recriando tudo isso em poucos minutos, a partir de um único prompt.**
+
+E a lição por trás do truque: **o que importa agora é saber o que pedir — e como pedir.** Um pedido vago produz um projeto que *funciona*, mas não é o nosso; uma especificação precisa produz o projeto da turma. A diferença entre os dois prompts é exatamente o vocabulário que a turma aprendeu em 10 aulas.
 
 ## O objetivo pedagógico (o mais importante!)
 
@@ -29,98 +33,49 @@ O impacto inicial é o "uau" (e um friozinho na barriga 😅). A mensagem final 
 2. **O trabalho do profissional DevOps mudou de lugar:** sai do "digitar comandos" e vai para **entender, revisar, decidir e operar**. A IA escreve o script; quem responde pelo deploy em produção é você.
 3. **Quem domina os fundamentos multiplica a própria produtividade com IA.** Quem não domina, apenas copia e cola — e não sabe consertar quando quebra (e sempre quebra!).
 
-## Roteiro da demo (12 min de prompt + 10 de virada)
+## Dois prompts, um objetivo
 
-1. **Setup prévio:** uma VM/máquina limpa com uma CLI de IA instalada e autenticada, e uma conta GitHub de demonstração. **Ensaiar antes** — demo ao vivo sem ensaio é roleta-russa. Ter um vídeo gravado de backup.
-2. **A chamada:** "Vocês levaram 10 aulas para construir esse projeto. Alguém quer chutar quanto tempo uma IA levaria?" (enquete no chat!)
-3. **Rodar o prompt** (abaixo) na frente de todos, narrando o que a IA vai fazendo — e conectando cada arquivo gerado à aula em que a turma o construiu ("olha o `set -e` da Aula 04!", "olha o `depends_on` da Aula 08!").
-4. **Executar o resultado:** `./scripts/pipeline.sh` verde, `docker compose up -d`, `curl localhost:8080`, push e pipeline verde no Actions.
-5. **A virada:** perguntar ao chat — "a IA errou algo? o que vocês fariam diferente?" — e deixar a turma **revisar a IA**. É o momento em que eles percebem que sabem.
-6. Fechar com a mensagem pedagógica acima, o encerramento e o aviso de que o certificado será enviado pela organização.
+| | Prompt 1 — o pedido simples | Prompt 2 — a especificação |
+|---|---|---|
+| Arquivo | [`prompt-simples.txt`](prompt-simples.txt) (9 linhas) | [`prompt-detalhado.txt`](prompt-detalhado.txt) (63 linhas) |
+| O que diz | O que queremos, em linguagem natural, com o vocabulário do bootcamp (build, teste, deploy, pipeline, nginx, compose, redis, workflow) | Nomes de arquivos, caminhos, mensagens, comportamentos e a prova, item a item |
+| Funciona? | **Sim**: pipeline verde, teste quebrado barra o deploy, commit — em ~1 min | **Sim**, igual |
+| É o projeto da turma? | **Não.** No ensaio a IA decidiu sozinha: `dist/` em vez de `app/`; produção dentro do projeto em vez de `~/producao`; título "Meu Projeto DevOps"; mensagens `[build]`/`[test]` e 5 verificações no teste; `nginx:1.27-alpine`; serviço `redis` com volume e `restart`; workflow em qualquer push + upload de artefato; `set -euo pipefail`; `.gitignore` e README que ninguém pediu | **Sim.** 11 arquivos com os mesmos nomes, mensagens `[OK]`/`[FALHA]`/`[BUILD]`/`[TEST]`/`[DEPLOY]`, `nginx:alpine`, serviço `visitas`, `ci.yml` igual |
 
-## O prompt da demo
+Os dois foram testados numa máquina limpa, sem acesso ao material. Nenhum dos dois está "errado": o primeiro mostra o que a IA faz quando a gente não sabe o que quer; o segundo mostra o que ela faz quando a gente sabe.
 
-O prompt é uma **especificação fechada** do que a turma construiu — nomes de arquivos, mensagens, comportamentos e a prova de que funciona. Foi testado antes de entrar aqui: executado numa máquina limpa, gerou os 11 arquivos, pipeline verde, a quebra proposital barrando o deploy e o commit inicial em cerca de 1 minuto. Cole-o **inteiro** na CLI de IA (está também em [`prompt-demo.txt`](prompt-demo.txt), para copiar sem erro):
+## Prompt 1 — o pedido simples (ao vivo)
 
 ```text
-Voce e um engenheiro DevOps. Crie, do zero, o projeto "meu-projeto-devops" na pasta ~/meu-projeto-devops,
-exatamente com a estrutura e o comportamento abaixo. Use apenas bash puro (sem dependencias extras),
-somente caracteres ASCII dentro dos scripts (sem acentos nem emojis), e deixe todos os .sh executaveis.
-
-ESTRUTURA
-~/meu-projeto-devops/
-  README.md            (o que e o projeto, o que tem em cada pasta, como rodar:
-                        ./scripts/build.sh e depois docker compose up -d)
-  .gitignore           (ignorar: *.log, relatorio.txt e app/index.html - arquivos gerados nao se versionam)
-  Dockerfile
-  compose.yaml
-  scripts/relatorio.sh
-  scripts/healthcheck.sh
-  scripts/build.sh
-  scripts/test.sh
-  scripts/deploy.sh
-  scripts/pipeline.sh
-  .github/workflows/ci.yml
-
-SCRIPTS (todos comecam com #!/bin/bash; build.sh, test.sh, deploy.sh e pipeline.sh usam set -e;
-relatorio.sh e healthcheck.sh NAO usam, pois precisam continuar mesmo se um comando falhar)
-1. scripts/relatorio.sh: imprime "=== Relatorio do sistema ===", depois a saida de date, uptime e
-   df -h / sem a linha de cabecalho (df -h / | grep -v Filesystem).
-2. scripts/healthcheck.sh: imprime "=== Health Check - <hostname> - <dd/mm/aaaa HH:MM> ===";
-   verifica internet com "ping -c 1 ubuntu.com" (saida descartada) e imprime "[OK] Internet" ou
-   "[FALHA] Internet"; le o percentual de uso do disco raiz com
-   df / --output=pcent | tail -1 | tr -d ' %' e imprime "[OK] Disco: N% usado" se N < 80 ou
-   "[FALHA] Disco: N% usado (acima de 80%!)"; termina com "=== Fim do health check ===".
-3. scripts/build.sh: imprime "[BUILD] Montando a aplicacao...", cria a pasta ~/meu-projeto-devops/app
-   (mkdir -p) e grava em ~/meu-projeto-devops/app/index.html UMA linha:
-   <h1>Bootcamp DevOps Matera 2026</h1><p>Build em dd/mm/aaaa HH:MM:SS</p> (data/hora atuais);
-   imprime "[BUILD] OK - app/index.html gerado.".
-4. scripts/test.sh: imprime "[TEST] Verificando a aplicacao..."; se
-   grep -q "Bootcamp DevOps" ~/meu-projeto-devops/app/index.html der certo, imprime
-   "[TEST] OK - conteudo esperado encontrado."; senao imprime
-   "[TEST] FALHOU - conteudo esperado nao encontrado!" e termina com exit 1.
-5. scripts/deploy.sh: imprime "[DEPLOY] Publicando em 'producao'...", cria ~/producao (mkdir -p),
-   copia ~/meu-projeto-devops/app/index.html para la e imprime
-   "[DEPLOY] OK - publicado em ~/producao/index.html".
-6. scripts/pipeline.sh: imprime "===== PIPELINE INICIADA - HH:MM:SS =====", executa ./build.sh,
-   ./test.sh e ./deploy.sh nesta ordem (ele e executado de dentro da pasta scripts) e, so se todos
-   passarem, imprime "===== PIPELINE VERDE - aplicacao em producao! =====". Se um stage falhar,
-   os seguintes nao rodam (set -e).
-
-CONTAINERS
-- Dockerfile: FROM nginx:alpine; COPY app/index.html /usr/share/nginx/html/index.html; EXPOSE 80.
-- compose.yaml: servico "site" (build: . ; ports "8080:80"; depends_on visitas) e servico "visitas"
-  com a imagem redis:alpine. Nada mais.
-
-CI
-- .github/workflows/ci.yml: name CI; dispara em push na branch main e em pull_request; um job
-  "build-e-teste" em ubuntu-latest com os steps: actions/checkout@v4, "Build" (run: ./scripts/build.sh)
-  e "Teste" (run: ./scripts/test.sh).
-
-PROVA (execute e mostre a saida de cada comando)
-1. cd ~/meu-projeto-devops/scripts && ./relatorio.sh && ./healthcheck.sh
-2. ./pipeline.sh            -> deve terminar com PIPELINE VERDE; depois cat ~/producao/index.html
-3. Troque, no build.sh, "Bootcamp DevOps Matera 2026" por "Ola mundo" e rode ./pipeline.sh de novo
-   -> o TEST deve FALHAR e o deploy NAO deve executar; confirme com cat ~/producao/index.html
-   (a versao boa continua la). Depois desfaca a troca e rode ./pipeline.sh ate ficar VERDE.
-4. Se o Docker estiver disponivel: cd ~/meu-projeto-devops && docker compose up -d &&
-   curl http://localhost:8080 && docker compose down.
-5. cd ~/meu-projeto-devops && git init -b main && git add . && git commit -m "primeiro commit: projeto do bootcamp"
-   && git log --oneline   (a branch precisa se chamar main, como o gatilho do ci.yml)
-Nao crie nada alem do que foi pedido. Nao invente servicos, testes ou arquivos extras.
+Crie um projeto chamado meu-projeto-devops com scripts em bash:
+- um build que gera uma pagina index.html com a data do build;
+- um teste que verifica a pagina e falha com codigo de saida diferente de zero se ela estiver errada;
+- um deploy que copia a pagina para uma pasta de "producao";
+- uma pipeline que roda build, teste e deploy nessa ordem e para no primeiro erro.
+Inclua um Dockerfile com nginx para servir a pagina, um compose com o site e um redis,
+e um workflow do GitHub Actions que roda build e teste a cada push.
+Rode a pipeline para provar que funciona e depois quebre o teste de proposito
+para mostrar que o deploy nao acontece. Por fim, inicie o repositorio git e faca o primeiro commit.
 ```
 
-## Como conduzir a demo com esse prompt
+Narre enquanto a IA trabalha ("ela criou um `build.sh`… olha, decidiu chamar a pasta de `dist`") e deixe a prova rodar: pipeline verde, teste quebrado sem deploy, commit.
 
-1. **Antes de colar**, mostre na tela o repositório de um aluno (ou o seu) com os mesmos 11 arquivos: "foi isso que levamos 10 aulas para construir".
-2. **Cole o prompt e narre** enquanto a IA cria os arquivos: "ela está escrevendo o `healthcheck.sh` — reparem no `[OK]`/`[FALHA]`, igual ao da Aula 04"; "olha o `set -e` da Aula 05"; "o `depends_on` da Aula 08".
-3. **A prova** acontece sozinha (o prompt pede): pipeline verde → quebra proposital com o `[TEST] FALHOU` e o deploy que não roda → verde de novo → `docker compose` → `git log`. Dê zoom nessas saídas: são as mesmas que a turma viu.
-4. **Comparação lado a lado** (o momento da virada): abra o `test.sh` da IA ao lado do `test.sh` da turma. São iguais? O que a IA decidiu sozinha? No teste de ensaio, ela: colocou `./scripts/build.sh` antes do `compose up` no README (porque o `index.html` está no `.gitignore`); escolheu a forma curta do `depends_on`; e **não** removeu o cabeçalho do `df` numa máquina em português (`grep -v Filesystem` só funciona com o sistema em inglês — a turma passou por isso). Pergunte ao chat: *"a IA errou algo? vocês fariam diferente?"* — e deixe a turma revisar.
-5. Feche com a mensagem pedagógica: **a IA só fez em um minuto porque vocês, agora, sabem julgar o que ela fez.**
+## Prompt 2 — a especificação (resultado ensaiado)
+
+O [`prompt-detalhado.txt`](prompt-detalhado.txt) descreve o projeto da turma item a item. Rodá-lo ao vivo duplicaria o tempo; mostre o prompt na tela (dê zoom em 2 ou 3 trechos: as mensagens `[OK]`/`[FALHA]`, o `grep -q`, o serviço `visitas`) e, ao lado, o resultado **já ensaiado** — o `test.sh` da IA idêntico ao `test.sh` da turma. Se sobrar tempo, rode-o também.
+
+## Roteiro da demo (25 min)
+
+1. **Setup prévio:** máquina limpa com a CLI de IA autenticada e conta GitHub de demonstração; os dois prompts prontos para colar; o resultado do Prompt 2 já gerado (ou um vídeo); nenhum token visível. Dupla: um narra, outro digita.
+2. **A chamada (3 min):** "Vocês levaram 10 aulas para construir esse projeto. Quanto tempo uma IA levaria?" — enquete no chat.
+3. **Prompt 1 ao vivo (7 min):** cole o pedido simples e narre. Celebre o verde: *funcionou*.
+4. **Comparação (5 min):** abra o projeto da IA ao lado do projeto de um aluno. Pergunte ao chat: "é o nosso projeto?" — e vá apontando as diferenças da tabela acima. A turma vai perceber que *sabe* ver a diferença.
+5. **Prompt 2 (4 min):** mostre a especificação e o resultado ensaiado, idêntico ao da turma. A frase-chave: **"a diferença entre os dois prompts é o que vocês aprenderam aqui."**
+6. **A virada (6 min):** "a IA errou algo? o que vocês fariam diferente?" — deixe a turma revisar a IA. Feche com a mensagem pedagógica acima, o encerramento e o aviso de que o certificado será enviado pela organização.
 
 ## Checklist de riscos
 
-- [ ] **Ensaio com o prompt final** (`prompt-demo.txt`) na mesma CLI e na mesma máquina da live; anotar o tempo e as decisões que a IA tomou sozinha (viram perguntas para a turma).
+- [ ] **Ensaio com os dois prompts** (`prompt-simples.txt` e `prompt-detalhado.txt`) na mesma CLI e na mesma máquina da live; anotar o tempo e as decisões que a IA tomou sozinha no Prompt 1 (viram a tabela de comparação) e guardar o resultado do Prompt 2 para mostrar pronto.
 - [ ] Internet do estúdio testada (a demo baixa imagens Docker).
 - [ ] Imagens `nginx:alpine` e `redis:alpine` já baixadas na máquina da demo (cache).
 - [ ] Vídeo de backup gravado do fluxo completo.
