@@ -31,15 +31,20 @@ Baixe **somente dos espelhos oficiais do Ubuntu**. Qual arquivo baixar depende d
 
 Na página, baixe o arquivo cujo nome termina em `-live-server-amd64.iso` (ou `-arm64.iso`), com o maior número de versão (ex.: `ubuntu-24.04.5-live-server-amd64.iso`). O download tem **cerca de 4 GB**.
 
-### Verifique a integridade do arquivo (recomendado)
+### Verifique a integridade do arquivo (opcional, mas recomendado)
 
-Na mesma página há um arquivo `SHA256SUMS` com a "impressão digital" oficial de cada ISO. Compare com a do arquivo que você baixou:
+Na mesma página há um arquivo `SHA256SUMS` com a "impressão digital" oficial de cada ISO. O comando varia conforme **o sistema do seu computador** — e, no Windows, conforme **a janela** em que você digita. Rode-o **no seu computador**, na pasta onde a ISO foi salva (normalmente *Downloads*), **não** dentro da VM:
 
-- **Windows (PowerShell):** `Get-FileHash .\ubuntu-24.04.5-live-server-amd64.iso -Algorithm SHA256`
-- **Linux:** `sha256sum ubuntu-24.04.5-live-server-amd64.iso`
-- **macOS:** `shasum -a 256 ubuntu-24.04.5-live-server-arm64.iso`
+| Onde você está | Comando |
+|----------------|---------|
+| **Windows — PowerShell** (menu Iniciar → digite *PowerShell*) | `Get-FileHash .\ubuntu-24.04.5-live-server-amd64.iso -Algorithm SHA256` |
+| **Windows — Prompt de Comando (CMD)** | `certutil -hashfile ubuntu-24.04.5-live-server-amd64.iso SHA256` |
+| **Linux** | `sha256sum ubuntu-24.04.5-live-server-amd64.iso` |
+| **macOS** (Terminal) | `shasum -a 256 ubuntu-24.04.5-live-server-arm64.iso` |
 
-Se o código for igual ao da linha correspondente do `SHA256SUMS`, o download está íntegro. Guia oficial: https://ubuntu.com/tutorials/how-to-verify-ubuntu
+> ⚠️ **`Get-FileHash: command not found`?** Essa mensagem é do *bash*: você digitou o comando do PowerShell num terminal Linux (Git Bash, WSL ou a própria VM). Abra o **PowerShell** do Windows e repita — ou use a linha do CMD. Se não estiver na pasta da ISO, entre nela primeiro: `cd Downloads`.
+
+Se o código for igual ao da linha correspondente do `SHA256SUMS`, o download está íntegro. Se não conseguir fazer essa verificação, siga em frente: a instalação vai avisar se a imagem estiver corrompida. Guia oficial: https://ubuntu.com/tutorials/how-to-verify-ubuntu
 
 ## 2. Crie a VM no VirtualBox
 
