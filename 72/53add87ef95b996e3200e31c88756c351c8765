@@ -1,0 +1,19 @@
+setup/instalacao-ubuntu-vm.md
+  s_d9aa151b3beb74::t_780b70b616d9c3 34,36,38-43,45-47
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7253add87ef95b996e3200e31c88756c351c8765",
+  "prompts": {},
+  "sessions": {
+    "s_d9aa151b3beb74": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2585408d-388a-4057-8919-db431ee490b4",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "vrn <vinicius.navarro@matera.com>"
+    }
+  }
+}
