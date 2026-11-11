@@ -151,6 +151,31 @@ curl -O https://raw.githubusercontent.com/matera-vrn/bootcamp-devops-2026/main/a
 chmod +x build.sh test.sh deploy.sh pipeline.sh
 ```
 
+## Conteúdo extra — a esteira em versão "show" 🎬
+
+A mesma pipeline, com cores, uma caixa por stage, barra de progresso e um aviso bem grande dizendo **o que não executou** quando algo falha. A lógica é idêntica à do seu `pipeline.sh`: ela chama os mesmos `build.sh`, `test.sh` e `deploy.sh` e para no primeiro erro. É opcional — serve para brincar e para enxergar a esteira "andando".
+
+Baixe para a pasta dos seus scripts e **leia antes de executar** (`cat pipeline-show.sh`):
+
+```bash
+cd ~/meu-projeto-devops/scripts
+curl -O https://raw.githubusercontent.com/matera-vrn/bootcamp-devops-2026/main/aulas/aula-05-devops-pipelines/scripts/pipeline-show.sh
+chmod +x pipeline-show.sh
+./pipeline-show.sh
+```
+
+Para experimentar:
+
+| Comando | O que muda |
+|---------|------------|
+| `./pipeline-show.sh` | Pausa de 2 segundos entre os stages |
+| `PAUSA=0.5 ./pipeline-show.sh` | Esteira rápida |
+| `PAUSA=4 ./pipeline-show.sh` | Esteira lenta — boa para repetir o Passo 6 e ver o deploy **não** acontecer |
+
+> 💡 O arquivo está em [`scripts/pipeline-show.sh`](scripts/pipeline-show.sh). Ele usa coisas que ainda não vimos (funções, cores do terminal, `pipefail`) — não precisa entender tudo agora. Repare só que o desenho de cada stage (nome, comando, ✔ ou ✘) é o mesmo que o GitHub Actions vai mostrar na Aula 10.
+>
+> Os emojis dependem do seu terminal: no Windows Terminal e no macOS aparecem certos; em janelas mais antigas do PowerShell podem virar quadradinhos. As cores e as caixas funcionam em todos.
+
 ## Desafio bônus 🏆
 
 1. **Smoke test:** adicione um 4º stage à pipeline — o `healthcheck.sh` da Aula 04 rodando **depois** do deploy (na vida real, checar se produção continua saudável após a mudança se chama *smoke test*).
