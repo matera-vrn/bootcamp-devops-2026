@@ -1,0 +1,21 @@
+aulas/aula-05-devops-pipelines/pratica.md
+  s_d9aa151b3beb74::t_601051882c954d 154-178
+aulas/aula-05-devops-pipelines/scripts/pipeline-show.sh
+  s_d9aa151b3beb74::t_4c4ff787a3c725 1-55
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "db5f1da89d882f58059b5413b1711d519fa2ec0f",
+  "prompts": {},
+  "sessions": {
+    "s_d9aa151b3beb74": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2585408d-388a-4057-8919-db431ee490b4",
+        "model": "claude-fable-5-2"
+      },
+      "human_author": "vrn <vinicius.navarro@matera.com>"
+    }
+  }
+}
