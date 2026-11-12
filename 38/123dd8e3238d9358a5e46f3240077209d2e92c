@@ -1,0 +1,27 @@
+recursos/cheat-sheet-git.md
+  s_4e5058359831c4::t_07d01b2bddd9a9 1-147
+aulas/aula-06-git/pratica.md
+  s_4e5058359831c4::t_5689a2a1ca0872 7-8
+recursos/cheat-sheet-terminal.md
+  s_4e5058359831c4::t_5689a2a1ca0872 118-119
+README.md
+  s_4e5058359831c4::t_5689a2a1ca0872 53
+aulas/aula-06-git/README.md
+  s_4e5058359831c4::t_5689a2a1ca0872 77-78
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "38123dd8e3238d9358a5e46f3240077209d2e92c",
+  "prompts": {},
+  "sessions": {
+    "s_4e5058359831c4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8f7da099-8277-4ba2-b733-57ad5717ca56",
+        "model": "unknown"
+      },
+      "human_author": "vrn <vinicius.navarro@matera.com>"
+    }
+  }
+}
