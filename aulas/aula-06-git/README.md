@@ -74,6 +74,8 @@ No DevOps, o repositório Git não guarda só código da aplicação:
 
 👉 Siga o **[pratica.md](pratica.md)**: o `meu-projeto-devops` vira um repositório Git de verdade, com histórico, branch e merge.
 
+> 📝 Todos os comandos — e a explicação de commit, branch e HEAD — estão na [cola do Git](../../recursos/cheat-sheet-git.md). Imprima e deixe ao lado.
+
 ---
 
 ## O que levamos para a próxima aula 🔗
