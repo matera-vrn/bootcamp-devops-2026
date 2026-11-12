@@ -4,6 +4,8 @@
 
 **Onde:** no terminal conectado à VM via SSH (como no [setup](../../setup/instalacao-ubuntu-vm.md)). A janela do VirtualBox também serve, mas sem copiar e colar.
 
+> 📝 Deixe a [cola do Git](../../recursos/cheat-sheet-git.md) aberta ao lado: comandos, o que é HEAD e como desfazer.
+
 ## Passo 1 — Apresente-se ao Git
 
 O Git já vem instalado no Ubuntu Server. Confirme:

@@ -115,6 +115,8 @@ Abre no modo **normal** (teclas = comandos). `i` entra no modo de **inserção**
 
 ## Git essencial
 
+A versão completa, com HEAD, desfazer e socorro, está na [cola do Git](cheat-sheet-git.md).
+
 | Comando | Faz |
 |---------|-----|
 | `git status` · `git log --oneline` | O que mudou · histórico resumido |
