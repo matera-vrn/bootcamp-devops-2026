@@ -60,11 +60,98 @@ No DevOps, o repositório Git não guarda só código da aplicação:
 
 > 🧠 **Boas mensagens de commit** dizem o *o quê* e o *porquê*: `"adiciona teste de disco ao healthcheck"` ✔ · `"ajustes"` ✖
 
-### 5. Branches: universos paralelos
+### 5. Commit, branch e HEAD: as definições
 
-- `main` — a linha do tempo oficial, sempre funcional.
-- `git branch minha-ideia` + `git checkout minha-ideia` (ou `git checkout -b minha-ideia`) — experimente sem medo, longe da `main`.
-- `git merge minha-ideia` — ideia aprovada? Junta na linha oficial.
+Três palavras sustentam todo o resto do Git. Vale defini-las com precisão antes de desenhar.
+
+**Commit** é um registro **permanente** do estado de todos os arquivos acompanhados pelo Git num certo momento, com:
+
+- um **identificador único**, o *hash* (`e0b70f5`): uma impressão digital calculada a partir do conteúdo, que muda se qualquer detalhe mudar;
+- **autor, data e mensagem**;
+- uma referência ao **commit anterior** (o *pai*). É essa corrente de pais que forma a linha do tempo.
+
+Um commit nunca é alterado depois de criado: "corrigir" é sempre fazer um commit novo.
+
+**Branch** é um **nome que aponta para um commit**: o mais recente daquela linha de trabalho. Não é uma cópia da pasta nem dos arquivos; dentro do `.git` ela é só um arquivo de texto com um hash (`.git/refs/heads/main`). Duas consequências:
+
+- criar uma branch é instantâneo e não ocupa espaço;
+- ao fazer um commit **estando numa branch**, o nome dela avança sozinho para o commit novo.
+
+O "histórico de uma branch" é o commit para onde ela aponta mais todos os antepassados dele, seguindo a corrente de pais.
+
+**HEAD** é o indicador de **onde você está**. Normalmente ele aponta para uma branch (`HEAD -> main`) e define duas coisas:
+
+- quais arquivos aparecem na pasta de trabalho (os do commit daquela branch);
+- **qual branch avança** no próximo commit.
+
+`git switch` (ou `git checkout`) é o comando que move o HEAD.
+
+**Merge** integra o histórico de outra branch na branch **atual** (a do HEAD).
+
+| Termo | Em uma frase | Analogia (livro) |
+|-------|--------------|------------------|
+| Commit | Registro permanente do projeto, com hash, autor, data, mensagem e pai | Uma página escrita |
+| Branch | Nome que aponta para o commit mais recente de uma linha | Um marcador com nome |
+| HEAD | Indica a branch em uso: define a pasta e quem avança no commit | O seu dedo |
+| Merge | Traz o histórico de outra branch para a atual | Juntar dois capítulos |
+
+### 6. Branches em desenho
+
+Convenção dos desenhos: cada letra é um commit, o tempo corre da esquerda para a direita, `---` liga um commit ao seu pai e `<-` mostra para onde cada nome aponta.
+
+**① Histórico linear: só a `main`.** Cada commit novo faz a `main` avançar.
+
+```text
+A---B                  <- main <- HEAD
+```
+
+**② `git switch -c ideia`: nasce uma branch.** Nenhum commit novo: só um nome a mais, no mesmo lugar. O HEAD passa para a `ideia`.
+
+```text
+A---B                  <- main
+                       <- ideia <- HEAD
+```
+
+**③ Commit na branch: ela avança, a `main` fica parada.** Quem andou foi a branch do HEAD.
+
+```text
+A---B                  <- main
+     \
+      C                <- ideia <- HEAD
+```
+
+**④ `git switch main` e depois `git merge ideia`: fast-forward.** A `main` não andou desde que a `ideia` nasceu, então o Git só **avança o nome `main`** até o `C`. Nenhum commit novo é criado.
+
+```text
+A---B---C              <- main <- HEAD
+                       <- ideia
+```
+
+**⑤ Quando as duas andam: merge commit.** Se a `main` ganhou o commit `D` enquanto a `ideia` ganhava o `C`, as histórias se separaram:
+
+```text
+A---B---D              <- main <- HEAD
+     \
+      C                <- ideia
+```
+
+O `git merge ideia` cria um commit novo, `M`, com **dois pais** (`D` e `C`), que junta as duas linhas:
+
+```text
+A---B---D---M          <- main <- HEAD
+     \     /
+      C---'            <- ideia
+```
+
+Se `C` e `D` mudaram **a mesma linha do mesmo arquivo**, o Git não sabe qual escolher: é um **conflito**. Você edita o arquivo, decide o que fica e conclui com `git add` e `git commit`.
+
+> 🔎 Para ver esse desenho no seu repositório: `git log --oneline --graph --all`. O Git desenha na vertical, com o commit mais novo no topo e `*` no lugar das letras.
+
+### 7. O fluxo de trabalho com branches
+
+- `main` — a linha oficial, sempre funcional.
+- `git switch -c minha-ideia` (ou `git checkout -b minha-ideia`) — cria a branch e move o HEAD para ela: experimente sem medo, longe da `main`.
+- `git switch main` + `git merge minha-ideia` — ideia aprovada? Junta na linha oficial.
 
 > 💬 **Interação:** "Aquele `ls -la` da Aula 02 que mostrou arquivos ocultos... rodem na pasta do projeto depois do `git init` e me digam o que apareceu!" (resposta: a pasta `.git`, onde o histórico mora)
 

@@ -17,16 +17,36 @@ Uma página para imprimir ou deixar aberta ao lado. Tudo aqui é o Git básico d
 | 📦 Staging | O "carrinho" do próximo commit | `git diff --staged` |
 | 🗄️ Repositório | As fotos (commits) já gravadas | `git log --oneline` |
 
-## 📖 Commit, branch e HEAD: o livro com marcadores
+## 📖 Commit, branch e HEAD: as definições
 
-| Git | No livro | Onde mora |
-|-----|----------|-----------|
-| **Commit** (`e0b70f5`) | Uma **página** escrita — não muda mais | `.git/objects/` |
-| **Branch** (`main`, `melhoria`) | Um **marcador com nome** preso numa página | `.git/refs/heads/` |
-| **HEAD** | **O seu dedo**: qual marcador você está usando agora | `.git/HEAD` |
+| Termo | Definição | No livro | Onde mora |
+|-------|-----------|----------|-----------|
+| **Commit** (`e0b70f5`) | Registro **permanente** do estado de todos os arquivos acompanhados, com hash único, autor, data, mensagem e o commit anterior (o *pai*) | Uma **página** escrita | `.git/objects/` |
+| **Branch** (`main`) | **Nome que aponta para um commit**, o mais recente da linha. Não é cópia de arquivos: avança sozinho a cada commit feito nela | Um **marcador** com nome | `.git/refs/heads/` |
+| **HEAD** | Indica **onde você está**: aponta para a branch em uso, define os arquivos da pasta e qual branch avança no próximo commit | O seu **dedo** | `.git/HEAD` |
+| **Merge** | Traz o histórico de outra branch para a branch atual (a do HEAD) | Juntar capítulos | — |
 
 > **Commit é a página. Branch é o marcador. HEAD é o dedo.**
 > Ao commitar, só o marcador que está no seu dedo anda.
+
+## 🗺️ Branches em desenho
+
+Cada letra é um commit, o tempo corre para a direita e `<-` mostra para onde cada nome aponta.
+
+```text
+① git switch -c ideia       ② commit na ideia           ③ merge: fast-forward
+                                                           (main não tinha andado)
+A---B   <- main              A---B   <- main              A---B---C   <- main <- HEAD
+        <- ideia <- HEAD          \                                   <- ideia
+                                   C   <- ideia <- HEAD
+
+④ as duas andaram           ⑤ merge commit (M tem dois pais: D e C)
+A---B---D   <- main <- HEAD  A---B---D---M   <- main <- HEAD
+     \                            \     /
+      C     <- ideia               C---'     <- ideia
+```
+
+No terminal, o Git desenha na vertical, com o mais novo no topo: `git log --oneline --graph --all`.
 
 Como ler o `git log --oneline --decorate`:
 

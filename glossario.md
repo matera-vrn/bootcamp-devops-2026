@@ -9,10 +9,10 @@ Os termos do bootcamp explicados em uma linha, em ordem alfabética. Não decore
 | **bash** | O *shell* padrão do Ubuntu — o programa que lê o que você digita no terminal e executa |
 | **binário** | Um programa já pronto para rodar (compilado), em oposição ao código-fonte |
 | **blameless** | Cultura de analisar incidentes sem procurar culpados: a pergunta é "o que no processo permitiu o erro?" |
-| **branch** | Uma "linha do tempo" paralela no Git para trabalhar sem mexer na versão oficial (`main`) |
+| **branch** | No Git, um **nome que aponta para um commit** — o mais recente de uma linha de trabalho. Não copia arquivos: avança sozinho a cada commit feito nela. Serve para trabalhar sem mexer na versão oficial (`main`) |
 | **build** | Montar/empacotar o programa a partir do código: compilar, gerar arquivos, criar a imagem |
 | **CI / CD** | Integração Contínua (integrar e testar o código automaticamente a cada mudança) / Entrega Contínua (deixar cada versão pronta para produção) |
-| **commit** | Uma "foto" do projeto gravada no histórico do Git, com autor, data e mensagem |
+| **commit** | Registro permanente do estado do projeto no Git, com um *hash* único, autor, data, mensagem e o commit anterior (o "pai") — uma "foto" do projeto |
 | **container** | Um programa empacotado com tudo que precisa, rodando isolado — como um "apartamento" dentro do sistema |
 | **cron** | O "despertador" do Linux: executa comandos em horários agendados |
 | **deploy** | Colocar uma versão do sistema no ar (em produção) |
@@ -24,8 +24,10 @@ Os termos do bootcamp explicados em uma linha, em ordem alfabética. Não decore
 | **Docker Hub** | O "mercado público" de imagens Docker prontas (`ubuntu`, `nginx`, `redis`...) |
 | **Dockerfile** | A receita, em texto, para construir uma imagem Docker |
 | **esteira** | O mesmo que *pipeline*: a sequência automática de etapas que o código percorre até produção |
+| **fast-forward** | Merge em que a branch de destino não andou: o Git só avança o nome dela até o último commit da outra, sem criar commit novo |
 | **GitHub Actions** | O serviço de CI/CD embutido no GitHub: executa a pipeline descrita em um arquivo YAML dentro do repositório |
 | **hash (SHA256)** | A "impressão digital" de um arquivo: um código que muda se um único byte mudar. Serve para conferir downloads |
+| **HEAD** | No Git, o indicador de **onde você está**: aponta para a branch em uso (`HEAD -> main`) e define qual branch avança no próximo commit |
 | **hostname** | O nome da máquina na rede (na VM do bootcamp: `bootcamp`) |
 | **HTTP / HTTPS** | O "idioma" da web, usado entre navegador e servidor. O S é a versão criptografada |
 | **imagem (Docker)** | O pacote pronto e imutável gerado pelo Dockerfile; um container é uma imagem em execução |
@@ -37,7 +39,7 @@ Os termos do bootcamp explicados em uma linha, em ordem alfabética. Não decore
 | **log** | O "diário de bordo" de um programa ou do sistema: registro do que aconteceu, com horário. Vivem em `/var/log` |
 | **LTS** | *Long Term Support*: versão com suporte longo (5 anos no Ubuntu), a preferida em empresas |
 | **markdown** | Linguagem simples de formatação de texto usada em READMEs: `#` vira título, `-` vira lista |
-| **merge** | Juntar uma branch em outra (ex.: integrar sua branch na `main`) |
+| **merge** | Integrar o histórico de outra branch na branch atual. Pode ser *fast-forward* (só avança o nome da branch) ou gerar um *merge commit*, com dois pais |
 | **NAT** | Modo de rede em que a VM fica "escondida" atrás do seu computador, usando a internet dele |
 | **nginx** | Um servidor web muito usado: entrega páginas HTML para quem acessa |
 | **PAT (token)** | *Personal Access Token*: uma "senha de aplicativo" do GitHub, com validade e permissões limitadas |

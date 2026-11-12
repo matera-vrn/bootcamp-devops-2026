@@ -73,6 +73,14 @@ git log
 
 Resultado esperado: `nothing to commit, working tree clean` e um `git log` com seu nome, data e mensagem. **Essa versão agora existe para sempre.**
 
+> 🗺️ **Como está o seu repositório agora.** Nos desenhos desta prática, cada letra é um commit (`A` = este primeiro), o tempo corre da esquerda para a direita e `<-` mostra para onde cada nome aponta. As definições de commit, branch e HEAD estão no [README da aula](README.md#5-commit-branch-e-head-as-definições).
+>
+> ```text
+> A                      <- main <- HEAD
+> ```
+>
+> A branch `main` aponta para o commit `A`, e o HEAD aponta para a `main`: você está nela. No `git log`, isso aparece como `(HEAD -> main)` ao lado do hash.
+
 ## Passo 5 — Mude algo e veja o Git perceber
 
 ```bash
@@ -91,11 +99,27 @@ git log --oneline
 
 Resultado esperado: duas linhas no log — sua linha do tempo cresceu.
 
+> 🗺️ O commit `B` aponta para o `A` (o pai dele). Como você estava na `main`, foi ela que avançou:
+>
+> ```text
+> A---B                  <- main <- HEAD
+> ```
+
 ## Passo 6 — Branch: experimente sem medo
 
 ```bash
 git checkout -b melhoria-healthcheck
+git log --oneline
 ```
+
+O `checkout -b` fez duas coisas: criou a branch e **moveu o HEAD** para ela. Nenhum commit novo foi criado: o log mostra `(HEAD -> melhoria-healthcheck, main)` no commit `B`, porque os dois nomes apontam para o mesmo lugar.
+
+> 🗺️
+>
+> ```text
+> A---B                  <- main
+>                        <- melhoria-healthcheck <- HEAD
+> ```
 
 Edite o script e adicione, no final (antes da última linha `echo`), há quanto tempo a máquina está ligada:
 
@@ -112,7 +136,16 @@ Commit na branch:
 ```bash
 git add scripts/healthcheck.sh
 git commit -m "adiciona tempo ligado ao healthcheck"
+git log --oneline --graph --all
 ```
+
+> 🗺️ Quem avança no commit é a branch para onde o HEAD aponta. A `melhoria-healthcheck` foi para o `C`, e a `main` ficou parada no `B`:
+>
+> ```text
+> A---B                  <- main
+>      \
+>       C                <- melhoria-healthcheck <- HEAD
+> ```
 
 ## Passo 7 — Compare os universos paralelos
 
@@ -121,7 +154,17 @@ git checkout main
 cat scripts/healthcheck.sh | tail -3
 ```
 
-Repare: na `main`, sua mudança **não existe**! Ela vive só na branch. Agora o merge:
+Repare: na `main`, sua mudança **não existe**! Ela vive só na branch. O `checkout main` moveu o HEAD de volta e o Git trocou os arquivos da pasta pelos do commit `B`:
+
+> 🗺️
+>
+> ```text
+> A---B                  <- main <- HEAD
+>      \
+>       C                <- melhoria-healthcheck
+> ```
+
+Agora o merge:
 
 ```bash
 git merge melhoria-healthcheck
@@ -129,7 +172,22 @@ cat scripts/healthcheck.sh | tail -3
 git log --oneline
 ```
 
-Resultado esperado: a mudança chegou à `main`. Ideia testada, aprovada e integrada — em miniatura, é assim que times inteiros trabalham.
+Resultado esperado: o merge mostra `Fast-forward`, a mudança chegou à `main` e o log mostra três commits, o mais novo com `(HEAD -> main, melhoria-healthcheck)`. Ideia testada, aprovada e integrada — em miniatura, é assim que times inteiros trabalham.
+
+> 🗺️ **Fast-forward** ("avanço rápido"): a `main` não andou desde que a branch nasceu, então o Git só **avançou o nome `main`** até o `C`. Nenhum commit novo foi criado, e os dois nomes agora apontam para o mesmo commit:
+>
+> ```text
+> A---B---C              <- main <- HEAD
+>                        <- melhoria-healthcheck
+> ```
+>
+> Se a `main` tivesse ganhado outro commit nesse meio-tempo, o Git criaria um **merge commit**, com dois pais. O desenho desse caso está no [README da aula](README.md#6-branches-em-desenho).
+
+A branch cumpriu o papel. Apague-a (o commit `C` continua na `main`):
+
+```bash
+git branch -d melhoria-healthcheck
+```
 
 ## Desafio bônus 🏆
 

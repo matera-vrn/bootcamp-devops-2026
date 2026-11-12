@@ -85,8 +85,8 @@
     "Hoje é o padrão em praticamente toda equipe de software."
    ],
    "destaque": "Git = a memória completa do seu projeto.",
-   "minutos": 3,
-   "notas": "⏱ 3 min — Contar a origem: 2005, Linus Torvalds, o mesmo do Linux que vocês usam na VM. Kernel é o núcleo do sistema. Ele precisava organizar milhares de pessoas mexendo no mesmo código. A ideia central: registrar cada mudança, de cada arquivo, de cada pessoa, para sempre."
+   "minutos": 2,
+   "notas": "⏱ 2 min — Contar a origem: 2005, Linus Torvalds, o mesmo do Linux que vocês usam na VM. Kernel é o núcleo do sistema. Ele precisava organizar milhares de pessoas mexendo no mesmo código. A ideia central: registrar cada mudança, de cada arquivo, de cada pessoa, para sempre."
   },
   {
    "tipo": "conteudo",
@@ -97,9 +97,9 @@
     "**Volta no tempo:** qualquer versão pode ser restaurada.",
     "**Em paralelo:** cada um na sua linha do tempo (branch), juntando depois (merge)."
    ],
-   "destaque": "Commit = uma foto do projeto com autor, data e motivo. Branch = uma linha do tempo paralela.",
-   "minutos": 4,
-   "notas": "⏱ 4 min — Os três superpoderes. Definir os jargões no primeiro uso: commit é uma 'foto' selada do projeto, com autor, data e mensagem explicando o porquê. Branch é uma linha do tempo paralela; merge é juntar duas linhas. Perguntar no chat: o 'por quê' de uma mudança, onde vocês anotam hoje?"
+   "destaque": "Commit, branch e merge: daqui a pouco, a definição exata de cada um — e o desenho.",
+   "minutos": 2,
+   "notas": "⏱ 2 min — Os três superpoderes. Definir os jargões no primeiro uso: commit é uma 'foto' selada do projeto, com autor, data e mensagem explicando o porquê. Branch é uma linha do tempo paralela; merge é juntar duas linhas. Perguntar no chat: o 'por quê' de uma mudança, onde vocês anotam hoje?"
   },
   {
    "tipo": "conteudo",
@@ -115,8 +115,8 @@
     "Documentação ✔"
    ],
    "destaque": "É do Git que a esteira parte; é o Git que conta a história do sistema.",
-   "minutos": 4,
-   "notas": "⏱ 4 min — Definir repositório: a pasta do projeto mais o seu histórico completo. Conectar com as aulas anteriores: os scripts de healthcheck e a pipeline que vocês fizeram entram no Git. Infraestrutura como código (a infra descrita em arquivos) e documentação também. A esteira da Aula 05 parte do repositório: é daí que ela pega a versão. Isso responde o gancho da revisão."
+   "minutos": 2,
+   "notas": "⏱ 2 min — Definir repositório: a pasta do projeto mais o seu histórico completo. Conectar com as aulas anteriores: os scripts de healthcheck e a pipeline que vocês fizeram entram no Git. Infraestrutura como código (a infra descrita em arquivos) e documentação também. A esteira da Aula 05 parte do repositório: é daí que ela pega a versão. Isso responde o gancho da revisão."
   },
   {
    "tipo": "conteudo",
@@ -131,8 +131,8 @@
     "Este próprio bootcamp vive em um repositório Git!"
    ],
    "destaque": "Se não está no Git, não existe.",
-   "minutos": 3,
-   "notas": "⏱ 3 min — Frase para gravar: se não está no Git, não existe. Explicar 'fonte única da verdade': o único lugar que define o que é atual. Mostrar na tela o repositório do bootcamp (as aulas, o glossário) e comentar que todo o material está versionado ali."
+   "minutos": 2,
+   "notas": "⏱ 2 min — Frase para gravar: se não está no Git, não existe. Explicar 'fonte única da verdade': o único lugar que define o que é atual. Mostrar na tela o repositório do bootcamp (as aulas, o glossário) e comentar que todo o material está versionado ali."
   },
   {
    "tipo": "conteudo",
@@ -158,8 +158,8 @@
     "`git commit -m \"mensagem\"` — sela a caixa no histórico, com autor e data."
    ],
    "destaque": "Ritual: `git status` → `git add` → `git commit`. Sempre nessa ordem.",
-   "minutos": 4,
-   "notas": "⏱ 4 min — Ligar cada comando ao diagrama anterior. init cria o cofre. status mostra o que mudou na bancada: vão usar o tempo todo. add põe na caixa. commit sela com mensagem. Mostrar o ritual status → add → commit, que vão repetir na Parte 2."
+   "minutos": 3,
+   "notas": "⏱ 3 min — Ligar cada comando ao diagrama anterior. init cria o cofre. status mostra o que mudou na bancada: vão usar o tempo todo. add põe na caixa. commit sela com mensagem. Mostrar o ritual status → add → commit, que vão repetir na Parte 2."
   },
   {
    "tipo": "conteudo",
@@ -171,8 +171,8 @@
     "`git merge` — traz o conteúdo da branch informada para a branch atual."
    ],
    "destaque": "`log` para olhar o passado; `checkout` e `merge` para navegar entre linhas do tempo.",
-   "minutos": 3,
-   "notas": "⏱ 3 min — Completar a tabela. log mostra a linha do tempo de commits. checkout troca de branch (ramificação). merge traz a branch informada para a atual. Não precisa decorar agora: vamos digitar cada um na prática."
+   "minutos": 2,
+   "notas": "⏱ 2 min — Completar a tabela. log mostra a linha do tempo de commits. checkout troca de branch (ramificação). merge traz a branch informada para a atual. Não precisa decorar agora: vamos digitar cada um na prática."
   },
   {
    "tipo": "conteudo",
@@ -186,22 +186,80 @@
     "`\"ajustes\"` ✖"
    ],
    "destaque": "A mensagem é para o você de daqui a seis meses — e para o colega que nunca viu esse código.",
-   "minutos": 3,
-   "notas": "⏱ 3 min — Comparar as duas mensagens. 'ajustes' não diz nada; 'adiciona teste de disco ao healthcheck' diz o quê e deixa claro o porquê. Perguntar no chat: qual das duas vocês gostariam de encontrar no histórico daqui a seis meses?"
+   "minutos": 2,
+   "notas": "⏱ 2 min — Comparar as duas mensagens. 'ajustes' não diz nada; 'adiciona teste de disco ao healthcheck' diz o quê e deixa claro o porquê. Perguntar no chat: qual das duas vocês gostariam de encontrar no histórico daqui a seis meses?"
   },
   {
    "tipo": "conteudo",
    "bloco": "parte1",
-   "titulo": "Branches: universos paralelos",
+   "titulo": "Commit: a definição",
+   "paragrafos": [
+    "**Commit** = registro **permanente** do projeto num certo momento."
+   ],
    "bullets": [
-    "`main` — a linha do tempo oficial, sempre funcional.",
-    "`git branch minha-ideia` + `git checkout minha-ideia` (ou `git checkout -b minha-ideia`).",
+    "**Hash** único (`e0b70f5`): a impressão digital do conteúdo.",
+    "**Autor, data e mensagem**: quem, quando e por quê.",
+    "Aponta para o **pai** (o commit anterior): é a linha do tempo.",
+    "Não muda nunca: corrigir = fazer um commit novo."
+   ],
+   "codigo": "A---B---C     cada letra = um commit\n              C aponta para B, que aponta para A",
+   "minutos": 3,
+   "notas": "⏱ 3 min — Definição precisa, sem analogia ainda. Commit é o registro permanente do estado de todos os arquivos acompanhados. Quatro partes: hash (impressão digital: muda qualquer vírgula, muda o hash), autor/data/mensagem, e o pai — o commit anterior. É a corrente de pais que forma a linha do tempo. Mostrar o desenho: letras são commits, cada um ligado ao anterior. Reforçar: commit não se edita; corrigir é fazer outro commit."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Branch e HEAD: a definição",
+   "bullets": [
+    "**Branch** = um **nome que aponta para um commit**: o mais recente da linha.",
+    "Não copia arquivos: é um arquivo de texto com um hash (`.git/refs/heads/main`).",
+    "Commit feito numa branch → o nome dela **avança sozinho**.",
+    "**HEAD** = onde você está: aponta para a branch em uso (`HEAD -> main`).",
+    "O HEAD define os arquivos da pasta e **qual branch avança** no próximo commit."
+   ],
+   "destaque": "Commit é a página. Branch é o marcador. HEAD é o dedo.",
+   "minutos": 4,
+   "notas": "⏱ 4 min — O ponto que mais trava. Branch NÃO é uma pasta nem uma cópia: é só um nome que aponta para um commit; por isso criar branch é instantâneo. Ao commitar, o nome da branch avança para o commit novo. HEAD é o 'você está aqui': aponta para a branch em uso e decide duas coisas — que arquivos aparecem na pasta e qual branch anda no próximo commit. Fechar com a analogia: página, marcador, dedo. Avisar: no git log vocês vão ver '(HEAD -> main)' — é exatamente isso."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Branches em desenho (1/2)",
+   "codigo": "git switch -c ideia     A---B   <- main\n                                <- ideia <- HEAD\n\ncommit na ideia         A---B   <- main\n                             \\\n                              C   <- ideia <- HEAD\n\ngit switch main         A---B---C   <- main <- HEAD\ngit merge ideia                     <- ideia",
+   "bullets": [
+    "Criar branch **não cria commit**: só um nome a mais, no mesmo lugar.",
+    "**Fast-forward**: a `main` não andou, então o Git só avança o nome."
+   ],
+   "minutos": 3,
+   "notas": "⏱ 3 min — Desenhar devagar, um quadro de cada vez (se possível, na lousa/whiteboard). 1) switch -c: mesmo commit B, dois nomes, o HEAD foi para ideia. 2) commit: só a ideia anda, porque é ela que está no HEAD; a main fica no B. 3) switch main move o HEAD; merge ideia: como a main não andou, o Git só empurra o nome main até o C — fast-forward, nenhum commit novo. É exatamente o que vão fazer na Parte 2."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Branches em desenho (2/2)",
+   "codigo": "as duas andaram:         merge commit:\nA---B---D  <- main       A---B---D---M  <- main <- HEAD\n     \\                        \\     /\n      C    <- ideia             C---'     <- ideia",
+   "bullets": [
+    "Se a `main` também andou, o merge cria **M**, com **dois pais**.",
+    "Mesma linha mudada dos dois lados? **Conflito**: você decide.",
+    "No terminal: `git log --oneline --graph --all`."
+   ],
+   "destaque": "Fast-forward avança um nome. Merge commit junta duas histórias.",
+   "minutos": 3,
+   "notas": "⏱ 3 min — O outro caso de merge, que acontece o tempo todo em equipe: enquanto você trabalhava na ideia (C), alguém colocou D na main. Não dá para só avançar o nome: o Git cria M, um commit com dois pais, que junta as duas linhas. Se C e D mexeram na mesma linha do mesmo arquivo, é conflito: o Git pergunta, você decide, git add e git commit. Mostrar que o git log --graph desenha isso no terminal."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte1",
+   "titulo": "Branches: o fluxo de trabalho",
+   "bullets": [
+    "`main` — a linha oficial, sempre funcional.",
+    "`git checkout -b minha-ideia` (ou `git switch -c`) — cria a branch e move o HEAD.",
     "Experimente sem medo, longe da `main`.",
-    "`git merge minha-ideia` — ideia aprovada? Junta na linha oficial."
+    "`git checkout main` + `git merge minha-ideia` — aprovada? Junta na linha oficial."
    ],
    "destaque": "A `main` nunca quebra: toda experiência acontece numa branch e só entra depois de aprovada.",
-   "minutos": 4,
-   "notas": "⏱ 4 min — main é a linha oficial, sempre funcional. Criar branch = abrir um universo paralelo para experimentar sem risco. checkout -b cria e já entra. Quando a ideia dá certo, merge junta na main. É assim que times inteiros trabalham ao mesmo tempo no mesmo código."
+   "minutos": 2,
+   "notas": "⏱ 2 min — Amarrar os desenhos ao dia a dia: main é a linha oficial; cada ideia nasce numa branch; aprovada, entra por merge. Na Aula 09, esse merge passa a acontecer por Pull Request no GitHub. É assim que times inteiros trabalham ao mesmo tempo no mesmo código."
   },
   {
    "tipo": "conteudo",
@@ -212,8 +270,8 @@
    ],
    "destaque": "💬 Interação: rodem `ls -la` na pasta do projeto depois do `git init` e me digam o que apareceu!",
    "rodape": "Resposta: a pasta `.git`, onde o histórico mora.",
-   "minutos": 4,
-   "notas": "⏱ 4 min — Interação de fechamento da Parte 1. Quem já tem o terminal aberto pode testar: cd ~/meu-projeto-devops, git init, ls -la. Esperar o chat responder: a pasta oculta .git. Explicar: ali dentro vive todo o histórico; apagou a pasta .git, perdeu o cofre. Fazer a ponte para o intervalo: na volta fazemos isso passo a passo."
+   "minutos": 2,
+   "notas": "⏱ 2 min — Interação de fechamento da Parte 1. Quem já tem o terminal aberto pode testar: cd ~/meu-projeto-devops, git init, ls -la. Esperar o chat responder: a pasta oculta .git. Explicar: ali dentro vive todo o histórico; apagou a pasta .git, perdeu o cofre. Fazer a ponte para o intervalo: na volta fazemos isso passo a passo."
   },
   {
    "tipo": "secao",
@@ -357,13 +415,13 @@
    "tipo": "conteudo",
    "bloco": "parte2",
    "titulo": "Passo 6 — Branch: experimente sem medo (2/2)",
-   "codigo": "git add scripts/healthcheck.sh\ngit commit -m \"adiciona tempo ligado ao healthcheck\"",
+   "codigo": "git add scripts/healthcheck.sh\ngit commit -m \"adiciona tempo ligado ao healthcheck\"\n\nA---B   <- main\n     \\\n      C   <- melhoria-healthcheck <- HEAD",
    "bullets": [
-    "Commit na branch: a `main` continua intocada.",
-    "Sem \"Resultado esperado\" aqui: a prova vem no Passo 7."
+    "Quem avança é a branch do HEAD: a `melhoria-healthcheck` foi para o `C`.",
+    "A `main` continua parada no `B` — a prova vem no Passo 7."
    ],
    "minutos": 2,
-   "notas": "⏱ 2 min — Add e commit do healthcheck.sh na branch. Explicar: essa mudança vive só na branch; a main ainda não sabe dela. A prova vem no Passo 7, quando compararmos os dois universos."
+   "notas": "⏱ 2 min — Add e commit do healthcheck.sh na branch. Mostrar o desenho: A é o primeiro commit, B o do README, C o de agora. Só a melhoria-healthcheck andou, porque é ela que está no HEAD; a main ficou no B. Pedir que rodem git log --oneline --graph --all e achem o '(HEAD -> melhoria-healthcheck)'."
   },
   {
    "tipo": "conteudo",
@@ -376,8 +434,21 @@
     "Em miniatura, é assim que times inteiros trabalham."
    ],
    "rodape": "Resultado esperado: a mudança chegou à `main` — ideia testada, aprovada e integrada; o log mostra o novo commit.",
-   "minutos": 5,
-   "notas": "⏱ 5 min — Voltar para a main e mostrar com tail -3 que a linha do uptime não está lá. Rodar o merge e repetir o tail: agora está. git log --oneline com o commit integrado. Se abrir um editor no merge, é o vi pedindo a mensagem: Esc, :wq, Enter. Fechar: é assim que times trabalham em paralelo sem quebrar a main."
+   "minutos": 4,
+   "notas": "⏱ 4 min — Voltar para a main e mostrar com tail -3 que a linha do uptime não está lá. Rodar o merge e repetir o tail: agora está. git log --oneline com o commit integrado. Se abrir um editor no merge, é o vi pedindo a mensagem: Esc, :wq, Enter. Fechar: é assim que times trabalham em paralelo sem quebrar a main."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 7 — O que o merge fez",
+   "codigo": "antes do merge:   A---B      <- main <- HEAD\n                       \\\n                        C   <- melhoria-healthcheck\n\ndepois:           A---B---C  <- main <- HEAD\n                             <- melhoria-healthcheck",
+   "bullets": [
+    "**Fast-forward**: a `main` não andou, então o Git só avançou o nome até o `C`.",
+    "No log: `(HEAD -> main, melhoria-healthcheck)` — dois nomes, o mesmo commit.",
+    "Branch cumpriu o papel? `git branch -d melhoria-healthcheck`."
+   ],
+   "minutos": 2,
+   "notas": "⏱ 2 min — Ler o desenho com a turma. Antes: HEAD na main, que está no B; a branch está no C. O merge viu que a main não tinha andado e só avançou o nome: fast-forward, nenhum commit novo. Por isso o log mostra '(HEAD -> main, melhoria-healthcheck)' — os dois nomes no mesmo commit. Apagar a branch não apaga o commit C: ele já está na main."
   },
   {
    "tipo": "conteudo",
@@ -390,8 +461,8 @@
     "Abriu um editor no merge/commit → é o `vi` pedindo a mensagem: `Esc`, `:wq` e Enter",
     "`git log` abriu uma tela que não sai → visualizador de páginas: setas navegam, `q` sai"
    ],
-   "minutos": 2,
-   "notas": "⏱ 2 min — Passar pelos erros mais comuns. Perguntar no chat quem travou em algum passo e resolver ao vivo. A tabela completa está no pratica.md."
+   "minutos": 1,
+   "notas": "⏱ 1 min — Passar pelos erros mais comuns. Perguntar no chat quem travou em algum passo e resolver ao vivo. A tabela completa está no pratica.md."
   },
   {
    "tipo": "conteudo",
