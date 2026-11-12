@@ -1,0 +1,21 @@
+tools/slides/gerar_slides.py
+  s_4e5058359831c4::t_cd56ced6f6e52d 185-190
+tools/slides/README.md
+  s_4e5058359831c4::t_918ae4b6c8e72e 28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "0b67c8e666354714367e0e44b5a51b69ad00426f",
+  "prompts": {},
+  "sessions": {
+    "s_4e5058359831c4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8f7da099-8277-4ba2-b733-57ad5717ca56",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "vrn <vinicius.navarro@matera.com>"
+    }
+  }
+}
