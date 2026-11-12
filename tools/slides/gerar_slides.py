@@ -182,6 +182,12 @@ def build(deck):
     with zipfile.ZipFile(TEMPLATE) as z:
         content = z.read("content.xml").decode("utf-8")
     head = content[:content.index("<office:automatic-styles>")]
+    # o template nao declara a fonte monoespacada: sem esta declaracao, o LibreOffice ignora
+    # "Liberation Mono" nos blocos de codigo e cai numa fonte proporcional (desalinha diagramas)
+    if 'style:name="Liberation Mono"' not in head:
+        head = head.replace("</office:font-face-decls>",
+                            '<style:font-face style:name="Liberation Mono" svg:font-family="&apos;Liberation Mono&apos;" '
+                            'style:font-family-generic="modern" style:font-pitch="fixed"/></office:font-face-decls>', 1)
     auto = re.search(r"<office:automatic-styles>(.*?)</office:automatic-styles>", content, re.S).group(1)
     tail_start = content.index("</office:presentation>")
     tail = content[tail_start:]  # </office:presentation></office:body></office:document-content>

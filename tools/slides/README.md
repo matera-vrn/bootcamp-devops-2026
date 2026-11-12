@@ -25,7 +25,7 @@ Requisitos: Python 3 (só biblioteca padrão); para renderizar, LibreOffice (`so
 ## PDF único com todas as aulas
 
 ```bash
-tools/slides/pdf-unico.sh            # gera aulas/slides-bootcamp-devops-2026.pdf (355 páginas)
+tools/slides/pdf-unico.sh            # gera aulas/slides-bootcamp-devops-2026.pdf (364 páginas)
 ```
 
 Converte os 10 `.odp` em PDF e junta na ordem das aulas (requer LibreOffice e `pdfunite`). Instale a fonte **Poppins** antes, para o PDF sair com a tipografia do template.
