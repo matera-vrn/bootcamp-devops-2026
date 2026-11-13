@@ -16,6 +16,22 @@ docker --version
 
 Resultado esperado: `Docker version 2x.x.x, build ...`.
 
+Confira se o **serviço** do Docker ligou (o comando `docker` só conversa com ele):
+
+```bash
+systemctl is-active docker
+```
+
+Resultado esperado: `active`. Se aparecer `inactive`, a instalação automática da VM deixou uma trava que impede o `apt` de ligar serviços recém-instalados. Remova a trava e ligue o Docker:
+
+```bash
+sudo rm -f /usr/sbin/policy-rc.d
+sudo systemctl start docker
+systemctl is-active docker
+```
+
+Agora deve aparecer `active`. (A trava não volta: daqui em diante, serviços instalados pelo `apt` ligam sozinhos, como no Ubuntu normal.)
+
 Para usar o Docker sem `sudo`, adicione seu usuário ao grupo `docker` e **saia e entre de novo** para a mudança valer:
 
 ```bash
@@ -137,7 +153,9 @@ Rode um **segundo** container da mesma imagem na porta 8081 (`--name meu-projeto
 
 | Mensagem | Causa provável |
 |----------|----------------|
+| `failed to connect to the docker API ... docker.sock: connect: no such file or directory` | O serviço do Docker não está ligado — veja a conferência do `systemctl is-active docker` no Passo 1 |
 | `permission denied ... docker.sock` | Faltou o `usermod` do Passo 1, ou você ainda não saiu e entrou de novo no SSH (ou use `sudo docker`) |
+| `failed to fetch anonymous token ... connection reset by peer` | Falha momentânea de rede ao falar com o Docker Hub — espere alguns segundos e rode o mesmo comando de novo. Se persistir, é a rede (Wi-Fi corporativo, VPN, firewall): teste em outra rede |
 | `DEPRECATED: The legacy builder is deprecated` | Só um aviso — o build funciona. Ele some instalando o `docker-buildx` (Passo 1) |
 | `port is already allocated` | Já existe container na 8080 — `docker ps` e pare o antigo |
 | `COPY failed: ... not found` | Rode o `docker build` de dentro de `~/meu-projeto-devops` e gere o `app/index.html` antes (`./scripts/build.sh`) |
