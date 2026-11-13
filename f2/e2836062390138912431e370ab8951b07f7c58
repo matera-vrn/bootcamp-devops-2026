@@ -1,0 +1,22 @@
+aulas/aula-07-docker/pratica.md
+  s_bf974a16e789fa::t_b7b25ff3ef4f78 19-34
+  s_bf974a16e789fa::t_bf18f0f49fc7fa 156,158
+aulas/aula-07-docker/slides/aula-07.json
+  s_bf974a16e789fa::t_53dd3489334e80 262-277,407,413,421-422,426
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f2e2836062390138912431e370ab8951b07f7c58",
+  "prompts": {},
+  "sessions": {
+    "s_bf974a16e789fa": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4cda662d-f3d5-4c26-853a-0f2c7833dc1d",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "vrn <vinicius.navarro@matera.com>"
+    }
+  }
+}
