@@ -259,8 +259,22 @@
     "A instalação baixa alguns pacotes: pode levar um ou dois minutos"
    ],
    "rodape": "Resultado esperado: `Docker version 2x.x.x, build ...`",
-   "minutos": 5,
-   "notas": "⏱ 5 min — Mostrar os três comandos na tela e rodar junto. apt update atualiza a lista de pacotes; apt install instala o docker.io e o docker-buildx; docker --version confirma. Enquanto baixa, lembrar que sudo é o 'faça como administrador' das aulas de Linux. Pedir para colarem no chat a linha do docker --version quando aparecer."
+   "minutos": 4,
+   "notas": "⏱ 4 min — Mostrar os três comandos na tela e rodar junto. apt update atualiza a lista de pacotes; apt install instala o docker.io e o docker-buildx; docker --version confirma. Enquanto baixa, lembrar que sudo é o 'faça como administrador' das aulas de Linux. Pedir para colarem no chat a linha do docker --version quando aparecer."
+  },
+  {
+   "tipo": "conteudo",
+   "bloco": "parte2",
+   "titulo": "Passo 1 — O Docker ligou?",
+   "codigo": "systemctl is-active docker\n\n# se aparecer inactive:\nsudo rm -f /usr/sbin/policy-rc.d\nsudo systemctl start docker",
+   "bullets": [
+    "O comando `docker` só conversa com o **serviço** do Docker",
+    "`inactive` = a instalação automática da VM deixou uma trava que impede o `apt` de ligar serviços",
+    "Removida a trava, ela não volta"
+   ],
+   "rodape": "Resultado esperado: `active`.",
+   "minutos": 1,
+   "notas": "⏱ 1 min — Pedir para todos rodarem systemctl is-active docker. Nas VMs criadas pela instalação automática do VirtualBox sobra o arquivo /usr/sbin/policy-rc.d, que impede o apt de ligar serviços recém-instalados: o Docker fica instalado mas parado, e o Passo 2 falha com 'failed to connect to the docker API ... no such file or directory'. Quem vir inactive: rm do policy-rc.d e systemctl start docker. Pedir para colarem 'active' no chat."
   },
   {
    "tipo": "conteudo",
@@ -390,12 +404,13 @@
    "bloco": "parte2",
    "titulo": "Deu errado? 😥 (1/2)",
    "bullets": [
+    "`docker.sock: no such file or directory` → Docker parado: veja o `systemctl` do Passo 1",
     "`permission denied ... docker.sock` → faltou o `usermod` (Passo 1) ou sair/entrar de novo",
     "`DEPRECATED: The legacy builder is deprecated` → só um aviso; some com o `docker-buildx`",
     "`port is already allocated` → já existe container na 8080: `docker ps` e pare o antigo"
    ],
    "minutos": 1,
-   "notas": "⏱ 1 min — Passar pelos erros mais prováveis. permission denied no docker.sock: ou faltou o usermod ou a pessoa não saiu e entrou de novo no SSH (alternativa: sudo docker). Aviso de legacy builder: só aviso. Porta já alocada: tem container antigo na 8080, docker ps e docker stop. Os outros dois erros estão no próximo slide."
+   "notas": "⏱ 1 min — Passar pelos erros mais prováveis. docker.sock no such file or directory: o serviço do Docker não ligou, refazer a conferência do Passo 1 (systemctl is-active docker). permission denied no docker.sock: ou faltou o usermod ou a pessoa não saiu e entrou de novo no SSH (alternativa: sudo docker). Aviso de legacy builder: só aviso. Porta já alocada: tem container antigo na 8080, docker ps e docker stop. Os outros dois erros estão no próximo slide."
   },
   {
    "tipo": "conteudo",
@@ -403,11 +418,12 @@
    "titulo": "Deu errado? 😥 (2/2)",
    "bullets": [
     "`COPY failed: ... not found` → build fora da pasta do projeto ou sem `app/index.html`",
-    "`Unable to find image` → é o download da imagem; na primeira vez demora, é normal"
+    "`Unable to find image` → é o download da imagem; na primeira vez demora, é normal",
+    "`connection reset by peer` → falha momentânea de rede: espere e rode de novo"
    ],
    "destaque": "A tabela completa está no pratica.md. Travou? Cola a mensagem no chat.",
    "minutos": 1,
-   "notas": "⏱ 1 min — Continuação dos erros prováveis. COPY failed: rodar o build de dentro de ~/meu-projeto-devops e gerar o app/index.html antes com ./scripts/build.sh. Unable to find image: é o download, normal na primeira vez. Lembrar que a tabela completa está no pratica.md e que quem travar deve colar a mensagem no chat."
+   "notas": "⏱ 1 min — Continuação dos erros prováveis. COPY failed: rodar o build de dentro de ~/meu-projeto-devops e gerar o app/index.html antes com ./scripts/build.sh. Unable to find image: é o download, normal na primeira vez. connection reset by peer ao buscar o token do Docker Hub: falha momentânea de rede, esperar uns segundos e repetir; se persistir, é a rede do aluno (Wi-Fi corporativo, VPN, firewall). Lembrar que a tabela completa está no pratica.md e que quem travar deve colar a mensagem no chat."
   },
   {
    "tipo": "conteudo",
